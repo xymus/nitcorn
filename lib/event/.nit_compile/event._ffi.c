@@ -8,7 +8,8 @@ echo_read_cb(struct bufferevent *bev, void *ctx)
 {
         struct evbuffer *input = bufferevent_get_input(bev);
         struct evbuffer *output = bufferevent_get_output(bev);
-        ((void (*)(void)) ((struct callback_struct*) ctx)->callback)();
+        //ConnectionListener_read_callback((((struct callback_struct*) ctx)->listener));
+        ConnectionListener_read_callback(ctx);
 }
 
 static void
@@ -27,33 +28,35 @@ accept_conn_cb(struct evconnlistener *listener,
     void *ctx)
 {
 
+/*
     struct callback_struct* cb = malloc(sizeof(*cb));
     cb->listener = listener;
     cb->callback = ctx;
+    */
         /* We got a new connection! Set up a bufferevent for it. */
         struct event_base *base = evconnlistener_get_base(listener);
         struct bufferevent *bev = bufferevent_socket_new(
                 base, fd, BEV_OPT_CLOSE_ON_FREE);
 
-        bufferevent_setcb(bev, echo_read_cb, NULL, echo_event_cb, cb);
+        bufferevent_setcb(bev, echo_read_cb, NULL, echo_event_cb, listener);
 
         bufferevent_enable(bev, EV_READ|EV_WRITE);
 }
 void* new_EventBase_create_base___impl(  )
 {
-#line 56 "event.nit"
+#line 60 "event.nit"
 
                 return event_base_new();
         }
 void EventBase_dispatch___impl( void* recv )
 {
-#line 60 "event.nit"
+#line 64 "event.nit"
 
             event_base_dispatch(recv);
         }
 void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port )
 {
-#line 73 "event.nit"
+#line 77 "event.nit"
 
         struct sockaddr_in sin;
         struct evconnlistener *listener;
@@ -75,13 +78,13 @@ void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint 
     }
 void* ConnectionListener_base___impl( void* recv )
 {
-#line 93 "event.nit"
+#line 97 "event.nit"
 
         return evconnlistener_get_base(recv);
     }
 void ConnectionListener_exit_loop___impl( void* recv )
 {
-#line 106 "event.nit"
+#line 111 "event.nit"
 
         event_base_loopexit(ConnectionListener_base(recv), NULL);
     }

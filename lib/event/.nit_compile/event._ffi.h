@@ -13,10 +13,11 @@
 
 #include <arpa/inet.h>
 
-struct callback_struct {
+/*struct callback_struct {
         struct evconnlistener* listener;
         void* callback;
 };
+*/
 void* new_EventBase_create_base___impl(  );
 void EventBase_dispatch___impl( void* recv );
 void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port );
