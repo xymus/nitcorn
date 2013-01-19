@@ -1,2 +1,2 @@
-*.nit_compile/
+*.nit_compile/*
 *.swp

@@ -84,7 +84,7 @@ void* ConnectionListener_base___impl( void* recv )
     }
 void ConnectionListener_exit_loop___impl( void* recv )
 {
-#line 111 "event.nit"
+#line 110 "event.nit"
 
         event_base_loopexit(ConnectionListener_base(recv), NULL);
     }
