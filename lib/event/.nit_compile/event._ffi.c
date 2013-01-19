@@ -3,11 +3,9 @@
 */
 #include "event._ffi.h"
 
-#define BUF_LEN 1024
 static void
 echo_read_cb(struct bufferevent *bev, void *ctx)
 {
-        struct evbuffer *input = bufferevent_get_input(bev);
         /*
         char buf[1024];
         int n;
@@ -18,12 +16,11 @@ echo_read_cb(struct bufferevent *bev, void *ctx)
         */
 
         int n;
-        char* buf = calloc(BUF_LEN, sizeof(char));
-        memset(buf, '\0', BUF_LEN);
+        size_t buf_length = 1024;//evbuffer_get_length(input);
+        char* buf = calloc(buf_length, sizeof(char));
         do {
-                memset(buf, '\0', BUF_LEN);
-                n = evbuffer_remove(input, buf, BUF_LEN);
-                printf("got %d bytes on a buffer of %d\n", n, BUF_LEN);
+            memset(buf, 0, buf_length);
+                n = bufferevent_read(bev, buf, buf_length);
                 ConnectionListener_read_callback(ctx, new_String_from_cstring(buf));
         } while(n > 0);
         free(buf);
@@ -61,19 +58,19 @@ accept_conn_cb(struct evconnlistener *listener,
 }
 void* new_EventBase_create_base___impl(  )
 {
-#line 77 "event.nit"
+#line 74 "event.nit"
 
                 return event_base_new();
         }
 void EventBase_dispatch___impl( void* recv )
 {
-#line 81 "event.nit"
+#line 78 "event.nit"
 
             event_base_dispatch(recv);
         }
 void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port )
 {
-#line 94 "event.nit"
+#line 91 "event.nit"
 
         struct sockaddr_in sin;
         struct evconnlistener *listener;
@@ -95,13 +92,13 @@ void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint 
     }
 void* ConnectionListener_base___impl( void* recv )
 {
-#line 114 "event.nit"
+#line 111 "event.nit"
 
         return evconnlistener_get_base(recv);
     }
 void ConnectionListener_exit_loop___impl( void* recv )
 {
-#line 126 "event.nit"
+#line 124 "event.nit"
 
         event_base_loopexit(ConnectionListener_base(recv), NULL);
     }
