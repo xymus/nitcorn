@@ -50,8 +50,8 @@ typedef void (*event___ConnectionListener___bind_to_t)(val_t p0, val_t p1, val_t
 val_t NEW_ConnectionListener_event___ConnectionListener___bind_to(val_t p0, val_t p1, val_t p2);
 val_t event___ConnectionListener___base(val_t p0);
 typedef val_t (*event___ConnectionListener___base_t)(val_t p0);
-void event___ConnectionListener___read_callback(val_t p0);
-typedef void (*event___ConnectionListener___read_callback_t)(val_t p0);
+void event___ConnectionListener___read_callback(val_t p0, val_t p1);
+typedef void (*event___ConnectionListener___read_callback_t)(val_t p0, val_t p1);
 void event___ConnectionListener___error_callback(val_t p0);
 typedef void (*event___ConnectionListener___error_callback_t)(val_t p0);
 void event___ConnectionListener___exit_loop(val_t p0);

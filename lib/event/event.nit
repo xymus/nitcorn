@@ -15,13 +15,30 @@ in "C header" `{
 `}
 
 in "C" `{
+#define BUF_LEN 1024
 static void
 echo_read_cb(struct bufferevent *bev, void *ctx)
 {
         struct evbuffer *input = bufferevent_get_input(bev);
-        struct evbuffer *output = bufferevent_get_output(bev);
-        //ConnectionListener_read_callback((((struct callback_struct*) ctx)->listener));
-        ConnectionListener_read_callback(ctx);
+        /*
+        char buf[1024];
+        int n;
+        while ((n = evbuffer_remove(input, buf, sizeof(buf-1))) > 0) {
+            printf("%d\n", n);
+            printf("%s\n", buf);
+        }
+        */
+
+        int n;
+        char* buf = calloc(BUF_LEN, sizeof(char));
+        memset(buf, '\0', BUF_LEN);
+        do {
+                memset(buf, '\0', BUF_LEN);
+                n = evbuffer_remove(input, buf, BUF_LEN);
+                printf("got %d bytes on a buffer of %d\n", n, BUF_LEN);
+                ConnectionListener_read_callback(ctx, new_String_from_cstring(buf));
+        } while(n > 0);
+        free(buf);
 }
 
 static void
@@ -98,8 +115,7 @@ special Callback
         return evconnlistener_get_base(recv);
     `}
 
-    fun read_callback do
-            print "callback from nit"
+    fun read_callback(read : String) do
     end
 
     redef fun error_callback do

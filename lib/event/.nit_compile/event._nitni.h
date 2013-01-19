@@ -34,7 +34,7 @@ char * event_String_to_cstring( String recv );
 #define String_to_cstring event_String_to_cstring
 #endif
 /* friendly for event::ConnectionListener::read_callback */
-void event_ConnectionListener_read_callback( void* recv );
+void event_ConnectionListener_read_callback( void* recv, String read );
 #ifndef ConnectionListener_read_callback
 #define ConnectionListener_read_callback event_ConnectionListener_read_callback
 #endif

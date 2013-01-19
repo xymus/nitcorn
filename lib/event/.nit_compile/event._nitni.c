@@ -61,9 +61,11 @@ trans_return = UNBOX_NativeString(orig_return);
 return trans_return;
 }
 /* friendly for event::ConnectionListener::read_callback */
-void event_ConnectionListener_read_callback( void* recv )
+void event_ConnectionListener_read_callback( void* recv, String read )
 {
-CALL_event___ConnectionListener___read_callback( BOX_ConnectionListener(recv) )( BOX_ConnectionListener(recv) );
+val_t trans___read;
+trans___read = read->ref.val;
+CALL_event___ConnectionListener___read_callback( BOX_ConnectionListener(recv) )( BOX_ConnectionListener(recv), trans___read );
 }
 /* friendly for event::ConnectionListener::(event::Callback::error_callback) */
 void event_ConnectionListener_error_callback( void* recv )
