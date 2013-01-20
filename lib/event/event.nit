@@ -27,14 +27,10 @@ echo_read_cb(struct bufferevent *bev, void *ctx)
         }
         */
 
-        int n;
-        size_t buf_length = 1024;//evbuffer_get_length(input);
-        char* buf = calloc(buf_length, sizeof(char));
-        do {
-            memset(buf, 0, buf_length);
-                n = bufferevent_read(bev, buf, buf_length);
-                ConnectionListener_read_callback(ctx, new_String_from_cstring(buf));
-        } while(n > 0);
+        struct evbuffer *input = bufferevent_get_input(bev);
+        char* buf;
+        int* n;
+        buf = evbuffer_readln(input, n, EVBUFFER_EOL_ANY);
         free(buf);
 }
 
@@ -113,7 +109,8 @@ special Callback
     `}
 
     fun read_callback(read : String) do
-            print "{read}"
+        var t = read.length
+        print "{t}"
     end
 
     redef fun error_callback do
