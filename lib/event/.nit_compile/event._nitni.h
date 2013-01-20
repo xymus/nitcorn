@@ -33,8 +33,13 @@ char * event_String_to_cstring( String recv );
 #ifndef String_to_cstring
 #define String_to_cstring event_String_to_cstring
 #endif
+/* friendly for string::String::with_native */
+String event_new_String_with_native( char * nat, bigint size );
+#ifndef new_String_with_native
+#define new_String_with_native event_new_String_with_native
+#endif
 /* friendly for event::ConnectionListener::read_callback */
-void event_ConnectionListener_read_callback( void* recv, String read );
+void event_ConnectionListener_read_callback( void* recv, char * line );
 #ifndef ConnectionListener_read_callback
 #define ConnectionListener_read_callback event_ConnectionListener_read_callback
 #endif

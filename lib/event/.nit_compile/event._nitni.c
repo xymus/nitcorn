@@ -60,12 +60,25 @@ orig_return = CALL_standard___string___String___to_cstring( trans_recv )( trans_
 trans_return = UNBOX_NativeString(orig_return);
 return trans_return;
 }
-/* friendly for event::ConnectionListener::read_callback */
-void event_ConnectionListener_read_callback( void* recv, String read )
+/* friendly for string::String::with_native */
+String event_new_String_with_native( char * nat, bigint size )
 {
-val_t trans___read;
-trans___read = read->ref.val;
-CALL_event___ConnectionListener___read_callback( BOX_ConnectionListener(recv) )( BOX_ConnectionListener(recv), trans___read );
+val_t trans___size;
+val_t orig_return;
+String trans_return;
+trans___size = TAG_Int(size);
+trans_return = malloc( sizeof( struct s_String ) );
+trans_return->ref.val = NIT_NULL;
+trans_return->ref.count = 0;
+nitni_local_ref_add( (struct nitni_ref *)trans_return );
+orig_return = NEW_String_standard___string___String___with_native( BOX_NativeString(nat), trans___size );
+trans_return->ref.val = orig_return;
+return trans_return;
+}
+/* friendly for event::ConnectionListener::read_callback */
+void event_ConnectionListener_read_callback( void* recv, char * line )
+{
+CALL_event___ConnectionListener___read_callback( BOX_ConnectionListener(recv) )( BOX_ConnectionListener(recv), BOX_NativeString(line) );
 }
 /* friendly for event::ConnectionListener::(event::Callback::error_callback) */
 void event_ConnectionListener_error_callback( void* recv )

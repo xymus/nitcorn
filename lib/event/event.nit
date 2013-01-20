@@ -28,9 +28,10 @@ echo_read_cb(struct bufferevent *bev, void *ctx)
         */
 
         struct evbuffer *input = bufferevent_get_input(bev);
-        char* buf;
-        int* n;
-        buf = evbuffer_readln(input, n, EVBUFFER_EOL_ANY);
+        char* buf = NULL;
+        size_t sz;
+        buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
+        ConnectionListener_read_callback(ctx, new_String_with_native(buf, strlen(buf)));
         free(buf);
 }
 
@@ -84,7 +85,7 @@ end
 
 extern ConnectionListener
 special Callback
-    new bind_to(base: EventBase, address : String, port : Int) is extern import String::to_cstring, ConnectionListener::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int) is extern import String::to_cstring, String::with_native, ConnectionListener::read_callback, ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
 
@@ -108,9 +109,8 @@ special Callback
         return evconnlistener_get_base(recv);
     `}
 
-    fun read_callback(read : String) do
-        var t = read.length
-        print "{t}"
+    fun read_callback(line : NativeString) do
+        print line
     end
 
     redef fun error_callback do
@@ -126,4 +126,5 @@ end
 
 var e : EventBase = new EventBase.create_base
 var listener : ConnectionListener = new ConnectionListener.bind_to(e, "localhost", 12345)
+print "running"
 e.dispatch

@@ -16,9 +16,10 @@ echo_read_cb(struct bufferevent *bev, void *ctx)
         */
 
         struct evbuffer *input = bufferevent_get_input(bev);
-        char* buf;
-        int* n;
-        buf = evbuffer_readln(input, n, EVBUFFER_EOL_ANY);
+        char* buf = NULL;
+        size_t sz;
+        buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
+        ConnectionListener_read_callback(ctx, new_String_with_native(buf, strlen(buf)));
         free(buf);
 }
 
@@ -54,19 +55,19 @@ accept_conn_cb(struct evconnlistener *listener,
 }
 void* new_EventBase_create_base___impl(  )
 {
-#line 70 "event.nit"
+#line 71 "event.nit"
 
                 return event_base_new();
         }
 void EventBase_dispatch___impl( void* recv )
 {
-#line 74 "event.nit"
+#line 75 "event.nit"
 
             event_base_dispatch(recv);
         }
 void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port )
 {
-#line 87 "event.nit"
+#line 88 "event.nit"
 
         struct sockaddr_in sin;
         struct evconnlistener *listener;
@@ -88,7 +89,7 @@ void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint 
     }
 void* ConnectionListener_base___impl( void* recv )
 {
-#line 107 "event.nit"
+#line 108 "event.nit"
 
         return evconnlistener_get_base(recv);
     }
