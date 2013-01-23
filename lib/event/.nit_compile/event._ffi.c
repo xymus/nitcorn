@@ -10,6 +10,7 @@ c_read_cb(struct bufferevent *bev, void *ctx)
         char* buf = NULL;
         size_t sz;
         buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
+        Reactor_incr_ref(((struct callback*)ctx)->reactor);
         ConnectionListener_read_callback(
             ((struct callback*)ctx)->listener ,
             new_String_from_cstring(buf),
@@ -45,19 +46,19 @@ accept_conn_cb(struct evconnlistener *listener,
 }
 void* new_EventBase_create_base___impl(  )
 {
-#line 60 "event.nit"
+#line 61 "event.nit"
 
                 return event_base_new();
         }
 void EventBase_dispatch___impl( void* recv )
 {
-#line 64 "event.nit"
+#line 65 "event.nit"
 
             event_base_dispatch(recv);
         }
 void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port, Reactor reactor )
 {
-#line 75 "event.nit"
+#line 76 "event.nit"
 
         struct sockaddr_in sin;
         struct evconnlistener *listener;
@@ -83,19 +84,19 @@ void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint 
     }
 void* ConnectionListener_base___impl( void* recv )
 {
-#line 99 "event.nit"
+#line 100 "event.nit"
 
         return evconnlistener_get_base(recv);
     }
 void ConnectionListener_exit_loop___impl( void* recv )
 {
-#line 113 "event.nit"
+#line 114 "event.nit"
 
         event_base_loopexit(ConnectionListener_base(recv), NULL);
     }
 void String_destroy___impl( String recv )
 {
-#line 127 "event.nit"
+#line 128 "event.nit"
 
         free(recv);
     }
