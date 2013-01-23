@@ -13,14 +13,14 @@
 
 #include <arpa/inet.h>
 
-/*struct callback_struct {
+struct callback {
         struct evconnlistener* listener;
-        void* callback;
+        Reactor reactor;
 };
-*/
 void* new_EventBase_create_base___impl(  );
 void EventBase_dispatch___impl( void* recv );
-void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port );
+void* new_ConnectionListener_bind_to___impl( void* base, String address, bigint port, Reactor reactor );
 void* ConnectionListener_base___impl( void* recv );
 void ConnectionListener_exit_loop___impl( void* recv );
+void String_destroy___impl( String recv );
 #endif

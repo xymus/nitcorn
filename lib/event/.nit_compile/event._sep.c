@@ -8,14 +8,14 @@ void event___EventBase___create_base(val_t p0, int* init_table){
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 71;
+  fra.me.line = 60;
   fra.me.meth = LOCATE_event___EventBase___create_base;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* event.nit:71 */
+  /* event.nit:60 */
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -26,61 +26,109 @@ void event___EventBase___dispatch(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 75;
+  fra.me.line = 64;
   fra.me.meth = LOCATE_event___EventBase___dispatch;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* event.nit:75 */
+  /* event.nit:64 */
   EventBase_dispatch___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
 }
-static const char LOCATE_event___Callback___accept_callback[] = "event::Callback::accept_callback";
-void event___Callback___accept_callback(val_t p0){
+static const char LOCATE_event___Reactor___read[] = "event::Reactor::read";
+void event___Reactor___read(val_t p0, val_t p1){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 82;
-  fra.me.meth = LOCATE_event___Callback___accept_callback;
+  fra.me.line = 71;
+  fra.me.meth = LOCATE_event___Reactor___read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* event.nit:82 */
-  nit_abort("Deferred method called", NULL, LOCATE_event, 82);
+  /* event.nit:71 */
+  nit_abort("Deferred method called", NULL, LOCATE_event, 71);
   stack_frame_head = fra.me.prev;
   return;
 }
-static const char LOCATE_event___Callback___error_callback[] = "event::Callback::error_callback";
-void event___Callback___error_callback(val_t p0){
+static const char LOCATE_event___Reactor___init[] = "event::Reactor::init";
+void event___Reactor___init(val_t p0, int* init_table){
+  int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_event___Reactor].i;
   struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 83;
-  fra.me.meth = LOCATE_event___Callback___error_callback;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  fra.me.nitni_local_ref_head = NULL;
-  /* event.nit:83 */
-  nit_abort("Deferred method called", NULL, LOCATE_event, 83);
-  stack_frame_head = fra.me.prev;
-  return;
-}
-static const char LOCATE_event___ConnectionListener___bind_to[] = "event::ConnectionListener::bind_to";
-void event___ConnectionListener___bind_to(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table){
-  int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_event___ConnectionListener].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
   val_t tmp;
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 88;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_event___Reactor___init;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  stack_frame_head = fra.me.prev;
+  init_table[itpos1] = 1;
+  return;
+}
+static const char LOCATE_event___ConnectionListener___bind_to[] = "event::ConnectionListener::bind_to";
+void event___ConnectionListener___bind_to(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table){
+  int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_event___ConnectionListener].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t tmp;
+  if (init_table[itpos2]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 75;
   fra.me.meth = LOCATE_event___ConnectionListener___bind_to;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  REGB0 = p3;
+  fra.me.REG[3] = p4;
+  /* event.nit:75 */
+  ;
+  ;
+  ;
+  ;
+  stack_frame_head = fra.me.prev;
+  init_table[itpos2] = 1;
+  return;
+}
+static const char LOCATE_event___ConnectionListener___base[] = "event::ConnectionListener::base";
+val_t event___ConnectionListener___base(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 99;
+  fra.me.meth = LOCATE_event___ConnectionListener___base;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* event.nit:99 */
+  fra.me.REG[0] = ConnectionListener_base___out(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+static const char LOCATE_event___ConnectionListener___read_callback[] = "event::ConnectionListener::read_callback";
+void event___ConnectionListener___read_callback(val_t p0, val_t p1, val_t p2){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 103;
+  fra.me.meth = LOCATE_event___ConnectionListener___read_callback;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
   fra.me.nitni_local_ref_head = NULL;
@@ -90,55 +138,14 @@ void event___ConnectionListener___bind_to(val_t p0, val_t p1, val_t p2, val_t p3
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  REGB0 = p3;
-  /* event.nit:88 */
-  ;
-  ;
-  ;
-  ;
-  stack_frame_head = fra.me.prev;
-  init_table[itpos1] = 1;
-  return;
-}
-static const char LOCATE_event___ConnectionListener___base[] = "event::ConnectionListener::base";
-val_t event___ConnectionListener___base(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 108;
-  fra.me.meth = LOCATE_event___ConnectionListener___base;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* event.nit:108 */
-  fra.me.REG[0] = ConnectionListener_base___out(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-static const char LOCATE_event___ConnectionListener___read_callback[] = "event::ConnectionListener::read_callback";
-void event___ConnectionListener___read_callback(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 112;
-  fra.me.meth = LOCATE_event___ConnectionListener___read_callback;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  /* event.nit:113 */
-  CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* event.nit:104 */
+  CALL_event___Reactor___read(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  /* event.nit:105 */
+  CALL_event___String___destroy(fra.me.REG[1])(fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }
-static const char LOCATE_event___ConnectionListener___error_callback[] = "event::ConnectionListener::(event::Callback::error_callback)";
+static const char LOCATE_event___ConnectionListener___error_callback[] = "event::ConnectionListener::error_callback";
 void event___ConnectionListener___error_callback(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
@@ -146,7 +153,7 @@ void event___ConnectionListener___error_callback(val_t p0){
   static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 116;
+  fra.me.line = 108;
   fra.me.meth = LOCATE_event___ConnectionListener___error_callback;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -154,7 +161,7 @@ void event___ConnectionListener___error_callback(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* event.nit:117 */
+  /* event.nit:109 */
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("Got an error on connection, quitting loop");
     REGB0 = TAG_Int(41);
@@ -164,7 +171,7 @@ void event___ConnectionListener___error_callback(val_t p0){
   } else fra.me.REG[1] = once_value_1;
   fra.me.REG[1] = fra.me.REG[1];
   CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* event.nit:118 */
+  /* event.nit:110 */
   CALL_event___ConnectionListener___exit_loop(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -175,62 +182,103 @@ void event___ConnectionListener___exit_loop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 121;
+  fra.me.line = 113;
   fra.me.meth = LOCATE_event___ConnectionListener___exit_loop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* event.nit:121 */
+  /* event.nit:113 */
   ConnectionListener_exit_loop___out(fra.me.REG[0]);
   ;
   stack_frame_head = fra.me.prev;
   return;
 }
+static const char LOCATE_event___HttpReactor___read[] = "event::HttpReactor::(event::Reactor::read)";
+void event___HttpReactor___read(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 121;
+  fra.me.meth = LOCATE_event___HttpReactor___read;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* event.nit:122 */
+  CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+static const char LOCATE_event___String___destroy[] = "event::String::destroy";
+void event___String___destroy(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 127;
+  fra.me.meth = LOCATE_event___String___destroy;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* event.nit:127 */
+  String_destroy___out(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
 static const char LOCATE_event___Sys___main[] = "event::Sys::(kernel::Sys::main)";
 void event___Sys___main(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
   static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_event;
-  fra.me.line = 127;
+  fra.me.line = 132;
   fra.me.meth = LOCATE_event___Sys___main;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* event.nit:127 */
-  fra.me.REG[1] = NEW_EventBase_event___EventBase___create_base();
-  /* event.nit:128 */
+  /* event.nit:132 */
+  fra.me.REG[1] = NEW_HttpReactor_event___Reactor___init();
+  /* event.nit:133 */
+  fra.me.REG[2] = NEW_EventBase_event___EventBase___create_base();
+  /* event.nit:134 */
   if (!once_value_1) {
-    fra.me.REG[2] = BOX_NativeString("localhost");
+    fra.me.REG[3] = BOX_NativeString("localhost");
     REGB0 = TAG_Int(9);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
-    once_value_1 = fra.me.REG[2];
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
-  } else fra.me.REG[2] = once_value_1;
-  fra.me.REG[2] = fra.me.REG[2];
+  } else fra.me.REG[3] = once_value_1;
+  fra.me.REG[3] = fra.me.REG[3];
   REGB0 = TAG_Int(12345);
-  fra.me.REG[2] = NEW_ConnectionListener_event___ConnectionListener___bind_to(fra.me.REG[1], fra.me.REG[2], REGB0);
-  /* event.nit:129 */
+  fra.me.REG[1] = NEW_ConnectionListener_event___ConnectionListener___bind_to(fra.me.REG[2], fra.me.REG[3], REGB0, fra.me.REG[1]);
+  /* event.nit:135 */
   if (!once_value_2) {
-    fra.me.REG[2] = BOX_NativeString("running");
+    fra.me.REG[1] = BOX_NativeString("running");
     REGB0 = TAG_Int(7);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
-    once_value_2 = fra.me.REG[2];
+    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
-  } else fra.me.REG[2] = once_value_2;
-  fra.me.REG[2] = fra.me.REG[2];
-  CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* event.nit:130 */
-  CALL_event___EventBase___dispatch(fra.me.REG[1])(fra.me.REG[1]);
+  } else fra.me.REG[1] = once_value_2;
+  fra.me.REG[1] = fra.me.REG[1];
+  CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* event.nit:136 */
+  CALL_event___EventBase___dispatch(fra.me.REG[2])(fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
 }

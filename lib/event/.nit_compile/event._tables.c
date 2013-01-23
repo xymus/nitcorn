@@ -20,6 +20,29 @@
 #include "standard___gc._sep.h"
 #include "event._sep.h"
 #include <nit_common.h>
+void INIT_ATTRIBUTES__event___Reactor(val_t p0);
+typedef void (*INIT_ATTRIBUTES__event___Reactor_t)(val_t p0);
+val_t NEW_event___Reactor(void);
+void CHECKNEW_event___Reactor(val_t p0);
+typedef void (*CHECKNEW_event___Reactor_t)(val_t p0);
+val_t NEW_Reactor_event___Reactor___init(void);
+typedef val_t (*NEW_Reactor_event___Reactor___init_t)(void);
+void INIT_ATTRIBUTES__event___HttpReactor(val_t p0);
+typedef void (*INIT_ATTRIBUTES__event___HttpReactor_t)(val_t p0);
+val_t NEW_event___HttpReactor(void);
+void CHECKNEW_event___HttpReactor(val_t p0);
+typedef void (*CHECKNEW_event___HttpReactor_t)(val_t p0);
+val_t NEW_HttpReactor_event___Reactor___init(void);
+typedef val_t (*NEW_HttpReactor_event___Reactor___init_t)(void);
+void INIT_ATTRIBUTES__standard___string___String(val_t p0);
+typedef void (*INIT_ATTRIBUTES__standard___string___String_t)(val_t p0);
+val_t NEW_standard___string___String(void);
+void CHECKNEW_standard___string___String(val_t p0);
+typedef void (*CHECKNEW_standard___string___String_t)(val_t p0);
+val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
+typedef val_t (*NEW_String_standard___string___String___with_native_t)(val_t p0, val_t p1);
+val_t NEW_String_standard___string___String___from_cstring(val_t p0);
+typedef val_t (*NEW_String_standard___string___String___from_cstring_t)(val_t p0);
 void INIT_ATTRIBUTES__standard___kernel___Sys(val_t p0);
 typedef void (*INIT_ATTRIBUTES__standard___kernel___Sys_t)(val_t p0);
 val_t NEW_standard___kernel___Sys(void);
@@ -230,15 +253,6 @@ void CHECKNEW_standard___collection___hash_collection___HashSetIterator(val_t p0
 typedef void (*CHECKNEW_standard___collection___hash_collection___HashSetIterator_t)(val_t p0);
 val_t NEW_HashSetIterator_standard___collection___hash_collection___HashSetIterator___init(val_t p0);
 typedef val_t (*NEW_HashSetIterator_standard___collection___hash_collection___HashSetIterator___init_t)(val_t p0);
-void INIT_ATTRIBUTES__standard___string___String(val_t p0);
-typedef void (*INIT_ATTRIBUTES__standard___string___String_t)(val_t p0);
-val_t NEW_standard___string___String(void);
-void CHECKNEW_standard___string___String(val_t p0);
-typedef void (*CHECKNEW_standard___string___String_t)(val_t p0);
-val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
-typedef val_t (*NEW_String_standard___string___String___with_native_t)(val_t p0, val_t p1);
-val_t NEW_String_standard___string___String___from_cstring(val_t p0);
-typedef val_t (*NEW_String_standard___string___String___from_cstring_t)(val_t p0);
 void INIT_ATTRIBUTES__standard___string___Buffer(val_t p0);
 typedef void (*INIT_ATTRIBUTES__standard___string___Buffer_t)(val_t p0);
 val_t NEW_standard___string___Buffer(void);
@@ -374,14 +388,14 @@ const int SFT_standard___environ[2] = {
 };
 const char LOCATE_standard___string[] = "/home/jp/Projects-ssd/nit/lib/standard/string.nit";
 const int SFT_standard___string[24] = {
-  279 /* Id of AbstractString */,
+  283 /* Id of AbstractString */,
   12 /* Color of AbstractString */,
   3 /* Group of ? */,
   99 /* Group of ? */,
-  283 /* Id of String */,
+  287 /* Id of String */,
   8 /* Color of String */,
   112 /* Group of ? */,
-  307 /* Id of Buffer */,
+  311 /* Id of Buffer */,
   14 /* Color of Buffer */,
   4 /* Group of ? */,
   115 /* Group of ? */,
@@ -413,39 +427,39 @@ const int SFT_standard___collection___range[8] = {
 };
 const char LOCATE_standard___collection___abstract_collection[] = "/home/jp/Projects-ssd/nit/lib/standard/collection/abstract_collection.nit";
 const int SFT_standard___collection___abstract_collection[63] = {
-  59 /* Id of Collection */,
+  63 /* Id of Collection */,
   6 /* Color of Collection */,
   64 /* Group of ? */,
   91 /* Id of NaiveCollection */,
   7 /* Color of NaiveCollection */,
   74 /* Group of ? */,
-  39 /* Id of Iterator */,
+  43 /* Id of Iterator */,
   4 /* Color of Iterator */,
   47 /* Group of ? */,
-  159 /* Id of Container */,
+  163 /* Id of Container */,
   7 /* Color of Container */,
   2 /* Group of ? */,
   74 /* Group of ? */,
-  155 /* Id of ContainerIterator */,
+  159 /* Id of ContainerIterator */,
   5 /* Color of ContainerIterator */,
   2 /* Group of ? */,
   51 /* Group of ? */,
   79 /* Id of RemovableCollection */,
   8 /* Color of RemovableCollection */,
   78 /* Group of ? */,
-  175 /* Id of SimpleCollection */,
+  179 /* Id of SimpleCollection */,
   9 /* Color of SimpleCollection */,
   48 /* Group of ? */,
-  255 /* Id of Set */,
+  259 /* Id of Set */,
   4 /* Color of Set */,
   46 /* Group of ? */,
-  31 /* Id of MapRead */,
+  35 /* Id of MapRead */,
   4 /* Color of MapRead */,
   46 /* Group of ? */,
   103 /* Id of Map */,
   6 /* Color of Map */,
   58 /* Group of ? */,
-  35 /* Id of MapIterator */,
+  39 /* Id of MapIterator */,
   4 /* Color of MapIterator */,
   46 /* Group of ? */,
   99 /* Id of MapKeysIterator */,
@@ -459,20 +473,20 @@ const int SFT_standard___collection___abstract_collection[63] = {
   75 /* Id of SequenceRead */,
   7 /* Color of SequenceRead */,
   74 /* Group of ? */,
-  259 /* Id of Sequence */,
+  263 /* Id of Sequence */,
   11 /* Color of Sequence */,
   89 /* Group of ? */,
   111 /* Id of IndexedIterator */,
   5 /* Color of IndexedIterator */,
   51 /* Group of ? */,
-  223 /* Id of CoupleMap */,
+  227 /* Id of CoupleMap */,
   7 /* Color of CoupleMap */,
   62 /* Group of ? */,
-  151 /* Id of CoupleMapIterator */,
+  155 /* Id of CoupleMapIterator */,
   5 /* Color of CoupleMapIterator */,
   2 /* Group of ? */,
   51 /* Group of ? */,
-  51 /* Id of Couple */,
+  55 /* Id of Couple */,
   4 /* Color of Couple */,
   2 /* Group of ? */,
   46 /* Group of ? */,
@@ -485,10 +499,10 @@ const int SFT_standard___kernel[27] = {
   7 /* Id of Sys */,
   4 /* Color of Sys */,
   51 /* Group of ? */,
-  55 /* Id of Comparable */,
+  59 /* Id of Comparable */,
   5 /* Color of Comparable */,
   51 /* Group of ? */,
-  147 /* Id of Discrete */,
+  151 /* Id of Discrete */,
   6 /* Color of Discrete */,
   62 /* Group of ? */,
   -13 /* Id of Bool */,
@@ -509,15 +523,15 @@ const int SFT_standard___kernel[27] = {
 };
 const char LOCATE_standard___collection___list[] = "/home/jp/Projects-ssd/nit/lib/standard/collection/list.nit";
 const int SFT_standard___collection___list[12] = {
-  291 /* Id of List */,
+  295 /* Id of List */,
   12 /* Color of List */,
   2 /* Group of ? */,
   99 /* Group of ? */,
-  191 /* Id of ListIterator */,
+  195 /* Id of ListIterator */,
   6 /* Color of ListIterator */,
   2 /* Group of ? */,
   53 /* Group of ? */,
-  187 /* Id of ListNode */,
+  191 /* Id of ListNode */,
   8 /* Color of ListNode */,
   3 /* Group of ? */,
   78 /* Group of ? */,
@@ -527,44 +541,44 @@ const int SFT_standard___collection___sorter[6] = {
   71 /* Id of AbstractSorter */,
   4 /* Color of AbstractSorter */,
   46 /* Group of ? */,
-  163 /* Id of ComparableSorter */,
+  167 /* Id of ComparableSorter */,
   5 /* Color of ComparableSorter */,
   52 /* Group of ? */,
 };
 const char LOCATE_standard___collection___array[] = "/home/jp/Projects-ssd/nit/lib/standard/collection/array.nit";
 const int SFT_standard___collection___array[43] = {
-  243 /* Id of AbstractArrayRead */,
+  247 /* Id of AbstractArrayRead */,
   10 /* Color of AbstractArrayRead */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  303 /* Id of AbstractArray */,
+  307 /* Id of AbstractArray */,
   13 /* Color of AbstractArray */,
   111 /* Group of ? */,
-  311 /* Id of Array */,
+  315 /* Id of Array */,
   4 /* Color of Array */,
   3 /* Group of ? */,
   99 /* Group of ? */,
-  239 /* Id of ArrayIterator */,
+  243 /* Id of ArrayIterator */,
   6 /* Color of ArrayIterator */,
   2 /* Group of ? */,
   53 /* Group of ? */,
-  299 /* Id of ArraySet */,
+  303 /* Id of ArraySet */,
   10 /* Color of ArraySet */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  171 /* Id of ArraySetIterator */,
+  175 /* Id of ArraySetIterator */,
   5 /* Color of ArraySetIterator */,
   2 /* Group of ? */,
   51 /* Group of ? */,
-  275 /* Id of ArrayMap */,
+  279 /* Id of ArrayMap */,
   8 /* Color of ArrayMap */,
   2 /* Group of ? */,
   64 /* Group of ? */,
-  235 /* Id of ArrayMapKeys */,
+  239 /* Id of ArrayMapKeys */,
   9 /* Color of ArrayMapKeys */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  231 /* Id of ArrayMapValues */,
+  235 /* Id of ArrayMapValues */,
   9 /* Color of ArrayMapValues */,
   2 /* Group of ? */,
   82 /* Group of ? */,
@@ -573,47 +587,47 @@ const int SFT_standard___collection___array[43] = {
   67 /* Id of ArrayCapable */,
   5 /* Color of ArrayCapable */,
   55 /* Group of ? */,
-  23 /* Id of NativeArray */,
+  27 /* Id of NativeArray */,
   4 /* Color of NativeArray */,
   46 /* Group of ? */,
 };
 const char LOCATE_standard___collection___hash_collection[] = "/home/jp/Projects-ssd/nit/lib/standard/collection/hash_collection.nit";
 const int SFT_standard___collection___hash_collection[38] = {
-  135 /* Id of HashCollection */,
+  139 /* Id of HashCollection */,
   7 /* Color of HashCollection */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  47 /* Id of HashNode */,
+  51 /* Id of HashNode */,
   4 /* Color of HashNode */,
   2 /* Group of ? */,
   46 /* Group of ? */,
-  211 /* Id of HashMap */,
+  215 /* Id of HashMap */,
   8 /* Color of HashMap */,
   9 /* Group of ? */,
   62 /* Group of ? */,
-  207 /* Id of HashMapKeys */,
+  211 /* Id of HashMapKeys */,
   9 /* Color of HashMapKeys */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  203 /* Id of HashMapValues */,
+  207 /* Id of HashMapValues */,
   9 /* Color of HashMapValues */,
   2 /* Group of ? */,
   82 /* Group of ? */,
-  127 /* Id of HashMapNode */,
+  131 /* Id of HashMapNode */,
   5 /* Color of HashMapNode */,
   7 /* Group of ? */,
   54 /* Group of ? */,
-  131 /* Id of HashMapIterator */,
+  135 /* Id of HashMapIterator */,
   5 /* Color of HashMapIterator */,
   2 /* Group of ? */,
   51 /* Group of ? */,
-  295 /* Id of HashSet */,
+  299 /* Id of HashSet */,
   10 /* Color of HashSet */,
   51 /* Group of ? */,
-  119 /* Id of HashSetNode */,
+  123 /* Id of HashSetNode */,
   5 /* Color of HashSetNode */,
   54 /* Group of ? */,
-  123 /* Id of HashSetIterator */,
+  127 /* Id of HashSetIterator */,
   5 /* Color of HashSetIterator */,
   2 /* Group of ? */,
   51 /* Group of ? */,
@@ -630,25 +644,25 @@ const int SFT_standard___time[2] = {
 const char LOCATE_standard___file[] = "/home/jp/Projects-ssd/nit/lib/standard/file.nit";
 const int SFT_standard___file[30] = {
   26 /* Group of ? */,
-  139 /* Id of FStream */,
+  143 /* Id of FStream */,
   4 /* Color of FStream */,
   2 /* Group of ? */,
   46 /* Group of ? */,
-  267 /* Id of IFStream */,
+  271 /* Id of IFStream */,
   8 /* Color of IFStream */,
   6 /* Group of ? */,
   69 /* Group of ? */,
-  183 /* Id of OFStream */,
+  187 /* Id of OFStream */,
   7 /* Color of OFStream */,
   4 /* Group of ? */,
   50 /* Group of ? */,
-  287 /* Id of Stdin */,
+  291 /* Id of Stdin */,
   9 /* Color of Stdin */,
   74 /* Group of ? */,
-  247 /* Id of Stdout */,
+  251 /* Id of Stdout */,
   8 /* Color of Stdout */,
   62 /* Group of ? */,
-  251 /* Id of Stderr */,
+  255 /* Id of Stderr */,
   8 /* Color of Stderr */,
   62 /* Group of ? */,
   119 /* Group of ? */,
@@ -662,7 +676,7 @@ const int SFT_standard___file[30] = {
 };
 const char LOCATE_standard___stream[] = "/home/jp/Projects-ssd/nit/lib/standard/stream.nit";
 const int SFT_standard___stream[32] = {
-  43 /* Id of IOS */,
+  47 /* Id of IOS */,
   5 /* Color of IOS */,
   57 /* Group of ? */,
   115 /* Id of IStream */,
@@ -671,40 +685,40 @@ const int SFT_standard___stream[32] = {
   87 /* Id of OStream */,
   6 /* Color of OStream */,
   59 /* Group of ? */,
-  227 /* Id of BufferedIStream */,
+  231 /* Id of BufferedIStream */,
   6 /* Color of BufferedIStream */,
   4 /* Group of ? */,
   50 /* Group of ? */,
-  199 /* Id of IOStream */,
+  203 /* Id of IOStream */,
   10 /* Color of IOStream */,
   79 /* Group of ? */,
-  143 /* Id of FDStream */,
+  147 /* Id of FDStream */,
   4 /* Color of FDStream */,
   2 /* Group of ? */,
   46 /* Group of ? */,
-  219 /* Id of FDIStream */,
+  223 /* Id of FDIStream */,
   9 /* Color of FDIStream */,
   4 /* Group of ? */,
   69 /* Group of ? */,
-  215 /* Id of FDOStream */,
+  219 /* Id of FDOStream */,
   8 /* Color of FDOStream */,
   3 /* Group of ? */,
   54 /* Group of ? */,
-  271 /* Id of FDIOStream */,
+  275 /* Id of FDIOStream */,
   11 /* Color of FDIOStream */,
   72 /* Group of ? */,
   33 /* Group of ? */,
 };
 const char LOCATE_standard___string_search[] = "/home/jp/Projects-ssd/nit/lib/standard/string_search.nit";
 const int SFT_standard___string_search[12] = {
-  19 /* Id of Pattern */,
+  23 /* Id of Pattern */,
   4 /* Color of Pattern */,
   46 /* Group of ? */,
-  167 /* Id of BM_Pattern */,
+  171 /* Id of BM_Pattern */,
   5 /* Color of BM_Pattern */,
   2 /* Group of ? */,
   51 /* Group of ? */,
-  27 /* Id of Match */,
+  31 /* Id of Match */,
   4 /* Color of Match */,
   2 /* Group of ? */,
   46 /* Group of ? */,
@@ -712,19 +726,19 @@ const int SFT_standard___string_search[12] = {
 };
 const char LOCATE_standard___exec[] = "/home/jp/Projects-ssd/nit/lib/standard/exec.nit";
 const int SFT_standard___exec[20] = {
-  15 /* Id of Process */,
+  19 /* Id of Process */,
   4 /* Color of Process */,
   2 /* Group of ? */,
   46 /* Group of ? */,
-  195 /* Id of IProcess */,
+  199 /* Id of IProcess */,
   9 /* Color of IProcess */,
   4 /* Group of ? */,
   74 /* Group of ? */,
-  179 /* Id of OProcess */,
+  183 /* Id of OProcess */,
   8 /* Color of OProcess */,
   3 /* Group of ? */,
   69 /* Group of ? */,
-  263 /* Id of IOProcess */,
+  267 /* Id of IOProcess */,
   11 /* Color of IOProcess */,
   80 /* Group of ? */,
   46 /* Group of ? */,
@@ -745,16 +759,20 @@ const int SFT_standard___gc[1] = {
   54 /* Group of ? */,
 };
 const char LOCATE_event[] = "event.nit";
-const int SFT_event[9] = {
+const int SFT_event[13] = {
   -29 /* Id of EventBase */,
   5 /* Color of EventBase */,
   47 /* Group of ? */,
-  63 /* Id of Callback */,
-  5 /* Color of Callback */,
-  47 /* Group of ? */,
+  15 /* Id of Reactor */,
+  4 /* Color of Reactor */,
+  46 /* Group of ? */,
   -33 /* Id of ConnectionListener */,
-  6 /* Color of ConnectionListener */,
-  50 /* Group of ? */,
+  5 /* Color of ConnectionListener */,
+  47 /* Group of ? */,
+  119 /* Id of HttpReactor */,
+  5 /* Color of HttpReactor */,
+  49 /* Group of ? */,
+  137 /* Group of ? */,
 };
 const classtable_elt_t VFT_event___EventBase[50] = {
   {(bigint) -29 /* 0: Identity */},
@@ -818,14 +836,122 @@ val_t BOX_EventBase(void* val) {
   object_id_counter = object_id_counter + 1;
   return OBJ2VAL(box);
 }
-const classtable_elt_t VFT_event___ConnectionListener[55] = {
+const classtable_elt_t VFT_event___Reactor[49] = {
+  {(bigint) 15 /* 0: Identity */},
+  {(bigint) 2 /* 1: Object size (-1 if a NativeArray)*/},
+  {(bigint) "Reactor" /* 2: Class Name */},
+  {(bigint) 3 /* 3: Reactor < Object: superclass typecheck marker */},
+  {(bigint) 15 /* 4: Reactor < Reactor: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {(bigint) standard___time___Object___get_time},
+  {(bigint) 0 /* 17: Reactor < Object: superclass init_table position */},
+  {(bigint) standard___kernel___Object___object_id},
+  {(bigint) standard___kernel___Object___is_same_type},
+  {(bigint) standard___kernel___Object_____eqeq},
+  {(bigint) standard___kernel___Object_____neq},
+  {(bigint) standard___kernel___Object___output},
+  {(bigint) standard___kernel___Object___output_class_name},
+  {(bigint) standard___kernel___Object___exit},
+  {(bigint) standard___kernel___Object___sys},
+  {(bigint) standard___file___Object___printn},
+  {(bigint) standard___file___Object___print},
+  {(bigint) standard___file___Object___getc},
+  {(bigint) standard___file___Object___gets},
+  {(bigint) standard___file___Object___stdin},
+  {(bigint) standard___file___Object___stdout},
+  {(bigint) standard___file___Object___stderr},
+  {(bigint) standard___stream___Object___poll},
+  {(bigint) standard___stream___Object___intern_poll},
+  {(bigint) standard___string___Object___to_s},
+  {(bigint) standard___string___Object___native_class_name},
+  {(bigint) standard___string___Object___class_name},
+  {(bigint) standard___string___Object___inspect},
+  {(bigint) standard___string___Object___inspect_head},
+  {(bigint) standard___string___Object___args},
+  {(bigint) standard___hash___Object___hash},
+  {(bigint) standard___math___Object___atan2},
+  {(bigint) standard___math___Object___pi},
+  {(bigint) standard___math___Object___srand_from},
+  {(bigint) standard___math___Object___srand},
+  {(bigint) 1 /* 46: Reactor < Reactor: superclass init_table position */},
+  {(bigint) event___Reactor___read},
+  {(bigint) event___Reactor___init},
+};
+/* 0: Pointer to the classtable */
+/* 1: Object_id */
+static const char LOCATE_INIT_ATTRIBUTES__event___Reactor[] = "init var of Reactor";
+void INIT_ATTRIBUTES__event___Reactor(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_INIT_ATTRIBUTES__event___Reactor;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  stack_frame_head = fra.me.prev;
+}
+val_t NEW_event___Reactor(void)
+{
+  obj_t obj;
+  obj = alloc(sizeof(val_t) * 2);
+  obj->vft = (classtable_elt_t*)VFT_event___Reactor;
+  obj[1].object_id = object_id_counter;
+  object_id_counter = object_id_counter + 1;
+  return OBJ2VAL(obj);
+}
+static const char LOCATE_CHECKNEW_event___Reactor[] = "check new Reactor";
+void CHECKNEW_event___Reactor(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_CHECKNEW_event___Reactor;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  stack_frame_head = fra.me.prev;
+}
+static const char LOCATE_NEW_Reactor_event___Reactor___init[] = "new Reactor event::Reactor::init";
+val_t NEW_Reactor_event___Reactor___init(void){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  int init_table[2] = {0, 0};
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_NEW_Reactor_event___Reactor___init;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = NEW_event___Reactor();
+  INIT_ATTRIBUTES__event___Reactor(fra.me.REG[0]);
+  event___Reactor___init(fra.me.REG[0], init_table);
+  CHECKNEW_event___Reactor(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+const classtable_elt_t VFT_event___ConnectionListener[53] = {
   {(bigint) -33 /* 0: Identity */},
   {(bigint) 2 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ConnectionListener" /* 2: Class Name */},
   {(bigint) 3 /* 3: ConnectionListener < Object: superclass typecheck marker */},
   {(bigint) -1 /* 4: ConnectionListener < Pointer: superclass typecheck marker */},
-  {(bigint) 63 /* 5: ConnectionListener < Callback: superclass typecheck marker */},
-  {(bigint) -33 /* 6: ConnectionListener < ConnectionListener: superclass typecheck marker */},
+  {(bigint) -33 /* 5: ConnectionListener < ConnectionListener: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -865,14 +991,12 @@ const classtable_elt_t VFT_event___ConnectionListener[55] = {
   {(bigint) standard___math___Object___pi},
   {(bigint) standard___math___Object___srand_from},
   {(bigint) standard___math___Object___srand},
-  {(bigint) 2 /* 46: ConnectionListener < Pointer: superclass init_table position */},
-  {(bigint) 0 /* 47: ConnectionListener < Callback: superclass init_table position */},
-  {(bigint) event___Callback___accept_callback},
-  {(bigint) event___ConnectionListener___error_callback},
-  {(bigint) 3 /* 50: ConnectionListener < ConnectionListener: superclass init_table position */},
+  {(bigint) 0 /* 46: ConnectionListener < Pointer: superclass init_table position */},
+  {(bigint) 2 /* 47: ConnectionListener < ConnectionListener: superclass init_table position */},
   {(bigint) event___ConnectionListener___bind_to},
   {(bigint) event___ConnectionListener___base},
   {(bigint) event___ConnectionListener___read_callback},
+  {(bigint) event___ConnectionListener___error_callback},
   {(bigint) event___ConnectionListener___exit_loop},
 };
 /* 0: Pointer to the classtable */
@@ -884,6 +1008,361 @@ val_t BOX_ConnectionListener(void* val) {
   box->object_id = object_id_counter;
   object_id_counter = object_id_counter + 1;
   return OBJ2VAL(box);
+}
+const classtable_elt_t VFT_event___HttpReactor[50] = {
+  {(bigint) 119 /* 0: Identity */},
+  {(bigint) 2 /* 1: Object size (-1 if a NativeArray)*/},
+  {(bigint) "HttpReactor" /* 2: Class Name */},
+  {(bigint) 3 /* 3: HttpReactor < Object: superclass typecheck marker */},
+  {(bigint) 15 /* 4: HttpReactor < Reactor: superclass typecheck marker */},
+  {(bigint) 119 /* 5: HttpReactor < HttpReactor: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {(bigint) standard___time___Object___get_time},
+  {(bigint) 0 /* 17: HttpReactor < Object: superclass init_table position */},
+  {(bigint) standard___kernel___Object___object_id},
+  {(bigint) standard___kernel___Object___is_same_type},
+  {(bigint) standard___kernel___Object_____eqeq},
+  {(bigint) standard___kernel___Object_____neq},
+  {(bigint) standard___kernel___Object___output},
+  {(bigint) standard___kernel___Object___output_class_name},
+  {(bigint) standard___kernel___Object___exit},
+  {(bigint) standard___kernel___Object___sys},
+  {(bigint) standard___file___Object___printn},
+  {(bigint) standard___file___Object___print},
+  {(bigint) standard___file___Object___getc},
+  {(bigint) standard___file___Object___gets},
+  {(bigint) standard___file___Object___stdin},
+  {(bigint) standard___file___Object___stdout},
+  {(bigint) standard___file___Object___stderr},
+  {(bigint) standard___stream___Object___poll},
+  {(bigint) standard___stream___Object___intern_poll},
+  {(bigint) standard___string___Object___to_s},
+  {(bigint) standard___string___Object___native_class_name},
+  {(bigint) standard___string___Object___class_name},
+  {(bigint) standard___string___Object___inspect},
+  {(bigint) standard___string___Object___inspect_head},
+  {(bigint) standard___string___Object___args},
+  {(bigint) standard___hash___Object___hash},
+  {(bigint) standard___math___Object___atan2},
+  {(bigint) standard___math___Object___pi},
+  {(bigint) standard___math___Object___srand_from},
+  {(bigint) standard___math___Object___srand},
+  {(bigint) 1 /* 46: HttpReactor < Reactor: superclass init_table position */},
+  {(bigint) event___HttpReactor___read},
+  {(bigint) event___Reactor___init},
+  {(bigint) 2 /* 49: HttpReactor < HttpReactor: superclass init_table position */},
+};
+/* 0: Pointer to the classtable */
+/* 1: Object_id */
+static const char LOCATE_INIT_ATTRIBUTES__event___HttpReactor[] = "init var of HttpReactor";
+void INIT_ATTRIBUTES__event___HttpReactor(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_INIT_ATTRIBUTES__event___HttpReactor;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  stack_frame_head = fra.me.prev;
+}
+val_t NEW_event___HttpReactor(void)
+{
+  obj_t obj;
+  obj = alloc(sizeof(val_t) * 2);
+  obj->vft = (classtable_elt_t*)VFT_event___HttpReactor;
+  obj[1].object_id = object_id_counter;
+  object_id_counter = object_id_counter + 1;
+  return OBJ2VAL(obj);
+}
+static const char LOCATE_CHECKNEW_event___HttpReactor[] = "check new HttpReactor";
+void CHECKNEW_event___HttpReactor(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_CHECKNEW_event___HttpReactor;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  stack_frame_head = fra.me.prev;
+}
+static const char LOCATE_NEW_HttpReactor_event___Reactor___init[] = "new HttpReactor event::Reactor::init";
+val_t NEW_HttpReactor_event___Reactor___init(void){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  int init_table[3] = {0, 0, 0};
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_NEW_HttpReactor_event___Reactor___init;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = NEW_event___HttpReactor();
+  INIT_ATTRIBUTES__event___HttpReactor(fra.me.REG[0]);
+  event___Reactor___init(fra.me.REG[0], init_table);
+  CHECKNEW_event___HttpReactor(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+const classtable_elt_t VFT_standard___string___String[138] = {
+  {(bigint) 287 /* 0: Identity */},
+  {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
+  {(bigint) "String" /* 2: Class Name */},
+  {(bigint) 3 /* 3: String < Object: superclass typecheck marker */},
+  {(bigint) 23 /* 4: String < Pattern: superclass typecheck marker */},
+  {(bigint) 59 /* 5: String < Comparable: superclass typecheck marker */},
+  {(bigint) 63 /* 6: String < Collection: superclass typecheck marker */},
+  {(bigint) 75 /* 7: String < SequenceRead: superclass typecheck marker */},
+  {(bigint) 287 /* 8: String < String: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
+  {(bigint) 247 /* 10: String < AbstractArrayRead: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
+  {(bigint) 283 /* 12: String < AbstractString: superclass typecheck marker */},
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {(bigint) standard___time___Object___get_time},
+  {(bigint) 1 /* 17: String < Object: superclass init_table position */},
+  {(bigint) standard___kernel___Object___object_id},
+  {(bigint) standard___kernel___Object___is_same_type},
+  {(bigint) standard___string___String_____eqeq},
+  {(bigint) standard___kernel___Object_____neq},
+  {(bigint) standard___string___AbstractString___output},
+  {(bigint) standard___kernel___Object___output_class_name},
+  {(bigint) standard___kernel___Object___exit},
+  {(bigint) standard___kernel___Object___sys},
+  {(bigint) standard___file___Object___printn},
+  {(bigint) standard___file___Object___print},
+  {(bigint) standard___file___Object___getc},
+  {(bigint) standard___file___Object___gets},
+  {(bigint) standard___file___Object___stdin},
+  {(bigint) standard___file___Object___stdout},
+  {(bigint) standard___file___Object___stderr},
+  {(bigint) standard___stream___Object___poll},
+  {(bigint) standard___stream___Object___intern_poll},
+  {(bigint) standard___string___String___to_s},
+  {(bigint) standard___string___Object___native_class_name},
+  {(bigint) standard___string___Object___class_name},
+  {(bigint) standard___string___Object___inspect},
+  {(bigint) standard___string___Object___inspect_head},
+  {(bigint) standard___string___Object___args},
+  {(bigint) standard___string___String___hash},
+  {(bigint) standard___math___Object___atan2},
+  {(bigint) standard___math___Object___pi},
+  {(bigint) standard___math___Object___srand_from},
+  {(bigint) standard___math___Object___srand},
+  {(bigint) 6 /* 46: String < Pattern: superclass init_table position */},
+  {(bigint) standard___string_search___String___search_index_in},
+  {(bigint) standard___string_search___String___search_in},
+  {(bigint) standard___string_search___Pattern___search_all_in},
+  {(bigint) standard___string_search___Pattern___split_in},
+  {(bigint) 0 /* 51: String < Comparable: superclass init_table position */},
+  {(bigint) 287 /* 52: VT String::OTHER : id of String */},
+  {(bigint) 8 /* 53: VT String::OTHER : color of String */},
+  {(bigint) standard___string___String_____l},
+  {(bigint) standard___kernel___Comparable_____leq},
+  {(bigint) standard___kernel___Comparable_____geq},
+  {(bigint) standard___kernel___Comparable_____g},
+  {(bigint) standard___kernel___Comparable_____leqg},
+  {(bigint) standard___kernel___Comparable___is_between},
+  {(bigint) standard___kernel___Comparable___max},
+  {(bigint) standard___kernel___Comparable___min},
+  {(bigint) standard___string___Collection___join},
+  {(bigint) standard___collection___array___Collection___to_a},
+  {(bigint) 5 /* 64: String < Collection: superclass init_table position */},
+  {(bigint) standard___collection___array___AbstractArrayRead___iterator},
+  {(bigint) standard___collection___abstract_collection___Collection___iterate},
+  {(bigint) standard___collection___array___AbstractArrayRead___is_empty},
+  {(bigint) standard___collection___array___AbstractArrayRead___length},
+  {(bigint) standard___collection___array___AbstractArrayRead___has},
+  {(bigint) standard___collection___array___AbstractArrayRead___has_only},
+  {(bigint) standard___collection___array___AbstractArrayRead___count},
+  {(bigint) standard___collection___abstract_collection___SequenceRead___first},
+  {(bigint) standard___math___Collection___rand},
+  {(bigint) 4 /* 74: String < SequenceRead: superclass init_table position */},
+  {(bigint) standard___string___AbstractString_____bra},
+  {(bigint) standard___collection___abstract_collection___SequenceRead___last},
+  {(bigint) standard___collection___array___AbstractArrayRead___index_of},
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {(bigint) 3 /* 82: String < AbstractArrayRead: superclass init_table position */},
+  {(bigint) standard___collection___array___AbstractArrayRead___last_index_of},
+  {(bigint) standard___collection___array___AbstractArrayRead___index_of_from},
+  {(bigint) standard___collection___array___AbstractArrayRead___last_index_of_from},
+  {(bigint) standard___collection___array___AbstractArrayRead___reversed},
+  {(bigint) standard___collection___array___AbstractArrayRead___copy_to},
+  {(bigint) standard___collection___array___AbstractArrayRead___init},
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {0} /* Class Hole :( */,
+  {(bigint) 2 /* 99: String < AbstractString: superclass init_table position */},
+  {(bigint) standard___string___AbstractString___items},
+  {(bigint) standard___string___AbstractString___substring},
+  {(bigint) standard___string___AbstractString___substring_from},
+  {(bigint) standard___string___AbstractString___has_substring},
+  {(bigint) standard___string___AbstractString___has_prefix},
+  {(bigint) standard___string___AbstractString___has_suffix},
+  {(bigint) standard___string___AbstractString___to_i},
+  {(bigint) standard___string___AbstractString___to_hex},
+  {(bigint) standard___string___AbstractString___a_to},
+  {(bigint) standard___string___AbstractString___to_upper},
+  {(bigint) standard___string___AbstractString___to_lower},
+  {(bigint) standard___environ___String___environ},
+  {(bigint) 7 /* 112: String < String: superclass init_table position */},
+  {(bigint) standard___string___String___with_native},
+  {(bigint) standard___string___String___from_cstring},
+  {(bigint) standard___string___String___to_cstring},
+  {(bigint) standard___string___String_____plus},
+  {(bigint) standard___string___String_____star},
+  {(bigint) standard___string___String___to_f},
+  {(bigint) standard___file___String___file_exists},
+  {(bigint) standard___file___String___file_stat},
+  {(bigint) standard___file___String___file_delete},
+  {(bigint) standard___file___String___strip_extension},
+  {(bigint) standard___file___String___basename},
+  {(bigint) standard___file___String___dirname},
+  {(bigint) standard___file___String___simplify_path},
+  {(bigint) standard___file___String___join_path},
+  {(bigint) standard___file___String___mkdir},
+  {(bigint) standard___file___String___file_extension},
+  {(bigint) standard___file___String___files},
+  {(bigint) standard___string_search___String___search},
+  {(bigint) standard___string_search___String___search_from},
+  {(bigint) standard___string_search___String___search_all},
+  {(bigint) standard___string_search___String___split_with},
+  {(bigint) standard___string_search___String___split},
+  {(bigint) standard___string_search___String___replace},
+  {(bigint) standard___string_search___String___html_escape},
+  {(bigint) event___String___destroy},
+};
+/* 0: Pointer to the classtable */
+/* 1: Object_id */
+/* 2: Attribute String::_length */
+/* 3: Attribute String::_items */
+static const char LOCATE_INIT_ATTRIBUTES__standard___string___String[] = "init var of String";
+void INIT_ATTRIBUTES__standard___string___String(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_INIT_ATTRIBUTES__standard___string___String;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* /home/jp/Projects-ssd/nit/lib/standard/collection/array.nit:24 */
+  REGB0 = TAG_Int(0);
+  ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]) = REGB0;
+  stack_frame_head = fra.me.prev;
+}
+val_t NEW_standard___string___String(void)
+{
+  obj_t obj;
+  obj = alloc(sizeof(val_t) * 4);
+  obj->vft = (classtable_elt_t*)VFT_standard___string___String;
+  obj[1].object_id = object_id_counter;
+  object_id_counter = object_id_counter + 1;
+  return OBJ2VAL(obj);
+}
+static const char LOCATE_CHECKNEW_standard___string___String[] = "check new String";
+void CHECKNEW_standard___string___String(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 0;
+  fra.me.meth = LOCATE_CHECKNEW_standard___string___String;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  REGB0 = TAG_Bool(ATTR_standard___string___AbstractString____items(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_items", LOCATE_event, 0);
+  }
+  REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_event, 0);
+  }
+  stack_frame_head = fra.me.prev;
+}
+static const char LOCATE_NEW_String_standard___string___String___with_native[] = "new String string::String::with_native";
+val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t tmp;
+  int init_table[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 170;
+  fra.me.meth = LOCATE_NEW_String_standard___string___String___with_native;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  REGB0 = p1;
+  /* /home/jp/Projects-ssd/nit/lib/standard/string.nit:170 */
+  fra.me.REG[1] = NEW_standard___string___String();
+  INIT_ATTRIBUTES__standard___string___String(fra.me.REG[1]);
+  standard___string___String___with_native(fra.me.REG[1], fra.me.REG[0], REGB0, init_table);
+  CHECKNEW_standard___string___String(fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+static const char LOCATE_NEW_String_standard___string___String___from_cstring[] = "new String string::String::from_cstring";
+val_t NEW_String_standard___string___String___from_cstring(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  int init_table[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_event;
+  fra.me.line = 178;
+  fra.me.meth = LOCATE_NEW_String_standard___string___String___from_cstring;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* /home/jp/Projects-ssd/nit/lib/standard/string.nit:178 */
+  fra.me.REG[1] = NEW_standard___string___String();
+  INIT_ATTRIBUTES__standard___string___String(fra.me.REG[1]);
+  standard___string___String___from_cstring(fra.me.REG[1], fra.me.REG[0], init_table);
+  CHECKNEW_standard___string___String(fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___kernel___Sys[55] = {
   {(bigint) 7 /* 0: Identity */},
@@ -1139,8 +1618,8 @@ const classtable_elt_t VFT_standard___kernel___Int[88] = {
   {(bigint) "Int" /* 2: Class Name */},
   {(bigint) 3 /* 3: Int < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 55 /* 5: Int < Comparable: superclass typecheck marker */},
-  {(bigint) 147 /* 6: Int < Discrete: superclass typecheck marker */},
+  {(bigint) 59 /* 5: Int < Comparable: superclass typecheck marker */},
+  {(bigint) 151 /* 6: Int < Discrete: superclass typecheck marker */},
   {(bigint) -37 /* 7: Int < Int: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1230,9 +1709,9 @@ const classtable_elt_t VFT_standard___kernel___Char[77] = {
   {(bigint) 2 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Char" /* 2: Class Name */},
   {(bigint) 3 /* 3: Char < Object: superclass typecheck marker */},
-  {(bigint) 19 /* 4: Char < Pattern: superclass typecheck marker */},
-  {(bigint) 55 /* 5: Char < Comparable: superclass typecheck marker */},
-  {(bigint) 147 /* 6: Char < Discrete: superclass typecheck marker */},
+  {(bigint) 23 /* 4: Char < Pattern: superclass typecheck marker */},
+  {(bigint) 59 /* 5: Char < Comparable: superclass typecheck marker */},
+  {(bigint) 151 /* 6: Char < Discrete: superclass typecheck marker */},
   {(bigint) -41 /* 7: Char < Char: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1366,14 +1845,14 @@ val_t BOX_Pointer(void * val) {
   return OBJ2VAL(box);
 }
 const classtable_elt_t VFT_standard___collection___abstract_collection___Container[78] = {
-  {(bigint) 159 /* 0: Identity */},
+  {(bigint) 163 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Container" /* 2: Class Name */},
   {(bigint) 3 /* 3: Container < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: Container < Collection: superclass typecheck marker */},
-  {(bigint) 159 /* 7: Container < Container: superclass typecheck marker */},
+  {(bigint) 63 /* 6: Container < Collection: superclass typecheck marker */},
+  {(bigint) 163 /* 7: Container < Container: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1507,12 +1986,12 @@ val_t NEW_Container_standard___collection___abstract_collection___Container___in
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___abstract_collection___ContainerIterator[53] = {
-  {(bigint) 155 /* 0: Identity */},
+  {(bigint) 159 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ContainerIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: ContainerIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: ContainerIterator < Iterator: superclass typecheck marker */},
-  {(bigint) 155 /* 5: ContainerIterator < ContainerIterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: ContainerIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 159 /* 5: ContainerIterator < ContainerIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1647,7 +2126,7 @@ const classtable_elt_t VFT_standard___collection___abstract_collection___MapKeys
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "MapKeysIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: MapKeysIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: MapKeysIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: MapKeysIterator < Iterator: superclass typecheck marker */},
   {(bigint) 99 /* 5: MapKeysIterator < MapKeysIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1772,7 +2251,7 @@ const classtable_elt_t VFT_standard___collection___abstract_collection___MapValu
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "MapValuesIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: MapValuesIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: MapValuesIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: MapValuesIterator < Iterator: superclass typecheck marker */},
   {(bigint) 95 /* 5: MapValuesIterator < MapValuesIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -1893,12 +2372,12 @@ val_t NEW_MapValuesIterator_standard___collection___abstract_collection___MapVal
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___abstract_collection___CoupleMapIterator[53] = {
-  {(bigint) 151 /* 0: Identity */},
+  {(bigint) 155 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "CoupleMapIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: CoupleMapIterator < Object: superclass typecheck marker */},
-  {(bigint) 35 /* 4: CoupleMapIterator < MapIterator: superclass typecheck marker */},
-  {(bigint) 151 /* 5: CoupleMapIterator < CoupleMapIterator: superclass typecheck marker */},
+  {(bigint) 39 /* 4: CoupleMapIterator < MapIterator: superclass typecheck marker */},
+  {(bigint) 155 /* 5: CoupleMapIterator < CoupleMapIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2017,11 +2496,11 @@ val_t NEW_CoupleMapIterator_standard___collection___abstract_collection___Couple
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___abstract_collection___Couple[52] = {
-  {(bigint) 51 /* 0: Identity */},
+  {(bigint) 55 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Couple" /* 2: Class Name */},
   {(bigint) 3 /* 3: Couple < Object: superclass typecheck marker */},
-  {(bigint) 51 /* 4: Couple < Couple: superclass typecheck marker */},
+  {(bigint) 55 /* 4: Couple < Couple: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2141,7 +2620,7 @@ const classtable_elt_t VFT_standard___collection___range___Range[79] = {
   {(bigint) 3 /* 3: Range < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: Range < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: Range < Collection: superclass typecheck marker */},
   {(bigint) 83 /* 7: Range < Range: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2328,7 +2807,7 @@ const classtable_elt_t VFT_standard___collection___range___IteratorRange[53] = {
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "IteratorRange" /* 2: Class Name */},
   {(bigint) 3 /* 3: IteratorRange < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: IteratorRange < Iterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: IteratorRange < Iterator: superclass typecheck marker */},
   {(bigint) 107 /* 5: IteratorRange < IteratorRange: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2454,19 +2933,19 @@ val_t NEW_IteratorRange_standard___collection___range___IteratorRange___init(val
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___list___List[107] = {
-  {(bigint) 291 /* 0: Identity */},
+  {(bigint) 295 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "List" /* 2: Class Name */},
   {(bigint) 3 /* 3: List < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: List < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: List < Collection: superclass typecheck marker */},
   {(bigint) 75 /* 7: List < SequenceRead: superclass typecheck marker */},
   {(bigint) 79 /* 8: List < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 175 /* 9: List < SimpleCollection: superclass typecheck marker */},
+  {(bigint) 179 /* 9: List < SimpleCollection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 259 /* 11: List < Sequence: superclass typecheck marker */},
-  {(bigint) 291 /* 12: List < List: superclass typecheck marker */},
+  {(bigint) 263 /* 11: List < Sequence: superclass typecheck marker */},
+  {(bigint) 295 /* 12: List < List: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2646,13 +3125,13 @@ val_t NEW_List_standard___collection___list___List___from(val_t p0){
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___list___ListIterator[58] = {
-  {(bigint) 191 /* 0: Identity */},
+  {(bigint) 195 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ListIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: ListIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: ListIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: ListIterator < Iterator: superclass typecheck marker */},
   {(bigint) 111 /* 5: ListIterator < IndexedIterator: superclass typecheck marker */},
-  {(bigint) 191 /* 6: ListIterator < ListIterator: superclass typecheck marker */},
+  {(bigint) 195 /* 6: ListIterator < ListIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2782,15 +3261,15 @@ val_t NEW_ListIterator_standard___collection___list___ListIterator___init(val_t 
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___list___ListNode[84] = {
-  {(bigint) 187 /* 0: Identity */},
+  {(bigint) 191 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ListNode" /* 2: Class Name */},
   {(bigint) 3 /* 3: ListNode < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: ListNode < Collection: superclass typecheck marker */},
-  {(bigint) 159 /* 7: ListNode < Container: superclass typecheck marker */},
-  {(bigint) 187 /* 8: ListNode < ListNode: superclass typecheck marker */},
+  {(bigint) 63 /* 6: ListNode < Collection: superclass typecheck marker */},
+  {(bigint) 163 /* 7: ListNode < Container: superclass typecheck marker */},
+  {(bigint) 191 /* 8: ListNode < ListNode: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -2931,20 +3410,20 @@ val_t NEW_ListNode_standard___collection___list___ListNode___init(val_t p0){
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___Array[115] = {
-  {(bigint) 311 /* 0: Identity */},
+  {(bigint) 315 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Array" /* 2: Class Name */},
   {(bigint) 3 /* 3: Array < Object: superclass typecheck marker */},
-  {(bigint) 311 /* 4: Array < Array: superclass typecheck marker */},
+  {(bigint) 315 /* 4: Array < Array: superclass typecheck marker */},
   {(bigint) 67 /* 5: Array < ArrayCapable: superclass typecheck marker */},
-  {(bigint) 59 /* 6: Array < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: Array < Collection: superclass typecheck marker */},
   {(bigint) 75 /* 7: Array < SequenceRead: superclass typecheck marker */},
   {(bigint) 79 /* 8: Array < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 175 /* 9: Array < SimpleCollection: superclass typecheck marker */},
-  {(bigint) 243 /* 10: Array < AbstractArrayRead: superclass typecheck marker */},
-  {(bigint) 259 /* 11: Array < Sequence: superclass typecheck marker */},
+  {(bigint) 179 /* 9: Array < SimpleCollection: superclass typecheck marker */},
+  {(bigint) 247 /* 10: Array < AbstractArrayRead: superclass typecheck marker */},
+  {(bigint) 263 /* 11: Array < Sequence: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 303 /* 13: Array < AbstractArray: superclass typecheck marker */},
+  {(bigint) 307 /* 13: Array < AbstractArray: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {(bigint) standard___time___Object___get_time},
@@ -3231,13 +3710,13 @@ val_t NEW_Array_standard___collection___array___Array___with_native(val_t p0, va
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___ArrayIterator[55] = {
-  {(bigint) 239 /* 0: Identity */},
+  {(bigint) 243 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArrayIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArrayIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: ArrayIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: ArrayIterator < Iterator: superclass typecheck marker */},
   {(bigint) 111 /* 5: ArrayIterator < IndexedIterator: superclass typecheck marker */},
-  {(bigint) 239 /* 6: ArrayIterator < ArrayIterator: superclass typecheck marker */},
+  {(bigint) 243 /* 6: ArrayIterator < ArrayIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -3369,17 +3848,17 @@ val_t NEW_ArrayIterator_standard___collection___array___ArrayIterator___init(val
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___ArraySet[87] = {
-  {(bigint) 299 /* 0: Identity */},
+  {(bigint) 303 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArraySet" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArraySet < Object: superclass typecheck marker */},
-  {(bigint) 255 /* 4: ArraySet < Set: superclass typecheck marker */},
+  {(bigint) 259 /* 4: ArraySet < Set: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: ArraySet < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: ArraySet < Collection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 79 /* 8: ArraySet < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 175 /* 9: ArraySet < SimpleCollection: superclass typecheck marker */},
-  {(bigint) 299 /* 10: ArraySet < ArraySet: superclass typecheck marker */},
+  {(bigint) 179 /* 9: ArraySet < SimpleCollection: superclass typecheck marker */},
+  {(bigint) 303 /* 10: ArraySet < ArraySet: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -3548,12 +4027,12 @@ val_t NEW_ArraySet_standard___collection___array___ArraySet___with_capacity(val_
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___collection___array___ArraySetIterator[53] = {
-  {(bigint) 171 /* 0: Identity */},
+  {(bigint) 175 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArraySetIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArraySetIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: ArraySetIterator < Iterator: superclass typecheck marker */},
-  {(bigint) 171 /* 5: ArraySetIterator < ArraySetIterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: ArraySetIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 175 /* 5: ArraySetIterator < ArraySetIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -3672,15 +4151,15 @@ val_t NEW_ArraySetIterator_standard___collection___array___ArraySetIterator___in
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___ArrayMap[71] = {
-  {(bigint) 275 /* 0: Identity */},
+  {(bigint) 279 /* 0: Identity */},
   {(bigint) 6 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArrayMap" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArrayMap < Object: superclass typecheck marker */},
-  {(bigint) 31 /* 4: ArrayMap < MapRead: superclass typecheck marker */},
+  {(bigint) 35 /* 4: ArrayMap < MapRead: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 103 /* 6: ArrayMap < Map: superclass typecheck marker */},
-  {(bigint) 223 /* 7: ArrayMap < CoupleMap: superclass typecheck marker */},
-  {(bigint) 275 /* 8: ArrayMap < ArrayMap: superclass typecheck marker */},
+  {(bigint) 227 /* 7: ArrayMap < CoupleMap: superclass typecheck marker */},
+  {(bigint) 279 /* 8: ArrayMap < ArrayMap: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -3845,16 +4324,16 @@ val_t NEW_ArrayMap_standard___collection___array___ArrayMap___init(void){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___collection___array___ArrayMapKeys[86] = {
-  {(bigint) 235 /* 0: Identity */},
+  {(bigint) 239 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArrayMapKeys" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArrayMapKeys < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: ArrayMapKeys < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: ArrayMapKeys < Collection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 79 /* 8: ArrayMapKeys < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 235 /* 9: ArrayMapKeys < ArrayMapKeys: superclass typecheck marker */},
+  {(bigint) 239 /* 9: ArrayMapKeys < ArrayMapKeys: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4001,16 +4480,16 @@ val_t NEW_ArrayMapKeys_standard___collection___array___ArrayMapKeys___init(val_t
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___ArrayMapValues[86] = {
-  {(bigint) 231 /* 0: Identity */},
+  {(bigint) 235 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ArrayMapValues" /* 2: Class Name */},
   {(bigint) 3 /* 3: ArrayMapValues < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: ArrayMapValues < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: ArrayMapValues < Collection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 79 /* 8: ArrayMapValues < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 231 /* 9: ArrayMapValues < ArrayMapValues: superclass typecheck marker */},
+  {(bigint) 235 /* 9: ArrayMapValues < ArrayMapValues: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4157,11 +4636,11 @@ val_t NEW_ArrayMapValues_standard___collection___array___ArrayMapValues___init(v
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___array___NativeArray[50] = {
-  {(bigint) 23 /* 0: Identity */},
+  {(bigint) 27 /* 0: Identity */},
   {(bigint) -1 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "NativeArray" /* 2: Class Name */},
   {(bigint) 3 /* 3: NativeArray < Object: superclass typecheck marker */},
-  {(bigint) 23 /* 4: NativeArray < NativeArray: superclass typecheck marker */},
+  {(bigint) 27 /* 4: NativeArray < NativeArray: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4220,12 +4699,12 @@ val_t NEW_NativeArray(size_t length, size_t size) {
   return OBJ2VAL(array);
 }
 const classtable_elt_t VFT_standard___collection___sorter___ComparableSorter[54] = {
-  {(bigint) 163 /* 0: Identity */},
+  {(bigint) 167 /* 0: Identity */},
   {(bigint) 2 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "ComparableSorter" /* 2: Class Name */},
   {(bigint) 3 /* 3: ComparableSorter < Object: superclass typecheck marker */},
   {(bigint) 71 /* 4: ComparableSorter < AbstractSorter: superclass typecheck marker */},
-  {(bigint) 163 /* 5: ComparableSorter < ComparableSorter: superclass typecheck marker */},
+  {(bigint) 167 /* 5: ComparableSorter < ComparableSorter: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4334,15 +4813,15 @@ val_t NEW_ComparableSorter_standard___collection___sorter___ComparableSorter___i
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashMap[92] = {
-  {(bigint) 211 /* 0: Identity */},
+  {(bigint) 215 /* 0: Identity */},
   {(bigint) 11 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashMap" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashMap < Object: superclass typecheck marker */},
-  {(bigint) 31 /* 4: HashMap < MapRead: superclass typecheck marker */},
+  {(bigint) 35 /* 4: HashMap < MapRead: superclass typecheck marker */},
   {(bigint) 67 /* 5: HashMap < ArrayCapable: superclass typecheck marker */},
   {(bigint) 103 /* 6: HashMap < Map: superclass typecheck marker */},
-  {(bigint) 135 /* 7: HashMap < HashCollection: superclass typecheck marker */},
-  {(bigint) 211 /* 8: HashMap < HashMap: superclass typecheck marker */},
+  {(bigint) 139 /* 7: HashMap < HashCollection: superclass typecheck marker */},
+  {(bigint) 215 /* 8: HashMap < HashMap: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4551,16 +5030,16 @@ val_t NEW_HashMap_standard___collection___hash_collection___HashMap___init(void)
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashMapKeys[86] = {
-  {(bigint) 207 /* 0: Identity */},
+  {(bigint) 211 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashMapKeys" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashMapKeys < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: HashMapKeys < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: HashMapKeys < Collection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 79 /* 8: HashMapKeys < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 207 /* 9: HashMapKeys < HashMapKeys: superclass typecheck marker */},
+  {(bigint) 211 /* 9: HashMapKeys < HashMapKeys: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4707,16 +5186,16 @@ val_t NEW_HashMapKeys_standard___collection___hash_collection___HashMapKeys___in
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashMapValues[86] = {
-  {(bigint) 203 /* 0: Identity */},
+  {(bigint) 207 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashMapValues" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashMapValues < Object: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
-  {(bigint) 59 /* 6: HashMapValues < Collection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: HashMapValues < Collection: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 79 /* 8: HashMapValues < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 203 /* 9: HashMapValues < HashMapValues: superclass typecheck marker */},
+  {(bigint) 207 /* 9: HashMapValues < HashMapValues: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4863,12 +5342,12 @@ val_t NEW_HashMapValues_standard___collection___hash_collection___HashMapValues_
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashMapNode[56] = {
-  {(bigint) 127 /* 0: Identity */},
+  {(bigint) 131 /* 0: Identity */},
   {(bigint) 8 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashMapNode" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashMapNode < Object: superclass typecheck marker */},
-  {(bigint) 47 /* 4: HashMapNode < HashNode: superclass typecheck marker */},
-  {(bigint) 127 /* 5: HashMapNode < HashMapNode: superclass typecheck marker */},
+  {(bigint) 51 /* 4: HashMapNode < HashNode: superclass typecheck marker */},
+  {(bigint) 131 /* 5: HashMapNode < HashMapNode: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -4910,7 +5389,7 @@ const classtable_elt_t VFT_standard___collection___hash_collection___HashMapNode
   {(bigint) standard___math___Object___srand_from},
   {(bigint) standard___math___Object___srand},
   {(bigint) 0 /* 46: HashMapNode < HashNode: superclass init_table position */},
-  {(bigint) 127 /* 47: VT HashMapNode::N : id of HashMapNode */},
+  {(bigint) 131 /* 47: VT HashMapNode::N : id of HashMapNode */},
   {(bigint) 5 /* 48: VT HashMapNode::N : color of HashMapNode */},
   {(bigint) standard___collection___hash_collection___HashNode___next_item},
   {(bigint) standard___collection___hash_collection___HashNode___next_item__eq},
@@ -5012,12 +5491,12 @@ val_t NEW_HashMapNode_standard___collection___hash_collection___HashMapNode___in
   return fra.me.REG[2];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashMapIterator[53] = {
-  {(bigint) 131 /* 0: Identity */},
+  {(bigint) 135 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashMapIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashMapIterator < Object: superclass typecheck marker */},
-  {(bigint) 35 /* 4: HashMapIterator < MapIterator: superclass typecheck marker */},
-  {(bigint) 131 /* 5: HashMapIterator < HashMapIterator: superclass typecheck marker */},
+  {(bigint) 39 /* 4: HashMapIterator < MapIterator: superclass typecheck marker */},
+  {(bigint) 135 /* 5: HashMapIterator < HashMapIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -5137,17 +5616,17 @@ val_t NEW_HashMapIterator_standard___collection___hash_collection___HashMapItera
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashSet[92] = {
-  {(bigint) 295 /* 0: Identity */},
+  {(bigint) 299 /* 0: Identity */},
   {(bigint) 9 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashSet" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashSet < Object: superclass typecheck marker */},
-  {(bigint) 255 /* 4: HashSet < Set: superclass typecheck marker */},
+  {(bigint) 259 /* 4: HashSet < Set: superclass typecheck marker */},
   {(bigint) 67 /* 5: HashSet < ArrayCapable: superclass typecheck marker */},
-  {(bigint) 59 /* 6: HashSet < Collection: superclass typecheck marker */},
-  {(bigint) 135 /* 7: HashSet < HashCollection: superclass typecheck marker */},
+  {(bigint) 63 /* 6: HashSet < Collection: superclass typecheck marker */},
+  {(bigint) 139 /* 7: HashSet < HashCollection: superclass typecheck marker */},
   {(bigint) 79 /* 8: HashSet < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 175 /* 9: HashSet < SimpleCollection: superclass typecheck marker */},
-  {(bigint) 295 /* 10: HashSet < HashSet: superclass typecheck marker */},
+  {(bigint) 179 /* 9: HashSet < SimpleCollection: superclass typecheck marker */},
+  {(bigint) 299 /* 10: HashSet < HashSet: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -5334,12 +5813,12 @@ val_t NEW_HashSet_standard___collection___hash_collection___HashSet___init(void)
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashSetNode[56] = {
-  {(bigint) 119 /* 0: Identity */},
+  {(bigint) 123 /* 0: Identity */},
   {(bigint) 7 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashSetNode" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashSetNode < Object: superclass typecheck marker */},
-  {(bigint) 47 /* 4: HashSetNode < HashNode: superclass typecheck marker */},
-  {(bigint) 119 /* 5: HashSetNode < HashSetNode: superclass typecheck marker */},
+  {(bigint) 51 /* 4: HashSetNode < HashNode: superclass typecheck marker */},
+  {(bigint) 123 /* 5: HashSetNode < HashSetNode: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -5381,7 +5860,7 @@ const classtable_elt_t VFT_standard___collection___hash_collection___HashSetNode
   {(bigint) standard___math___Object___srand_from},
   {(bigint) standard___math___Object___srand},
   {(bigint) 0 /* 46: HashSetNode < HashNode: superclass init_table position */},
-  {(bigint) 119 /* 47: VT HashSetNode::N : id of HashSetNode */},
+  {(bigint) 123 /* 47: VT HashSetNode::N : id of HashSetNode */},
   {(bigint) 5 /* 48: VT HashSetNode::N : color of HashSetNode */},
   {(bigint) standard___collection___hash_collection___HashNode___next_item},
   {(bigint) standard___collection___hash_collection___HashNode___next_item__eq},
@@ -5480,12 +5959,12 @@ val_t NEW_HashSetNode_standard___collection___hash_collection___HashSetNode___in
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___collection___hash_collection___HashSetIterator[53] = {
-  {(bigint) 123 /* 0: Identity */},
+  {(bigint) 127 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "HashSetIterator" /* 2: Class Name */},
   {(bigint) 3 /* 3: HashSetIterator < Object: superclass typecheck marker */},
-  {(bigint) 39 /* 4: HashSetIterator < Iterator: superclass typecheck marker */},
-  {(bigint) 123 /* 5: HashSetIterator < HashSetIterator: superclass typecheck marker */},
+  {(bigint) 43 /* 4: HashSetIterator < Iterator: superclass typecheck marker */},
+  {(bigint) 127 /* 5: HashSetIterator < HashSetIterator: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -5604,267 +6083,22 @@ val_t NEW_HashSetIterator_standard___collection___hash_collection___HashSetItera
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
-const classtable_elt_t VFT_standard___string___String[137] = {
-  {(bigint) 283 /* 0: Identity */},
-  {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
-  {(bigint) "String" /* 2: Class Name */},
-  {(bigint) 3 /* 3: String < Object: superclass typecheck marker */},
-  {(bigint) 19 /* 4: String < Pattern: superclass typecheck marker */},
-  {(bigint) 55 /* 5: String < Comparable: superclass typecheck marker */},
-  {(bigint) 59 /* 6: String < Collection: superclass typecheck marker */},
-  {(bigint) 75 /* 7: String < SequenceRead: superclass typecheck marker */},
-  {(bigint) 283 /* 8: String < String: superclass typecheck marker */},
-  {0} /* Class Hole :( */,
-  {(bigint) 243 /* 10: String < AbstractArrayRead: superclass typecheck marker */},
-  {0} /* Class Hole :( */,
-  {(bigint) 279 /* 12: String < AbstractString: superclass typecheck marker */},
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {(bigint) standard___time___Object___get_time},
-  {(bigint) 1 /* 17: String < Object: superclass init_table position */},
-  {(bigint) standard___kernel___Object___object_id},
-  {(bigint) standard___kernel___Object___is_same_type},
-  {(bigint) standard___string___String_____eqeq},
-  {(bigint) standard___kernel___Object_____neq},
-  {(bigint) standard___string___AbstractString___output},
-  {(bigint) standard___kernel___Object___output_class_name},
-  {(bigint) standard___kernel___Object___exit},
-  {(bigint) standard___kernel___Object___sys},
-  {(bigint) standard___file___Object___printn},
-  {(bigint) standard___file___Object___print},
-  {(bigint) standard___file___Object___getc},
-  {(bigint) standard___file___Object___gets},
-  {(bigint) standard___file___Object___stdin},
-  {(bigint) standard___file___Object___stdout},
-  {(bigint) standard___file___Object___stderr},
-  {(bigint) standard___stream___Object___poll},
-  {(bigint) standard___stream___Object___intern_poll},
-  {(bigint) standard___string___String___to_s},
-  {(bigint) standard___string___Object___native_class_name},
-  {(bigint) standard___string___Object___class_name},
-  {(bigint) standard___string___Object___inspect},
-  {(bigint) standard___string___Object___inspect_head},
-  {(bigint) standard___string___Object___args},
-  {(bigint) standard___string___String___hash},
-  {(bigint) standard___math___Object___atan2},
-  {(bigint) standard___math___Object___pi},
-  {(bigint) standard___math___Object___srand_from},
-  {(bigint) standard___math___Object___srand},
-  {(bigint) 6 /* 46: String < Pattern: superclass init_table position */},
-  {(bigint) standard___string_search___String___search_index_in},
-  {(bigint) standard___string_search___String___search_in},
-  {(bigint) standard___string_search___Pattern___search_all_in},
-  {(bigint) standard___string_search___Pattern___split_in},
-  {(bigint) 0 /* 51: String < Comparable: superclass init_table position */},
-  {(bigint) 283 /* 52: VT String::OTHER : id of String */},
-  {(bigint) 8 /* 53: VT String::OTHER : color of String */},
-  {(bigint) standard___string___String_____l},
-  {(bigint) standard___kernel___Comparable_____leq},
-  {(bigint) standard___kernel___Comparable_____geq},
-  {(bigint) standard___kernel___Comparable_____g},
-  {(bigint) standard___kernel___Comparable_____leqg},
-  {(bigint) standard___kernel___Comparable___is_between},
-  {(bigint) standard___kernel___Comparable___max},
-  {(bigint) standard___kernel___Comparable___min},
-  {(bigint) standard___string___Collection___join},
-  {(bigint) standard___collection___array___Collection___to_a},
-  {(bigint) 5 /* 64: String < Collection: superclass init_table position */},
-  {(bigint) standard___collection___array___AbstractArrayRead___iterator},
-  {(bigint) standard___collection___abstract_collection___Collection___iterate},
-  {(bigint) standard___collection___array___AbstractArrayRead___is_empty},
-  {(bigint) standard___collection___array___AbstractArrayRead___length},
-  {(bigint) standard___collection___array___AbstractArrayRead___has},
-  {(bigint) standard___collection___array___AbstractArrayRead___has_only},
-  {(bigint) standard___collection___array___AbstractArrayRead___count},
-  {(bigint) standard___collection___abstract_collection___SequenceRead___first},
-  {(bigint) standard___math___Collection___rand},
-  {(bigint) 4 /* 74: String < SequenceRead: superclass init_table position */},
-  {(bigint) standard___string___AbstractString_____bra},
-  {(bigint) standard___collection___abstract_collection___SequenceRead___last},
-  {(bigint) standard___collection___array___AbstractArrayRead___index_of},
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {(bigint) 3 /* 82: String < AbstractArrayRead: superclass init_table position */},
-  {(bigint) standard___collection___array___AbstractArrayRead___last_index_of},
-  {(bigint) standard___collection___array___AbstractArrayRead___index_of_from},
-  {(bigint) standard___collection___array___AbstractArrayRead___last_index_of_from},
-  {(bigint) standard___collection___array___AbstractArrayRead___reversed},
-  {(bigint) standard___collection___array___AbstractArrayRead___copy_to},
-  {(bigint) standard___collection___array___AbstractArrayRead___init},
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {0} /* Class Hole :( */,
-  {(bigint) 2 /* 99: String < AbstractString: superclass init_table position */},
-  {(bigint) standard___string___AbstractString___items},
-  {(bigint) standard___string___AbstractString___substring},
-  {(bigint) standard___string___AbstractString___substring_from},
-  {(bigint) standard___string___AbstractString___has_substring},
-  {(bigint) standard___string___AbstractString___has_prefix},
-  {(bigint) standard___string___AbstractString___has_suffix},
-  {(bigint) standard___string___AbstractString___to_i},
-  {(bigint) standard___string___AbstractString___to_hex},
-  {(bigint) standard___string___AbstractString___a_to},
-  {(bigint) standard___string___AbstractString___to_upper},
-  {(bigint) standard___string___AbstractString___to_lower},
-  {(bigint) standard___environ___String___environ},
-  {(bigint) 7 /* 112: String < String: superclass init_table position */},
-  {(bigint) standard___string___String___with_native},
-  {(bigint) standard___string___String___from_cstring},
-  {(bigint) standard___string___String___to_cstring},
-  {(bigint) standard___string___String_____plus},
-  {(bigint) standard___string___String_____star},
-  {(bigint) standard___string___String___to_f},
-  {(bigint) standard___file___String___file_exists},
-  {(bigint) standard___file___String___file_stat},
-  {(bigint) standard___file___String___file_delete},
-  {(bigint) standard___file___String___strip_extension},
-  {(bigint) standard___file___String___basename},
-  {(bigint) standard___file___String___dirname},
-  {(bigint) standard___file___String___simplify_path},
-  {(bigint) standard___file___String___join_path},
-  {(bigint) standard___file___String___mkdir},
-  {(bigint) standard___file___String___file_extension},
-  {(bigint) standard___file___String___files},
-  {(bigint) standard___string_search___String___search},
-  {(bigint) standard___string_search___String___search_from},
-  {(bigint) standard___string_search___String___search_all},
-  {(bigint) standard___string_search___String___split_with},
-  {(bigint) standard___string_search___String___split},
-  {(bigint) standard___string_search___String___replace},
-  {(bigint) standard___string_search___String___html_escape},
-};
-/* 0: Pointer to the classtable */
-/* 1: Object_id */
-/* 2: Attribute String::_length */
-/* 3: Attribute String::_items */
-static const char LOCATE_INIT_ATTRIBUTES__standard___string___String[] = "init var of String";
-void INIT_ATTRIBUTES__standard___string___String(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 0;
-  fra.me.meth = LOCATE_INIT_ATTRIBUTES__standard___string___String;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* /home/jp/Projects-ssd/nit/lib/standard/collection/array.nit:24 */
-  REGB0 = TAG_Int(0);
-  ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]) = REGB0;
-  stack_frame_head = fra.me.prev;
-}
-val_t NEW_standard___string___String(void)
-{
-  obj_t obj;
-  obj = alloc(sizeof(val_t) * 4);
-  obj->vft = (classtable_elt_t*)VFT_standard___string___String;
-  obj[1].object_id = object_id_counter;
-  object_id_counter = object_id_counter + 1;
-  return OBJ2VAL(obj);
-}
-static const char LOCATE_CHECKNEW_standard___string___String[] = "check new String";
-void CHECKNEW_standard___string___String(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 0;
-  fra.me.meth = LOCATE_CHECKNEW_standard___string___String;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_standard___string___AbstractString____items(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_items", LOCATE_event, 0);
-  }
-  REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_event, 0);
-  }
-  stack_frame_head = fra.me.prev;
-}
-static const char LOCATE_NEW_String_standard___string___String___with_native[] = "new String string::String::with_native";
-val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t tmp;
-  int init_table[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 170;
-  fra.me.meth = LOCATE_NEW_String_standard___string___String___with_native;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = p1;
-  /* /home/jp/Projects-ssd/nit/lib/standard/string.nit:170 */
-  fra.me.REG[1] = NEW_standard___string___String();
-  INIT_ATTRIBUTES__standard___string___String(fra.me.REG[1]);
-  standard___string___String___with_native(fra.me.REG[1], fra.me.REG[0], REGB0, init_table);
-  CHECKNEW_standard___string___String(fra.me.REG[1]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
-}
-static const char LOCATE_NEW_String_standard___string___String___from_cstring[] = "new String string::String::from_cstring";
-val_t NEW_String_standard___string___String___from_cstring(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t tmp;
-  int init_table[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_event;
-  fra.me.line = 178;
-  fra.me.meth = LOCATE_NEW_String_standard___string___String___from_cstring;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* /home/jp/Projects-ssd/nit/lib/standard/string.nit:178 */
-  fra.me.REG[1] = NEW_standard___string___String();
-  INIT_ATTRIBUTES__standard___string___String(fra.me.REG[1]);
-  standard___string___String___from_cstring(fra.me.REG[1], fra.me.REG[0], init_table);
-  CHECKNEW_standard___string___String(fra.me.REG[1]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
-}
 const classtable_elt_t VFT_standard___string___Buffer[121] = {
-  {(bigint) 307 /* 0: Identity */},
+  {(bigint) 311 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Buffer" /* 2: Class Name */},
   {(bigint) 3 /* 3: Buffer < Object: superclass typecheck marker */},
   {(bigint) 11 /* 4: Buffer < StringCapable: superclass typecheck marker */},
-  {(bigint) 55 /* 5: Buffer < Comparable: superclass typecheck marker */},
-  {(bigint) 59 /* 6: Buffer < Collection: superclass typecheck marker */},
+  {(bigint) 59 /* 5: Buffer < Comparable: superclass typecheck marker */},
+  {(bigint) 63 /* 6: Buffer < Collection: superclass typecheck marker */},
   {(bigint) 75 /* 7: Buffer < SequenceRead: superclass typecheck marker */},
   {(bigint) 79 /* 8: Buffer < RemovableCollection: superclass typecheck marker */},
-  {(bigint) 175 /* 9: Buffer < SimpleCollection: superclass typecheck marker */},
-  {(bigint) 243 /* 10: Buffer < AbstractArrayRead: superclass typecheck marker */},
-  {(bigint) 259 /* 11: Buffer < Sequence: superclass typecheck marker */},
-  {(bigint) 279 /* 12: Buffer < AbstractString: superclass typecheck marker */},
-  {(bigint) 303 /* 13: Buffer < AbstractArray: superclass typecheck marker */},
-  {(bigint) 307 /* 14: Buffer < Buffer: superclass typecheck marker */},
+  {(bigint) 179 /* 9: Buffer < SimpleCollection: superclass typecheck marker */},
+  {(bigint) 247 /* 10: Buffer < AbstractArrayRead: superclass typecheck marker */},
+  {(bigint) 263 /* 11: Buffer < Sequence: superclass typecheck marker */},
+  {(bigint) 283 /* 12: Buffer < AbstractString: superclass typecheck marker */},
+  {(bigint) 307 /* 13: Buffer < AbstractArray: superclass typecheck marker */},
+  {(bigint) 311 /* 14: Buffer < Buffer: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) standard___time___Object___get_time},
   {(bigint) 4 /* 17: Buffer < Object: superclass init_table position */},
@@ -5902,7 +6136,7 @@ const classtable_elt_t VFT_standard___string___Buffer[121] = {
   {(bigint) standard___string___Buffer___add},
   {(bigint) standard___collection___abstract_collection___SimpleCollection___add_all},
   {(bigint) 5 /* 51: Buffer < Comparable: superclass init_table position */},
-  {(bigint) 283 /* 52: VT Buffer::OTHER : id of String */},
+  {(bigint) 287 /* 52: VT Buffer::OTHER : id of String */},
   {(bigint) 8 /* 53: VT Buffer::OTHER : color of String */},
   {(bigint) standard___string___Buffer_____l},
   {(bigint) standard___kernel___Comparable_____leq},
@@ -6175,16 +6409,16 @@ val_t BOX_NativeString(char * val) {
   return OBJ2VAL(box);
 }
 const classtable_elt_t VFT_standard___stream___FDIStream[72] = {
-  {(bigint) 219 /* 0: Identity */},
+  {(bigint) 223 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "FDIStream" /* 2: Class Name */},
   {(bigint) 3 /* 3: FDIStream < Object: superclass typecheck marker */},
-  {(bigint) 143 /* 4: FDIStream < FDStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: FDIStream < IOS: superclass typecheck marker */},
+  {(bigint) 147 /* 4: FDIStream < FDStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: FDIStream < IOS: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 115 /* 7: FDIStream < IStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 219 /* 9: FDIStream < FDIStream: superclass typecheck marker */},
+  {(bigint) 223 /* 9: FDIStream < FDIStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -6331,15 +6565,15 @@ val_t NEW_FDIStream_standard___stream___FDIStream___init(val_t p0){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___stream___FDOStream[62] = {
-  {(bigint) 215 /* 0: Identity */},
+  {(bigint) 219 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "FDOStream" /* 2: Class Name */},
   {(bigint) 3 /* 3: FDOStream < Object: superclass typecheck marker */},
-  {(bigint) 143 /* 4: FDOStream < FDStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: FDOStream < IOS: superclass typecheck marker */},
+  {(bigint) 147 /* 4: FDOStream < FDStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: FDOStream < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: FDOStream < OStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 215 /* 8: FDOStream < FDOStream: superclass typecheck marker */},
+  {(bigint) 219 /* 8: FDOStream < FDOStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -6470,18 +6704,18 @@ val_t NEW_FDOStream_standard___stream___FDOStream___init(val_t p0){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___stream___FDIOStream[80] = {
-  {(bigint) 271 /* 0: Identity */},
+  {(bigint) 275 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "FDIOStream" /* 2: Class Name */},
   {(bigint) 3 /* 3: FDIOStream < Object: superclass typecheck marker */},
-  {(bigint) 143 /* 4: FDIOStream < FDStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: FDIOStream < IOS: superclass typecheck marker */},
+  {(bigint) 147 /* 4: FDIOStream < FDStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: FDIOStream < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: FDIOStream < OStream: superclass typecheck marker */},
   {(bigint) 115 /* 7: FDIOStream < IStream: superclass typecheck marker */},
-  {(bigint) 215 /* 8: FDIOStream < FDOStream: superclass typecheck marker */},
-  {(bigint) 219 /* 9: FDIOStream < FDIStream: superclass typecheck marker */},
-  {(bigint) 199 /* 10: FDIOStream < IOStream: superclass typecheck marker */},
-  {(bigint) 271 /* 11: FDIOStream < FDIOStream: superclass typecheck marker */},
+  {(bigint) 219 /* 8: FDIOStream < FDOStream: superclass typecheck marker */},
+  {(bigint) 223 /* 9: FDIOStream < FDIStream: superclass typecheck marker */},
+  {(bigint) 203 /* 10: FDIOStream < IOStream: superclass typecheck marker */},
+  {(bigint) 275 /* 11: FDIOStream < FDIOStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -6639,12 +6873,12 @@ val_t NEW_FDIOStream_standard___stream___FDIOStream___init(val_t p0){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___string_search___BM_Pattern[57] = {
-  {(bigint) 167 /* 0: Identity */},
+  {(bigint) 171 /* 0: Identity */},
   {(bigint) 6 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "BM_Pattern" /* 2: Class Name */},
   {(bigint) 3 /* 3: BM_Pattern < Object: superclass typecheck marker */},
-  {(bigint) 19 /* 4: BM_Pattern < Pattern: superclass typecheck marker */},
-  {(bigint) 167 /* 5: BM_Pattern < BM_Pattern: superclass typecheck marker */},
+  {(bigint) 23 /* 4: BM_Pattern < Pattern: superclass typecheck marker */},
+  {(bigint) 171 /* 5: BM_Pattern < BM_Pattern: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -6785,11 +7019,11 @@ val_t NEW_BM_Pattern_standard___string_search___BM_Pattern___init(val_t p0){
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___string_search___Match[52] = {
-  {(bigint) 27 /* 0: Identity */},
+  {(bigint) 31 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Match" /* 2: Class Name */},
   {(bigint) 3 /* 3: Match < Object: superclass typecheck marker */},
-  {(bigint) 27 /* 4: Match < Match: superclass typecheck marker */},
+  {(bigint) 31 /* 4: Match < Match: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -6924,15 +7158,15 @@ val_t NEW_Match_standard___string_search___Match___init(val_t p0, val_t p1, val_
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___file___IFStream[74] = {
-  {(bigint) 267 /* 0: Identity */},
+  {(bigint) 271 /* 0: Identity */},
   {(bigint) 7 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "IFStream" /* 2: Class Name */},
   {(bigint) 3 /* 3: IFStream < Object: superclass typecheck marker */},
-  {(bigint) 139 /* 4: IFStream < FStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: IFStream < IOS: superclass typecheck marker */},
-  {(bigint) 227 /* 6: IFStream < BufferedIStream: superclass typecheck marker */},
+  {(bigint) 143 /* 4: IFStream < FStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: IFStream < IOS: superclass typecheck marker */},
+  {(bigint) 231 /* 6: IFStream < BufferedIStream: superclass typecheck marker */},
   {(bigint) 115 /* 7: IFStream < IStream: superclass typecheck marker */},
-  {(bigint) 267 /* 8: IFStream < IFStream: superclass typecheck marker */},
+  {(bigint) 271 /* 8: IFStream < IFStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -7139,14 +7373,14 @@ val_t NEW_IFStream_standard___file___IFStream___without_file(void){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___file___OFStream[62] = {
-  {(bigint) 183 /* 0: Identity */},
+  {(bigint) 187 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "OFStream" /* 2: Class Name */},
   {(bigint) 3 /* 3: OFStream < Object: superclass typecheck marker */},
-  {(bigint) 139 /* 4: OFStream < FStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: OFStream < IOS: superclass typecheck marker */},
+  {(bigint) 143 /* 4: OFStream < FStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: OFStream < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: OFStream < OStream: superclass typecheck marker */},
-  {(bigint) 183 /* 7: OFStream < OFStream: superclass typecheck marker */},
+  {(bigint) 187 /* 7: OFStream < OFStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -7325,16 +7559,16 @@ val_t NEW_OFStream_standard___file___OFStream___without_file(void){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___file___Stdin[76] = {
-  {(bigint) 287 /* 0: Identity */},
+  {(bigint) 291 /* 0: Identity */},
   {(bigint) 7 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Stdin" /* 2: Class Name */},
   {(bigint) 3 /* 3: Stdin < Object: superclass typecheck marker */},
-  {(bigint) 139 /* 4: Stdin < FStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: Stdin < IOS: superclass typecheck marker */},
-  {(bigint) 227 /* 6: Stdin < BufferedIStream: superclass typecheck marker */},
+  {(bigint) 143 /* 4: Stdin < FStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: Stdin < IOS: superclass typecheck marker */},
+  {(bigint) 231 /* 6: Stdin < BufferedIStream: superclass typecheck marker */},
   {(bigint) 115 /* 7: Stdin < IStream: superclass typecheck marker */},
-  {(bigint) 267 /* 8: Stdin < IFStream: superclass typecheck marker */},
-  {(bigint) 287 /* 9: Stdin < Stdin: superclass typecheck marker */},
+  {(bigint) 271 /* 8: Stdin < IFStream: superclass typecheck marker */},
+  {(bigint) 291 /* 9: Stdin < Stdin: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -7498,15 +7732,15 @@ val_t NEW_Stdin_standard___file___Stdin___init(void){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___file___Stdout[64] = {
-  {(bigint) 247 /* 0: Identity */},
+  {(bigint) 251 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Stdout" /* 2: Class Name */},
   {(bigint) 3 /* 3: Stdout < Object: superclass typecheck marker */},
-  {(bigint) 139 /* 4: Stdout < FStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: Stdout < IOS: superclass typecheck marker */},
+  {(bigint) 143 /* 4: Stdout < FStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: Stdout < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: Stdout < OStream: superclass typecheck marker */},
-  {(bigint) 183 /* 7: Stdout < OFStream: superclass typecheck marker */},
-  {(bigint) 247 /* 8: Stdout < Stdout: superclass typecheck marker */},
+  {(bigint) 187 /* 7: Stdout < OFStream: superclass typecheck marker */},
+  {(bigint) 251 /* 8: Stdout < Stdout: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -7642,15 +7876,15 @@ val_t NEW_Stdout_standard___file___Stdout___init(void){
   return fra.me.REG[0];
 }
 const classtable_elt_t VFT_standard___file___Stderr[64] = {
-  {(bigint) 251 /* 0: Identity */},
+  {(bigint) 255 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Stderr" /* 2: Class Name */},
   {(bigint) 3 /* 3: Stderr < Object: superclass typecheck marker */},
-  {(bigint) 139 /* 4: Stderr < FStream: superclass typecheck marker */},
-  {(bigint) 43 /* 5: Stderr < IOS: superclass typecheck marker */},
+  {(bigint) 143 /* 4: Stderr < FStream: superclass typecheck marker */},
+  {(bigint) 47 /* 5: Stderr < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: Stderr < OStream: superclass typecheck marker */},
-  {(bigint) 183 /* 7: Stderr < OFStream: superclass typecheck marker */},
-  {(bigint) 251 /* 8: Stderr < Stderr: superclass typecheck marker */},
+  {(bigint) 187 /* 7: Stderr < OFStream: superclass typecheck marker */},
+  {(bigint) 255 /* 8: Stderr < Stderr: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -7920,11 +8154,11 @@ val_t BOX_NativeFile(void* val) {
   return OBJ2VAL(box);
 }
 const classtable_elt_t VFT_standard___exec___Process[57] = {
-  {(bigint) 15 /* 0: Identity */},
+  {(bigint) 19 /* 0: Identity */},
   {(bigint) 3 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "Process" /* 2: Class Name */},
   {(bigint) 3 /* 3: Process < Object: superclass typecheck marker */},
-  {(bigint) 15 /* 4: Process < Process: superclass typecheck marker */},
+  {(bigint) 19 /* 4: Process < Process: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -8100,16 +8334,16 @@ val_t NEW_Process_standard___exec___Process___execute(val_t p0, val_t p1, val_t 
   return fra.me.REG[2];
 }
 const classtable_elt_t VFT_standard___exec___IProcess[79] = {
-  {(bigint) 195 /* 0: Identity */},
+  {(bigint) 199 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "IProcess" /* 2: Class Name */},
   {(bigint) 3 /* 3: IProcess < Object: superclass typecheck marker */},
-  {(bigint) 15 /* 4: IProcess < Process: superclass typecheck marker */},
-  {(bigint) 43 /* 5: IProcess < IOS: superclass typecheck marker */},
+  {(bigint) 19 /* 4: IProcess < Process: superclass typecheck marker */},
+  {(bigint) 47 /* 5: IProcess < IOS: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {(bigint) 115 /* 7: IProcess < IStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 195 /* 9: IProcess < IProcess: superclass typecheck marker */},
+  {(bigint) 199 /* 9: IProcess < IProcess: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -8282,15 +8516,15 @@ val_t NEW_IProcess_standard___exec___IProcess___init_(val_t p0){
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___exec___OProcess[74] = {
-  {(bigint) 179 /* 0: Identity */},
+  {(bigint) 183 /* 0: Identity */},
   {(bigint) 4 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "OProcess" /* 2: Class Name */},
   {(bigint) 3 /* 3: OProcess < Object: superclass typecheck marker */},
-  {(bigint) 15 /* 4: OProcess < Process: superclass typecheck marker */},
-  {(bigint) 43 /* 5: OProcess < IOS: superclass typecheck marker */},
+  {(bigint) 19 /* 4: OProcess < Process: superclass typecheck marker */},
+  {(bigint) 47 /* 5: OProcess < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: OProcess < OStream: superclass typecheck marker */},
   {0} /* Class Hole :( */,
-  {(bigint) 179 /* 8: OProcess < OProcess: superclass typecheck marker */},
+  {(bigint) 183 /* 8: OProcess < OProcess: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
@@ -8458,18 +8692,18 @@ val_t NEW_OProcess_standard___exec___OProcess___init_(val_t p0){
   return fra.me.REG[1];
 }
 const classtable_elt_t VFT_standard___exec___IOProcess[83] = {
-  {(bigint) 263 /* 0: Identity */},
+  {(bigint) 267 /* 0: Identity */},
   {(bigint) 5 /* 1: Object size (-1 if a NativeArray)*/},
   {(bigint) "IOProcess" /* 2: Class Name */},
   {(bigint) 3 /* 3: IOProcess < Object: superclass typecheck marker */},
-  {(bigint) 15 /* 4: IOProcess < Process: superclass typecheck marker */},
-  {(bigint) 43 /* 5: IOProcess < IOS: superclass typecheck marker */},
+  {(bigint) 19 /* 4: IOProcess < Process: superclass typecheck marker */},
+  {(bigint) 47 /* 5: IOProcess < IOS: superclass typecheck marker */},
   {(bigint) 87 /* 6: IOProcess < OStream: superclass typecheck marker */},
   {(bigint) 115 /* 7: IOProcess < IStream: superclass typecheck marker */},
-  {(bigint) 179 /* 8: IOProcess < OProcess: superclass typecheck marker */},
-  {(bigint) 195 /* 9: IOProcess < IProcess: superclass typecheck marker */},
-  {(bigint) 199 /* 10: IOProcess < IOStream: superclass typecheck marker */},
-  {(bigint) 263 /* 11: IOProcess < IOProcess: superclass typecheck marker */},
+  {(bigint) 183 /* 8: IOProcess < OProcess: superclass typecheck marker */},
+  {(bigint) 199 /* 9: IOProcess < IProcess: superclass typecheck marker */},
+  {(bigint) 203 /* 10: IOProcess < IOStream: superclass typecheck marker */},
+  {(bigint) 267 /* 11: IOProcess < IOProcess: superclass typecheck marker */},
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,
   {0} /* Class Hole :( */,

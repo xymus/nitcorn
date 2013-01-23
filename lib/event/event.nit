@@ -7,36 +7,29 @@ in "C header" `{
 
 #include <arpa/inet.h>
 
-/*struct callback_struct {
+struct callback {
         struct evconnlistener* listener;
-        void* callback;
+        Reactor reactor;
 };
-*/
 `}
 
 in "C" `{
 static void
-echo_read_cb(struct bufferevent *bev, void *ctx)
+c_read_cb(struct bufferevent *bev, void *ctx)
 {
-        /*
-        char buf[1024];
-        int n;
-        while ((n = evbuffer_remove(input, buf, sizeof(buf-1))) > 0) {
-            printf("%d\n", n);
-            printf("%s\n", buf);
-        }
-        */
-
         struct evbuffer *input = bufferevent_get_input(bev);
         char* buf = NULL;
         size_t sz;
         buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
-        ConnectionListener_read_callback(ctx, new_String_with_native(buf, strlen(buf)));
-        free(buf);
+        ConnectionListener_read_callback(
+            ((struct callback*)ctx)->listener ,
+            new_String_from_cstring(buf),
+            ((struct callback*)ctx)->reactor
+        );
 }
 
 static void
-echo_event_cb(struct bufferevent *bev, short events, void *ctx)
+c_event_cb(struct bufferevent *bev, short events, void *ctx)
 {
         if (events & BEV_EVENT_ERROR)
                 perror("Error from bufferevent");
@@ -51,19 +44,15 @@ accept_conn_cb(struct evconnlistener *listener,
     void *ctx)
 {
 
-/*
-    struct callback_struct* cb = malloc(sizeof(*cb));
-    cb->listener = listener;
-    cb->callback = ctx;
-    */
-        /* We got a new connection! Set up a bufferevent for it. */
-        struct event_base *base = evconnlistener_get_base(listener);
-        struct bufferevent *bev = bufferevent_socket_new(
-                base, fd, BEV_OPT_CLOSE_ON_FREE);
+    struct event_base *base = evconnlistener_get_base(listener);
+    struct bufferevent *bev = bufferevent_socket_new(
+            base, fd, BEV_OPT_CLOSE_ON_FREE);
 
-        bufferevent_setcb(bev, echo_read_cb, NULL, echo_event_cb, listener);
+    ((struct callback*)ctx)->listener = listener;
 
-        bufferevent_enable(bev, EV_READ|EV_WRITE);
+    bufferevent_setcb(bev, c_read_cb, NULL, c_event_cb, ctx);
+
+    bufferevent_enable(bev, EV_READ|EV_WRITE);
 }
 `}
 
@@ -78,22 +67,24 @@ extern EventBase
 
 end
 
-interface Callback
-        fun accept_callback is abstract
-        fun error_callback is abstract
+class Reactor
+    fun read(line : String) is abstract
 end
 
 extern ConnectionListener
-special Callback
-    new bind_to(base: EventBase, address : String, port : Int) is extern import String::to_cstring, String::with_native, ConnectionListener::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int, reactor : Reactor) is extern import String::to_cstring, Reactor::read, ConnectionListener::read_callback, ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
 
+        struct callback* cb = malloc(sizeof(*cb));
+        //cb->callback = ConnectionListener_read_callback,;
+        cb->reactor = reactor;
+
         memset(&sin, 0, sizeof(sin));
         sin.sin_family = AF_INET;
-        sin.sin_addr.s_addr = htonl(0); //localhost pour l'instant
+        sin.sin_addr.s_addr = INADDR_ANY;//htonl(0); //localhost pour l'instant
         sin.sin_port = htons(port);
-        listener = evconnlistener_new_bind(base, (evconnlistener_cb)accept_conn_cb, ConnectionListener_read_callback,
+        listener = evconnlistener_new_bind(base, (evconnlistener_cb)accept_conn_cb, cb,
                 LEV_OPT_CLOSE_ON_FREE|LEV_OPT_REUSEABLE, -1,
                 (struct sockaddr*)&sin, sizeof(sin));
         if(!listener) {
@@ -109,11 +100,12 @@ special Callback
         return evconnlistener_get_base(recv);
     `}
 
-    fun read_callback(line : NativeString) do
-        print line
+    fun read_callback(line : String, r : Reactor) do
+        r.read(line)
+        line.destroy
     end
 
-    redef fun error_callback do
+    fun error_callback do
         print "Got an error on connection, quitting loop"
         exit_loop
     end
@@ -124,7 +116,21 @@ special Callback
 
 end
 
+class HttpReactor
+special Reactor
+    redef fun read(line : String) do
+        print line
+    end
+end
+
+redef class String
+    fun destroy is extern `{
+        free(recv);
+    `}
+end
+
+var r : Reactor = new HttpReactor
 var e : EventBase = new EventBase.create_base
-var listener : ConnectionListener = new ConnectionListener.bind_to(e, "localhost", 12345)
+var listener : ConnectionListener = new ConnectionListener.bind_to(e, "localhost", 12345, r)
 print "running"
 e.dispatch

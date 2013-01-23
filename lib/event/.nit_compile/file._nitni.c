@@ -22,9 +22,11 @@ return trans_return;
 /* out/indirect function for file::NativeString::file_exists */
 val_t NativeString_file_exists___out( val_t recv )
 {
+char * trans_recv;
 int orig_return;
 val_t trans_return;
-orig_return = string_NativeString_NativeString_file_exists_0( UNBOX_NativeString(recv) );
+trans_recv = UNBOX_NativeString(recv);
+orig_return = string_NativeString_NativeString_file_exists_0( trans_recv );
 trans_return = TAG_Bool(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -32,9 +34,11 @@ return trans_return;
 /* out/indirect function for file::NativeString::file_stat */
 val_t NativeString_file_stat___out( val_t recv )
 {
+char * trans_recv;
 void* orig_return;
 val_t trans_return;
-orig_return = string_NativeString_NativeString_file_stat_0( UNBOX_NativeString(recv) );
+trans_recv = UNBOX_NativeString(recv);
+orig_return = string_NativeString_NativeString_file_stat_0( trans_recv );
 trans_return = BOX_FileStat(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -42,9 +46,11 @@ return trans_return;
 /* out/indirect function for file::NativeString::file_mkdir */
 val_t NativeString_file_mkdir___out( val_t recv )
 {
+char * trans_recv;
 int orig_return;
 val_t trans_return;
-orig_return = string_NativeString_NativeString_file_mkdir_0( UNBOX_NativeString(recv) );
+trans_recv = UNBOX_NativeString(recv);
+orig_return = string_NativeString_NativeString_file_mkdir_0( trans_recv );
 trans_return = TAG_Bool(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -52,9 +58,11 @@ return trans_return;
 /* out/indirect function for file::NativeString::file_delete */
 val_t NativeString_file_delete___out( val_t recv )
 {
+char * trans_recv;
 int orig_return;
 val_t trans_return;
-orig_return = string_NativeString_NativeString_file_delete_0( UNBOX_NativeString(recv) );
+trans_recv = UNBOX_NativeString(recv);
+orig_return = string_NativeString_NativeString_file_delete_0( trans_recv );
 trans_return = TAG_Bool(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -62,9 +70,11 @@ return trans_return;
 /* out/indirect function for file::FileStat::mode */
 val_t FileStat_mode___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_FileStat_FileStat_mode_0( UNBOX_FileStat(recv) );
+trans_recv = UNBOX_FileStat(recv);
+orig_return = file_FileStat_FileStat_mode_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -72,9 +82,11 @@ return trans_return;
 /* out/indirect function for file::FileStat::atime */
 val_t FileStat_atime___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_FileStat_FileStat_atime_0( UNBOX_FileStat(recv) );
+trans_recv = UNBOX_FileStat(recv);
+orig_return = file_FileStat_FileStat_atime_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -82,9 +94,11 @@ return trans_return;
 /* out/indirect function for file::FileStat::ctime */
 val_t FileStat_ctime___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_FileStat_FileStat_ctime_0( UNBOX_FileStat(recv) );
+trans_recv = UNBOX_FileStat(recv);
+orig_return = file_FileStat_FileStat_ctime_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -92,9 +106,11 @@ return trans_return;
 /* out/indirect function for file::FileStat::mtime */
 val_t FileStat_mtime___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_FileStat_FileStat_mtime_0( UNBOX_FileStat(recv) );
+trans_recv = UNBOX_FileStat(recv);
+orig_return = file_FileStat_FileStat_mtime_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -102,9 +118,11 @@ return trans_return;
 /* out/indirect function for file::FileStat::size */
 val_t FileStat_size___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_FileStat_FileStat_size_0( UNBOX_FileStat(recv) );
+trans_recv = UNBOX_FileStat(recv);
+orig_return = file_FileStat_FileStat_size_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -112,11 +130,13 @@ return trans_return;
 /* out/indirect function for file::NativeFile::io_read */
 val_t NativeFile_io_read___out( val_t recv, val_t buf, val_t len )
 {
-bigint trans___len;
+void* trans_recv;
+char * trans___buf;
 bigint orig_return;
 val_t trans_return;
-trans___len = UNTAG_Int(len);
-orig_return = file_NativeFile_NativeFile_io_read_2( UNBOX_NativeFile(recv), UNBOX_NativeString(buf), trans___len );
+trans_recv = UNBOX_NativeFile(recv);
+trans___buf = UNBOX_NativeString(buf);
+orig_return = file_NativeFile_NativeFile_io_read_2( trans_recv, trans___buf, UNTAG_Int(len) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -124,11 +144,13 @@ return trans_return;
 /* out/indirect function for file::NativeFile::io_write */
 val_t NativeFile_io_write___out( val_t recv, val_t buf, val_t len )
 {
-bigint trans___len;
+void* trans_recv;
+char * trans___buf;
 bigint orig_return;
 val_t trans_return;
-trans___len = UNTAG_Int(len);
-orig_return = file_NativeFile_NativeFile_io_write_2( UNBOX_NativeFile(recv), UNBOX_NativeString(buf), trans___len );
+trans_recv = UNBOX_NativeFile(recv);
+trans___buf = UNBOX_NativeString(buf);
+orig_return = file_NativeFile_NativeFile_io_write_2( trans_recv, trans___buf, UNTAG_Int(len) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -136,9 +158,11 @@ return trans_return;
 /* out/indirect function for file::NativeFile::io_close */
 val_t NativeFile_io_close___out( val_t recv )
 {
+void* trans_recv;
 bigint orig_return;
 val_t trans_return;
-orig_return = file_NativeFile_NativeFile_io_close_0( UNBOX_NativeFile(recv) );
+trans_recv = UNBOX_NativeFile(recv);
+orig_return = file_NativeFile_NativeFile_io_close_0( trans_recv );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -146,9 +170,11 @@ return trans_return;
 /* out/indirect function for file::NativeFile::file_stat */
 val_t NativeFile_file_stat___out( val_t recv )
 {
+void* trans_recv;
 void* orig_return;
 val_t trans_return;
-orig_return = file_NativeFile_NativeFile_file_stat_0( UNBOX_NativeFile(recv) );
+trans_recv = UNBOX_NativeFile(recv);
+orig_return = file_NativeFile_NativeFile_file_stat_0( trans_recv );
 trans_return = BOX_FileStat(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -156,9 +182,11 @@ return trans_return;
 /* out/indirect function for file::NativeFile::io_open_read */
 val_t NEW_NativeFile_standard___file___NativeFile___io_open_read( val_t path )
 {
+char * trans___path;
 void* orig_return;
 val_t trans_return;
-orig_return = file_NativeFileCapable_NativeFileCapable_io_open_read_1( UNBOX_NativeString(path) );
+trans___path = UNBOX_NativeString(path);
+orig_return = file_NativeFileCapable_NativeFileCapable_io_open_read_1( trans___path );
 trans_return = BOX_NativeFile(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -166,9 +194,11 @@ return trans_return;
 /* out/indirect function for file::NativeFile::io_open_write */
 val_t NEW_NativeFile_standard___file___NativeFile___io_open_write( val_t path )
 {
+char * trans___path;
 void* orig_return;
 val_t trans_return;
-orig_return = file_NativeFileCapable_NativeFileCapable_io_open_write_1( UNBOX_NativeString(path) );
+trans___path = UNBOX_NativeString(path);
+orig_return = file_NativeFileCapable_NativeFileCapable_io_open_write_1( trans___path );
 trans_return = BOX_NativeFile(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -228,13 +258,15 @@ CALL_standard___collection___abstract_collection___SimpleCollection___add( trans
 /* friendly for string::String::from_cstring */
 String file_new_String_from_cstring( char * str )
 {
+val_t trans___str;
 val_t orig_return;
 String trans_return;
+trans___str = BOX_NativeString(str);
 trans_return = malloc( sizeof( struct s_String ) );
 trans_return->ref.val = NIT_NULL;
 trans_return->ref.count = 0;
 nitni_local_ref_add( (struct nitni_ref *)trans_return );
-orig_return = NEW_String_standard___string___String___from_cstring( BOX_NativeString(str) );
+orig_return = NEW_String_standard___string___String___from_cstring( trans___str );
 trans_return->ref.val = orig_return;
 return trans_return;
 }

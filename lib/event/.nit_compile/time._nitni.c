@@ -13,16 +13,12 @@ return trans_return;
 /* out/indirect function for time::Int::sleep */
 void Int_sleep___out( val_t recv )
 {
-bigint trans_recv;
-trans_recv = UNTAG_Int(recv);
-Int_sleep___impl( trans_recv );
+Int_sleep___impl( UNTAG_Int(recv) );
 nitni_local_ref_clean(  );
 }
 /* out/indirect function for time::Int::nanosleep */
 void Int_nanosleep___out( val_t recv )
 {
-bigint trans_recv;
-trans_recv = UNTAG_Int(recv);
-Int_nanosleep___impl( trans_recv );
+Int_nanosleep___impl( UNTAG_Int(recv) );
 nitni_local_ref_clean(  );
 }
