@@ -21,6 +21,8 @@ c_read_cb(struct bufferevent *bev, void *ctx)
         char* buf = NULL;
         size_t sz;
         buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
+        //Reactor_read(((struct callback*)ctx)->reactor, new_String_from_cstring(buf));
+        //Reactor_test_me(((struct callback*)ctx)->reactor);
         ConnectionListener_read_callback(
             ((struct callback*)ctx)->listener ,
             new_String_from_cstring(buf),
@@ -72,13 +74,13 @@ class Reactor
 end
 
 extern ConnectionListener
-    new bind_to(base: EventBase, address : String, port : Int, reactor : Reactor) is extern import String::to_cstring, Reactor::read, ConnectionListener::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int, reactor : Reactor) is extern import String::to_cstring, ConnectionListener::read_callback, ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
 
         struct callback* cb = malloc(sizeof(*cb));
-        //cb->callback = ConnectionListener_read_callback,;
         cb->reactor = reactor;
+        Reactor_incr_ref(reactor);
 
         memset(&sin, 0, sizeof(sin));
         sin.sin_family = AF_INET;
@@ -100,9 +102,8 @@ extern ConnectionListener
         return evconnlistener_get_base(recv);
     `}
 
-    fun read_callback(line : String, r : Reactor) do
+    fun read_callback(line : String, r : Reactor) do 
         r.read(line)
-        line.destroy
     end
 
     fun error_callback do
@@ -121,6 +122,7 @@ special Reactor
     redef fun read(line : String) do
         print line
     end
+
 end
 
 redef class String
