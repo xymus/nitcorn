@@ -57,7 +57,6 @@ accept_conn_cb(struct evconnlistener *listener,
     ((struct callback*)ctx)->buffer_event = bev;
 
     bufferevent_setcb(bev, c_read_cb, NULL, c_event_cb, ctx);
-
     bufferevent_enable(bev, EV_READ|EV_WRITE);
 }
 `}
@@ -105,6 +104,7 @@ extern ConnectionListener
     `}
 
     fun write_line(line : String) : Int is extern import String::to_cstring `{
+        recv->user_data;
         return 0;
     `}
 
