@@ -12,25 +12,34 @@ struct callback {
         Reactor reactor;
         struct bufferevent *buffer_event;
 };
+
+struct nit_listener {
+    struct evconnlistener* listener;
+    struct callback* cb;
+};
+
 `}
 
 in "C" `{
 static void
 c_read_cb(struct bufferevent *bev, void *ctx)
 {
-        struct evbuffer *input = bufferevent_get_input(bev);
-        char* buf = NULL;
-        size_t sz;
-        buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
-        //Reactor_read(((struct callback*)ctx)->reactor, new_String_from_cstring(buf));
-        //Reactor_test_me(((struct callback*)ctx)->reactor);
+    struct evbuffer *input = bufferevent_get_input(bev);
+    char* buf = NULL;
+    size_t sz;
+    buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
+    //todo
+    if(buf[0] > 32 && buf[0] < 126) {
+        String buf_str = new_String_from_cstring(buf);
+        free(buf);
         if(ctx != NULL) {
             ConnectionListener_read_callback(
                 ((struct callback*)ctx)->listener ,
-                new_String_from_cstring(buf),
+                buf_str,
                 ((struct callback*)ctx)->reactor
             );
         }
+    }
 }
 
 static void
@@ -76,6 +85,8 @@ extern ConnectionListener
         struct sockaddr_in sin;
         struct evconnlistener *listener;
 
+        struct nit_listener* nit_listener = malloc(sizeof(*nit_listener));
+
         //cb->reactor = reactor;
         //Reactor_incr_ref(reactor);
 
@@ -92,24 +103,28 @@ extern ConnectionListener
         }
         evconnlistener_set_error_cb(listener, (evconnlistener_errorcb)ConnectionListener_error_callback);
 
-        return listener;
+        nit_listener->listener = listener;
+
+        return nit_listener;
     `}
 
     fun set_reactor(r : Reactor) is extern import Reactor::set_listener `{
         Reactor_incr_ref(r);
         struct callback* cb = malloc(sizeof(*cb));
         cb->reactor = r;
-        cb->listener = recv;
-        evconnlistener_set_cb(recv, (evconnlistener_cb)accept_conn_cb, cb);
+        cb->listener = ((struct nit_listener*)recv)->listener;
+        evconnlistener_set_cb(((struct nit_listener*)recv)->listener, (evconnlistener_cb)accept_conn_cb, cb);
+        ((struct nit_listener*)recv)->cb = cb;
+        Reactor_set_listener(r, recv);
     `}
 
     fun write_line(line : String) : Int is extern import String::to_cstring `{
-        recv->user_data;
-        return 0;
+        char* c_line = String_to_cstring(line);
+        return bufferevent_write(((struct nit_listener*)recv)->cb->buffer_event, c_line, strlen(c_line));
     `}
 
     fun base : EventBase is extern `{
-        return evconnlistener_get_base(recv);
+        return evconnlistener_get_base(((struct nit_listener*)recv)->listener);
     `}
 
     fun read_callback(line : String, r : Reactor) do 
@@ -122,7 +137,7 @@ extern ConnectionListener
     end
 
     fun exit_loop is extern import ConnectionListener::base `{
-        event_base_loopexit(ConnectionListener_base(recv), NULL);
+        event_base_loopexit(ConnectionListener_base(((struct nit_listener*)recv)->listener), NULL);
     `}
 
 end
@@ -132,9 +147,11 @@ class Reactor
 
     fun read(line : String) is abstract
     fun write(line : String) do
-        connection.write_line(line)
+        if connection != null then
+            connection.write_line(line)
+        end
     end
-    fun set_listener(l: ConnectionListener) is abstract
+    fun set_listener(l: ConnectionListener) do connection = l end
 end
 
 
@@ -142,9 +159,9 @@ class HttpReactor
 special Reactor
     redef fun read(line : String) do
         print line
+        write("patate\r\n")
     end
 
-    redef fun set_listener(l: ConnectionListener) do connection = l end
 
 end
 
