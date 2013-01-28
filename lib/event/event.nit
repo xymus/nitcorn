@@ -29,7 +29,7 @@ c_read_cb(struct bufferevent *bev, void *ctx)
     size_t sz;
     buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
     //todo
-    if(buf[0] > 32 && buf[0] < 126) {
+    if(sz > 0) {
         String buf_str = new_String_from_cstring(buf);
         free(buf);
         if(ctx != NULL) {
