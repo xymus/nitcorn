@@ -5,3 +5,6 @@ bin-dir:
 
 event: bin-dir
 	nitc -o bin/event lib/event/event.nit
+
+clean:
+	rm -rf bin/*
