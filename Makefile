@@ -1,14 +1,10 @@
-default: server
+default: event
 
 bin-dir:
-	mkdir -p bin/lib/
+	mkdir -p bin
 
 event: bin-dir
-	nitc -o bin/lib/event lib/event/event.nit
-
-server: bin-dir event
-	nitc src/server.nit -o bin/server -I lib
+	nitc -o bin/event lib/event/event.nit
 
 clean:
 	rm -rf bin/*
-	mkdir bin/lib/
