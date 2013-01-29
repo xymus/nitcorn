@@ -4,15 +4,17 @@ class HttpServer
 super Server
     redef fun read(line : String) do
         print line
-        self.close
+        write("hello")
     end
 end
 
 class HttpServerFactory
 super Factory
-    redef fun make_server : Server do
-        print "created http reactor"
-        return new HttpServer(self)
+    var i = 0
+    redef fun make_server(c: Connection): Server do
+        i += 1
+        print "created http reactor {i}"
+        return new HttpServer(self, c)
     end
 end
 

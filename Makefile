@@ -6,7 +6,7 @@ bin-dir:
 event: bin-dir
 	nitc -o bin/event lib/event/event.nit
 
-server: bin-dir event
+server: bin-dir
 	nitc -o bin/server -I lib/ src/server.nit
 
 clean:
