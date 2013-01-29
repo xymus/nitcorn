@@ -9,11 +9,12 @@ in "C header" `{
 
 struct callback {
         struct evconnlistener* listener;
-        Reactor reactor;
+        Server server;
+        Factory factory;
         struct bufferevent *buffer_event;
 };
 
-struct nit_listener {
+struct connection {
     struct evconnlistener* listener;
     struct callback* cb;
 };
@@ -31,14 +32,14 @@ c_read_cb(struct bufferevent *bev, void *ctx)
     //todo
     if(sz > 0) {
         String buf_str = new_String_from_cstring(buf);
-        free(buf);
         if(ctx != NULL) {
             ConnectionListener_read_callback(
                 ((struct callback*)ctx)->listener ,
                 buf_str,
-                ((struct callback*)ctx)->reactor
+                ((struct callback*)ctx)->server
             );
         }
+        free(buf);
     }
 }
 
@@ -58,12 +59,17 @@ accept_conn_cb(struct evconnlistener *listener,
     void *ctx)
 {
 
+    if(ctx == NULL) {
+        perror("Cannot accept a connection without a factory");
+    }
     struct event_base *base = evconnlistener_get_base(listener);
     struct bufferevent *bev = bufferevent_socket_new(
             base, fd, BEV_OPT_CLOSE_ON_FREE);
 
     ((struct callback*)ctx)->listener = listener;
     ((struct callback*)ctx)->buffer_event = bev;
+    ((struct callback*)ctx)->server = Factory_make_server(((struct callback*)ctx)->factory);
+    Server_incr_ref(((struct callback*)ctx)->server);
 
     bufferevent_setcb(bev, c_read_cb, NULL, c_event_cb, ctx);
     bufferevent_enable(bev, EV_READ|EV_WRITE);
@@ -81,20 +87,22 @@ extern EventBase
 
 end
 extern ConnectionListener
-    new bind_to(base: EventBase, address : String, port : Int) is extern import String::to_cstring, ConnectionListener::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import Factory::set_listener, Factory::make_server, String::to_cstring, ConnectionListener::read_callback, ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
+        Factory_incr_ref(fact);
 
-        struct nit_listener* nit_listener = malloc(sizeof(*nit_listener));
+        struct callback* cb = malloc(sizeof(*cb));
+        struct connection* connection = malloc(sizeof(*connection));
 
-        //cb->reactor = reactor;
-        //Reactor_incr_ref(reactor);
+        //cb->server = server;
+        //Server_incr_ref(server);
 
         memset(&sin, 0, sizeof(sin));
         sin.sin_family = AF_INET;
         sin.sin_addr.s_addr = INADDR_ANY;//htonl(0); //localhost pour l'instant
         sin.sin_port = htons(port);
-        listener = evconnlistener_new_bind(base, (evconnlistener_cb)accept_conn_cb, NULL,
+        listener = evconnlistener_new_bind(base, (evconnlistener_cb)accept_conn_cb, cb,
                 LEV_OPT_CLOSE_ON_FREE|LEV_OPT_REUSEABLE, -1,
                 (struct sockaddr*)&sin, sizeof(sin));
         if(!listener) {
@@ -103,31 +111,35 @@ extern ConnectionListener
         }
         evconnlistener_set_error_cb(listener, (evconnlistener_errorcb)ConnectionListener_error_callback);
 
-        nit_listener->listener = listener;
+        connection->listener = listener;
+        Factory_set_listener(fact, connection);
 
-        return nit_listener;
+        connection->cb = cb;
+        cb->listener = listener;
+        cb->factory = fact;
+
+        return connection;
     `}
 
-    fun set_reactor(r : Reactor) is extern import Reactor::set_listener `{
-        Reactor_incr_ref(r);
-        struct callback* cb = malloc(sizeof(*cb));
-        cb->reactor = r;
-        cb->listener = ((struct nit_listener*)recv)->listener;
-        evconnlistener_set_cb(((struct nit_listener*)recv)->listener, (evconnlistener_cb)accept_conn_cb, cb);
-        ((struct nit_listener*)recv)->cb = cb;
-        Reactor_set_listener(r, recv);
-    `}
+    #fun set_factory(f : Factory) is extern import Server::set_listener, Factory::make_server `{
+    #    Factory_incr_ref(f);
+    #    struct callback* cb = malloc(sizeof(*cb));
+    #    cb->factory = f;
+    #    cb->listener = ((struct connection*)recv)->listener;
+    #    evconnlistener_set_cb(((struct connection*)recv)->listener, (evconnlistener_cb)accept_conn_cb, cb);
+    #    ((struct connection*)recv)->cb = cb;
+    #`}
 
     fun write_line(line : String) : Int is extern import String::to_cstring `{
         char* c_line = String_to_cstring(line);
-        return bufferevent_write(((struct nit_listener*)recv)->cb->buffer_event, c_line, strlen(c_line));
+        return bufferevent_write(((struct connection*)recv)->cb->buffer_event, c_line, strlen(c_line));
     `}
 
     fun base : EventBase is extern `{
-        return evconnlistener_get_base(((struct nit_listener*)recv)->listener);
+        return evconnlistener_get_base(((struct connection*)recv)->listener);
     `}
 
-    fun read_callback(line : String, r : Reactor) do 
+    fun read_callback(line : String, r : Server) do 
         r.read(line)
     end
 
@@ -137,45 +149,39 @@ extern ConnectionListener
     end
 
     fun exit_loop is extern import ConnectionListener::base `{
-        event_base_loopexit(ConnectionListener_base(((struct nit_listener*)recv)->listener), NULL);
+        event_base_loopexit(ConnectionListener_base(recv), NULL);
     `}
+
+    fun close is extern `{
+        if(((struct connection*)recv)->cb != NULL) {
+            bufferevent_free(((struct connection*)recv)->cb->buffer_event);
+        }
+    `}
+
 
 end
 
-class Reactor
-    var connection : nullable ConnectionListener = null
+class Factory
+    var connection : nullable ConnectionListener
+    init do end
+    fun make_server : Server is abstract
+    fun set_listener(c: ConnectionListener) do self.connection = c
+    fun close do 
+        var c = self.connection
+        if c != null then c.close
+    end
+end
+
+class Server
+    private var factory : Factory
+
+    init(f : Factory) do self.factory = f
 
     fun read(line : String) is abstract
     fun write(line : String) do
-        if connection != null then
-            connection.write_line(line)
-        end
-    end
-    fun set_listener(l: ConnectionListener) do connection = l end
-end
-
-
-class HttpReactor
-special Reactor
-    redef fun read(line : String) do
-        print line
-        write("patate\r\n")
+        self.factory.connection.write_line(line)
     end
 
-
+    fun close do self.factory.close
 end
 
-redef class String
-    fun destroy is extern `{
-        free(recv);
-    `}
-end
-
-var e : EventBase = new EventBase.create_base
-var listener : ConnectionListener = new ConnectionListener.bind_to(e, "localhost", 12345)
-
-var r : Reactor = new HttpReactor
-listener.set_reactor(r)
-
-print "running"
-e.dispatch
