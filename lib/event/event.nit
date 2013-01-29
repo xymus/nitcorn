@@ -4,6 +4,7 @@ in "C header" `{
 #include <event2/listener.h>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
+#include <errno.h>
 
 #include <arpa/inet.h>
 
@@ -162,9 +163,16 @@ extern ConnectionListener
     `}
 
     fun error_callback do
-        print "Got an error on listener, quitting loop"
+        get_socket_error
+        print "Quitting loop"
         exit_loop
     end
+
+    fun get_socket_error is extern `{
+        int err = EVUTIL_SOCKET_ERROR();
+        fprintf(stderr, "Got an error %d (%s) on the listener. ",
+            err, evutil_socket_error_to_string(err));
+    `}
 
     fun exit_loop is extern import ConnectionListener::base `{
         event_base_loopexit(ConnectionListener_base(recv), NULL);

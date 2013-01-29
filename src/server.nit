@@ -3,17 +3,13 @@ import event
 class HttpServer
 super Server
     redef fun read(line : String) do
-        print line
-        write("hello")
+        close
     end
 end
 
 class HttpServerFactory
 super Factory
-    var i = 0
     redef fun make_server(c: Connection): Server do
-        i += 1
-        print "created http reactor {i}"
         return new HttpServer(self, c)
     end
 end
