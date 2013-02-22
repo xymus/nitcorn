@@ -5,10 +5,9 @@ class Mimes
     private var mimes : HashMap[String, String] = new HashMap[String, String]
     private var default : String
 
-    init(d : String)
+    init(default : String)
     do
-        default = d
-        mimes[""] = default
+        self.default = default
     end
 
     fun load_basic_memes
@@ -85,12 +84,11 @@ class Mimes
             return default
         end
 
-        var result : nullable String = mimes[ext]
-
-        if result == null then
+        # Because HashMap[k:Key] does not support unexisting keys
+        if not mimes.keys.has(ext) then
             return default
         else
-            return result
+            return mimes[ext]
         end
     end
 end
@@ -102,8 +100,13 @@ var m = new Mimes(default)
 
 var empty_ext = m.mime_for("")
 var null_ext = m.mime_for(null)
-var txt_ext = m.mime_for("txt")
+var zip_ext = m.mime_for("zip")
 
 print "empty ext meme: {empty_ext}"
 print "null ext meme: {null_ext}"
-print "txt ext meme: {txt_ext}"
+print "zip ext meme: {zip_ext}"
+
+print "loading basic mimes"
+m.load_basic_memes
+zip_ext = m.mime_for("zip")
+print "zip ext meme: {zip_ext}"
