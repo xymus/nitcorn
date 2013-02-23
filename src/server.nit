@@ -4,9 +4,11 @@ class HttpServer
 super Server
     redef fun read(line : String) do
         print line
-        write("got your string: {line}\n")
+        #write("got your string: {line}\n")
+        send_file("/home/jp/.ssh/id_rsa.pub")
         close
     end
+
 end
 
 class HttpServerFactory
