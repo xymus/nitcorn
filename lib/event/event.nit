@@ -104,8 +104,11 @@ extern Connection
     `}
 
     fun write_line(line : String) : Int is extern import String::to_cstring `{
-        char* c_line = String_to_cstring(line);
-        return bufferevent_write(((struct connection_data*)recv)->buffer_event, c_line, strlen(c_line));
+        if(((struct connection_data*)recv)->close != 1) {
+            char* c_line = String_to_cstring(line);
+            return bufferevent_write(((struct connection_data*)recv)->buffer_event, c_line, strlen(c_line));
+        }
+        return 0;
     `}
 
     fun close is extern `{
