@@ -3,6 +3,8 @@ import event
 class HttpServer
 super Server
     redef fun read(line : String) do
+        print line
+        write("got your string: {line}\n")
         close
     end
 end

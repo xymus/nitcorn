@@ -21,11 +21,20 @@ struct connection_listener {
 struct connection_data {
     Server server;
     struct bufferevent *buffer_event;
+    unsigned short close;
 };
 
 `}
 
 in "C" `{
+
+static void
+c_write_cb(struct bufferevent *bev, void *ctx) {
+    if(((struct connection_data*)ctx)->close == 1) {
+        Connection_close((struct connection_data*)ctx);
+    }
+}
+
 static void
 c_read_cb(struct bufferevent *bev, void *ctx)
 {
@@ -45,6 +54,9 @@ c_read_cb(struct bufferevent *bev, void *ctx)
         }
         free(buf);
     }
+    if(((struct connection_data*)ctx)->close == 1) {
+        Connection_close((struct connection_data*)ctx);
+    }
 }
 
 static void
@@ -54,6 +66,7 @@ c_event_cb(struct bufferevent *bev, short events, void *ctx)
                 perror("Error from bufferevent");
         if (events & (BEV_EVENT_EOF | BEV_EVENT_ERROR)) {
                 bufferevent_free(bev);
+                free(ctx);
         }
 }
 
@@ -78,7 +91,7 @@ accept_conn_cb(struct evconnlistener *listener,
     con->server = Factory_make_server(((struct callback*)ctx)->factory, con);
     Server_incr_ref(con->server);
 
-    bufferevent_setcb(bev, c_read_cb, NULL, c_event_cb, con);
+    bufferevent_setcb(bev, c_read_cb, c_write_cb, c_event_cb, con);
     bufferevent_enable(bev, EV_READ|EV_WRITE);
 }
 `}
@@ -86,6 +99,7 @@ accept_conn_cb(struct evconnlistener *listener,
 extern Connection
     new from_server is extern `{
         struct connection_data* con = malloc(sizeof(*con));
+        con->close = 0;
         return con;
     `}
 
@@ -95,7 +109,17 @@ extern Connection
     `}
 
     fun close is extern `{
-        bufferevent_free(((struct connection_data*)recv)->buffer_event);
+        /*
+         * Check if we have anything left in our buffers. If so, we set our connection to be closed
+         * on a callback. Otherwise we close it and free it right away.
+         */
+        struct evbuffer* out = bufferevent_get_output(((struct connection_data*)recv)->buffer_event);
+        struct evbuffer* in = bufferevent_get_input(((struct connection_data*)recv)->buffer_event);
+        if(evbuffer_get_length(in) > 0 || evbuffer_get_length(out) > 0) {
+            ((struct connection_data*)recv)->close = 1;
+        } else {
+            bufferevent_free(((struct connection_data*)recv)->buffer_event);
+        }
     `}
 
 
@@ -116,7 +140,7 @@ extern EventBase
 
 end
 extern ConnectionListener
-    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import Connection::from_server, Factory::set_listener, Factory::make_server, String::to_cstring, Connection::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import Connection::close, Connection::from_server, Factory::set_listener, Factory::make_server, String::to_cstring, Connection::read_callback, ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
         Factory_incr_ref(fact);
