@@ -116,6 +116,20 @@ extern Connection
         return 0;
     `}
 
+    fun send_file(path: String) : Int is extern import String::to_cstring `{
+        char* path_c = String_to_cstring(path);
+        int file = open(path_c, 'r');
+        if(file) {
+            struct stat st;
+            fstat(file, &st);
+            return evbuffer_add_file(bufferevent_get_output(((struct connection_data*)recv)->buffer_event),
+                file, 0, st.st_size);
+        }
+        return -1;
+
+    `}
+
+
     fun close is extern `{
         /*
          * Check if we have anything left in our buffers. If so, we set our connection to be closed
@@ -193,20 +207,6 @@ extern ConnectionListener
     fun base : EventBase is extern `{
         return evconnlistener_get_base(((struct connection_listener*)recv)->listener);
     `}
-
-    fun open_and_send_file(path: String) : Int is extern import String::to_cstring `{
-        char* path_c = String_to_cstring(path);
-        int file = open(path_c, 'r');
-        if(file) {
-            struct stat st;
-            fstat(file, &st);
-            return evbuffer_add_file(bufferevent_get_output(((struct connection_data*)recv)->buffer_event),
-                file, 0, st.st_size);
-        }
-        return -1;
-
-    `}
-
     fun error_callback do
         get_socket_error
         print "Quitting loop"
@@ -243,7 +243,7 @@ class Server
 
     fun read(line : String) is abstract
     fun send_file(path: String) : Int do
-        return self.connection.open_and_send_file(path)
+        return self.connection.send_file(path)
     end
     fun write(line : String) do
         self.connection.write_line(line)
