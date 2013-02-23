@@ -23,16 +23,9 @@ class Config
 
     fun get_init_time : Int do return init_time
 
-    fun get_log_error_path : String return log_error_path
-    fun get_log_access_path : String return log_access_path
-    fun get_log_info_path : String return log_info_path
-    fun get_log_debug_path : String return log_debug_path
+    fun get_log_error_path : String do return log_error_path
+    fun get_log_access_path : String do return log_access_path
+    fun get_log_info_path : String do return log_info_path
+    fun get_log_debug_path : String do return log_debug_path
 
 end
-
-# Tests
-
-var config = new Config("test_config")
-
-print "init time: {config.init_time}"
-print "instance name: {config.name}"

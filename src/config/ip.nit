@@ -14,8 +14,3 @@ class Ip
 		return parts[i]
 	end
 end
-
-# Tests
-
-var ip = new Ip([127, 0, 0, 1])
-print "ip: {ip.get_p(0)}.{ip.get_p(1)}.{ip.get_p(2)}.{ip.get_p(3)}"

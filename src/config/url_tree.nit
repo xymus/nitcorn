@@ -56,9 +56,3 @@ class UrlTreeNode
 		end
 	end
 end
-
-# Tests
-
-var wc = new WebContent("index.html","text/html")
-
-var root = new UrlTreeNode("", null, wc)

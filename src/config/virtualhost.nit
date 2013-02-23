@@ -25,12 +25,5 @@ class VirtualHost
 	fun get_port : Int do return port
 
 	fun get_host : Host do return host
-
 	fun set_host(host : Host) do self.host = host
 end
-
-# Tests
-
-var h = new Host
-
-var vh = new VirtualHost("host1",new Ip([127,0,0,1]),8080,h)

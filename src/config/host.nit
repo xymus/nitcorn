@@ -1,5 +1,7 @@
 module host
 
+import url_tree
+
 class Host
 
 	private var url_tree_root : UrlTreeNode

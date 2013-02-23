@@ -92,21 +92,3 @@ class Mimes
         end
     end
 end
-
-# Tests
-
-var default = "text/plain"
-var m = new Mimes(default)
-
-var empty_ext = m.mime_for("")
-var null_ext = m.mime_for(null)
-var zip_ext = m.mime_for("zip")
-
-print "empty ext meme: {empty_ext}"
-print "null ext meme: {null_ext}"
-print "zip ext meme: {zip_ext}"
-
-print "loading basic mimes"
-m.load_basic_memes
-zip_ext = m.mime_for("zip")
-print "zip ext meme: {zip_ext}"
