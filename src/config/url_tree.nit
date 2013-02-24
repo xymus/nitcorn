@@ -5,22 +5,22 @@ module url_tree
 class WebContent
 
 	private var path : String
-	private var mime_type : String
+	private var mime : String
 
-	init(path : String, mime_type : String)
+	init(path : String, mime : String)
 	do
 		self.path = path
-		self.mime_type = mime_type
+		self.mime = mime
 	end
 
 	fun get_path : String do return path
 
-	fun get_mime_type : String do return mime_type
+	fun get_mime : String do return mime
 
-	fun set_content(path : String, mime_type : String)
+	fun set_content(path : String, mime : String)
 	do
 		self.path = path
-		self.mime_type = mime_type
+		self.mime = mime
 	end
 end
 
@@ -40,6 +40,15 @@ class UrlTreeNode
 		self.parent = parent
 		self.leaf = leaf
 	end
+	
+	init root
+	do
+		self.name = "root"
+	end
+	
+	fun get_name : String do return name
+	fun get_parent : nullable UrlTreeNode do return parent
+	fun get_leaf : nullable WebContent do return leaf
 
 	fun add_child(child : UrlTreeNode)
 	do
@@ -51,8 +60,10 @@ class UrlTreeNode
 	do
 		if childs == null then
 			return null
-		else
+		else if childs.keys.has(name) then
 			return childs[name]
+		else
+			return null
 		end
 	end
 end

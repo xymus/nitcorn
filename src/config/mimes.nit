@@ -3,13 +3,22 @@ module mimes
 class Mimes
 
     private var mimes : HashMap[String, String] = new HashMap[String, String]
-    private var default : String
-
-    init(default : String)
+    
+    fun set_mime(ext : String, mime : String)
     do
-        self.default = default
+    	mimes[ext] = mime
     end
 
+    fun get_mime(ext : String) : String
+    do
+        # Because HashMap[k:Key] does not support unexisting keys
+        if not mimes.keys.has(ext) then
+            return mimes[""]
+        else
+            return mimes[ext]
+        end
+    end
+    
     fun load_basic_memes
     do
         mimes["html"]       = "text/html"
@@ -76,19 +85,5 @@ class Mimes
         mimes["asx"]        = "video/x-ms-asf"
         mimes["asf"]        = "video/x-ms-asf"
         mimes["mng"]        = "video/x-mng"
-    end
-
-    fun mime_for(ext : nullable String) : String
-    do
-        if ext == null then
-            return default
-        end
-
-        # Because HashMap[k:Key] does not support unexisting keys
-        if not mimes.keys.has(ext) then
-            return default
-        else
-            return mimes[ext]
-        end
     end
 end

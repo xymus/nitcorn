@@ -4,13 +4,24 @@ class Ip
 
 	private var parts : Array[Int]
 
-	init(p : Array[Int])
+	init(parts : Array[Int])
 	do
-		parts = p
+		self.parts = parts
 	end
 
-	fun get_p(i : Int) : Int
+	fun get_part(i : Int) : Int
 	do
 		return parts[i]
+	end
+	
+	redef fun hash : Int
+	do
+		var h = 1
+		
+		for i in parts do
+			h = 31 * h + i
+		end
+		
+		return h
 	end
 end
