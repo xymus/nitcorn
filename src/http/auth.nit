@@ -23,16 +23,22 @@ fun reqAuth ( path : NativeString ) : Int `{
     }
 `}
 
+#fun checkUser
+
 #
 fun authentifier: Bool
 do
-    if true then # Si header contient un champ Auth
-        #TODO 
+    var headers = [ "TODO" ] # get headers
+    
+    # Si header contient un champ Auth
+    if headers.has( "Auth" ) then 
+        
         return true
     else
+
         return false
 end
 
 end
 
-print reqAuth( "./access.h".to_cstring )
+# print reqAuth( "./test".to_cstring )
