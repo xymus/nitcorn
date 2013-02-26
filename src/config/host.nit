@@ -1,7 +1,7 @@
 module host
 
-import url_tree
-import mimes
+import urltree
+import mime
 
 class Host
 
@@ -15,11 +15,9 @@ class Host
 		self.root = new UrlTreeNode.root
 	end
 	
-	fun get_mimes : Mimes do return mimes
-	
 	fun get_name : String do return name
-	
 	fun get_root : UrlTreeNode do return root
+	fun get_mimes : Mimes do return mimes
 	
 	fun get_content(path : Array[String]) : nullable WebContent
 	do
@@ -31,5 +29,10 @@ class Host
 		end
 		
 		return current.get_leaf
+	end
+	
+	redef fun to_s : String
+	do
+		return name
 	end
 end

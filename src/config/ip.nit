@@ -24,4 +24,9 @@ class Ip
 		
 		return h
 	end
+	
+	redef fun to_s : String
+	do
+		return "[{parts.join(".")}]"
+	end
 end

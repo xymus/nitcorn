@@ -1,4 +1,4 @@
-module mimes
+module mime
 
 class Mimes
 

@@ -1,9 +1,9 @@
-module hosts_manager
+module hostmanager
 
 import host
 import virtualhost
 
-class HostsManager
+class HostManager
 
 	private var default_host : Host
 	

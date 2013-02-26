@@ -1,12 +1,11 @@
-module test_config
+module testconfig
 
-import mimes
+import mime
 import virtualhost
 import config
 import ip
-import url_tree
+import urltree
 import host
-
 
 # Configuration
 
@@ -19,31 +18,46 @@ var config = new Config(config_name)
 assert config_init_time_is_now: config.get_init_time == get_time
 assert config_name: 			config.get_name == config_name
 
-# Log paths
+# Log manager
+
+var log = config.get_logmanager
 
 # Ensure we have a default path
-assert default_error_log: 	config.get_log_error_path.length > 0
-assert default_access_log: 	config.get_log_access_path.length > 0
-assert default_info_log: 	config.get_log_info_path.length > 0
-assert default_debug_log: 	config.get_log_debug_path.length > 0
+assert default_error_log: 	log.get_e_path.length > 0
+assert default_access_log: 	log.get_a_path.length > 0
+assert default_info_log: 	log.get_i_path.length > 0
+assert default_debug_log: 	log.get_d_path.length > 0
+assert default_verbose_log: log.get_v_path.length > 0
+assert default_warning_log:	log.get_w_path.length > 0
+assert default_wtf_log: 	log.get_wtf_path.length > 0
 
 # Set and get
 var new_error_log 	= "log/newerror.log"
 var new_access_log 	= "log/newaccess.log"
 var new_info_log 	= "log/newinfo.log"
 var new_debug_log 	= "log/newdebug.log"
+var new_verbose_log = "log/newverbose.log"
+var new_warning_log = "log/newwarning.log"
+var new_wtf_log 	= "log/newwtf.log"
 
-config.set_log_error_path(new_error_log)
-config.set_log_access_path(new_access_log)
-config.set_log_info_path(new_info_log)
-config.set_log_debug_path(new_debug_log)
+log.set_e_path(new_error_log)
+log.set_a_path(new_access_log)
+log.set_i_path(new_info_log)
+log.set_d_path(new_debug_log)
+log.set_v_path(new_verbose_log)
+log.set_w_path(new_warning_log)
+log.set_wtf_path(new_wtf_log)
 
-assert get_set_error_log_path: 	config.get_log_error_path == new_error_log
-assert get_set_access_log_path: config.get_log_access_path == new_access_log
-assert get_set_info_log_path: 	config.get_log_info_path == new_info_log
-assert get_set_debug_log_path: 	config.get_log_debug_path == new_debug_log
 
-# Virtual Host
+assert get_set_error_log_path: 		log.get_e_path == new_error_log
+assert get_set_access_log_path: 	log.get_a_path == new_access_log
+assert get_set_info_log_path: 		log.get_i_path == new_info_log
+assert get_set_debug_log_path: 		log.get_d_path == new_debug_log
+assert get_set_verbose_log_path:	log.get_v_path == new_verbose_log
+assert get_set_warning_log_path:	log.get_w_path == new_warning_log
+assert get_set_wtf_log_path: 		log.get_wtf_path == new_wtf_log
+
+# Virtual Host and Host
 
 var hostsmanager = config.get_hostsmanager
 
@@ -88,7 +102,13 @@ var routed1 = hostsmanager.get_host_for(virtualhost1_ip,
 var routed2 = hostsmanager.get_host_for(virtualhost2_ip,
 									    virtualhost2_port,
 									    virtualhost2_alias)
+									    
+assert routed1: routed1 == virtualhost1.get_host
+assert routed2: routed2 == virtualhost2.get_host
 
-assert unknown_routed_ip:    hostsmanager.get_host_for(new Ip([192, 168, 1, 1]), virtualhost1_port, virtualhost1_alias) == null
-assert unknown_routed_port:  hostsmanager.get_host_for(virtualhost1_ip, 4413, virtualhost1_alias) == null
-assert unknown_routed_alias: hostsmanager.get_host_for(virtualhost1_ip, virtualhost1_port, "plus") == null
+assert unknown_routed_ip:    null == hostsmanager.get_host_for(new Ip([192, 168, 1, 1]), virtualhost1_port, virtualhost1_alias)
+assert unknown_routed_port:  null == hostsmanager.get_host_for(virtualhost1_ip, 4413, virtualhost1_alias)
+assert unknown_routed_alias: null == hostsmanager.get_host_for(virtualhost1_ip, virtualhost1_port, "plus")
+
+# Url Tree
+

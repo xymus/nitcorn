@@ -1,4 +1,4 @@
-module url_tree
+module urltree
 
 # Content of a url node
 
@@ -49,6 +49,12 @@ class UrlTreeNode
 	fun get_name : String do return name
 	fun get_parent : nullable UrlTreeNode do return parent
 	fun get_leaf : nullable WebContent do return leaf
+	
+	fun get_childs : nullable HashMapIterator[String, UrlTreeNode]
+	do
+		if childs == null then return null
+		return childs.iterator
+	end
 
 	fun add_child(child : UrlTreeNode)
 	do
