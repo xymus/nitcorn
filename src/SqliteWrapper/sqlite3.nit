@@ -1,3 +1,5 @@
+module sqlite3
+
 in "C header" `{
 	#include "sqlite3.h"
 	struct Data{
@@ -8,13 +10,20 @@ in "C header" `{
 `}
 extern Sqlite3
 
-	new (filename : String) is extern import String::to_cstring`{
+	new is extern `{
 		struct Data* data = malloc(sizeof(data));
-		sqlite3_open(String_to_cstring(filename), &(data->ppDb));
 		return data;
 	`}
 
-	fun destroy is extern `{
+	fun destroy do 
+		close
+	end
+
+	fun open(filename : String) is extern import String::to_cstring`{	
+		sqlite3_open(String_to_cstring(filename), &((struct Data*)recv)->ppDb);
+	`}
+
+	fun close is extern `{
 		sqlite3_close(((struct Data*) recv)->ppDb);
 		free(recv);
 	`}
@@ -75,11 +84,11 @@ extern Sqlite3
 	`}
 
 
-	fun getError : Int is extern import String::from_cstring `{
+	fun get_error : Int is extern import String::from_cstring `{
 		return sqlite3_errcode(((struct Data*)recv)->ppDb);
 	`}
 
-	fun getErrorStr : String is extern import String::from_cstring `{
+	fun get_error_str : String is extern import String::from_cstring `{
 		char * err =(char *) sqlite3_errmsg(((struct Data*)recv)->ppDb);
 		if(err == NULL){
 			err = "";
