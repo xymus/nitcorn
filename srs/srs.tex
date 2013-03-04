@@ -5,6 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{tabularx}
+\usepackage{hyperref}   % use for hypertext links, including those to external documents and URLs
+
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Document de spécification des exigences du logiciel}
@@ -55,34 +57,60 @@ Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime B�
 \end{tabularx}
 
 \chapter{Introduction}
-Ce chapitre permet d’introduire la documentation de Nitcorn. Il
-permettra d’éliminer toute ambiguïté concernant la documentation
-de notre application à l’aide de définitions, acronymes et
+Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Il
+permettra d'éliminer toute ambiguïté concernant la documentation
+de notre application à l'aide de définitions, acronymes et
 abréviations. Les objectifs et les portées seront décrites pour
 avoir une meilleure compréhension du document.
 \section{Objet}
-L’objectif de ce document est de présenter une description
-détaillée du système Nitcorn. Il explique les fonctionnalités et
-les besoins de l’application serveur. Les spécifications de
-l’application ne seront pas définies dans ce document.\\ \\ Ce
-document s’adresse aux développeurs du projet Nitcorn et aux
-potentiels utilisateurs.
+L'objectif de ce document est de présenter une description
+détaillée des différents modules de l'application Nitcorn. De plus,
+une spécification d'interface externe sera décrite permettant aux applications Nit existance
+d'utiliser un serveur web.\\
+Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
+contributeurs externes.
 \section{Portée}
-Nitcorn est un serveur web :
+L'application dont le présent document décrit est Nitcorn. Les différentes
+composantes seront :
 \begin{itemize}
-    \item Écoute des sockets;
-    \item Réception de requête HTTP;
+    \item Écoute sur un socket;
+    \item Réception de requête HTTP 1.0 et 1.1;
     \item Traitement et réponse à une requête HTTP;
-    \item Gestion du contenu;
+    \item Exposer une API pour gérer la configuration;
+    \item Gestion de log;
+    \item Transmettre les requêtes vers un serveur mandataire; et
+    \item Permettre la ré-écriture des requêtes HTTP.
+\end{itemize}
+Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche d'abstraction
+sera développé pour utiliser les librairies externes avec l'interface native de Nit.
+
+\begin{itemize}
+    \item Chiffrement et déchiffrement (SSL/TLS);
+    \item Boucle évènementiel gerant les entrées et sorties bloquantes; et
     \item Persistance de la configuration;
-    \item Fichiers locaux de permission et d'authentification;
-    \item Configuration via une API; et
-    \item Protocole Nit de service web.
 \end{itemize}
 
-\section{Définitions}
-\section{Acronymes}
-\section{Abréviations}
+Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
+librairies déjà existante matures et testés en production permettant de répondre
+à ses demandes.
+\\
+De plus, nous avons décidé d'utiliser un patron de conception basée sur
+une boucle d'évènements pour les communications bloquantes sur les sockets. Cela
+permet d'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
+Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation pour
+gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+
+\section{Définitions, acroynmes et abréviations}
+\begin{description}
+    \item[Protocole HTTP] Protocole de communication applicative d'architecture client-serveur\cite{http}.
+    \item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des connexion keep-alive.
+    \item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des connexion keep-alive\cite{http1.0}.
+    \item[Nit] Langage de programmation open source orienté objet développé par le groupe de recherche sur l'étude, la spécification et l'implémentation des langages informatique du département d'informatique à l'Université du Québec à Montréal.
+    \item[Boucle d'évènement asynchrone] 
+\end{description}
+
+\section{Références}
+\section{Vue d'ensemble}
 \chapter{Description générale}
 \section{Environnement}
 \section{Fonctions}
@@ -90,5 +118,22 @@ Nitcorn est un serveur web :
 \section{Contraintes}
 \section{Hypothèse et dépendances}
 \chapter{Exigences spécifiques}
+
+\begin{thebibliography}{9}
+\bibitem{ieefr}
+  Société d'informatique IEEE,
+  \emph{Norme IEEE 830-1993, Pratique recommandée par IEEE pour la préparation de spécifications d’exigences de logiciel}, 1993 \url{http://www.cours.polymtl.ca/log3410/bibliographie/IEEE/Pratique_Recommandee_Par_IEEE_pour_la%20_Specification.pdf}.
+\bibitem{c10k}
+  Dan Kegel
+  \emph{The C10K Problem}, 1999, \url{http://www.kegel.com/c10k.html#strategies}
+\bibitem{http}
+    The Internet Society,
+    \emph{Hypertext Transfer Protocol -- HTTP/1.1}, 1999, \url{https://tools.ietf.org/html/rfc2616}
+\bibitem{http1.0}
+    The Internet Society,
+    \emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996, \url{https://tools.ietf.org/html/rfc1945}
+\end{thebibliography}
+
+
 % add other chapters and sections to suit
 \end{document}
