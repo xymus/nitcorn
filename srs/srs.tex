@@ -5,7 +5,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{tabularx}
-\usepackage{hyperref}   % use for hypertext links, including those to external documents and URLs
 
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
@@ -44,7 +43,7 @@ Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime B�
 \maketitle
 \tableofcontents
 \chapter*{Historique de révision}
-\begin{tabularx}{\textwidth}{r|X|r}
+\begin{tabularx}{\textwidth}{|r|X|r|}
     \hline
     Nom & Description & Date \\
     \hline
@@ -65,7 +64,7 @@ avoir une meilleure compréhension du document.
 \section{Objet}
 L'objectif de ce document est de présenter une description
 détaillée des différents modules de l'application Nitcorn. De plus,
-une spécification d'interface externe sera décrite permettant aux applications Nit existance
+une spécification d'interface externe sera décrite permettant aux applications Nit existantes
 d'utiliser un serveur web.\\
 Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
@@ -86,7 +85,7 @@ sera développé pour utiliser les librairies externes avec l'interface native d
 
 \begin{itemize}
     \item Chiffrement et déchiffrement (SSL/TLS);
-    \item Boucle évènementiel gerant les entrées et sorties bloquantes; et
+    \item Boucle évènementiel gèrant les entrées et sorties bloquantes; et
     \item Persistance de la configuration;
 \end{itemize}
 
@@ -101,18 +100,52 @@ Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitat
 gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 
 \section{Définitions, acroynmes et abréviations}
+Voici les définitions des différents termes techniques utilisés dans ce document.
 \begin{description}
     \item[Protocole HTTP] Protocole de communication applicative d'architecture client-serveur\cite{http}.
     \item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des connexion keep-alive.
     \item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des connexion keep-alive\cite{http1.0}.
     \item[Nit] Langage de programmation open source orienté objet développé par le groupe de recherche sur l'étude, la spécification et l'implémentation des langages informatique du département d'informatique à l'Université du Québec à Montréal.
     \item[Boucle d'évènement asynchrone] 
+    \item[MIME]
+    \item[Méthode HTTP]
+    \item[Cookie]
+    \item[URL]
+    \item[Apache]
+    \item[Nginx]
+    \item[Authentification Basic]
+    \item[Authentification Digest]
+    \item[Fastcgi]
+    \item[Socket] Interface logiciel de connexion réseau.
 \end{description}
 
 \section{Références}
+\begin{tabularx}{\textwidth}{|l|X|l|}
+    \hline
+    Ref. & Numéro du document & Titre \\
+    \hline
+    \cite{ieefr} & IEEE 830-1993 & Norme IEEE 830-1993 \\
+    \hline
+    \cite{http} & RFC2616 & Hypertext Transfer Protocol -- HTTP/1.1 \\
+    \hline
+\end{tabularx}
+
 \section{Vue d'ensemble}
+@TODO
 \chapter{Description générale}
 \section{Environnement}
+Le but premier de Nitcorn est d'offrir aux applications développés en Nit d'utiliser
+un serveur web. Ainsi, il est important d'offrir des fonctionnalités de serveur
+au langage afin qu'il puisse être placée derrière un serveur web (Nginx, Apache, \ldots).
+Sous cette configuration, il est quand même essentiel de pouvoir répondre à des
+requêtes web, mais des fonctionnalités tel que la gestion des logs ou la persistance
+des configuration n'est plus inutile car ces fonctionnalités seraient gérés par
+le serveur web.\\
+Par contre, cela n'empêcherait pas Nitcorn d'être directement exposé à Internet
+et agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les fonctionnalités
+mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
+et de fonctionnalités essentiels d'un serveur web.
 \section{Fonctions}
 \section{Caractéristiques des utilisateurs}
 \section{Contraintes}
