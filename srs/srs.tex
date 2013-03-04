@@ -1,0 +1,94 @@
+\documentclass{scrreprt}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{tabularx}
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Document de spécification des exigences du logiciel}
+    pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
+    %pdfsubject={TeX and LaTeX},                        % subject of the document
+    %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=page            % only page is linked
+}%
+\def\myversion{1.0 }
+\title{%
+\flushright
+\rule{16cm}{5pt}\vskip1cm
+\Huge{Document de spécification des exigences du logiciel}\\
+\vspace{2cm}
+pour\\
+\vspace{2cm}
+Nitcorn\\
+\vspace{2cm}
+%\LARGE{Release 1.0\\}
+%\vspace{2cm}
+%\LARGE{Version \myversion approved\\}
+%\vspace{2cm}
+Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
+\vfill
+\rule{16cm}{5pt}
+}
+\date{}
+\usepackage{hyperref}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter*{Historique de révision}
+\begin{tabularx}{\textwidth}{r|X|r}
+    \hline
+    Nom & Description & Date \\
+    \hline
+    Stéphan Michaud & Création & 2013/02/04 \\
+    \hline
+    Équipe & Ébauche & 2013/02/26 \\
+    \hline
+    Jean-Philippe Caissy & Convertion en \LaTeX & 2013/03/04 \\
+    \hline
+\end{tabularx}
+
+\chapter{Introduction}
+Ce chapitre permet d’introduire la documentation de Nitcorn. Il
+permettra d’éliminer toute ambiguïté concernant la documentation
+de notre application à l’aide de définitions, acronymes et
+abréviations. Les objectifs et les portées seront décrites pour
+avoir une meilleure compréhension du document.
+\section{Objet}
+L’objectif de ce document est de présenter une description
+détaillée du système Nitcorn. Il explique les fonctionnalités et
+les besoins de l’application serveur. Les spécifications de
+l’application ne seront pas définies dans ce document.\\ \\ Ce
+document s’adresse aux développeurs du projet Nitcorn et aux
+potentiels utilisateurs.
+\section{Portée}
+Nitcorn est un serveur web :
+\begin{itemize}
+    \item Écoute des sockets;
+    \item Réception de requête HTTP;
+    \item Traitement et réponse à une requête HTTP;
+    \item Gestion du contenu;
+    \item Persistance de la configuration;
+    \item Fichiers locaux de permission et d'authentification;
+    \item Configuration via une API; et
+    \item Protocole Nit de service web.
+\end{itemize}
+
+\section{Définitions}
+\section{Acronymes}
+\section{Abréviations}
+\chapter{Description générale}
+\section{Environnement}
+\section{Fonctions}
+\section{Caractéristiques des utilisateurs}
+\section{Contraintes}
+\section{Hypothèse et dépendances}
+\chapter{Exigences spécifiques}
+% add other chapters and sections to suit
+\end{document}
