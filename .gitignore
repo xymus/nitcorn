@@ -1,3 +1,8 @@
 .nit_compile
 *.swp
 bin/
+srs/srs.aux
+srs/srs.log
+srs/srs.out
+srs/srs.pdf
+srs/srs.toc
