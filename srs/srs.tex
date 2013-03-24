@@ -211,6 +211,7 @@ Chacune des fonctionalités sont décrites sous forme de récit d'utilisateur.
 
 \subsection{Serveur}
 \subsubsection{Réception d'une requête}
+Afin de recevoir des requêtes, je dois écouter un port à l'aide d'un socket. Je veux écouter plusieurs ports en même temps afin de supporter plusieurs virtual host. Je transfère la requête au module de traitement sous forme de texte.
 
 \subsubsection{Traiter une requête}
 En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
