@@ -261,12 +261,14 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsection{API}
 \subsubsection{Lire la configuration}
-En tant qu'API, si je veux savoir l'était des configurations sur le serveur,
-je vais demander à la classe en question de me fournir ses attributs.
+En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
+configuration sur le serveur, je vais utiliser une API pour interroger la 
+classe en question qui elle me retournera la ou les valeur(s) désirée(s).
 \subsubsection{Enregistrer la configuration}
-En tant qu'API, si je désire apporter une modification à un ou plusieurs
-paramètres de la configuration sur le serveur, je vais lui fournir la nouvelle
-valeur de la ou les paramètre(s) désirée.
+En tant que client, si je désire apporter une modification à un ou plusieurs
+paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
+de la ou les paramètre(s) désirée à l'API qui se chargera de relayer
+l'information à la classe appropriée.
 \section{Caractéristiques des utilisateurs}
 
 \section{Contraintes}
