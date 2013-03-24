@@ -119,6 +119,8 @@ Voici les définitions des différents termes techniques utilisés dans ce docum
     \item[Fastcgi]
     \item[Socket] Interface logiciel de connexion réseau.
     \item[File descriptor] identifiant d'un fichié ouvert par le système d'exploitation
+    \item[x86] Architecture de processeur 32 bits développée par Intel.
+    \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais comptabile avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
 \end{description}
 
 \section{Références}
@@ -157,9 +159,26 @@ pour développer des applications web en Nit.
 \subsection{Interfaces avec les utilisateurs}
 
 \subsection{Interfaces avec le matériel}
-Nitcorn sera \textbf{cross-platform}, c'est-à-dire qu'il sera développé pour être utilisé
-par différentes architectures (Windows, Unix, etc). Par contre, cela dépendra
-du \textbf{tool chain} de compilation de Nit. 
+Nitcorn dépent du compilateur de Nit. Celui-ci est compatible pour le moment avec
+les architectures x86 et x86_64.
+
+\subsection{Interfaces avec les logiciels}
+Nitcorn ne supporte que les systèmes d'exploitation de style UNIX (GNU/Linux, *BSD, Mac OS X, etc).
+De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
+\\
+\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Nom & Mnémonique & Spécification & Version & Source \\
+    \hline
+    Nitc & N/A & FFI & N/A & \url{https://github.com/xymus/nit/tree/ffi} \\
+    \hline
+    Libevent & N/A & N/A & 2.0.X & \url{http://libevent.org/} \\
+    \hline
+    SQLite & N/A & N/A & 3.X & \url{https://www.sqlite.org/} \\
+    \hline
+
+\end{tabular}
+
 
 \section{Fonctions}
 \section{Caractéristiques des utilisateurs}
