@@ -123,7 +123,8 @@ Montréal.
     \item[MIME]
     \item[Méthode HTTP]
     \item[Cookie]
-    \item[URL]
+    \item[URL et URI]
+    \item[Virtual Host]
     \item[Apache]
     \item[Nginx]
     \item[Authentification Basic]
@@ -222,7 +223,17 @@ HTTP doit posséder les informations suivantes :
     \item Le host de la requête (i.e.: www.youtube.com)
 \end{itemize}
 
+Avec les informations que j'ai, je vais pouvoir lire ma configuration. Si
+je trouve un virtual host avec 
+
 \subsubsection{Lire la configuration}
+En tant que serveur, je vais faire une première lecture des mes configurations
+dans la base de données afin de connaître comment traiter les requêtes que je 
+vais recevoir.
+Pour éviter de faire une relecture dans la base de données pour chaque requête,
+je vais écrire ses informations dans ma classe.
+Si une application change ma configuration, je vais en tenir compte dans ma
+classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsubsection{Écrire la configuration}
 
