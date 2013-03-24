@@ -146,6 +146,19 @@ et agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les fonctionnalités
 mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
 et de fonctionnalités essentiels d'un serveur web.
+\subsection{Interfaces avec le sysyème}
+Nitcorn sera utilisé sur deux système : un serveur web et un environnement de développement.
+Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
+que l'environnement de développement sera le système utilisé par les développeurs
+pour développer des applications web en Nit.
+
+\subsection{Interfaces avec les utilisateurs}
+
+\subsection{Interfaces avec le matériel}
+Nitcorn sera \textbf{cross-platform}, c'est-à-dire qu'il sera développé pour être utilisé
+par différentes architectures (Windows, Unix, etc). Par contre, cela dépendra
+du \textbf{tool chain} de compilation de Nit. 
+
 \section{Fonctions}
 \section{Caractéristiques des utilisateurs}
 \section{Contraintes}
