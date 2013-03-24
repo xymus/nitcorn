@@ -273,10 +273,16 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsubsection{Écrire la configuration}
 En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
- de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
- je dois ajuster mes attributs de classe et valeurs dans la base de donnée 
+de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
+je dois ajuster mes attributs de classe et valeurs dans la base de donnée 
 pour tenir compte des ajustements.
+
 \subsubsection{Enregistrer les évènements}
+En tant que serveur, je désire garder une historique de mes transactions. Par
+default je respect le standard "NCSA Common log format". Par contre je m'adapte
+aux \textit{hosts}, qui eux ont la possibilité de changer le format de
+l'enregistrement. Mes enregistrements sont cours et consise. Ils expliques
+simplement qui a fait quoi et quand.
 
 \subsection{Application Nit}
 \subsubsection{Recevoir une requête HTTP}
@@ -312,7 +318,7 @@ question n'existe pas.
 Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que  
 je lui fournit une valeur qui est invalide dans le contexte du paramètre, je 
 vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
-la valeur fourni. 
+la valeur fourni.
 \section{Caractéristiques des utilisateurs}
 
 \section{Contraintes}
@@ -326,7 +332,6 @@ serveur devra gerer l'atteinte de cette limite.
 Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
 d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
 les nouvelles requêtes.
-
 
 \section{Hypothèse et dépendances}
 \chapter{Exigences spécifiques}
