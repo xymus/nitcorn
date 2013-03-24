@@ -107,6 +107,7 @@ Voici les définitions des différents termes techniques utilisés dans ce docum
     \item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des connexion keep-alive\cite{http1.0}.
     \item[Nit] Langage de programmation open source orienté objet développé par le groupe de recherche sur l'étude, la spécification et l'implémentation des langages informatique du département d'informatique à l'Université du Québec à Montréal.
     \item[Boucle d'évènement asynchrone] 
+    \item[Fil d'exécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
     \item[MIME]
     \item[Méthode HTTP]
     \item[Cookie]
@@ -117,6 +118,7 @@ Voici les définitions des différents termes techniques utilisés dans ce docum
     \item[Authentification Digest]
     \item[Fastcgi]
     \item[Socket] Interface logiciel de connexion réseau.
+    \item[File descriptor] identifiant d'un fichié ouvert par le système d'exploitation
 \end{description}
 
 \section{Références}
@@ -161,7 +163,15 @@ du \textbf{tool chain} de compilation de Nit.
 
 \section{Fonctions}
 \section{Caractéristiques des utilisateurs}
+
 \section{Contraintes}
+
+\subsection{Mémoire}
+Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de \textbf{file descriptor} ouvert en même temps sera limité par le noyau du système d'exploitation. La limite est à la discrétion de l'utilisateur. Le serveur devra gerer l'atteinte de cette limite.
+\subsection{Exécution}
+Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer les nouvelles requêtes.
+
+
 \section{Hypothèse et dépendances}
 \chapter{Exigences spécifiques}
 
