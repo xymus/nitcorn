@@ -211,7 +211,7 @@ Chacune des fonctionalités sont décrites sous forme de récit d'utilisateur.
 
 \subsection{Serveur}
 \subsubsection{Réception d'une requête}
-Afin de recevoir des requêtes, je dois écouter un port à l'aide d'un socket. Je veux écouter plusieurs ports en même temps afin de supporter plusieurs virtual host. Je transfère la requête au module de traitement sous forme de texte.
+Afin de recevoir des requêtes, je dois écouter un port à l'aide d'un socket. Je veux pouvoir recevoir plusieurs requête et écouter plusieurs ports en même temps. Je transfère la requête au module de traitement sous forme de texte.
 
 \subsubsection{Traiter une requête}
 En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
@@ -223,13 +223,7 @@ HTTP doit posséder les informations suivantes :
 \end{itemize}
 
 \subsubsection{Lire la configuration}
-En tant que serveur, je vais faire une première lecture des mes configurations
-dans la base de données afin de connaître comment traiter les requêtes que je 
-vais recevoir.
-Pour éviter de faire une relecture dans la base de données pour chaque requête,
-je vais écrire ses informations dans ma classe.
-Si une application change ma configuration, je vais en tenir compte dans ma
-classe pour éviter d'utiliser une configuration qui n'est plus à jour.
+
 \subsubsection{Écrire la configuration}
 
 \subsubsection{Enregistrer les évènements}
