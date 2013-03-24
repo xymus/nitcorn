@@ -284,11 +284,21 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
 configuration sur le serveur, je vais utiliser une API pour interroger la 
 classe en question qui elle me retournera la ou les valeur(s) désirée(s).
+Si j'utilise la API pour interroger une classe à propos d'un paramètre 
+inexistant, je vais recevoir une erreur m'indiquant la clé en question
+n'existe pas. 
 \subsubsection{Enregistrer la configuration}
 En tant que client, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
-de la ou les paramètre(s) désirée à l'API qui se chargera de relayer
+de la ou les paramètre(s) désirée à l'API qui se chargera de relayer.
 l'information à la classe appropriée.
+Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
+serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
+question n'existe pas.
+Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que  
+je lui fournit une valeur qui est invalide dans le contexte du paramètre, je 
+vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
+la valeur fourni. 
 \section{Caractéristiques des utilisateurs}
 
 \section{Contraintes}
