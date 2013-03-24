@@ -257,7 +257,8 @@ et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse 
 \end{itemize}
 Après que la réponse est transmise au client, si le protocole HTTP est 1.0, je ferme
 la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
-ouverte.
+ouverte. De plus, je vais écrire un évènement pour cette réponse (voir section
+\textit{Enregistrer les évènements}).
 
 \subsubsection{Lire la configuration}
 En tant que serveur, je vais faire une première lecture des mes configurations
@@ -274,6 +275,7 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsection{Application Nit}
 \subsubsection{Recevoir une requête HTTP}
+
 
 \subsubsection{Traiter une requête HTTP}
 
