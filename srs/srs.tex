@@ -223,7 +223,13 @@ HTTP doit posséder les informations suivantes :
 \end{itemize}
 
 \subsubsection{Lire la configuration}
-
+En tant que serveur, je vais faire une première lecture des mes configurations
+dans la base de données afin de connaître comment traiter les requêtes que je 
+vais recevoir.
+Pour éviter de faire une relecture dans la base de données pour chaque requête,
+je vais écrire ses informations dans ma classe.
+Si une application change ma configuration, je vais en tenir compte dans ma
+classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 \subsubsection{Écrire la configuration}
 
 \subsubsection{Enregistrer les évènements}
