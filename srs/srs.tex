@@ -221,7 +221,7 @@ HTTP doit posséder les informations suivantes :
 \begin{itemize}
     \item La version du protocole HTTP : 1.0 ou 1.1
     \item Le URI (i.e.: /foobar/123)
-    \item Le host de la requête (i.e.: www.youtube.com)
+    \item Le host de la requête (i.e.: www.example.com)
 \end{itemize}
 
 Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
@@ -255,7 +255,6 @@ et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse 
     \item D'autres \textit{headers} transmis par l'application NIT
     \item Le contenu de la réponse
 \end{itemize}
-\\
 Après que la réponse est transmise au client, si le protocole HTTP est 1.0, je ferme
 la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
 ouverte.
