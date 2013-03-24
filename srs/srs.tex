@@ -54,7 +54,7 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Jean-Philippe Caissy & Convertion en \LaTeX & 2013/03/04 \\
     \hline
-    Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette & Fonctionalités & 2013/03/24 \\
+    Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette,\\Frédéric Sevillano & Fonctionalités & 2013/03/24 \\
     \hline
 \end{tabularx}
 
@@ -278,9 +278,17 @@ pour tenir compte des ajustements.
 
 \subsection{Application Nit}
 \subsubsection{Recevoir une requête HTTP}
-
+En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
+(@TODO définir et nommer le protocole) me permenttant de communiquer avec le serveur
+Nitcorn. La réception d'une requête se fait en passant en paramètre les informations
+reçu par Nitcorn (host, uri, headers).
 
 \subsubsection{Traiter une requête HTTP}
+Après qu'une requête HTTP a été reçu, je peux faire le traitement que je veux.
+Une fois ce traitement, je dois retourner (@TODO à voir avec spec de l'interface)
+une réponse selon le protocole de l'interface avec Nitcorn. Cette réponse doit
+contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
+et les différents \textit{headers} HTTP.
 
 \subsection{API}
 \subsubsection{Lire la configuration}
@@ -289,7 +297,8 @@ configuration sur le serveur, je vais utiliser une API pour interroger la
 classe en question qui elle me retournera la ou les valeur(s) désirée(s).
 Si j'utilise la API pour interroger une classe à propos d'un paramètre 
 inexistant, je vais recevoir une erreur m'indiquant la clé en question
-n'existe pas. 
+n'existe pas.
+
 \subsubsection{Enregistrer la configuration}
 En tant que client, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
