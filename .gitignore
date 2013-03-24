@@ -6,3 +6,4 @@ srs/srs.log
 srs/srs.out
 srs/srs.pdf
 srs/srs.toc
+srs/*.gz
