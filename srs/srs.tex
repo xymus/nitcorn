@@ -9,9 +9,9 @@
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Document de spécification des exigences du logiciel}
-    pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
-    %pdfsubject={TeX and LaTeX},                        % subject of the document
-    %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
+Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
+%pdfsubject={TeX and LaTeX},                        % subject of the document    %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=blue,       % color of internal links
     citecolor=black,       % color of links to bibliography
@@ -33,7 +33,8 @@ Nitcorn\\
 %\vspace{2cm}
 %\LARGE{Version \myversion approved\\}
 %\vspace{2cm}
-Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
+Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
+Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
 \vfill
 \rule{16cm}{5pt}
 }
@@ -56,15 +57,15 @@ Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime B�
 \end{tabularx}
 
 \chapter{Introduction}
-Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Il
-permettra d'éliminer toute ambiguïté concernant la documentation
+Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Ilpermettra d'éliminer toute ambiguïté concernant la documentation
 de notre application à l'aide de définitions, acronymes et
 abréviations. Les objectifs et les portées seront décrites pour
 avoir une meilleure compréhension du document.
 \section{Objet}
 L'objectif de ce document est de présenter une description
 détaillée des différents modules de l'application Nitcorn. De plus,
-une spécification d'interface externe sera décrite permettant aux applications Nit existantes
+une spécification d'interface externe sera décrite permettant aux applications
+Nit existantes
 d'utiliser un serveur web.\\
 Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
@@ -80,8 +81,10 @@ composantes seront :
     \item Transmettre les requêtes vers un serveur mandataire; et
     \item Permettre la ré-écriture des requêtes HTTP.
 \end{itemize}
-Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche d'abstraction
-sera développé pour utiliser les librairies externes avec l'interface native de Nit.
+Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche
+d'abstraction
+sera développé pour utiliser les librairies externes avec l'interface native de
+Nit.
 
 \begin{itemize}
     \item Chiffrement et déchiffrement (SSL/TLS);
@@ -90,22 +93,29 @@ sera développé pour utiliser les librairies externes avec l'interface native d
 \end{itemize}
 
 Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
-librairies déjà existante matures et testés en production permettant de répondre
-à ses demandes.
+librairies déjà existante matures et testés en production permettant de répondreà ses demandes.
 \\
 De plus, nous avons décidé d'utiliser un patron de conception basée sur
-une boucle d'évènements pour les communications bloquantes sur les sockets. Cela
-permet d'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
-Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation pour
+une boucle d'évènements pour les communications bloquantes sur les sockets. Celapermet d'utiliser qu'un seul processus pour le serveur, tout en restant très
+performant.
+Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
+pour
 gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 
 \section{Définitions, acroynmes et abréviations}
-Voici les définitions des différents termes techniques utilisés dans ce document.
+Voici les définitions des différents termes techniques utilisés dans ce
+document.
 \begin{description}
-    \item[Protocole HTTP] Protocole de communication applicative d'architecture client-serveur\cite{http}.
-    \item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des connexion keep-alive.
-    \item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des connexion keep-alive\cite{http1.0}.
-    \item[Nit] Langage de programmation open source orienté objet développé par le groupe de recherche sur l'étude, la spécification et l'implémentation des langages informatique du département d'informatique à l'Université du Québec à Montréal.
+\item[Protocole HTTP] Protocole de communication applicative d'architecture
+client-serveur\cite{http}.
+\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
+connexion keep-alive.
+\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des
+connexion keep-alive\cite{http1.0}.
+\item[Nit] Langage de programmation open source orienté objet développé par le
+groupe de recherche sur l'étude, la spécification et l'implémentation des
+langages informatique du département d'informatique à l'Université du Québec à
+Montréal.
     \item[Boucle d'évènement asynchrone] 
     \item[Fil d'exécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
     \item[MIME]
@@ -138,18 +148,23 @@ Voici les définitions des différents termes techniques utilisés dans ce docum
 @TODO
 \chapter{Description générale}
 \section{Environnement}
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit d'utiliser
+Le but premier de Nitcorn est d'offrir aux applications développés en Nit
+d'utiliser
 un serveur web. Ainsi, il est important d'offrir des fonctionnalités de serveur
-au langage afin qu'il puisse être placée derrière un serveur web (Nginx, Apache, \ldots).
+au langage afin qu'il puisse être placée derrière un serveur web (Nginx, Apache,
+\ldots).
 Sous cette configuration, il est quand même essentiel de pouvoir répondre à des
-requêtes web, mais des fonctionnalités tel que la gestion des logs ou la persistance
+requêtes web, mais des fonctionnalités tel que la gestion des logs ou la
+persistance
 des configuration n'est plus inutile car ces fonctionnalités seraient gérés par
 le serveur web.\\
 Par contre, cela n'empêcherait pas Nitcorn d'être directement exposé à Internet
 et agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
-serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les fonctionnalités
+serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les
+fonctionnalités
 mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
 et de fonctionnalités essentiels d'un serveur web.
+
 \subsection{Interfaces avec le sysyème}
 Nitcorn sera utilisé sur deux système : un serveur web et un environnement de développement.
 Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
@@ -157,6 +172,13 @@ que l'environnement de développement sera le système utilisé par les dévelop
 pour développer des applications web en Nit.
 
 \subsection{Interfaces avec les utilisateurs}
+Comme il est disponible avec les autres serveurs web, un système de log est
+disponible permettant à un utilisateur de déterminer la cause du problème. Sur
+un autre point, le logiciel aura une API permettant aux applications Nit de 
+communiquer sur le web sans avoir de se soucier des configurations. Cette
+API sera grandement inspirée par l'interface universelle WGSI développé pour
+le langage Python. Le logiciel Nitcorn offira aussi une interface pour les
+applications Nit.
 
 \subsection{Interfaces avec le matériel}
 Nitcorn dépent du compilateur de Nit. Celui-ci est compatible pour le moment avec
@@ -179,7 +201,6 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 
 \end{tabular}
 
-
 \section{Fonctions}
 \section{Caractéristiques des utilisateurs}
 
@@ -197,16 +218,19 @@ Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fi
 \begin{thebibliography}{9}
 \bibitem{ieefr}
   Société d'informatique IEEE,
-  \emph{Norme IEEE 830-1993, Pratique recommandée par IEEE pour la préparation de spécifications d’exigences de logiciel}, 1993 \url{http://www.cours.polymtl.ca/log3410/bibliographie/IEEE/Pratique_Recommandee_Par_IEEE_pour_la%20_Specification.pdf}.
+\emph{Norme IEEE 830-1993, Pratique recommandée par IEEE pour la préparation de
+spécifications d’exigences de logiciel}, 1993
+\url{http://www.cours.polymtl.ca/log3410/bibliographie/IEEE/Pratique_Recommandee_Par_IEEE_pour_la%20_Specification.pdf}.
 \bibitem{c10k}
   Dan Kegel
-  \emph{The C10K Problem}, 1999, \url{http://www.kegel.com/c10k.html#strategies}
-\bibitem{http}
+\emph{The C10K Problem}, 1999, \url{http://www.kegel.com/c10k.html#strategies}\bibitem{http}
     The Internet Society,
-    \emph{Hypertext Transfer Protocol -- HTTP/1.1}, 1999, \url{https://tools.ietf.org/html/rfc2616}
+\emph{Hypertext Transfer Protocol -- HTTP/1.1}, 1999,
+\url{https://tools.ietf.org/html/rfc2616}
 \bibitem{http1.0}
     The Internet Society,
-    \emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996, \url{https://tools.ietf.org/html/rfc1945}
+\emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996,
+\url{https://tools.ietf.org/html/rfc1945}
 \end{thebibliography}
 
 
