@@ -54,6 +54,8 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Jean-Philippe Caissy & Convertion en \LaTeX & 2013/03/04 \\
     \hline
+    Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette & Fonctionalités & 2013/03/24 \\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
@@ -213,7 +215,11 @@ Chacune des fonctionalités sont décrites sous forme de récit d'utilisateur.
 \subsubsection{Traiter une requête}
 En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
 HTTP doit posséder les informations suivantes :
-\itemize
+\begin{itemize}
+    \item La version du protocole HTTP : 1.0 ou 1.1
+    \item Le URI (i.e.: /foobar/123)
+    \item Le host de la requête (i.e.: www.example.com)
+\end{itemize}
 
 \subsubsection{Lire la configuration}
 
