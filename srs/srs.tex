@@ -227,6 +227,7 @@ HTTP doit posséder les informations suivantes :
 Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
 je trouve un virtual host égal au host de ma requête, je vais utiliser la configuration
 de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
+\\
 Le premier élément de la configuration que je lit pour ce host est de déterminer
 si pour ce host et URI je dois soit : lire un fichier statique, passer la requête
 à une application Nit, ou passer la requête à un serveur mandataire (reverse-proxy).\\
@@ -235,8 +236,26 @@ Lorsque je traite une requête pour une page statique, je dois récupérer la pa
 défaut et le dossier racine pour ce host. Avec ces informations-là, je peux renvoyer
 le contenu de la page statique au requérant. Si je ne suis pas en mesure de lire
 la page ou le dossier demandé, je dois retourner un message d'erreur au requérant
-(page inexistant, accès refusé, etc).
-
+(page inexistant, accès refusé, etc).\\
+\\
+Si la requête doit être passée à un serveur mandataire, je vais créer
+une requête web avec les mêmes informations de la requête, mais je vais modifier
+l'argument \textit{host} pour pointer vers le host du serveur mandataire. Lorsque
+la requête est envoyée, je vais attendre la réception de la réponse et transmettre
+cette réponse au client.
+\\
+Finalement, si la requete doit être transmise à une application Nit, je vais utiliser
+le protocole (@TODO PROTOCOLE À DÉFINIR) pour communiquer avec l'application
+qui m'a instanciée. Par la suite, je vais attendre de recevoir la réponse de l'application
+et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse HTTP
+à transmettre avec les éléments suivants :
+\begin{itemize}
+    \item Le code de statut HTTP
+    \item La taille de la réponse
+    \item D'autres \textit{headers} transmis par l'application NIT
+    \item Le contenu de la réponse
+\end{itemize}
+\\
 Après que la réponse est transmise au client, si le protocole HTTP est 1.0, je ferme
 la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
 ouverte.
