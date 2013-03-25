@@ -110,10 +110,10 @@ document.
 \begin{description}
 \item[Protocole HTTP] Protocole de communication applicative d'architecture
 client-serveur\cite{http}.
-\item[Requête HTTP] Demande envoyé par le client au serveur via un réseau.
 \item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
 connexion keep-alive.
 \item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des
+\item[Requête HTTP] Demande envoyé par le client au serveur via un réseau.
 connexion keep-alive\cite{http1.0}.
 \item[Nit] Langage de programmation open source orienté objet développé par le
 groupe de recherche sur l'étude, la spécification et l'implémentation des
@@ -124,9 +124,13 @@ Montréal.
     \item[Contenu] Information binaire.
     \item[MIME] Multipurpose Internet Mail Extensions. Standard de l'internet décrivant la nature d'un contenu.
     \item[Méthode HTTP] Intention de la requête.
-    \item[Site web]
+    \item[URI]
+    \item[URL]
+    \item[Site web] Ensemble de pages web sur un même domaine.
+    \item[Domaine] Fully qualified domain name. Nom qualifiant un et un seul emplacement dans les trois hiérarchies du DNS.
+    \item[Host] Domaine.
+    \item[DNS] Domain Name System. Associe les domaines aux adresses IP.
     \item[Cookie HTTP] Petit contenu envoyé par un site web et stocké par le client. Le contenu peut par la suite être récupéré par le serveur lors d'une prochaine visite.
-    \item[URL et URI]
     \item[Virtual Host]
     \item[Reverse Proxy]
     \item[Apache]
@@ -224,9 +228,9 @@ temps. Je transfère la requête au module de traitement sous forme de texte.
 En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
 HTTP doit posséder les informations suivantes :
 \begin{itemize}
-    \item La version du protocole HTTP : 1.0 ou 1.1
-    \item Le URI (i.e.: /foobar/123)
-    \item Le host de la requête (i.e.: www.example.com)
+    \item La version du protocole HTTP
+    \item Le URI
+    \item Le host
 \end{itemize}
 
 Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
