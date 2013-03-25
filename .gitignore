@@ -7,3 +7,5 @@ srs/srs.out
 srs/srs.pdf
 srs/srs.toc
 srs/*.gz
+srs/srs.bbl
+srs/srs.blg
