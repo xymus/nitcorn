@@ -348,7 +348,20 @@ serveur devra gerer l'atteinte de cette limite.
 Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
 d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
 les nouvelles requêtes.
-
+\subsection{Caractéristiques des utilisateurs}
+Les utilisateurs de Nitcorn seront en général soit des développeurs ou des
+administrateurs de réseaux. C'est des gens qui ont soit une formation de
+niveau collégiale ou universitaire ou une expérience professionelle dans
+le domaine du web. Il faudra connaitre l'effet de certains variables de
+configuration ou être prêt à lire la documentation qui sera founi.
+\subsection{Contraintes lié aux outils}
+Considérant que le compilateur "nitc" n'est supporté que sur des systèmes
+linux, seul un système d'exploitation de famille linux sera supporté pour
+l'instant.
+\subsection{Interfaces}
+Il faudra assurer une interface permettant aux applications Nit de communiquer
+via le web sans avoir à se soucier de l'écoute sur un port ou de "parsing" de
+requêtes HTTP.
 \section{Hypothèse et dépendances}
 \chapter{Exigences spécifiques}
 
