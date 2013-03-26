@@ -8,69 +8,43 @@ module log
 
 
 in "C header" `{
-    #include<stdio.h>
     #include<time.h>
-    #include<string.h>
 `}
 
 # Class Log
 class Log 
 
-    #permet de cree un fichier Log vide
-    fun initialise `{
-        FILE * file = fopen("log_file.log","w");
-        if (file == NULL){
-            printf("IMPOSSIBLE D'OUVRIR LE FICHIER LOG");
-            exit(1);
-        }
-        fclose (file);
+    var file : OFStream
+    init(filename: String) do
+        file = new OFStream.open(filename)
+    end
+
+    fun get_date : String is extern import String::from_cstring `{
+        time_t date = time(NULL);
+        char* s = ctime(&date);
+        s[strlen(s)-1] = '\0';
+        return new_String_from_cstring(s);
     `}
 
-    #function qui ajoute un message d'erreur au fichier log
-    fun error(id:Int,message:String) :Int is extern import String::to_cstring `{
-        FILE * file = fopen("log_file.log","a");
-        if (file == NULL){
-            printf("IMPOSSIBLE D'OUVRIR LE FICHIER LOG");
-            exit(1);
-        }
-        int c_id = id;
-        char * c_message = String_to_cstring(message);
-        time_t date = time(NULL);
-        char * s = ctime(&date);
-        s[24]= '\t';    
-        fprintf(file,"%s",s);
-        fprintf(file,"%d\t",c_id);
-        fprintf(file,"ERROR\t");
-        fprintf(file,"%s\n",c_message);
-        fclose (file);
-    `}
+    fun error(id: Int, message: String) do
+        var date = get_date
+        file.write("{date}\t{id}\tERROR\t{message}\n")
+    end
 
-    #function qui ajoute un message d'état au fichier log
-    fun debug(id:Int,tag:String,message:String) :Int is extern import String::to_cstring `{ 
-        FILE * file =fopen("log_file.log","a");
-        if(file == NULL){
-            printf("IMPOSSIBLE D'OUVRIR LE FICHIER LOG");
-            exit(1);
-        }
-        int c_id = id;
-        char * c_tag = String_to_cstring(tag);    
-        char * c_message = String_to_cstring(message);
-        time_t date = time(NULL);
-        char * s = ctime(&date);
-        s[24]= '\t';    
-        fprintf(file,"%s",s);
-        fprintf(file,"%d\t",c_id);
-        fprintf(file,"%s\t",c_tag);
-        fprintf(file,"%s\n",c_message);
-        fclose(file);
-    `}
+    fun debug(id: Int, message: String, tag: String) do
+        var date = self.get_date
+        file.write("{date}\t{id}\t{tag}\t{message}\n")
+    end
+
+    fun close do
+        file.write("")
+        file.close
+    end
 end
 
 
-var log : Log = new Log
-log.initialise
-
-log.error(0, "Error lors du chargement")
-log.debug(1, "GET" ,"Succes")
-log.error(0, "Error lors du chargement")
-log.debug(1, "GET" ,"Succes")
+var log : Log = new Log("test.log")
+log.error(0, "Erreur test test 123")
+log.error(0, "Erreur test test 123")
+log.error(0, "Erreur test test 123")
+log.error(0, "Erreur test test 123")
