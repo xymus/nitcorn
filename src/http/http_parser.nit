@@ -16,8 +16,7 @@ class HttpParser
 	private var req_fields: Array[String]
 	private var reply: Int
 	private var body: String
-
-	private var parsed_request: HttpRequest = new HttpRequest
+    private var fields : HashMap[String, String] = new HashMap[String, String]
 
 	init
 	do
@@ -34,19 +33,11 @@ class HttpParser
 	do	
 		clean_variables
 
-		parsed_request = new HttpRequest
-		
 		if not request.has_prefix(" ") then
 	
 			segment_request(request)	
 		
-			if check_req_line then
-				parsed_request.set_method(req_line[0])
-				parsed_request.set_url(req_line[1])
-				parsed_request.set_version(req_line[2])
-				parsed_request.set_body(body)
-			
-			else
+			if not check_req_line then
 				reply = 400
 			end	
 		else
@@ -54,10 +45,9 @@ class HttpParser
 		end
 
 		if not insert_fields then reply = 400
-		
-		parsed_request.set_reply(reply)
 
-		return parsed_request
+        return new HttpRequest(req_line[0], req_line[1], req_line[2], body,
+            reply, fields)
 	end
 
 	private fun clean_variables
@@ -73,7 +63,7 @@ class HttpParser
 		var temp_place = "\r\n\r\n".search_index_in(req, 0)
 
 		if temp_place < 0 then
-			req_fields = req.split_with("\r\n")			
+			req_fields = req.split_with("\r\n")
 		else
 			req_fields = req.substring(0, temp_place).split_with("\r\n")
 			body = req.substring(temp_place+4, req.length-1)
@@ -140,7 +130,7 @@ class HttpParser
 			if temp_field.length != 2 then
 				no_problem = false	
 			else 
-				parsed_request.set_field(temp_field[0], temp_field[1])
+				fields[temp_field[0]] = temp_field[1]
 			end				
 		end
 

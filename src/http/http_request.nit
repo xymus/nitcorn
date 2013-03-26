@@ -7,21 +7,12 @@ module http_request
 
 class HttpRequest
 
-	private var method: nullable String
-	private var url: nullable String
-	private var version: nullable String
-	private var body: nullable String
-	private var reply: nullable Int
-	private var header_fields: HashMap[String, String] = new HashMap[String,String]
-
-	init
-	do
-		method = null
-		url = null
-		version = null
-		body = null
-		reply = null
-	end
+	private var method: String
+	private var url: String
+	private var version: String
+	private var body: String
+	private var status_code: Int
+	private var header_fields: HashMap[String, String]
 
 	fun set_method(method: String) do self.method = method
 
@@ -31,27 +22,20 @@ class HttpRequest
 
 	fun set_body(body: String) do self.body = body
 
-	fun set_reply(reply: Int) do self.reply = reply
+	fun set_status_code(status_code: Int) do self.status_code = status_code
 
 	fun set_field(field, value: String) do header_fields[field] = value
 	
+	fun get_status_code: Int do return status_code
+
+	fun get_method: String do return method
+
+	fun get_url: String do return url
+
+	fun get_version: String do return version
 	
-	fun get_reply: nullable Int do return reply
+	fun get_body: String do return body
 
-	fun get_method: nullable String do return method
+    fun get_header(key: String) : String do return header_fields[key] end
 
-	fun get_url: nullable String do return url
-
-	fun get_version: nullable String do return version
-	
-	fun get_body: nullable String do return body
-
-	fun get(field: String): nullable String
-	do
-		if header_fields.has_key(field) then
-			return header_fields[field]
-		else
-			return null
-		end
-	end		
 end
