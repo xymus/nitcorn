@@ -48,17 +48,20 @@ c_read_cb(struct bufferevent *bev, void *ctx)
     size_t sz;
     buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
     //todo
+    String buf_str;
     if(sz > 0) {
-        String buf_str = new_String_from_cstring(buf);
-        if(ctx != NULL) {
-            Connection_read_callback(
-                ((struct connection_data*)ctx) ,
-                buf_str,
-                ((struct connection_data*)ctx)->server
-            );
-        }
-        free(buf);
+        buf_str = new_String_from_cstring(buf);
+    } else {
+        buf_str = new_String_from_cstring("");
     }
+    if(ctx != NULL) {
+        Connection_read_callback(
+            ((struct connection_data*)ctx) ,
+            buf_str,
+            ((struct connection_data*)ctx)->server
+        );
+    }
+    free(buf);
     if(((struct connection_data*)ctx)->close == 1) {
         Connection_close((struct connection_data*)ctx);
     }

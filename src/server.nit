@@ -1,18 +1,23 @@
 import event
-import request
+import http_parser
+
 
 class HttpServer
 super Server
 
-    var new_connection = false
-
-    var request : Request = new Request
+    var buffer_request : Buffer = new Buffer
 
     redef fun read(line : String) do
-        request.parse_line(line)
-        #write("got your string: {line}\n")
-        send_file("/home/jp/Projects-ssd/nit-webserver/test.html")
-        close
+        print "got line '{line}'"
+        if line == "" then
+            print "got full request, must be parsed : {buffer_request.to_s}"
+            var parser = new HttpParser
+            parser.parse_request(buffer_request.to_s)
+
+        else
+            buffer_request.append(line)
+            buffer_request.append("\r\n")
+        end
     end
 
 end
