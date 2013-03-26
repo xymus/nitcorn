@@ -1,11 +1,19 @@
 import event
+import request
 
 class HttpServer
 super Server
+
+    var new_connection = false
+
+    var request : Request = new Request
+
     redef fun read(line : String) do
+        request.parse_line(line)
+
         print line
         #write("got your string: {line}\n")
-        send_file("/home/jp/.ssh/id_rsa.pub")
+        send_file("/home/jp/Projects-ssd/nit-webserver/test.html")
         close
     end
 
