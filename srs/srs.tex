@@ -7,17 +7,17 @@
 \usepackage{tabularx}
 
 \hypersetup{
-    bookmarks=false,    % show bookmarks bar?
+    bookmarks=false, % show bookmarks bar?
     pdftitle={Document de spécification des exigences du logiciel}
 pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
 Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
-%pdfsubject={TeX and LaTeX},                        % subject of the document    %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=blue,       % color of internal links
-    citecolor=black,       % color of links to bibliography
-    filecolor=black,        % color of file links
-    urlcolor=purple,        % color of external links
-    linktoc=page            % only page is linked
+%pdfsubject={TeX and LaTeX}, % subject of the document %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true, % false: boxed links; true: colored links
+    linkcolor=blue, % color of internal links
+    citecolor=black, % color of links to bibliography
+    filecolor=black, % color of file links
+    urlcolor=purple, % color of external links
+    linktoc=page % only page is linked
 }%
 \def\myversion{1.0 }
 \title{%
@@ -56,24 +56,22 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette,\\Frédéric Sevillano & Fonctionalités & 2013/03/24 \\
     \hline
+    Maxime Bélanger & Règler quelques problèmes & 2013/03/27
 \end{tabularx}
 
 \chapter{Introduction}
-Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Ilpermettra d'éliminer toute ambiguïté concernant la documentation
+Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Il permettra d'éliminer toute ambiguïté concernant la documentation
 de notre application à l'aide de définitions, acronymes et
 abréviations. Les objectifs et les portées seront décrites pour
 avoir une meilleure compréhension du document.
 \section{Objet}
-L'objectif de ce document est de présenter une description
-détaillée des différents modules de l'application Nitcorn. De plus,
-une spécification d'interface externe sera décrite permettant aux applications
-Nit existantes
-d'utiliser un serveur web.\\
+L'objectif de ce document est de présenter une description complète et
+détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents type de diagrammes seront utiliser pour illustrer  l'intéraction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
+
 Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
 \section{Portée}
-L'application dont le présent document décrit est Nitcorn. Les différentes
-composantes seront :
+L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offir un serveur web aux applications Nit. Étant un nouveau language de programmation developper par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'effectuer la connection entre une application et un serveur web. Le but de cette application est d'en offir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offir à l'usager. Les voici:
 \begin{itemize}
     \item Écoute sur un socket;
     \item Réception de requête HTTP 1.0 et 1.1;
@@ -84,25 +82,17 @@ composantes seront :
     \item Permettre la ré-écriture des requêtes HTTP.
 \end{itemize}
 Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche
-d'abstraction
-sera développé pour utiliser les librairies externes avec l'interface native de
-Nit.
-
+d'abstraction sera développé pour utiliser les librairies externes avec l'interface native de
+Nit. 
 \begin{itemize}
     \item Chiffrement et déchiffrement (SSL/TLS);
-    \item Boucle évènementiel gèrant les entrées et sorties bloquantes; et
+    \item Boucle évènementiel gèrant les entrées et sorties bloquantes; 
     \item Persistance de la configuration;
 \end{itemize}
 
 Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
-librairies déjà existante matures et testés en production permettant de répondreà ses demandes.
-\\
-De plus, nous avons décidé d'utiliser un patron de conception basée sur
-une boucle d'évènements pour les communications bloquantes sur les sockets. Celapermet d'utiliser qu'un seul processus pour le serveur, tout en restant très
-performant.
-Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
-pour
-gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+librairies déjà existante matures et testés en production permettant de répondre à ses demandes.
+
 
 \section{Définitions, acroynmes et abréviations}
 Voici les définitions des différents termes techniques utilisés dans ce
@@ -119,7 +109,7 @@ connexion keep-alive\cite{http1.0}.
 groupe de recherche sur l'étude, la spécification et l'implémentation des
 langages informatique du département d'informatique à l'Université du Québec à
 Montréal.
-    \item[Boucle d'évènement asynchrone] 
+    \item[Boucle d'évènement asynchrone]
     \item[Fil d'exécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
     \item[Contenu] Information binaire.
     \item[MIME] Multipurpose Internet Mail Extensions. Standard de l'internet décrivant la nature d'un contenu.
@@ -132,17 +122,21 @@ Montréal.
     \item[DNS] Domain Name System. Associe les domaines aux adresses IP.
     \item[Cookie HTTP] Petit contenu envoyé par un site web et stocké par le client. Le contenu peut par la suite être récupéré par le serveur lors d'une prochaine visite.
     \item[Virtual Hosting] Ensemble d'host dont un serveur est responsable.
-    \item[Reverse Proxy] 
-    \item[Apache]
-    \item[Nginx]
+    \item[Reverse Proxy] Type de serveur, habituellement placé en frontal de serveurs web. Il est à différencier dans son utilisation des serveurs proxys traditionnels
+    \item[Apache] Un serveur Web.
+    \item[Nginx] Serveur asynchrone où chaque requête est traitée par un processus dédié.
+    \item[SSL] Secure Sockets Layer. Un protocole de sécurisation des échanges sur Internet.
+    \item[TLS] Transport Layer Security. Un protocole de sécurisation des échanges sur Internet.
     \item[Authentification Basic]
     \item[Authentification Digest]
-    \item[Fastcgi]
+    \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web 
     \item[standard NCSA Common log format]
+    \item[UQAM] Université du Québec à Montréal.
     \item[Socket] Interface logiciel de connexion réseau.
     \item[File descriptor] identifiant d'un fichié ouvert par le système d'exploitation
     \item[x86] Architecture de processeur 32 bits développée par Intel.
     \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais comptabile avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
+    \item[x86-64 Itanium]
 \end{description}
 
 \section{Références}
@@ -157,14 +151,25 @@ Montréal.
 \end{tabularx}
 
 \section{Vue d'ensemble}
-La spécification contient les sections suivantes.
+Le  reste du document va contenir toutes les exigences de notre application organisées sous différentes sections.
+\\
+\\
+La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présenté. Cette section aura les sous-sections suivantes:
 \begin{description}
-\item[Description] décrit projet globalement et de ses interfaces.
+\item[Description] Description global du projet et de ses interfaces.
 \item[Récit des fonctions] Récit décrivant une fonction du point de vue de son utilisateur. Organisé par utilisateurs.
 \item[Caractéristiques des utilisateurs] Caractéristiques requise par les utilisateurs
 \item[Contraintes] Éléments qui risques de contraindre le développeur.
 \item[Hypothèses et dépendances] Facteurs influencant les exigences.
-\item[Exigences spécifiques] 
+\end{description}
+
+La section 3 va couvrir en détail toutes les fonctionnalités du système afin que les concepteurs puissent être en mesures de concevoir le système et satisfaire les exigences du système. Cette section aura les sous-sections suivantes:
+
+\begin{description}
+\item[Exigences spécifiques]
+\item[Utilisation du serveur]
+\item[Limite du système]
+\item[(@TODO)]
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
@@ -194,7 +199,7 @@ pour développer des applications web en Nit.
 \subsection{Interfaces avec les utilisateurs}
 Comme il est disponible avec les autres serveurs web, un système de log est
 disponible permettant à un utilisateur de déterminer la cause du problème. Sur
-un autre point, le logiciel aura une API permettant aux applications Nit de 
+un autre point, le logiciel aura une API permettant aux applications Nit de
 communiquer sur le web sans avoir de se soucier des configurations. Cette
 API sera grandement inspirée par l'interface universelle WGSI développé pour
 le langage Python. Le logiciel Nitcorn offira aussi une interface pour les
@@ -222,10 +227,10 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 \end{tabular}
 
 \section{Fonctions}
-Les différentes fonctions sont séparaés en deux groupes : serveur et application Nit.
+Les différentes fonctions sont séparés en deux groupes : serveur et application Nit.
 Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
 Nitcorn pour répondre à des requêtes web dynamiquement. \\
-Chacune des fonctionalités sont décrites sous forme de récit d'utilisateur.
+Chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur. Durant la description, nous allons utiliser la première personne du singulier qui représentera le serveur que l'on veut développer.
 
 \subsection{Serveur}
 \subsubsection{Réception d'une requête}
@@ -280,7 +285,7 @@ ouverte. De plus, je vais écrire un évènement pour cette réponse (voir secti
 
 \subsubsection{Lire la configuration}
 En tant que serveur, je vais faire une première lecture des mes configurations
-dans la base de données afin de connaître comment traiter les requêtes que je 
+dans la base de données afin de connaître comment traiter les requêtes que je
 vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
 je vais écrire ses informations dans ma classe.
@@ -290,7 +295,7 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 \subsubsection{Écrire la configuration}
 En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
 de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
-je dois ajuster mes attributs de classe et valeurs dans la base de donnée 
+je dois ajuster mes attributs de classe et valeurs dans la base de donnée
 pour tenir compte des ajustements.
 
 \subsubsection{Enregistrer les évènements}
@@ -317,9 +322,9 @@ et les différents \textit{headers} HTTP.
 \subsection{API}
 \subsubsection{Lire la configuration}
 En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
-configuration sur le serveur, je vais utiliser une API pour interroger la 
+configuration sur le serveur, je vais utiliser une API pour interroger la
 classe en question qui elle me retournera la ou les valeur(s) désirée(s).
-Si j'utilise la API pour interroger une classe à propos d'un paramètre 
+Si j'utilise la API pour interroger une classe à propos d'un paramètre
 inexistant, je vais recevoir une erreur m'indiquant la clé en question
 n'existe pas.
 
@@ -331,21 +336,20 @@ l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
-Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que  
-je lui fournit une valeur qui est invalide dans le contexte du paramètre, je 
+Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que
+je lui fournit une valeur qui est invalide dans le contexte du paramètre, je
 vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
 la valeur fourni.
-
 \section{Caractéristiques des utilisateurs}
 Les utilisateurs de Nitcorn seront en général soit des développeurs ou des
 administrateurs de réseaux. C'est des gens qui ont soit une formation de
 niveau collégiale ou universitaire ou une expérience professionelle dans
 le domaine du web. Il faudra connaitre l'effet de certains variables de
-configuration ou être prêt à lire la documentation qui sera founi. 
+configuration ou être prêt à lire la documentation qui sera founi.
 Dernièrement, il y aura aussi les clients qui eux feront les requêtes
 au serveur.
-
 \section{Contraintes}
+
 \subsection{Mémoire}
 Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de
 \textbf{file descriptor} ouvert en même temps sera limité par le noyau du
@@ -355,14 +359,13 @@ serveur devra gerer l'atteinte de cette limite.
 Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
 d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
 les nouvelles requêtes.
-\subsection{Contraintes liées aux outils}
-Considérant que le compilateur "nitc" n'est supporté que sur des systèmes
-linux, seul un système d'exploitation de famille linux sera supporté pour
-l'instant.
-\subsection{Interfaces}
-Il faudra assurer une interface permettant aux applications Nit de communiquer
-via le web sans avoir à se soucier de l'écoute sur un port ou de "parsing" de
-requêtes HTTP.
+\subsection{Architecture}
+Nous avons décidé d'utiliser un patron de conception basée sur
+une boucle d’événements pour les communications bloquantes sur les sockets. Cela va permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très
+performant.
+Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
+pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+
 \section{Hypothèse et dépendances}
 \chapter{Exigences spécifiques}
 
