@@ -236,14 +236,14 @@ class Factory
 end
 
 class Server
-    private var factory : Factory
-    private var connection : Connection
+    protected var factory : Factory
+    protected var connection : Connection
 
-    init(f : Factory, c: Connection) do 
+    init(f: Factory, c:Connection) do
         self.factory = f
         self.connection = c
     end
-
+    
     fun read(line : String) is abstract
     fun send_file(path: String) : Int do
         return self.connection.send_file(path)
