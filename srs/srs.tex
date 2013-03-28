@@ -52,7 +52,7 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Équipe & Ébauche & 2013/02/26 \\
     \hline
-    Jean-Philippe Caissy & Convertion en \LaTeX & 2013/03/04 \\
+    Jean-Philippe Caissy & Conversion en \LaTeX & 2013/03/04 \\
     \hline
     Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette,\\Frédéric Sevillano & Fonctionalités & 2013/03/24 \\
     \hline
@@ -66,12 +66,12 @@ abréviations. Les objectifs et les portées seront décrites pour
 avoir une meilleure compréhension du document.
 \section{Objet}
 L'objectif de ce document est de présenter une description complète et
-détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents type de diagrammes seront utiliser pour illustrer  l'intéraction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
+détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents type de diagrammes seront utiliser pour illustrer  l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
 
 Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
 \section{Portée}
-L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offir un serveur web aux applications Nit. Étant un nouveau language de programmation developper par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'effectuer la connection entre une application et un serveur web. Le but de cette application est d'en offir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offir à l'usager. Les voici:
+L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développer par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
 \begin{itemize}
     \item Écoute sur un socket;
     \item Réception de requête HTTP 1.0 et 1.1;
@@ -86,7 +86,7 @@ d'abstraction sera développé pour utiliser les librairies externes avec l'inte
 Nit. 
 \begin{itemize}
     \item Chiffrement et déchiffrement (SSL/TLS);
-    \item Boucle évènementiel gèrant les entrées et sorties bloquantes; 
+    \item Boucle événementiel gérant les entrées et sorties bloquantes; 
     \item Persistance de la configuration;
 \end{itemize}
 
@@ -94,48 +94,51 @@ Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
 librairies déjà existante matures et testés en production permettant de répondre à ses demandes.
 
 
-\section{Définitions, acroynmes et abréviations}
+\section{Définitions, acronymes et abréviations}
 Voici les définitions des différents termes techniques utilisés dans ce
 document.
 \begin{description}
-\item[Protocole HTTP] Protocole de communication applicative d'architecture
-client-serveur\cite{http}.
-\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
+    \item[Apache] Un serveur Web.
+	\item[API]
+	\item[Authentification Basic]
+    \item[Authentification Digest]
+	\item[Boucle d'événement asynchrone]
+    \item[Contenu] Information binaire.
+    \item[Cookie HTTP] Petit contenu envoyé par un site web et stocké par le client. Le contenu peut par la suite être récupéré par le serveur lors d'une prochaine visite.
+    \item[Domaine] Fully qualified domain name. Nom qualifiant un et un seul emplacement dans les trois hiérarchies du DNS.
+    \item[DNS] Domain Name System. Associe les domaines aux adresses IP.
+    \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web. 
+    \item[Fil d'éxécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
+    \item[File descriptor] identifiant d'un fichier ouvert par le système d'exploitation. 
+ 	\item[Header]
+    \item[Host] Domaine.	
+	\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
 connexion keep-alive.
-\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des
-\item[Requête HTTP] Demande envoyé par le client au serveur via un réseau.
-connexion keep-alive\cite{http1.0}.
-\item[Nit] Langage de programmation open source orienté objet développé par le
+	\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des****
+	\item[Log]   
+    \item[Méthode HTTP] Intention de la requête.
+	\item[MIME] Multipurpose Internet Mail Extensions. Est un identifiant de format de données composé de deux parties,utilisé par les serveurs pour distinguer le type de format.
+	\item[Nit] Langage de programmation open source orienté objet développé par le
 groupe de recherche sur l'étude, la spécification et l'implémentation des
 langages informatique du département d'informatique à l'Université du Québec à
 Montréal.
-    \item[Boucle d'évènement asynchrone]
-    \item[Fil d'exécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
-    \item[Contenu] Information binaire.
-    \item[MIME] Multipurpose Internet Mail Extensions. Standard de l'internet décrivant la nature d'un contenu.
-    \item[Méthode HTTP] Intention de la requête.
+	\item[Nginx] Serveur asynchrone où chaque requête est traitée par un processus dédié.   
+	\item[Protocole HTTP] Protocole de communication applicative d'architecture
+client-serveur\cite{http}.
+	\item[Requête HTTP] Demande envoyé par le client au serveur via un réseau.
+connexion keep-alive\cite{http1.0}.
+	\item[Reverse Proxy] Type de serveur, habituellement placé en frontal de serveurs web. Il est à différencier dans son utilisation des serveurs proxys traditionnels.
+    \item[Site web] Ensemble de pages web sur un même domaine.
+	\item[Socket] Interface logiciel de connexion réseau.   
+    \item[SSL] Secure Sockets Layer. Un protocole de sécurisation des échanges sur Internet.
+	\item[Standard NCSA Common log format]  
+    \item[TLS] Transport Layer Security. Un protocole de sécurisation des échanges sur Internet. 
+    \item[UQAM] Université du Québec à Montréal.    
     \item[URI] Uniform resource identifier. Chaîne de caractères identifiant une ressource.
     \item[URL] Uniform resource locator. Adresse web qui réfère à une ressource.
-    \item[Site web] Ensemble de pages web sur un même domaine.
-    \item[Domaine] Fully qualified domain name. Nom qualifiant un et un seul emplacement dans les trois hiérarchies du DNS.
-    \item[Host] Domaine.
-    \item[DNS] Domain Name System. Associe les domaines aux adresses IP.
-    \item[Cookie HTTP] Petit contenu envoyé par un site web et stocké par le client. Le contenu peut par la suite être récupéré par le serveur lors d'une prochaine visite.
-    \item[Virtual Hosting] Ensemble d'host dont un serveur est responsable.
-    \item[Reverse Proxy] Type de serveur, habituellement placé en frontal de serveurs web. Il est à différencier dans son utilisation des serveurs proxys traditionnels
-    \item[Apache] Un serveur Web.
-    \item[Nginx] Serveur asynchrone où chaque requête est traitée par un processus dédié.
-    \item[SSL] Secure Sockets Layer. Un protocole de sécurisation des échanges sur Internet.
-    \item[TLS] Transport Layer Security. Un protocole de sécurisation des échanges sur Internet.
-    \item[Authentification Basic]
-    \item[Authentification Digest]
-    \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web 
-    \item[standard NCSA Common log format]
-    \item[UQAM] Université du Québec à Montréal.
-    \item[Socket] Interface logiciel de connexion réseau.
-    \item[File descriptor] identifiant d'un fichié ouvert par le système d'exploitation
+    \item[Virtual Host] Ensemble d'host dont un serveur est responsable.
     \item[x86] Architecture de processeur 32 bits développée par Intel.
-    \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais comptabile avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
+    \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais compatible avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
     \item[x86-64 Itanium]
 \end{description}
 
@@ -154,43 +157,31 @@ Montréal.
 Le  reste du document va contenir toutes les exigences de notre application organisées sous différentes sections.
 \\
 \\
-La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présenté. Cette section aura les sous-sections suivantes:
+La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présenté. Cette section traitera les aspects suivants:
 \begin{description}
 \item[Description] Description global du projet et de ses interfaces.
 \item[Récit des fonctions] Récit décrivant une fonction du point de vue de son utilisateur. Organisé par utilisateurs.
 \item[Caractéristiques des utilisateurs] Caractéristiques requise par les utilisateurs
 \item[Contraintes] Éléments qui risques de contraindre le développeur.
-\item[Hypothèses et dépendances] Facteurs influencant les exigences.
+\item[Hypothèses et dépendances] Facteurs influençant les exigences.
 \end{description}
 
-La section 3 va couvrir en détail toutes les fonctionnalités du système afin que les concepteurs puissent être en mesures de concevoir le système et satisfaire les exigences du système. Cette section aura les sous-sections suivantes:
+La section 3 va couvrir en détail toutes les exigences du système afin que les concepteurs puissent être en mesures de concevoir le système et satisfaire les exigences du système. Cette section traitera les aspects suivants:
 
 \begin{description}
-\item[Exigences spécifiques]
-\item[Utilisation du serveur]
-\item[Limite du système]
-\item[(@TODO)]
+\item[Exigences spécifiques] Décrit de façon précise les cas d'utilisation.
+\item[Contraintes de conception] Contrainte qui doit être suivit lors de la conception du système.
+\item[Attributs] Attributs de logiciel pouvant servir d'exigences. 
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit
-d'utiliser
-un serveur web. Ainsi, il est important d'offrir des fonctionnalités de serveur
-au langage afin qu'il puisse être placée derrière un serveur web (Nginx, Apache,
-\ldots).
-Sous cette configuration, il est quand même essentiel de pouvoir répondre à des
-requêtes web, mais des fonctionnalités tel que la gestion des logs ou la
-persistance
-des configuration n'est plus inutile car ces fonctionnalités seraient gérés par
-le serveur web.\\
-Par contre, cela n'empêcherait pas Nitcorn d'être directement exposé à Internet
-et agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
-serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les
-fonctionnalités
-mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
-et de fonctionnalités essentiels d'un serveur web.
+Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilité
+d'utiliser un serveur web. On va donc devoir créé un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placée derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus , lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+serveur web (Nginx, Apache, \ldots). Sous cette configuration, les
+fonctionnalités mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
+et de fonctionnalités essentiels au serveur web.
 
-\subsection{Interfaces avec le sysyème}
+\subsection{Interfaces avec le système}
 Nitcorn sera utilisé sur deux système : un serveur web et un environnement de développement.
 Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
 que l'environnement de développement sera le système utilisé par les développeurs
@@ -202,11 +193,11 @@ disponible permettant à un utilisateur de déterminer la cause du problème. Su
 un autre point, le logiciel aura une API permettant aux applications Nit de
 communiquer sur le web sans avoir de se soucier des configurations. Cette
 API sera grandement inspirée par l'interface universelle WGSI développé pour
-le langage Python. Le logiciel Nitcorn offira aussi une interface pour les
+le langage Python. Le logiciel Nitcorn offrira aussi une interface pour les
 applications Nit.
 
 \subsection{Interfaces avec le matériel}
-Nitcorn dépent du compilateur de Nit. Celui-ci est compatible pour le moment avec
+Nitcorn dépend du compilateur de Nit. Celui-ci est compatible pour le moment avec
 les architectures x86 et x86_64.
 
 \subsection{Interfaces avec les logiciels}
@@ -229,24 +220,125 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 \section{Fonctions}
 Les différentes fonctions sont séparés en deux groupes : serveur et application Nit.
 Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
-Nitcorn pour répondre à des requêtes web dynamiquement. \\
-Chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur. Durant la description, nous allons utiliser la première personne du singulier qui représentera le serveur que l'on veut développer.
+Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configuration selon les préférences de l'utilisateur.\\
 
 \subsection{Serveur}
-\subsubsection{Réception d'une requête}
-Afin de recevoir des requêtes, je dois écouter un port à l'aide d'un socket. Je
-veux pouvoir recevoir plusieurs requête et écouter plusieurs ports en même
-temps. Je transfère la requête au module de traitement sous forme de texte.
+\begin{itemize}
+ \item Réception d'une requête
+ \item Traiter une requête
+ \item Lire la configuration
+ \item Écrire la configuration
+ \item Enregistrer les événements
+\end{itemize}
+\subsection{Application Nit}
+\begin{itemize}
+ \item Recevoir une requête HTTP
+ \item Traiter une requête HTTP
+\end{itemize}
+\subsection{API}
+\begin{itemize}
+ \item Lire la configuration
+ \item Enregistrer la configuration
+\end{itemize}
+\section{Caractéristiques des utilisateurs}
+Les utilisateurs de Nitcorn seront en général soit des développeurs ou des
+administrateurs de réseaux. C'est des gens qui ont soit une formation de
+niveau collégiale ou universitaire ou une expérience professionnelle dans
+le domaine du web. Il faudra connaître l'effet de certains variables de
+configuration ou être prêt à lire la documentation qui sera fourni.
+Dernièrement, il y aura aussi les clients qui eux feront les requêtes
+au serveur.
+\section{Contraintes}
 
-\subsubsection{Traiter une requête}
-En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
+\subsection{Mémoire}
+Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de
+\textbf{file descriptor} ouvert en même temps sera limité par le noyau du
+système d'exploitation. La limite est à la discrétion de l'utilisateur. Le
+serveur devra gérer l'atteinte de cette limite.
+\subsection{Exécution}
+Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
+d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
+les nouvelles requêtes.
+\subsection{Architecture}
+Nous avons décidé d'utiliser un patron de conception basée sur
+une boucle d’événements pour les communications bloquantes sur les sockets. Cela va permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très
+performant.
+Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
+pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+\subsection{Utilisation du serveur}
+Le serveur devra être en mesure de supporter seulement les headers suivants: 
+\begin{itemize}
+ \item TODO
+ \item TODO
+ \item TODO
+ \item TODO
+\end{itemize}
+ 
+ De plus, il sera en mesure de traité les types d'erreurs suivants:
+ \begin{itemize}
+ \item TODO
+ \item TODO
+ \item TODO
+ \item TODO
+ \end{itemize}
+
+ 
+    
+\section{Hypothèse et dépendances}
+Étant donner le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
+
+
+\chapter{Exigences spécifiques}
+
+\section{Description des acteurs}
+\subsection{Serveur:} Le serveur est celui qui va interagir avec l'utilisateur. 
+\subsection{Utilisateur:} L'utilisateur est une personne qui va utiliser le serveur.
+
+\section{Spécification des cas d'utilisation pour le serveur} 
+À noter que nous utilisons la première personne du singulier pour représente le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
+\subsection{Réception d'une requête}
+\subsubsection{Titre du cas d'utilisation:} Réception d'une requête
+\subsubsection{Description sommaire:} Je reçois une requête et je l'envoie au module de traitement.
+\subsubsection{Acteur:} Serveur, utilisateur
+\subsubsection{Précondition:}
+\begin{itemize}
+	\item L'utilisateur doit être connecté au serveur.
+    \item Une requête doit avoir été envoyé par un utilisateur.
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  L'information de la requête est envoyer au module de traitement.
+    \item  Le log à été enregistrer.
+\end{itemize} 
+\subsubsection{Description du processus:}
+Je dois pouvoir recevoir une ou plusieurs requêtes en même temps. Après l'envoie d'une requête effectué par l'utilisateur, je vais écouter un ou plusieurs ports à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été émis et l'assigner au module de traitement sous forme de texte.
+
+
+*** A Faire:DIAGRAMME
+Example de requêtes;
+Démontrer le traitement;
+Example de retour ;
+***
+
+\subsection{Traiter une requête HTTP}
+\subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
+\subsubsection{Description sommaire:} 
+\subsubsection{Acteur:} Serveur
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
 HTTP doit posséder les informations suivantes :
 \begin{itemize}
     \item La version du protocole HTTP
     \item Le URI
     \item Le host
 \end{itemize}
-
 Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
 je trouve un virtual host égal au host de ma requête, je vais utiliser la configuration
 de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
@@ -267,7 +359,7 @@ l'argument \textit{host} pour pointer vers le host du serveur mandataire. Lorsqu
 la requête est envoyée, je vais attendre la réception de la réponse et transmettre
 cette réponse au client.
 \\
-Finalement, si la requete doit être transmise à une application Nit, je vais utiliser
+Finalement, si la requête doit être transmise à une application Nit, je vais utiliser
 le protocole (@TODO PROTOCOLE À DÉFINIR) pour communiquer avec l'application
 qui m'a instanciée. Par la suite, je vais attendre de recevoir la réponse de l'application
 et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse HTTP
@@ -280,11 +372,16 @@ et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse 
 \end{itemize}
 Après que la réponse est transmise au client, si le protocole HTTP est 1.0, je ferme
 la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
-ouverte. De plus, je vais écrire un évènement pour cette réponse (voir section
-\textit{Enregistrer les évènements}).
+ouverte. De plus, je vais écrire un événement pour cette réponse (voir section
+\textit{Enregistrer les événements}).
 
-\subsubsection{Lire la configuration}
-En tant que serveur, je vais faire une première lecture des mes configurations
+\subsection{Lire la configuration}
+\subsubsection{Titre du cas d'utilisation:} Lire la configuration
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:}
+\subsubsection{Précondition:}
+\subsubsection{Postcondition:}
+\subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations
 dans la base de données afin de connaître comment traiter les requêtes que je
 vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
@@ -292,44 +389,109 @@ je vais écrire ses informations dans ma classe.
 Si une application change ma configuration, je vais en tenir compte dans ma
 classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
-\subsubsection{Écrire la configuration}
-En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
+\subsection{Écrire la configuration}
+\subsubsection{Titre du cas d'utilisation:} Écrire la configuration
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:}
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
 de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
 je dois ajuster mes attributs de classe et valeurs dans la base de donnée
 pour tenir compte des ajustements.
 
-\subsubsection{Enregistrer les évènements}
-En tant que serveur, je désire garder une historique de mes transactions. Par
+\subsection{Enregistrer les événements}
+\subsubsection{Titre du cas d'utilisation:} Enregistrer les événements
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:}
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant que serveur, je désire garder une historique de mes transactions. Par
 default je respect le \textbf{standard NCSA Common log format}. Par contre je m'adapte
 aux \textbf{hosts}, qui eux ont la possibilité de changer le format de
-l'enregistrement. Mes enregistrements sont cours et consise. Ils expliques
+l'enregistrement. Mes enregistrements sont cours et concise. Ils expliques
 simplement qui a fait quoi et quand.
 
-\subsection{Application Nit}
-\subsubsection{Recevoir une requête HTTP}
-En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
-(@TODO définir et nommer le protocole) me permenttant de communiquer avec le serveur
+\section{Spécification des cas d'utilisation pour l'application Nit}
+\subsection{Recevoir une requête HTTP}
+\subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:} Serveur, utilisateur
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
+(@TODO définir et nommer le protocole) me permettant de communiquer avec le serveur
 Nitcorn. La réception d'une requête se fait en passant en paramètre les informations
 reçu par Nitcorn (host, uri, headers).
-
-\subsubsection{Traiter une requête HTTP}
-Après qu'une requête HTTP a été reçu, je peux faire le traitement que je veux.
+\subsection{Traiter une requête HTTP}
+\subsubsection{Titre du cas d'utilisation: Traiter une requête HTTP}
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:} Serveur, utilisateur
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}Après qu'une requête HTTP a été reçu, je peux faire le traitement que je veux.
 Une fois ce traitement, je dois retourner (@TODO à voir avec spec de l'interface)
 une réponse selon le protocole de l'interface avec Nitcorn. Cette réponse doit
 contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
 et les différents \textit{headers} HTTP.
 
-\subsection{API}
-\subsubsection{Lire la configuration}
-En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
+\section{Spécification des cas d'utilisation pour API}
+\subsection{Lire la configuration}
+\subsubsection{Titre du cas d'utilisation:} Lire la configuration
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:} Serveur, Utilisateur
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
 configuration sur le serveur, je vais utiliser une API pour interroger la
 classe en question qui elle me retournera la ou les valeur(s) désirée(s).
 Si j'utilise la API pour interroger une classe à propos d'un paramètre
 inexistant, je vais recevoir une erreur m'indiquant la clé en question
 n'existe pas.
 
-\subsubsection{Enregistrer la configuration}
-En tant que client, si je désire apporter une modification à un ou plusieurs
+\subsection{Enregistrer la configuration}
+\subsubsection{Titre du cas d'utilisation:} Enregistrer la configuration
+\subsubsection{Description sommaire:}
+\subsubsection{Acteur:} Serveur , utilisateur
+\subsubsection{Précondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Postcondition:}
+\begin{itemize}
+    \item  
+\end{itemize} 
+\subsubsection{Description du processus:}En tant que client, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
 de la ou les paramètre(s) désirée à l'API qui se chargera de relayer.
 l'information à la classe appropriée.
@@ -340,34 +502,19 @@ Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et qu
 je lui fournit une valeur qui est invalide dans le contexte du paramètre, je
 vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
 la valeur fourni.
-\section{Caractéristiques des utilisateurs}
-Les utilisateurs de Nitcorn seront en général soit des développeurs ou des
-administrateurs de réseaux. C'est des gens qui ont soit une formation de
-niveau collégiale ou universitaire ou une expérience professionelle dans
-le domaine du web. Il faudra connaitre l'effet de certains variables de
-configuration ou être prêt à lire la documentation qui sera founi.
-Dernièrement, il y aura aussi les clients qui eux feront les requêtes
-au serveur.
-\section{Contraintes}
 
-\subsection{Mémoire}
-Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de
-\textbf{file descriptor} ouvert en même temps sera limité par le noyau du
-système d'exploitation. La limite est à la discrétion de l'utilisateur. Le
-serveur devra gerer l'atteinte de cette limite.
-\subsection{Exécution}
-Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
-d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
-les nouvelles requêtes.
-\subsection{Architecture}
-Nous avons décidé d'utiliser un patron de conception basée sur
-une boucle d’événements pour les communications bloquantes sur les sockets. Cela va permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très
-performant.
-Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
-pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+\section{Exigences des interfaces externes}
+\subsection{Configuration}
+Pour la configuration du serveur, un service web sera disponible pour configuré le serveur au préférence du client. (ACOMPLETE)
+\section{Exigences fonctionnelles}
+\section{Exigences de performance}
+\section{Contraintes de conception}
+\section{Attributs}
+\subsection{Disponibilité}
+\subsection{Sécurité}
+\subsection{Maintenabilité}
 
-\section{Hypothèse et dépendances}
-\chapter{Exigences spécifiques}
+
 
 \begin{thebibliography}{9}
 \bibitem{ieefr}
