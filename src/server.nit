@@ -21,7 +21,8 @@ super Server
     end
 
     fun dispatch(request: HttpRequest) do
-        print config.get_name
+        #let's find the virtual host
+
     end
     
 
@@ -34,11 +35,9 @@ super Factory
     init do
         config = new Config("nitcorn")
         #Setting default hosts
-        config.get_hostsmanager.addnew_virtualhost(
-            "",
-            new Ip([127,0,0,1]),
-            8080,
-            "")
+        config.get_hostsmanager.set_default_host(
+            new VirtualHost("localhost", new Ip([127,0,0,1]), 80, "/var/www")
+        )
     end
 
 
