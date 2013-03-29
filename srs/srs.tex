@@ -54,35 +54,43 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Jean-Philippe Caissy & Conversion en \LaTeX & 2013/03/04 \\
     \hline
-    Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette,\\Frédéric Sevillano & Fonctionalités & 2013/03/24 \\
+    Jean-Philippe Caissy,& Fonctionalités & 2013/03/24\\
+    Stéphan Michaud,& &\\
+    Justin Michaud-Ouelette, & &\\
+    Frédéric Sevillano & & \\
     \hline
-    Maxime Bélanger & Règler quelques problèmes & 2013/03/27
+    Maxime Bélanger & Règler quelques problèmes & 2013/03/27  \\
+    \hline
+    Guillaume Auger & Correction de l'orthographe & 2013/03/28  \\
+     & Modification des acteurs &\\
+     & Modifications aux définitions &\\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
 Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Il permettra d'éliminer toute ambiguïté concernant la documentation
 de notre application à l'aide de définitions, acronymes et
-abréviations. Les objectifs et les portées seront décrites pour
+abréviations. Les objectifs et les portées seront décrits pour
 avoir une meilleure compréhension du document.
 \section{Objet}
 L'objectif de ce document est de présenter une description complète et
-détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents type de diagrammes seront utiliser pour illustrer  l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
+détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents types de diagrammes seront utilisé pour illustrer l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
 
-Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
+Ce document s'adresse aux développeurs du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
 \section{Portée}
-L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développer par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
+L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développé par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
 \begin{itemize}
     \item Écoute sur un socket;
-    \item Réception de requête HTTP 1.0 et 1.1;
+    \item Réception de requêtes HTTP 1.0 et 1.1;
     \item Traitement et réponse à une requête HTTP;
     \item Exposer une API pour gérer la configuration;
     \item Gestion de log;
     \item Transmettre les requêtes vers un serveur mandataire; et
     \item Permettre la ré-écriture des requêtes HTTP.
 \end{itemize}
-Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche
-d'abstraction sera développé pour utiliser les librairies externes avec l'interface native de
+Les éléments suivants ne sont pas traités par Nitcorn. Ainsi, une couche
+d'abstraction sera développée pour utiliser les librairies externes avec l'interface native de
 Nit. 
 \begin{itemize}
     \item Chiffrement et déchiffrement (SSL/TLS);
@@ -91,7 +99,7 @@ Nit.
 \end{itemize}
 
 Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
-librairies déjà existante matures et testés en production permettant de répondre à ses demandes.
+librairies déjà existantes matures et testées en production permettant de répondre à ces demandes.
 
 
 \section{Définitions, acronymes et abréviations}
@@ -109,15 +117,16 @@ document.
     \item[DNS] Domain Name System. Associe les domaines aux adresses IP.
     \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web. 
     \item[Fil d'éxécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
-    \item[File descriptor] identifiant d'un fichier ouvert par le système d'exploitation. 
+    \item[File descriptor] Identifiant d'un fichier ouvert par le système d'exploitation. 
  	\item[Header]
     \item[Host] Domaine.	
 	\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
-connexion keep-alive.
+connexions keep-alive.
 	\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des****
+    \item[Itanium] Processeurs 64 bits développés par Intel utilisant l'architecture IA_64 et non x86_64. Inclus ici les processeurs Itanium 2.
 	\item[Log]   
     \item[Méthode HTTP] Intention de la requête.
-	\item[MIME] Multipurpose Internet Mail Extensions. Est un identifiant de format de données composé de deux parties,utilisé par les serveurs pour distinguer le type de format.
+	\item[MIME] Multipurpose Internet Mail Extensions. Est un identifiant de format de données composé de deux parties, utilisé par les serveurs pour distinguer le type de format.
 	\item[Nit] Langage de programmation open source orienté objet développé par le
 groupe de recherche sur l'étude, la spécification et l'implémentation des
 langages informatique du département d'informatique à l'Université du Québec à
@@ -126,7 +135,7 @@ Montréal.
 	\item[Protocole HTTP] Protocole de communication applicative d'architecture
 client-serveur\cite{http}.
 	\item[Requête HTTP] Demande envoyé par le client au serveur via un réseau.
-connexion keep-alive\cite{http1.0}.
+Connexion keep-alive\cite{http1.0}.
 	\item[Reverse Proxy] Type de serveur, habituellement placé en frontal de serveurs web. Il est à différencier dans son utilisation des serveurs proxys traditionnels.
     \item[Site web] Ensemble de pages web sur un même domaine.
 	\item[Socket] Interface logiciel de connexion réseau.   
@@ -136,10 +145,10 @@ connexion keep-alive\cite{http1.0}.
     \item[UQAM] Université du Québec à Montréal.    
     \item[URI] Uniform resource identifier. Chaîne de caractères identifiant une ressource.
     \item[URL] Uniform resource locator. Adresse web qui réfère à une ressource.
-    \item[Virtual Host] Ensemble d'host dont un serveur est responsable.
+    \item[Virtual Host] Ensemble d'hosts dont un serveur est responsable.
     \item[x86] Architecture de processeur 32 bits développée par Intel.
-    \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais compatible avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
-    \item[x86-64 Itanium]
+    \item[x86_64] Architecture de processeur 64 bits développée par AMD, mais compatible avec la famille de processeur 64 bits d'Intel (à l'exception de Itanium).
+
 \end{description}
 
 \section{Références}
@@ -157,32 +166,32 @@ connexion keep-alive\cite{http1.0}.
 Le  reste du document va contenir toutes les exigences de notre application organisées sous différentes sections.
 \\
 \\
-La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présenté. Cette section traitera les aspects suivants:
+La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présentée. Cette section traitera les aspects suivants:
 \begin{description}
 \item[Description] Description global du projet et de ses interfaces.
 \item[Récit des fonctions] Récit décrivant une fonction du point de vue de son utilisateur. Organisé par utilisateurs.
-\item[Caractéristiques des utilisateurs] Caractéristiques requise par les utilisateurs
-\item[Contraintes] Éléments qui risques de contraindre le développeur.
-\item[Hypothèses et dépendances] Facteurs influençant les exigences.
+\item[Caractéristiques des utilisateurs] Caractéristiques requises par les utilisateurs
+\item[Contraintes] Éléments qui risquent de contraindre le développeur.
+\item[Hypothèses et dépendances] Facteurs influençants les exigences.
 \end{description}
 
-La section 3 va couvrir en détail toutes les exigences du système afin que les concepteurs puissent être en mesures de concevoir le système et satisfaire les exigences du système. Cette section traitera les aspects suivants:
+La section 3 va couvrir en détail toutes les exigences du système afin que les concepteurs puissent être en mesure de concevoir le système et satisfaire les exigences du système. Cette section traitera les aspects suivants:
 
 \begin{description}
 \item[Exigences spécifiques] Décrit de façon précise les cas d'utilisation.
-\item[Contraintes de conception] Contrainte qui doit être suivit lors de la conception du système.
+\item[Contraintes de conception] Contraintes qui doivent être suivi lors de la conception du système.
 \item[Attributs] Attributs de logiciel pouvant servir d'exigences. 
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
 Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilité
-d'utiliser un serveur web. On va donc devoir créé un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placée derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus , lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
-serveur web (Nginx, Apache, \ldots). Sous cette configuration, les
-fonctionnalités mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
+d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
+fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
 et de fonctionnalités essentiels au serveur web.
 
 \subsection{Interfaces avec le système}
-Nitcorn sera utilisé sur deux système : un serveur web et un environnement de développement.
+Nitcorn sera utilisé sur deux systèmes : un serveur web et un environnement de développement.
 Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
 que l'environnement de développement sera le système utilisé par les développeurs
 pour développer des applications web en Nit.
@@ -191,8 +200,8 @@ pour développer des applications web en Nit.
 Comme il est disponible avec les autres serveurs web, un système de log est
 disponible permettant à un utilisateur de déterminer la cause du problème. Sur
 un autre point, le logiciel aura une API permettant aux applications Nit de
-communiquer sur le web sans avoir de se soucier des configurations. Cette
-API sera grandement inspirée par l'interface universelle WGSI développé pour
+communiquer sur le web sans avoir à se soucier des configurations. Cette
+API sera grandement inspirée par l'interface universelle WGSI développée pour
 le langage Python. Le logiciel Nitcorn offrira aussi une interface pour les
 applications Nit.
 
@@ -218,9 +227,9 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 \end{tabular}
 
 \section{Fonctions}
-Les différentes fonctions sont séparés en deux groupes : serveur et application Nit.
+Les différentes fonctions sont séparées en deux groupes : serveur et application Nit.
 Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
-Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configuration selon les préférences de l'utilisateur.\\
+Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
 
 \subsection{Serveur}
 \begin{itemize}
@@ -238,31 +247,32 @@ Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est 
 \subsection{API}
 \begin{itemize}
  \item Lire la configuration
+ \item Modifier la configuration
  \item Enregistrer la configuration
 \end{itemize}
 \section{Caractéristiques des utilisateurs}
 Les utilisateurs de Nitcorn seront en général soit des développeurs ou des
-administrateurs de réseaux. C'est des gens qui ont soit une formation de
+administrateurs de réseaux. Ce sont des gens qui ont soit une formation de
 niveau collégiale ou universitaire ou une expérience professionnelle dans
-le domaine du web. Il faudra connaître l'effet de certains variables de
-configuration ou être prêt à lire la documentation qui sera fourni.
+le domaine du web. Il faudra connaître l'effet de certaines variables de
+configuration ou être prêt à lire la documentation qui sera fournie.
 Dernièrement, il y aura aussi les clients qui eux feront les requêtes
 au serveur.
 \section{Contraintes}
 
 \subsection{Mémoire}
 Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de
-\textbf{file descriptor} ouvert en même temps sera limité par le noyau du
+\textbf{file descriptors} ouvert en même temps sera limitée par le noyau du
 système d'exploitation. La limite est à la discrétion de l'utilisateur. Le
 serveur devra gérer l'atteinte de cette limite.
 \subsection{Exécution}
-Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil
-d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer
-les nouvelles requêtes.
+Le traitement des requêtes doit s'effectuer de façon asynchrone sur un seul fil
+d'exécution. Plusieurs requêtes doivent être traitables simultanément sans bloquer
+les nouvelles requêtes entrantes.
 \subsection{Architecture}
-Nous avons décidé d'utiliser un patron de conception basée sur
-une boucle d’événements pour les communications bloquantes sur les sockets. Cela va permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très
-performant.
+Nous avons décidé d'utiliser un patron de conception basé sur
+une boucle d’événements pour les communications bloquantes sur les sockets. Cela va 
+permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
@@ -274,7 +284,7 @@ Le serveur devra être en mesure de supporter seulement les headers suivants:
  \item TODO
 \end{itemize}
  
- De plus, il sera en mesure de traité les types d'erreurs suivants:
+ De plus, il sera en mesure de traiter les types d'erreurs suivants:
  \begin{itemize}
  \item TODO
  \item TODO
@@ -285,17 +295,19 @@ Le serveur devra être en mesure de supporter seulement les headers suivants:
  
     
 \section{Hypothèse et dépendances}
-Étant donner le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
+Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
+
 
 
 \chapter{Exigences spécifiques}
 
 \section{Description des acteurs}
-\subsection{Serveur:} Le serveur est celui qui va interagir avec l'utilisateur. 
-\subsection{Utilisateur:} L'utilisateur est une personne qui va utiliser le serveur.
+\subsection{Administrateur système:} Le sysadmin est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
+\subsection{Administrateur:} Un adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
+\subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
 
 \section{Spécification des cas d'utilisation pour le serveur} 
-À noter que nous utilisons la première personne du singulier pour représente le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
+À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
 \subsection{Réception d'une requête}
 \subsubsection{Titre du cas d'utilisation:} Réception d'une requête
 \subsubsection{Description sommaire:} Je reçois une requête et je l'envoie au module de traitement.
