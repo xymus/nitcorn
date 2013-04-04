@@ -11,7 +11,7 @@ import http_request
 # Configuration
 
 var test_parser = new HttpParser
-var test_parsed_request = new HttpRequest("GET", "/", "1.0", "Hello", 200, new HashMap[String, String])
+var test_parsed_request = new HttpRequest("GET", "/", "HTTP/1.0", "Hello", 200, new HashMap[String, String])
 
 # Ensure set_ values of http_request
 
@@ -60,12 +60,12 @@ var t_two_field_value = "Keep-Alive"
 
 test_parsed_request = test_parser.parse_request(test_request_string_one)
 
-#assert t_parsed_method_one:	test_parsed_request.get_method == t_one_method 	
-#assert t_parsed_url_one:	test_parsed_request.get_url == t_one_url 	
-#assert t_parsed_version_one:	test_parsed_request.get_version == t_one_version 	
-#assert t_parsed_body_one:	test_parsed_request.get_body == t_one_body 	
-#assert t_parsed_status_code_one:	test_parsed_request.get_status_code == t_one_status_code 	
-#assert t_parsed_field_one:	test_parsed_request.get("Host") == t_one_field_value 	
+assert t_parsed_method_one:	test_parsed_request.get_method == t_one_method 	
+assert t_parsed_url_one:	test_parsed_request.get_url == t_one_url 	
+assert t_parsed_version_one:	test_parsed_request.get_version == t_one_version 	
+assert t_parsed_body_one:	test_parsed_request.get_body == t_one_body 	
+assert t_parsed_status_code_one:	test_parsed_request.get_status_code == t_one_status_code 	
+assert t_parsed_field_one:	test_parsed_request.get_header("Host") == t_one_field_value 	
 
 test_parsed_request = test_parser.parse_request(test_request_string_two)
 
@@ -74,4 +74,4 @@ assert t_parsed_url_two:	test_parsed_request.get_url == t_two_url
 assert t_parsed_version_two:	test_parsed_request.get_version == t_two_version 	
 assert t_parsed_body_two:	test_parsed_request.get_body == t_two_body 	
 assert t_parsed_status_code_two:	test_parsed_request.get_status_code == t_two_status_code 	
-assert t_parsed_field_two:	test_parsed_request.get_header("Connection") == t_two_field_value 	
+assert t_parsed_field_two:	test_parsed_request.get_header("Connection") == t_two_field_value

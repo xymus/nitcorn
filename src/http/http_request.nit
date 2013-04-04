@@ -36,6 +36,12 @@ class HttpRequest
 	
 	fun get_body: String do return body
 
-    fun get_header(key: String) : String do return header_fields[key] end
-
+    fun get_header(key: String) : String
+    do
+		if header_fields.keys.has(key) then 
+			return header_fields[key] 
+		else
+			return ""
+		end
+	end
 end

@@ -14,7 +14,7 @@ class HttpParser
 
 	private var req_line:  Array[String]
 	private var req_fields: Array[String]
-	private var reply: Int
+	private var status_code: Int
 	private var body: String
     private var fields : HashMap[String, String] = new HashMap[String, String]
 
@@ -25,7 +25,7 @@ class HttpParser
 
 		req_fields = new Array[String]
 		req_line = new Array[String]
-		reply = 200
+		status_code = 200
 		body = ""
 	end
 
@@ -38,16 +38,16 @@ class HttpParser
 			segment_request(request)	
 		
 			if not check_req_line then
-				reply = 400
+				status_code = 400
 			end	
 		else
-			reply = 400
+			status_code = 400
 		end
 
-		if not insert_fields then reply = 400
+		if not insert_fields then status_code = 400
 
         return new HttpRequest(req_line[0], req_line[1], req_line[2], body,
-            reply, fields)
+            status_code, fields)
 	end
 
 	private fun clean_variables
@@ -55,7 +55,7 @@ class HttpParser
 		req_fields.clear
 		req_line.clear
 		body = ""
-		reply = 200
+		status_code = 200
 	end
 
 	private fun segment_request(req: String) 
