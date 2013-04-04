@@ -16,6 +16,7 @@ var t_status_message = "OK"
 var t_hash_key = "Etag"
 var t_hash_value = "fa2ba873343ba638123b767c8c09998"
 var t_body = "This is the body!"
+var t_response_total = "HTTP/1.0 200 OK\r\nEtag: fa2ba873343ba638123b767c8c09998\r\n\r\nThis is the body!\r\n"
 
 test_response.set_version(t_version)
 test_response.set_status_code(t_status_code)
@@ -28,3 +29,4 @@ assert t_response_status_code:		test_response.get_status_code == t_status_code
 assert t_response_status_message:	test_response.get_status_message == t_status_message
 assert t_response_field:			test_response.get_response_field(t_hash_key) == t_hash_value
 assert t_response_body:				test_response.get_response_body == t_body
+assert t_response_total:			test_response.get_full_response == t_response_total
