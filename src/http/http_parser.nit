@@ -21,7 +21,7 @@ class HttpParser
 	init
 	do
 		method_types = ["GET","POST","PUT","HEAD","OPTIONS","DELETE","TRACE","CONNECT"]
-		version_types = ["HTTP/1.0 ","HTTP/1.1"]	
+		version_types = ["HTTP/1.0","HTTP/1.1"]	
 
 		req_fields = new Array[String]
 		req_line = new Array[String]

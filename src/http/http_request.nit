@@ -26,6 +26,7 @@ class HttpRequest
 
 	fun set_field(field, value: String) do header_fields[field] = value
 	
+	
 	fun get_status_code: Int do return status_code
 
 	fun get_method: String do return method

@@ -7,9 +7,23 @@ module http_status_codes
 
 class HttpStatusCodes
 	
-	var codes : HashMap[Int,String] = new HashMap[Int,String]
+	private var codes : HashMap[Int,String] = new HashMap[Int,String]
 
-	fun status_codes
+	init
+	do
+		add_status_codes
+	end
+
+	fun get_status_message(key: Int): String
+	do 
+		if codes.keys.has(key) then
+			return codes[key]
+		else
+			return ""
+		end
+	end
+
+	private fun add_status_codes
 	do
 		codes[100] ="Continue"
 		codes[101] ="Switching Protocols"
