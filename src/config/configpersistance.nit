@@ -6,7 +6,7 @@ import sqlite3
 
 redef class Config
     private var config_db_path : String = "config.db"
-    private var config_script_path : String = "../../sql/config.sql"
+    private var config_script_path : String = "../../sql/config.sqlite"
 
     fun save_config
     do
@@ -31,6 +31,7 @@ redef class Config
         var req : String = "INSERT INTO LogPaths VALUES('{log.get_e_path}', '{log.get_a_path}', '{log.get_i_path}', '{log.get_d_path}', '{log.get_v_path}', '{log.get_w_path}', '{log.get_wtf_path}'"
         db.open(config_db_path)
         db.exec(req)
+        db.close
                 #        var req : String = "INSERT INTO Config VALUES("
     end
 
