@@ -41,6 +41,8 @@ class HostManager
     fun get_default_host : Host do return default_host
     fun set_default_host(host : Host) do default_host = host end
 
+    fun get_hosts : HashMapValues[String, Host] do return hosts.values end
+
 	fun addnew_virtualhost(name : String, ip : Ip, port : Int, alias : String) : VirtualHost
 	do
 		return addnew_virtualhost_with_host(name, ip, port, alias, default_host)
@@ -98,6 +100,6 @@ class HostManager
 			return null
 		end
 	end
-	
+
 end
 	
