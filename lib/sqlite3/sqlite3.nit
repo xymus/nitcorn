@@ -83,6 +83,10 @@ extern Sqlite3
 		return sqlite3_column_count(((struct Data*)recv)->stmt);
 	`}
 
+	fun last_insert_rowid: Int is extern `{
+		return sqlite3_last_insert_rowid(((struct Data*)recv)->ppDb);
+	`}
+
 
 	fun get_error : Int is extern import String::from_cstring `{
 		return sqlite3_errcode(((struct Data*)recv)->ppDb);
