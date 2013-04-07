@@ -27,6 +27,6 @@ class Ip
 	
 	redef fun to_s : String
 	do
-		return "[{parts.join(".")}]"
+		return parts.join(".")
 	end
 end
