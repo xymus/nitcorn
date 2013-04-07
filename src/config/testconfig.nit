@@ -4,7 +4,6 @@ import mime
 import virtualhost
 import config
 import ip
-import urltree
 import host
 
 # Configuration
@@ -77,7 +76,7 @@ assert get_init_virtualhost_alias:	virtualhost1.get_alias == virtualhost1_alias
 
 # Default host
 var defaulthost = hostsmanager.get_default_host
-var newdefaulthost = new Host("new")
+var newdefaulthost = new Host("new", "./", hostsmanager.get_default_mimes)
 hostsmanager.set_default_host(newdefaulthost)
 newdefaulthost = hostsmanager.get_default_host
 
@@ -109,6 +108,3 @@ assert routed2: routed2 == virtualhost2.get_host
 assert unknown_routed_ip:    null == hostsmanager.get_host_for(new Ip([192, 168, 1, 1]), virtualhost1_port, virtualhost1_alias)
 assert unknown_routed_port:  null == hostsmanager.get_host_for(virtualhost1_ip, 4413, virtualhost1_alias)
 assert unknown_routed_alias: null == hostsmanager.get_host_for(virtualhost1_ip, virtualhost1_port, "plus")
-
-# Url Tree
-

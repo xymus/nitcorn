@@ -5,6 +5,7 @@ import virtualhost
 
 class HostManager
 
+    private var default_mimes : Mimes
 	private var default_host : Host
 	
 	type AliasRouter : HashMap[String, VirtualHost]
@@ -18,14 +19,24 @@ class HostManager
 
 	init
 	do
+	    self.default_mimes = get_new_default_mimes
     	self.default_host = get_new_default_host
 	end
     
-    fun get_new_default_host : Host
+    private fun get_new_default_mimes : Mimes
     do
-    	return new Host("default")
+        var mimes : Mimes = new Mimes
+        mimes.load_basic_mimes
+        return mimes
+    end
+
+    private fun get_new_default_host : Host
+    do
+    	return new Host("default","./",default_mimes)
     end
     
+    fun get_default_mimes : Mimes do return default_mimes
+    fun set_default_mimes(mimes : Mimes) do default_mimes = mimes end
     
     fun get_default_host : Host do return default_host
     fun set_default_host(host : Host) do default_host = host end

@@ -19,7 +19,7 @@ class Mimes
         end
     end
     
-    fun load_basic_memes
+    fun load_basic_mimes
     do
         mimes["html"]       = "text/html"
         mimes["htm"]        = "text/html"
