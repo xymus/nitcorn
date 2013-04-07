@@ -108,3 +108,6 @@ assert routed2: routed2 == virtualhost2.get_host
 assert unknown_routed_ip:    null == hostsmanager.get_host_for(new Ip([192, 168, 1, 1]), virtualhost1_port, virtualhost1_alias)
 assert unknown_routed_port:  null == hostsmanager.get_host_for(virtualhost1_ip, 4413, virtualhost1_alias)
 assert unknown_routed_alias: null == hostsmanager.get_host_for(virtualhost1_ip, virtualhost1_port, "plus")
+
+config.save_config
+
