@@ -19,6 +19,7 @@ redef class Config
     
     fun create_db
     do
+        # hack for prototype only... TODO enventually
         sys.system("sqlite3 {config_db_path} < {config_script_path}")
     end
 
