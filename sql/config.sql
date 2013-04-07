@@ -1,5 +1,11 @@
 CREATE TABLE Config (
-    name TEXT NOT NULL PRIMARY KEY,
+    _id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    log_id INTEGER
+);
+
+CREATE TABLE LogPaths (
+    _id INTEGER NOT NULL PRIMARY KEY,
     error_path TEXT,
     access_path TEXT,
     info_path TEXT,
@@ -10,13 +16,17 @@ CREATE TABLE Config (
 );
 
 CREATE TABLE VirtualHost (
-    virtual_host TEXT PRIMARY KEY NOT NULL,
+    _id INTEGER NOT NULL PRIMARY KEY,
+    config_id INTEGER,
+    name TEXT NOT NULL,
     ip INTEGER,
     port INTEGER,
-    alias TEXT
+    alias TEXT,
+    host_id INTEGER
 );
 
 CREATE TABLE Host (
-    host TEXT PRIMARY KEY NOT NULL,
-    base_root TEXT
+    _id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    root TEXT
 );
