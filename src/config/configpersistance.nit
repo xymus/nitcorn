@@ -1,6 +1,7 @@
 module configpersistance
 
 import config
+import sqlite3
 
 
 redef class Config
@@ -25,7 +26,12 @@ redef class Config
 
     fun do_save_config
     do
-
+        var db: Sqlite3 = new Sqlite3
+        var log: LogManager = get_logmanager
+        var req : String = "INSERT INTO LogPaths VALUES('{log.get_e_path}', '{log.get_a_path}', '{log.get_i_path}', '{log.get_d_path}', '{log.get_v_path}', '{log.get_w_path}', '{log.get_wtf_path}'"
+        db.open(config_db_path)
+        db.exec(req)
+                #        var req : String = "INSERT INTO Config VALUES("
     end
 
 end
