@@ -42,6 +42,7 @@ class HostManager
     fun set_default_host(host : Host) do default_host = host end
 
     fun get_hosts : HashMapIterator[String, Host] do return hosts.iterator end
+    fun get_virtualhosts : HashMapIterator[String, VirtualHost] do return virtualhosts.iterator end
 
 	fun addnew_virtualhost(name : String, ip : Ip, port : Int, alias : String) : VirtualHost
 	do
