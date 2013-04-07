@@ -26,7 +26,7 @@ CREATE TABLE VirtualHost (
     _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     config_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    ip INTEGER NOT NULL,
+    ip TEXT NOT NULL,
     port INTEGER NOT NULL,
     alias TEXT NOT NULL,
     host_id INTEGER NOT NULL,
