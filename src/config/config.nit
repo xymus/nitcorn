@@ -59,17 +59,32 @@ class Config
         var log_id: Int = db.last_insert_rowid
         req = "INSERT INTO Config VALUES(NULL, '{get_name}', '{log_id}')"
         db.exec(req)
+        var config_id: Int = db.last_insert_rowid
 
         #Host save
         var host_man : HostManager = get_hostsmanager
-        var iterator: HashMapIterator[String, Host] = host_man.get_hosts
-        while iterator.is_ok do
-            var host: Host = iterator.item
+        var host_iterator: HashMapIterator[String, Host] = host_man.get_hosts
+        var host_ids: HashMap[String, Int] = new HashMap[String, Int]
+        while host_iterator.is_ok do
+            var host: Host = host_iterator.item
             req = "INSERT INTO Host VALUES(NULL, '{host.get_name}', '{host.get_root}')"
             db.exec(req)
-            print "fuck"
-            iterator.next
+            host_ids[host.get_name] = db.last_insert_rowid
+            host_iterator.next
         end
+
+        #Virtual host save
+        var vh_iterator: HashMapIterator[String, VirtualHost] = host_man.get_virtualhosts
+        while vh_iterator.is_ok do
+            var vh: VirtualHost = vh_iterator.item
+            var ip: Ip = vh.get_ip
+            req = "INSERT INTO VirtualHost VALUES(NULL, '{config_id}', '{vh.get_name}', '{ip.get_part(0)}', '{ip.get_part(1)}', '{ip.get_part(2)}', '{ip.get_part(3)}', '{vh.get_port}', '{vh.get_alias}', '{host_ids[vh.get_host.get_name]}')"
+            db.exec(req)
+            print db.get_error_str
+            print "fuck"
+            vh_iterator.next
+        end
+
 
         db.close
     end
