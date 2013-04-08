@@ -38,14 +38,14 @@ class Config
         do_save_config
     end
 
-    fun create_db
+    private fun create_db
     do
         # hack for prototype only... TODO eventually
         var cmd : String = "sqlite3 {config_db_path} < {config_script_path}"
         sys.system(cmd)
     end
 
-    fun do_save_config
+    private fun do_save_config
     do
         var db: Sqlite3 = new Sqlite3
 
