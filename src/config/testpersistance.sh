@@ -1,2 +1,2 @@
-nitc -I ../../lib configpersistance.nit
-./configpersistance
+nitc -I ../../lib testconfig.nit
+./testconfig
