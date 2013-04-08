@@ -38,6 +38,45 @@ class Config
         do_save_config
     end
 
+    fun load_config : Bool 
+    do
+
+        if not config_db_path.file_exists then
+            return false
+        else
+            var db: Sqlite3 = new Sqlite3
+
+            # Load config
+            var config_req = "SELECT * FROM Config WHERE name = '{get_name}';"
+
+            db.open(config_db_path)
+            db.prepare(config_req)
+            db.step
+
+            var log_id = db.column_int(2)
+
+            # Load log path
+            var log_req = "SELECT * FROM LogPaths WHERE _id = {log_id};"
+            db.prepare(log_req)
+            db.step
+
+            logmanager.set_e_path(db.column_text(1))
+            logmanager.set_a_path(db.column_text(2))
+            logmanager.set_i_path(db.column_text(3))
+            logmanager.set_d_path(db.column_text(4))
+            logmanager.set_v_path(db.column_text(5))
+            logmanager.set_w_path(db.column_text(6))
+            logmanager.set_wtf_path(db.column_text(7))
+
+            # Load hosts
+            #TODO
+
+
+            db.close
+            return true
+        end
+    end
+
     private fun create_db
     do
         # hack for prototype only... TODO eventually
