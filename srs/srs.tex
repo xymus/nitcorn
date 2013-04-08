@@ -262,7 +262,7 @@ les nouvelles requêtes entrantes.
 \subsection{Architecture}
 Nous avons décidé d'utiliser un patron de conception basé sur
 une boucle d’événements pour les communications bloquantes sur les sockets. Cela va 
-permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
+permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
@@ -369,28 +369,36 @@ Le serveur devra être en mesure de supporter seulement les headers suivants: \\
 \chapter{Exigences spécifiques}
 
 \section{Description des acteurs}
-\subsection{Administrateur système:} Le sysadmin est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
-\subsection{Administrateur:} Un adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
+\subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
+\subsection{Administrateur système:} L'administrateur système est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
+\subsection{Serveur:} C'est le logiciel décrit par le présent document, soit Nitcorn.
+
+
+
 
 \section{Spécification des cas d'utilisation pour le serveur} 
 À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
 \subsection{Réception d'une requête}
 \subsubsection{Titre du cas d'utilisation:} Réception d'une requête
 \subsubsection{Description sommaire:} Je reçois une requête et je l'envoie au module de traitement.
-\subsubsection{Acteur:} Serveur, utilisateur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
 \begin{itemize}
-	\item L'utilisateur doit être connecté au serveur.
-    \item Une requête doit avoir été envoyé par un utilisateur.
+    \item Client
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
+\begin{itemize}
+	\item Le client doit être connecté au serveur.
+    \item Une requête doit avoir été envoyée par un client.
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
-    \item  L'information de la requête est envoyer au module de traitement.
-    \item  Le log à été enregistrer.
+    \item  L'information de la requête est envoyée au module de traitement.
+    \item  Le log à été enregistré.
 \end{itemize} 
 \subsubsection{Description du processus:}
-Je dois pouvoir recevoir une ou plusieurs requêtes en même temps. Après l'envoie d'une requête effectué par l'utilisateur, je vais écouter un ou plusieurs ports à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été émis et l'assigner au module de traitement sous forme de texte.
+Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
 
 
 *** A Faire:DIAGRAMME
@@ -402,38 +410,39 @@ Example de retour ;
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
 \subsubsection{Description sommaire:} 
-\subsubsection{Acteur:} Serveur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
-HTTP doit posséder les informations suivantes :
+\subsubsection{Description du processus:}En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçue. Une requête HTTP doit posséder les informations suivantes :
 \begin{itemize}
     \item La version du protocole HTTP
     \item Le URI
     \item Le host
 \end{itemize}
 Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
-je trouve un virtual host égal au host de ma requête, je vais utiliser la configuration
-de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
+je trouve un virtual host correspondant au host de ma requête, je vais utiliser la configuration de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
 \\
-Le premier élément de la configuration que je lit pour ce host est de déterminer
-si pour ce host et URI je dois soit : lire un fichier statique, passer la requête
+Le premier élément de la configuration que je lis pour ce host est de déterminer
+si, pour ce host et URI, je dois soit : lire un fichier statique, passer la requête
 à une application Nit, ou passer la requête à un serveur mandataire (reverse-proxy).\\
 \\
 Lorsque je traite une requête pour une page statique, je dois récupérer la page par
 défaut et le dossier racine pour ce host. Avec ces informations-là, je peux renvoyer
 le contenu de la page statique au requérant. Si je ne suis pas en mesure de lire
 la page ou le dossier demandé, je dois retourner un message d'erreur au requérant
-(page inexistant, accès refusé, etc).\\
+(404-Not Found, 401-Unauthorized, etc).\\
 \\
 Si la requête doit être passée à un serveur mandataire, je vais créer
-une requête web avec les mêmes informations de la requête, mais je vais modifier
+une requête web avec les mêmes informations que la requête, mais je vais modifier
 l'argument \textit{host} pour pointer vers le host du serveur mandataire. Lorsque
 la requête est envoyée, je vais attendre la réception de la réponse et transmettre
 cette réponse au client.
@@ -457,30 +466,35 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:}
-\subsubsection{Précondition:}
-\subsubsection{Postcondition:}
-\subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations
-dans la base de données afin de connaître comment traiter les requêtes que je
-vais recevoir.
+\subsubsection{Acteurs:}
+\begin{itemize}
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
+\subsubsection{Postconditions:}
+\subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations dans la base de données afin de connaître comment traiter les requêtes que je vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
-je vais écrire ses informations dans ma classe.
+je vais écrire ces informations dans ma classe.
 Si une application change ma configuration, je vais en tenir compte dans ma
 classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsection{Écrire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Écrire la configuration
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:}
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:} 
+\begin{itemize}
+    \item Administrateur système ou administrateur
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
+\subsubsection{Description du processus:}En tant que serveur, si un administrateur change la valeur de un ou plusieurs paramètre(s)
 de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
 je dois ajuster mes attributs de classe et valeurs dans la base de donnée
 pour tenir compte des ajustements.
@@ -488,31 +502,38 @@ pour tenir compte des ajustements.
 \subsection{Enregistrer les événements}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer les événements
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:}
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que serveur, je désire garder une historique de mes transactions. Par
-default je respect le \textbf{standard NCSA Common log format}. Par contre je m'adapte
-aux \textbf{hosts}, qui eux ont la possibilité de changer le format de
-l'enregistrement. Mes enregistrements sont cours et concise. Ils expliques
+\subsubsection{Description du processus:}En tant que serveur, je désire garder un historique de mes transactions. Par
+défaut je respecte le \textbf{standard NCSA Common log format}. Par contre je m'adapte
+aux administrateurs, qui eux ont la possibilité de changer le format de
+l'enregistrement. Mes enregistrements sont cours et concis. Ils expliquent
 simplement qui a fait quoi et quand.
 
 \section{Spécification des cas d'utilisation pour l'application Nit}
 \subsection{Recevoir une requête HTTP}
 \subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:} Serveur, utilisateur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+	\item Client
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
@@ -523,17 +544,21 @@ reçu par Nitcorn (host, uri, headers).
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation: Traiter une requête HTTP}
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:} Serveur, utilisateur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+    \item Client
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}Après qu'une requête HTTP a été reçu, je peux faire le traitement que je veux.
-Une fois ce traitement, je dois retourner (@TODO à voir avec spec de l'interface)
+\subsubsection{Description du processus:}Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
+Une fois ce traitement fait, je dois retourner (@TODO à voir avec spec de l'interface)
 une réponse selon le protocole de l'interface avec Nitcorn. Cette réponse doit
 contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
 et les différents \textit{headers} HTTP.
@@ -542,49 +567,57 @@ et les différents \textit{headers} HTTP.
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:} Serveur, Utilisateur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+	\item Administrateur système ou administrateur
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
+\subsubsection{Description du processus:}En tant qu'administrateur, si je veux savoir l'état de un ou plusieurs paramètres de
 configuration sur le serveur, je vais utiliser une API pour interroger la
-classe en question qui elle me retournera la ou les valeur(s) désirée(s).
-Si j'utilise la API pour interroger une classe à propos d'un paramètre
-inexistant, je vais recevoir une erreur m'indiquant la clé en question
+classe en question qui, elle, me retournera la ou les valeur(s) désirée(s).
+Si j'utilise l'API pour interroger une classe à propos d'un paramètre
+inexistant, je vais recevoir une erreur m'indiquant que la clé en question
 n'existe pas.
 
 \subsection{Enregistrer la configuration}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer la configuration
 \subsubsection{Description sommaire:}
-\subsubsection{Acteur:} Serveur , utilisateur
-\subsubsection{Précondition:}
+\subsubsection{Acteurs:}
+\begin{itemize}
+	\item Administrateur système ou administrateur
+    \item Serveur
+\end{itemize}
+\subsubsection{Préconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Postcondition:}
+\subsubsection{Postconditions:}
 \begin{itemize}
     \item  
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que client, si je désire apporter une modification à un ou plusieurs
-paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
-de la ou les paramètre(s) désirée à l'API qui se chargera de relayer.
+\subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
+paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
+du ou des paramètre(s) désirée à l'API qui se chargera de relayer
 l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
 Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que
-je lui fournit une valeur qui est invalide dans le contexte du paramètre, je
+je lui fournis une valeur qui est invalide dans le contexte du paramètre, je
 vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
-la valeur fourni.
+la valeur fournie.
 
 \section{Exigences des interfaces externes}
 \subsection{Configuration}
-Pour la configuration du serveur, un service web sera disponible pour configuré le serveur au préférence du client. (ACOMPLETE)
+Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
 \section{Exigences de performance}
 \section{Contraintes de conception}
