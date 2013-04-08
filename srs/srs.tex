@@ -266,20 +266,97 @@ permettre d'utiliser qu'un seul processus pour le serveur, tout en restant très
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
-Le serveur devra être en mesure de supporter seulement les headers suivants: 
+Le serveur devra supporter les méthodes HTTP suivantes:\\
 \begin{itemize}
- \item TODO
- \item TODO
- \item TODO
- \item TODO
+ \item TODO: En enlever?
+ \item TODO: Ajouter des méthodes qui ne sont pas dans le RFC2616?
+ \item OPTIONS
+ \item GET
+ \item HEAD
+ \item POST
+ \item PUT
+ \item DELETE
+ \item TRACE
+ \item CONNECT
+ \\
+ 
+\end{itemize}
+
+Le serveur devra être en mesure de supporter seulement les headers suivants: \\
+\begin{itemize}
+
+ \item TODO: Enlever ceux que l'on ne veux pas et inclut-on des headers non-standard?
+ \item TODO: Ajouter les headers de reponses?
+ \item TODO: \#\#\# : Ne sont pas dans le RFC 2616
+ \item Accept
+ \item Accept-Charset
+ \item Accept-Encoding
+ \item Accept-Language
+ \item \#\#\#Accept-Datetime
+ \item Accept-Ranges
+ \item Age
+ \item Allow
+ \item Authorization
+ \item Cache-Control
+ \item Connection
+ \item \#\#\#Cookie
+ \item Content-Encoding
+ \item Content-Language
+ \item Content-Length
+ \item Content-Location
+ \item Content-MD5
+ \item Content-Range
+ \item Content-Type
+ \item Date
+ \item ETag
+ \item Expect
+ \item Expires
+ \item From
+ \item Host
+ \item If-Match
+ \item If-Modified-Since
+ \item If-None-Match
+ \item If-Range
+ \item If-Unmodified-Since
+ \item Last-Modified
+ \item Location
+ \item Max-Forwards
+ \item \#\#\#Origin
+ \item Pragma
+ \item Proxy-Authentification
+ \item Proxy-Authorization
+ \item Range
+ \item Referer
+ \item Retry-After
+ \item Server
+ \item TE
+ \item Trailer
+ \item Transfert-Encoding
+ \item Upgrade
+ \item User-Agent
+ \item Vary
+ \item Via
+ \item Warning
+ \item WWW-Authenticate
+ \\
+ 
 \end{itemize}
  
- De plus, il sera en mesure de traiter les types d'erreurs suivants:
+ De plus, il sera en mesure de traiter les types d'erreurs suivants:\\
  \begin{itemize}
- \item TODO
- \item TODO
- \item TODO
- \item TODO
+ \item TODO Voir quels autres ont supporte ou si on en enlève de ceux-ci.
+ \item 200 - Ok
+ \item 400 - Bad Request
+ \item 401 - Unauthorized
+ \item 403 - Forbidden
+ \item 404 - Not Found
+ \item 500 - Server Error
+ \item 501 - Not implemented
+ \item 502 - Bad Gateway
+ \item 503 - Out of Resources
+ \item 504 - Gateway Time-Out
+ \item 505 - HTTP Version not supported
+
  \end{itemize}
 
  
