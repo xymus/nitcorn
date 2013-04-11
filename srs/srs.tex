@@ -318,6 +318,7 @@ Http/1.0\\
         \item Extension-header
         \end{itemize}
 
+\\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
@@ -406,7 +407,39 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
  \item \textbf{405 - Method Not Allowed}
  \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
- \item 500 - Server Error
+ \item \textbf{406 - Not Acceptable}
+ \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyé par la requête.
+ \item \textbf{407 - Proxy Authentification Required}
+ \subitem Semblable à 401 - Unauthorized, mais indique que le client doit s'authetifier avec le proxy auparavant.
+ \item \textbf{408 -Request Timeout}
+ \subitem Le client n'a pas produit de requête dans le temps pendant lequel le serveur est prêt à attendre.
+ \item \textbf{409 - Conflict}
+ \subitem La requête n'a pas pu être complété à cause d'un conflit avec l'état actuel de la ressource.
+ \item \textbf{410 - Gone}
+ \subitem La ressource demandée n'est plus disponible sur le serveur et aucune adresse de redirection n'est connue.
+ \item \textbf{411 - Length Required}
+ \subitem Le serveur refuse de traiter la requête sans un textit{header} Content-Length.
+ \item \textbf{412 - Precondition Failed}
+ \subitem La précondition donnée dans un ou plusieurs champs \textit{header} a été évaluée à faux lorsque testé sur le serveur.
+ \item \textbf{413 - Request Entity Too Large}
+ \subitem Le serveur refuse de traiter une requête car l'entité de la requête est plus grande que ce que le serveur veut ou peut traiter.
+ \item \textbf{414 - Request-URI Too Long}
+ \subitem Le serveur refuse de servir la requête car l'URI de la requête est plus longue que ce que le serveur accepte d'interpréter.
+ \item \textbf{415 - Unsupported Media Type}
+ \subitem Le serveur refuse de traiter la requête car l'entité de la requête est dans un format non supporté par la ressource demandée pour la méthode demandée.
+ \item \textbf{416 - Requested Range Not Satisfiable}
+ \subitem Le champs du \textit{Range header} est invalide pour la ressource demandée.
+ \item \textbf{417 - Expectation Failed}
+ \subitem L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur
+ \item \textbf{500 - Internal Server Error}
+ \subitem Le serveur a rencontré une condition innattendue qui l'empêche de satifaire la requête.
+ \item \textbf{501 - Not Implemented}
+ \subitem Le serveur ne supporte pas la fonctionnalité nécéssaire pour satisfaire la requête.
+ \item \textbf{502 - Bad Gateway}
+ \subitem Le serveur, en agissant comme une passerelle ou un proxy, a reçu une réponse invalide du serveur en amont.
+ \item \textbf{503 - Service Unavailable}
+ \subitem Le serveur est actuellement incapable de prendre en charge la requête à cause d'une surcharge ou de maintenance en cours sur celui-ci.
+ \item \textbf{504 - Gateway Timeout}
  \subitem 
 
  \item 501 - Not implemented
@@ -702,7 +735,7 @@ la valeur fournie.
     \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
 \end{itemize}
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} .
+\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
 \section{Attributs}
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
@@ -710,8 +743,6 @@ Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-\subsection{Transférabilité} Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
-sur des machines de même famille.  
 
 
 \begin{thebibliography}{9}
