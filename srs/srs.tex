@@ -287,151 +287,134 @@ Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
 
 Le serveur devra être en mesure de supporter les headers suivants: \\
 \\
-Les headers Http/1.0\\
+Http/1.0\\
     General-Header\\
         \begin{itemize}
-        \item Date: 
-        \item Pragma:    
+        \item Date
+        \item Pragma
         \end{itemize}
-\\
     Request-Header\\
         \begin{itemize}
-        \item Authorization:
-        \item From:      
-        \item If-Modified-Since:
-        \item Referer:          
-        \item User-Agent:       
+        \item Authorization
+        \item From      
+        \item If-Modified-Since
+        \item Referer          
+        \item User-Agent       
         \end{itemize}
-\\
     Response-Header\\
         \begin{itemize}
-        \item Location:           
-        \item Server:          
-        \item WWW-Authenticate:
+        \item Location           
+        \item Server          
+        \item WWW-Authenticate
         \end{itemize}
-\\
     Entity-Header\\
         \begin{itemize}
-        \item Allow: une liste des méthodes supportées par la ressource qui se trouve à l'adresse indiquée dans Request-URI.               
-        \item Content-Encoding: 
-        \item Content-Length:    
-        \item Content-Type:      
-        \item Expires:           
-        \item Last-Modified:     
-        \item Extension-header:
+        \item Allow               
+        \item Content-Encoding 
+        \item Content-Length    
+        \item Content-Type      
+        \item Expires           
+        \item Last-Modified     
+        \item Extension-header
         \end{itemize}
-
-Les headers Http/1.1 suplementaire\\
-\\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
-        \item Cache-Control:      
-        \item Connection:     
-        \item Date:            
-        \item Pragma:          
-        \item Trailer:         
-        \item Transfer-Encoding:
-        \item Upgrade:          
-        \item Via:              
-        \item Warning:          
+        \item Cache-Control      
+        \item Connection      
+        \item Date            
+        \item Pragma          
+        \item Trailer         
+        \item Transfer-Encoding
+        \item Upgrade          
+        \item Via              
+        \item Warning          
         \end{itemize}
-\\
     Request-Header\\
         \begin{itemize}
-        \item Accept: Spécifie le type de media accepté dans la réponse              
-        \item Accept-Charset: Spécifie les formats de character accepté dans la réponse
-        \item Accept-Encoding: Spécifie le type d'encodage de donnees accepté dans la réponse   
-        \item Accept-Language: Spécifie les languages naturels acceptés dnas la réponse 
-        \item Expect:                 
-        \item Host:             
-        \item If-Match:         
-        \item If-None-Match:    
-        \item If-Range:         
-        \item If-Unmodified-Since:
-        \item Max-Forwards:       
-        \item Proxy-Authorization:
-        \item Range:              
-        \item TE:                 
+        \item Accept              
+        \item Accept-Charset   
+        \item Accept-Encoding  
+        \item Accept-Language  
+        \item Authorization    
+        \item Expect           
+        \item From             
+        \item Host             
+        \item If-Match         
+        \item If-Modified-Since
+        \item If-None-Match    
+        \item If-Range         
+        \item If-Unmodified-Since
+        \item Max-Forwards       
+        \item Proxy-Authorization
+        \item Range              
+        \item Referer            
+        \item TE                 
+        \item User-Agent  
         \end{itemize}
-\\
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges:
-        \item Age: indique l'age de la requête         
-        \item ETag:       
-        \item Proxy-Authenticate:  
-        \item Retry-After:         
-        \item Vary:                
+        \item Accept-Ranges 
+        \item Age        
+        \item ETag       
+        \item Location   
+        \item Proxy-Authenticate  
+        \item Retry-After         
+        \item Server              
+        \item Vary                
+        \item WWW-Authenticate
         \end{itemize}
-\\
     Entity-Header\\
-        \begin{itemizen}
-        \item Content-Language:            
-        \item Content-Location:     
-        \item Content-MD5:          
-        \item Content-Range:          
+        \begin{itemize}
+        \item Allow                   
+        \item Content-Encoding     
+        \item Content-Language     
+        \item Content-Length       
+        \item Content-Location     
+        \item Content-MD5          
+        \item Content-Range        
+        \item Content-Type         
+        \item Expires              
+        \item Last-Modified        
+        \item Extension-header
         \end{itemize}
-\\
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
- \item 200 - OK
+ \item \textbf{200 - OK}
  \subitem La requête à bien été traité sans erreurs.
- \item 201 - Created
+ \item \textbf{201 - Created}
  \subitem La ressource a bien été créée.
- \item 202 - Accepted
+ \item \textbf{202 - Accepted}
  \subitem La requête a été acceptée pour être traitée mais le traitement n'est pas terminé.
- \item 204 - No Content
+ \item \textbf{204 - No Content}
  \subitem Le serveur à bien traité la requête et il n'y a aucune information à retourner.
- \item 205 - Reset Content
+ \item \textbf{205 - Reset Content}
  \subitem Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
- \item 206 - Partial Content
+ \item \textbf{206 - Partial Content}
  \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource.
- \item 301 - Moved Permanently
+ \item \textbf{301 - Moved Permanently}
  \subitem La ressource demandé à été assigné à un nouvel URL de façon permanante.
- \item 400 - Bad Request
+ \item \textbf{400 - Bad Request}
  \subitem La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
- \item 401 - Unauthorized
+ \item \textbf{401 - Unauthorized}
  \subitem La requête nécéssite une authentification.
- \item 403 - Forbidden
+ \item \textbf{403 - Forbidden}
  \subitem La requête a bien été comprise, mais le serveur refuse de la traiter. Une authentification n'aidera pas.
- \item 404 - Not Found
+ \item \textbf{404 - Not Found}
  \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
- \item 405 - Method Not Allowed
+ \item \textbf{405 - Method Not Allowed}
  \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
- \item \textbf{406 - Not Acceptable}
- \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyé par la requête.
- \item \textbf{407 - Proxy Authentification Required}
- \subitem Semblable à 401 - Unauthorized, mais indique que le client doit s'authetifier avec le proxy auparavant.
- \item \textbf{408 -Request Timeout}
- \subitem Le client n'a pas produit de requête dans le temps pendant lequel le serveur est prêt à attendre.
- \item \textbf{409 - Conflict}
- \subitem La requête n'a pas pu être complété à cause d'un conflit avec l'état actuel de la ressource.
- \item \textbf{410 - Gone}
- \subitem La ressource demandée n'est plus disponible sur le serveur et aucune adresse de redirection n'est connue.
- \item \textbf{411 - Length Required}
- \subitem Le serveur refuse de traiter la requête sans un textit{header} Content-Length.
- \item \textbf{412 - Precondition Failed}
- \subitem La précondition donnée dans un ou plusieurs champs \textit{header} a été évaluée à faux lorsque testé sur le serveur.
- \item \textbf{413 - Request Entity Too Large}
- \subitem Le serveur refuse de traiter une requête car l'entité de la requête est plus grande que ce que le serveur veut ou peut traiter.
- \item \textbf{414 - Request-URI Too Long}
- \subitem Le serveur refuse de servir la requête car l'URI de la requête est plus longue que ce que le serveur accepte d'interpréter.
- \item \textbf{415 - Unsupported Media Type}
- \subitem Le serveur refuse de traiter la requête car l'entité de la requête est dans un format non supporté par la ressource demandée pour la méthode demandée.
- \item \textbf{416 - Requested Range Not Satisfiable}
- \subitem Le champs du \textit{Range header} est invalide pour la ressource demandée.
- \item \textbf{417 - Expectation Failed}
- \subitem L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur
  \item 500 - Server Error
  \subitem 
 
  \item 501 - Not implemented
- \item 502 - Bad Gateway
- \item 503 - Out of Resources
- \item 504 - Gateway Time-Out
- \item 505 - HTTP Version not supported
+ \item \textbf{502 - Bad Gateway}
+ \subitem Le serve8ur est incapable de contacter une autre ressource nécessaire à la completion de la requête.
+ \item \textbf{503 Service Unavailable}
+ \subitem Le serveur manque temporairement de ressources pour répondre à la requête.
+ \item \textbf{504 - Gateway Time-Out}
+ \item \textbf{505 - HTTP Version not supported}
 
  \end{itemize}
 
@@ -710,32 +693,22 @@ la valeur fournie.
 \section{Exigences fonctionnelles}
 \begin{itemize}
     \item Lors du démarrage, le système doit lire sa configuration.
-\end{itemize}
-\section{Exigences de performance} Le nombre 
-\section{Contraintes de conception}
     \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
         le serveur Nitcorn utilisera un hôte par défaut.
     \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
     \item Si la ressource demandée est un dossier et que le client y a accès, le système doit retourner une liste des fichiers et/ou dossiers contenus dans ce même dossier.
     \item Si la ressource demandée est un fichier et que le client y a accès, le système doit retourner le contenu du fichier dans la réponse HTTP.
     \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
-    \item Lors d'une modification de la configuration effectuée à l'aide du service web, le système doit tenir compte des modifications et les sauvegarder.
 \end{itemize}
-\section{Exigences logiques relatives aux bases de données} Le serveur Nitcorn communique avec une base de données afin d'y stocker les informations 
-de sa configuration. La fréquence d'utilisation des données est relative à la fréquence des redémarrages du serveur ainsi que les modifications faites à
-sa configuration via le service web. Il y aura un compte administrateur sur la base de données que le service web utilisera pour modifier les données de configuration.
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception vu qu'il doit envoyer des réponses respectant le 
-protocol HTTP. Le logiciel doit respecter tous les normes ayant comme sujet l'envoi des réponses HTTP comme le RFC2616.
+\section{Contraintes de conception} .
 \section{Attributs}
 \subsection{Disponibilité}
-Le serveur web doit toujours être disponible sauf dans le cas où un administrateur cesse son fonctionnement.
+Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
-Le serveur ne doit pas faire de compromis pour assurrer l'intégrité des connections.
+Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-\subsection{Transférabilité} Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
-sur des machines de même famille. Si le module de persistance 
 
 
 \begin{thebibliography}{9}
