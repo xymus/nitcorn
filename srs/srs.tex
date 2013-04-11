@@ -344,11 +344,22 @@ Le serveur devra être en mesure de supporter seulement les headers suivants: \\
  
 \end{itemize}
  
- De plus, il sera en mesure de traiter les types d'erreurs suivants:\\
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
  \begin{itemize}
- \item TODO Voir quels autres ont supporte ou si on en enlève de ceux-ci.
- \item 200 - Ok
+ \item 200 - OK
+ \subitem La requête à bien été traité sans erreurs.
+ \item 201 - Created
+ \subitem La ressource a bien été créée.
+ \item 202 - Accepted
+ \subitem La requête a été acceptée pour être traitée mais le traitement n'est pas terminé.
+ \item 204 - No Content
+ \subitem Le serveur à bien traité la requête et il n'y a aucune information à retourner.
+ \item 205 - Reset Content
+ \subitem Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
+ \item 206 - Partial Content
+ \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource. La réponse doit inclure les headers Content-Range, Date, Content-Location et Cache-Control.
  \item 400 - Bad Request
+ 
  \item 401 - Unauthorized
  \item 403 - Forbidden
  \item 404 - Not Found
@@ -627,8 +638,9 @@ Pour la configuration du serveur, un service web sera disponible pour configurer
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
+Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
-
+Le serveur devra pouvoir changer sa configuration sans se redémarrer.
 
 
 \begin{thebibliography}{9}
