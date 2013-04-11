@@ -440,16 +440,19 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item \textbf{503 - Service Unavailable}
  \subitem Le serveur est actuellement incapable de prendre en charge la requête à cause d'une surcharge ou de maintenance en cours sur celui-ci.
  \item \textbf{504 - Gateway Timeout}
- \subitem 
-
- \item 501 - Not implemented
- \item \textbf{502 - Bad Gateway}
- \subitem Le serve8ur est incapable de contacter une autre ressource nécessaire à la completion de la requête.
- \item \textbf{503 Service Unavailable}
- \subitem Le serveur manque temporairement de ressources pour répondre à la requête.
- \item \textbf{504 - Gateway Time-Out}
- \item \textbf{505 - HTTP Version not supported}
-
+ \subitem Le serveur, en agissant comme passerelle ou un proxy, n'a pas reçu à temps une réponse du serveur en amont.
+ \item \textbf{505 - HTTP Version Not Supported}
+ \subitem Le serveur ne supporte pas, ou refuse de supporter, la version du protocole HTTP spécifié dans par la requête.
+ \end{itemize}
+ \\
+ \\
+ 
+ Pour le HTTP/1.1, le serveur devra, en plus, supporter les erreurs suivantes.
+ \begin{itemize}
+ \item \textbf{100 - Continue}
+ \subitem Le client devrait continuer avec la requête.
+ \item \textbf{101 - Switching Protocols}
+ \subitem Le serveur comprend et est d'accord pour se conformer avec la requête du client de changer le protocole actuellement utilisé sur cette connection.
  \end{itemize}
 
  
