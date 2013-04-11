@@ -287,90 +287,103 @@ Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
 
 Le serveur devra être en mesure de supporter les headers suivants: \\
 \\
-Les headers Http/1.0\\
+Http/1.0\\
     General-Header\\
         \begin{itemize}
-        \item Date: 
-        \item Pragma:    
+        \item Date
+        \item Pragma
         \end{itemize}
 \\
     Request-Header\\
         \begin{itemize}
-        \item Authorization:
-        \item From:      
-        \item If-Modified-Since:
-        \item Referer:          
-        \item User-Agent:       
+        \item Authorization
+        \item From      
+        \item If-Modified-Since
+        \item Referer          
+        \item User-Agent       
         \end{itemize}
 \\
     Response-Header\\
         \begin{itemize}
-        \item Location:           
-        \item Server:          
-        \item WWW-Authenticate:
+        \item Location           
+        \item Server          
+        \item WWW-Authenticate
         \end{itemize}
 \\
     Entity-Header\\
         \begin{itemize}
-        \item Allow: une liste des méthodes supportées par la ressource qui se trouve à l'adresse indiquée dans Request-URI.               
-        \item Content-Encoding: 
-        \item Content-Length:    
-        \item Content-Type:      
-        \item Expires:           
-        \item Last-Modified:     
-        \item Extension-header:
+        \item Allow               
+        \item Content-Encoding 
+        \item Content-Length    
+        \item Content-Type      
+        \item Expires           
+        \item Last-Modified     
+        \item Extension-header
         \end{itemize}
-
-Les headers Http/1.1 supplémentaires\\
 \\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
-        \item Cache-Control:      
-        \item Connection:     
-        \item Date:            
-        \item Pragma:          
-        \item Trailer:         
-        \item Transfer-Encoding:
-        \item Upgrade:          
-        \item Via:              
-        \item Warning:          
+        \item Cache-Control      
+        \item Connection      
+        \item Date            
+        \item Pragma          
+        \item Trailer         
+        \item Transfer-Encoding
+        \item Upgrade          
+        \item Via              
+        \item Warning          
         \end{itemize}
 \\
     Request-Header\\
         \begin{itemize}
-        \item Accept: Spécifie le type de media accepté dans la réponse              
-        \item Accept-Charset: Spécifie les formats de character accepté dans la réponse
-        \item Accept-Encoding: Spécifie le type d'encodage de donnees accepté dans la réponse   
-        \item Accept-Language: Spécifie les languages naturels acceptés dnas la réponse 
-        \item Expect:                 
-        \item Host:             
-        \item If-Match:         
-        \item If-None-Match:    
-        \item If-Range:         
-        \item If-Unmodified-Since:
-        \item Max-Forwards:       
-        \item Proxy-Authorization:
-        \item Range:              
-        \item TE:                 
+        \item Accept              
+        \item Accept-Charset   
+        \item Accept-Encoding  
+        \item Accept-Language  
+        \item Authorization    
+        \item Expect           
+        \item From             
+        \item Host             
+        \item If-Match         
+        \item If-Modified-Since
+        \item If-None-Match    
+        \item If-Range         
+        \item If-Unmodified-Since
+        \item Max-Forwards       
+        \item Proxy-Authorization
+        \item Range              
+        \item Referer            
+        \item TE                 
+        \item User-Agent  
         \end{itemize}
 \\
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges:
-        \item Age: indique l'age de la requête         
-        \item ETag:       
-        \item Proxy-Authenticate:  
-        \item Retry-After:         
-        \item Vary:                
+        \item Accept-Ranges 
+        \item Age        
+        \item ETag       
+        \item Location   
+        \item Proxy-Authenticate  
+        \item Retry-After         
+        \item Server              
+        \item Vary                
+        \item WWW-Authenticate
         \end{itemize}
 \\
     Entity-Header\\
-        \begin{itemizen}
-        \item Content-Language:            
-        \item Content-Location:     
-        \item Content-MD5:          
-        \item Content-Range:          
+        \begin{itemize}
+        \item Allow                   
+        \item Content-Encoding     
+        \item Content-Language     
+        \item Content-Length       
+        \item Content-Location     
+        \item Content-MD5          
+        \item Content-Range        
+        \item Content-Type         
+        \item Expires              
+        \item Last-Modified        
+        \item Extension-header
         \end{itemize}
 \\
  
@@ -424,7 +437,17 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \subitem Le champs du \textit{Range header} est invalide pour la ressource demandée.
  \item \textbf{417 - Expectation Failed}
  \subitem L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur
- \item 500 - Server Error
+ \item \textbf{500 - Internal Server Error}
+ \subitem Le serveur a rencontré une condition innattendue qui l'empêche de satifaire la requête.
+ \item \textbf{501 - Not Implemented}
+ \subitem Le serveur ne supporte pas la fonctionnalité nécéssaire pour satisfaire la requête.
+ \item \textbf{502 - Bad Gateway}
+ \subitem Le serveur, en agissant comme une passerelle ou un proxy, a reçu une réponse invalide du serveur en amont.
+ \item \textbf{503 - Service Unavailable}
+ \subitem Le serveur est actuellement incapable de prendre en charge la requête à cause d'une surcharge ou de maintenance en cours sur celui-ci.
+ \item \textbf{504 - Gateway Timeout}
+ \subitem 
+ 
  \subitem 
 
  \item 501 - Not implemented
@@ -725,17 +748,14 @@ la valeur fournie.
 de sa configuration. La fréquence d'utilisation des données est relative à la fréquence des redémarrages du serveur ainsi que les modifications faites à
 sa configuration via le service web. Il y aura un compte administrateur sur la base de données que le service web utilisera pour modifier les données de configuration.
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception vu qu'il doit envoyer des réponses respectant le 
-protocol HTTP. Le logiciel doit respecter tous les normes ayant comme sujet l'envoi des réponses HTTP comme le RFC2616.
+\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
 \section{Attributs}
 \subsection{Disponibilité}
-Le serveur web doit toujours être disponible sauf dans le cas où un administrateur cesse son fonctionnement.
+Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
-Le serveur ne doit pas faire de compromis pour assurrer l'intégrité des connections.
+Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-\subsection{Transférabilité} Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
-sur des machines de même famille.  
 
 
 \begin{thebibliography}{9}
