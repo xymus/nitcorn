@@ -357,7 +357,9 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
  \item 205 - Reset Content
  \subitem Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
  \item 206 - Partial Content
- \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource. La réponse doit inclure les headers Content-Range, Date, Content-Location et Cache-Control.
+ \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource.
+ \item 301 - Moved Permanently
+ \subitem La ressource demandé à été assigné à un nouvel URL de façon permanante.
  \item 400 - Bad Request
  
  \item 401 - Unauthorized
