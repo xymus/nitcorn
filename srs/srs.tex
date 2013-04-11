@@ -726,6 +726,19 @@ la valeur fournie.
 \end{itemize}
 \section{Exigences de performance} Le nombre 
 \section{Contraintes de conception}
+    \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
+        le serveur Nitcorn utilisera un hôte par défaut.
+    \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
+    \item Si la ressource demandée est un dossier et que le client y a accès, le système doit retourner une liste des fichiers et/ou dossiers contenus dans ce même dossier.
+    \item Si la ressource demandée est un fichier et que le client y a accès, le système doit retourner le contenu du fichier dans la réponse HTTP.
+    \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
+    \item Lors d'une modification de la configuration effectuée à l'aide du service web, le système doit tenir compte des modifications et les sauvegarder.
+\end{itemize}
+\section{Exigences logiques relatives aux bases de données} Le serveur Nitcorn communique avec une base de données afin d'y stocker les informations 
+de sa configuration. La fréquence d'utilisation des données est relative à la fréquence des redémarrages du serveur ainsi que les modifications faites à
+sa configuration via le service web. Il y aura un compte administrateur sur la base de données que le service web utilisera pour modifier les données de configuration.
+\section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
+\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
 \section{Attributs}
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
