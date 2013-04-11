@@ -404,10 +404,15 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item 400 - Bad Request
  \subitem La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
  \item 401 - Unauthorized
- \subitem 
+ \subitem La requête nécéssite une authentification.
  \item 403 - Forbidden
+ \subitem La requête a bien été comprise, mais le serveur refuse de la traiter. Une authentification n'aidera pas.
  \item 404 - Not Found
+ \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
+ \item 405 - Method Not Allowed
+ \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
  \item 500 - Server Error
+ \subitem 
 
  \item 501 - Not implemented
  \item 502 - Bad Gateway
