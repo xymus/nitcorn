@@ -100,6 +100,7 @@ document.
 \begin{description}
     \item[Apache] Un serveur Web.
 	\item[API]
+    \item[Asynchrone]
 	\item[Authentification Basic]
     \item[Authentification Digest]
 	\item[Boucle d'événement asynchrone]
@@ -607,8 +608,7 @@ n'existe pas.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
-du ou des paramètre(s) désirée à l'API qui se chargera de relayer
-l'information à la classe appropriée.
+du ou des paramètre(s) désirée à l'API qui se chargera de relayer l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
@@ -618,7 +618,21 @@ vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
 la valeur fournie.
 
 \section{Exigences des interfaces externes}
+\subsection{Requête HTTP}
+\subsubsection{But} Le but d'une requête HTTP est de demander au serveur une ressource quelconque.
+\subsubsection{Provenance} La requête HTTP est soumise par le client.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les requêtes de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Il y a une requête HTTP pour chaque réponse HTTP.
+\subsection{Réponse HTTP}
+\subsubsection{But} Le but d'une réponse HTTP est de fournir au client la ressource demandée.
+\subsubsection{Provenance} La réponse HTTP est émise par le serveur.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les réponses de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Pour chaque réponse HTTP, il y a une requête HTTP.
 \subsection{Configuration}
+\subsubsection{But} Les but de la configuration est d'informer le serveur web sur la façon de traiter les requêtes HTTP.
+\subsubsection{Provenance} Il y a une configuration par défaut qui sera fournie avec le serveur Nitcorn. 
+\subsubsection{Synchronisation} La configuration du server ne necessite aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} La configuration détermine la façon dont la requête sera traité par le serveur.
 Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
 \section{Exigences de performance}
