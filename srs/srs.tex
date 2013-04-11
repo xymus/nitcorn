@@ -287,96 +287,81 @@ Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
 
 Le serveur devra être en mesure de supporter les headers suivants: \\
 \\
-Http/1.0\\
+Les headers Http/1.0\\
     General-Header\\
         \begin{itemize}
-        \item Date
-        \item Pragma
+        \item Date: 
+        \item Pragma:    
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Authorization
-        \item From      
-        \item If-Modified-Since
-        \item Referer          
-        \item User-Agent       
+        \item Authorization:
+        \item From:      
+        \item If-Modified-Since:
+        \item Referer:          
+        \item User-Agent:       
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Location           
-        \item Server          
-        \item WWW-Authenticate
+        \item Location:           
+        \item Server:          
+        \item WWW-Authenticate:
         \end{itemize}
     Entity-Header\\
         \begin{itemize}
-        \item Allow               
-        \item Content-Encoding 
-        \item Content-Length    
-        \item Content-Type      
-        \item Expires           
-        \item Last-Modified     
-        \item Extension-header
+        \item Allow: une liste des méthodes supportées par la ressource qui se trouve à l'adresse indiquée dans Request-URI.               
+        \item Content-Encoding: 
+        \item Content-Length:    
+        \item Content-Type:      
+        \item Expires:           
+        \item Last-Modified:     
+        \item Extension-header:
         \end{itemize}
-Http/1.1\\
+Les headers Http/1.1 suplementaire\\
     General-Header\\
         \begin{itemize}
-        \item Cache-Control      
-        \item Connection      
-        \item Date            
-        \item Pragma          
-        \item Trailer         
-        \item Transfer-Encoding
-        \item Upgrade          
-        \item Via              
-        \item Warning          
+        \item Cache-Control:      
+        \item Connection:     
+        \item Date:            
+        \item Pragma:          
+        \item Trailer:         
+        \item Transfer-Encoding:
+        \item Upgrade:          
+        \item Via:              
+        \item Warning:          
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Accept              
-        \item Accept-Charset   
-        \item Accept-Encoding  
-        \item Accept-Language  
-        \item Authorization    
-        \item Expect           
-        \item From             
-        \item Host             
-        \item If-Match         
-        \item If-Modified-Since
-        \item If-None-Match    
-        \item If-Range         
-        \item If-Unmodified-Since
-        \item Max-Forwards       
-        \item Proxy-Authorization
-        \item Range              
-        \item Referer            
-        \item TE                 
-        \item User-Agent  
+        \item Accept: Spécifie le type de media accepté dans la réponse              
+        \item Accept-Charset: Spécifie les formats de character accepté dans la réponse
+        \item Accept-Encoding: Spécifie le type d'encodage de donnees accepté dans la réponse   
+        \item Accept-Language: Spécifie les languages naturels acceptés dnas la réponse 
+        \item Expect:                 
+        \item Host:             
+        \item If-Match:         
+        \item If-None-Match:    
+        \item If-Range:         
+        \item If-Unmodified-Since:
+        \item Max-Forwards:       
+        \item Proxy-Authorization:
+        \item Range:              
+        \item TE:                 
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges 
-        \item Age        
-        \item ETag       
-        \item Location   
-        \item Proxy-Authenticate  
-        \item Retry-After         
-        \item Server              
-        \item Vary                
-        \item WWW-Authenticate
+        \item Accept-Ranges:
+        \item Age: indique l'age de la requête         
+        \item ETag:       
+        \item Proxy-Authenticate:  
+        \item Retry-After:         
+        \item Vary:                
         \end{itemize}
     Entity-Header\\
-        \begin{itemize}
-        \item Allow                   
-        \item Content-Encoding     
-        \item Content-Language     
-        \item Content-Length       
-        \item Content-Location     
-        \item Content-MD5          
-        \item Content-Range        
-        \item Content-Type         
-        \item Expires              
-        \item Last-Modified        
-        \item Extension-header
+        \begin{itemizen}
+        \item Content-Language:            
+        \item Content-Location:     
+        \item Content-MD5:          
+        \item Content-Range:          
         \end{itemize}
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
