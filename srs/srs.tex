@@ -293,6 +293,7 @@ Http/1.0\\
         \item Date
         \item Pragma
         \end{itemize}
+\\
     Request-Header\\
         \begin{itemize}
         \item Authorization
@@ -301,12 +302,14 @@ Http/1.0\\
         \item Referer          
         \item User-Agent       
         \end{itemize}
+\\
     Response-Header\\
         \begin{itemize}
         \item Location           
         \item Server          
         \item WWW-Authenticate
         \end{itemize}
+\\
     Entity-Header\\
         \begin{itemize}
         \item Allow               
@@ -317,6 +320,7 @@ Http/1.0\\
         \item Last-Modified     
         \item Extension-header
         \end{itemize}
+\\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
@@ -330,6 +334,7 @@ Http/1.1\\
         \item Via              
         \item Warning          
         \end{itemize}
+\\
     Request-Header\\
         \begin{itemize}
         \item Accept              
@@ -352,6 +357,7 @@ Http/1.1\\
         \item TE                 
         \item User-Agent  
         \end{itemize}
+\\
     Response-Header\\
         \begin{itemize}
         \item Accept-Ranges 
@@ -364,6 +370,7 @@ Http/1.1\\
         \item Vary                
         \item WWW-Authenticate
         \end{itemize}
+\\
     Entity-Header\\
         \begin{itemize}
         \item Allow                   
@@ -378,6 +385,7 @@ Http/1.1\\
         \item Last-Modified        
         \item Extension-header
         \end{itemize}
+\\
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
@@ -405,6 +413,10 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
  \item 405 - Method Not Allowed
  \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
+ \item 406 - Not Acceptable
+ \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \testit{headers} d'acceptation envoyé par la requête.
+ \item 407 - Proxy Authentification Required
+ \subitem Semblable à 401 - Unauthorized, mais indique que le client doit s'authetifier avec le proxy auparavant.
  \item 500 - Server Error
  \subitem 
 
@@ -691,15 +703,9 @@ la valeur fournie.
 \section{Exigences fonctionnelles}
 \begin{itemize}
     \item Lors du démarrage, le système doit lire sa configuration.
-    \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
-        le serveur Nitcorn utilisera un hôte par défaut.
-    \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
-    \item Si la ressource demandée est un dossier et que le client y a accès, le système doit retourner une liste des fichiers et/ou dossiers contenus dans ce même dossier.
-    \item Si la ressource demandée est un fichier et que le client y a accès, le système doit retourner le contenu du fichier dans la réponse HTTP.
-    \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
 \end{itemize}
-\section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} .
+\section{Exigences de performance} Le nombre 
+\section{Contraintes de conception}
 \section{Attributs}
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
