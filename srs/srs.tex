@@ -100,6 +100,7 @@ document.
 \begin{description}
     \item[Apache] Un serveur Web.
 	\item[API]
+    \item[Asynchrone]
 	\item[Authentification Basic]
     \item[Authentification Digest]
 	\item[Boucle d'événement asynchrone]
@@ -213,7 +214,7 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
     \hline
     Libevent & N/A & N/A & 2.0.X & \url{http://libevent.org/} \\
     \hline
-    SQLite & N/A & N/A & 3.X & \url{https://www.sqlite.org/} \\
+    SQLite & N/A & DEV & 3.X & \url{https://www.sqlite.org/} \\
     \hline
 
 \end{tabular}
@@ -268,7 +269,7 @@ permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant tr
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
-Le serveur devra supporter les méthodes HTTP suivantes:\\
+Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
 \begin{itemize}
  \item TODO: En enlever?
  \item TODO: Ajouter des méthodes qui ne sont pas dans le RFC2616?
@@ -284,67 +285,109 @@ Le serveur devra supporter les méthodes HTTP suivantes:\\
  
 \end{itemize}
 
-Le serveur devra être en mesure de supporter seulement les headers suivants: \\
-\begin{itemize}
-
- \item TODO: Enlever ceux que l'on ne veux pas et inclut-on des headers non-standard?
- \item TODO: Ajouter les headers de reponses?
- \item TODO: \#\#\# : Ne sont pas dans le RFC 2616
- \item Accept
- \item Accept-Charset
- \item Accept-Encoding
- \item Accept-Language
- \item \#\#\#Accept-Datetime
- \item Accept-Ranges
- \item Age
- \item Allow
- \item Authorization
- \item Cache-Control
- \item Connection
- \item \#\#\#Cookie
- \item Content-Encoding
- \item Content-Language
- \item Content-Length
- \item Content-Location
- \item Content-MD5
- \item Content-Range
- \item Content-Type
- \item Date
- \item ETag
- \item Expect
- \item Expires
- \item From
- \item Host
- \item If-Match
- \item If-Modified-Since
- \item If-None-Match
- \item If-Range
- \item If-Unmodified-Since
- \item Last-Modified
- \item Location
- \item Max-Forwards
- \item \#\#\#Origin
- \item Pragma
- \item Proxy-Authentification
- \item Proxy-Authorization
- \item Range
- \item Referer
- \item Retry-After
- \item Server
- \item TE
- \item Trailer
- \item Transfert-Encoding
- \item Upgrade
- \item User-Agent
- \item Vary
- \item Via
- \item Warning
- \item WWW-Authenticate
- \\
+Le serveur devra être en mesure de supporter les headers suivants: \\
+\\
+Http/1.0\\
+    General-Header\\
+        \begin{itemize}
+        \item Date
+        \item Pragma
+        \end{itemize}
+\\
+    Request-Header\\
+        \begin{itemize}
+        \item Authorization
+        \item From      
+        \item If-Modified-Since
+        \item Referer          
+        \item User-Agent       
+        \end{itemize}
+\\
+    Response-Header\\
+        \begin{itemize}
+        \item Location           
+        \item Server          
+        \item WWW-Authenticate
+        \end{itemize}
+\\
+    Entity-Header\\
+        \begin{itemize}
+        \item Allow               
+        \item Content-Encoding 
+        \item Content-Length    
+        \item Content-Type      
+        \item Expires           
+        \item Last-Modified     
+        \item Extension-header
+        \end{itemize}
+\\
+Http/1.1\\
+    General-Header\\
+        \begin{itemize}
+        \item Cache-Control      
+        \item Connection      
+        \item Date            
+        \item Pragma          
+        \item Trailer         
+        \item Transfer-Encoding
+        \item Upgrade          
+        \item Via              
+        \item Warning          
+        \end{itemize}
+\\
+    Request-Header\\
+        \begin{itemize}
+        \item Accept              
+        \item Accept-Charset   
+        \item Accept-Encoding  
+        \item Accept-Language  
+        \item Authorization    
+        \item Expect           
+        \item From             
+        \item Host             
+        \item If-Match         
+        \item If-Modified-Since
+        \item If-None-Match    
+        \item If-Range         
+        \item If-Unmodified-Since
+        \item Max-Forwards       
+        \item Proxy-Authorization
+        \item Range              
+        \item Referer            
+        \item TE                 
+        \item User-Agent  
+        \end{itemize}
+\\
+    Response-Header\\
+        \begin{itemize}
+        \item Accept-Ranges 
+        \item Age        
+        \item ETag       
+        \item Location   
+        \item Proxy-Authenticate  
+        \item Retry-After         
+        \item Server              
+        \item Vary                
+        \item WWW-Authenticate
+        \end{itemize}
+\\
+    Entity-Header\\
+        \begin{itemize}
+        \item Allow                   
+        \item Content-Encoding     
+        \item Content-Language     
+        \item Content-Length       
+        \item Content-Location     
+        \item Content-MD5          
+        \item Content-Range        
+        \item Content-Type         
+        \item Expires              
+        \item Last-Modified        
+        \item Extension-header
+        \end{itemize}
+\\
  
-\end{itemize}
- 
-Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
  \item 200 - OK
  \subitem La requête à bien été traité sans erreurs.
@@ -361,11 +404,13 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
  \item 301 - Moved Permanently
  \subitem La ressource demandé à été assigné à un nouvel URL de façon permanante.
  \item 400 - Bad Request
- 
+ \subitem La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
  \item 401 - Unauthorized
+ \subitem 
  \item 403 - Forbidden
  \item 404 - Not Found
  \item 500 - Server Error
+
  \item 501 - Not implemented
  \item 502 - Bad Gateway
  \item 503 - Out of Resources
@@ -620,8 +665,7 @@ n'existe pas.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
-du ou des paramètre(s) désirée à l'API qui se chargera de relayer
-l'information à la classe appropriée.
+du ou des paramètre(s) désirée à l'API qui se chargera de relayer l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
@@ -631,10 +675,27 @@ vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
 la valeur fournie.
 
 \section{Exigences des interfaces externes}
+\subsection{Requête HTTP}
+\subsubsection{But} Le but d'une requête HTTP est de demander au serveur une ressource quelconque.
+\subsubsection{Provenance} La requête HTTP est soumise par le client.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les requêtes de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Il y a une requête HTTP pour chaque réponse HTTP.
+\subsection{Réponse HTTP}
+\subsubsection{But} Le but d'une réponse HTTP est de fournir au client la ressource demandée.
+\subsubsection{Provenance} La réponse HTTP est émise par le serveur.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les réponses de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Pour chaque réponse HTTP, il y a une requête HTTP.
 \subsection{Configuration}
-Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
+\subsubsection{But} Les but de la configuration est d'informer le serveur web sur la façon de traiter les requêtes HTTP.
+\subsubsection{Provenance} Il y a une configuration par défaut qui sera fournie avec le serveur Nitcorn. 
+\subsubsection{Synchronisation} La configuration du server ne necessite aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} La configuration détermine la façon dont la requête sera traité par le serveur.
+% Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
-\section{Exigences de performance}
+\begin{itemize}
+    \item Lors du démarrage, le système doit lire sa configuration.
+\end{itemize}
+\section{Exigences de performance} Le nombre 
 \section{Contraintes de conception}
 \section{Attributs}
 \subsection{Disponibilité}
