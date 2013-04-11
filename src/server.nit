@@ -1,6 +1,7 @@
 import event
 import config
 import http_parser
+import http_response
 
 class HttpServer
 super Server
@@ -9,23 +10,20 @@ super Server
     private var config : nullable Config
 
     redef fun read(line : String) do
-        print "got line '{line}'"
-        if line == "" then
-            print "got full request, must be parsed : {buffer_request.to_s}"
-            var parser = new HttpParser
-            dispatch(parser.parse_request(buffer_request.to_s))
-        else
-            buffer_request.append(line)
-            buffer_request.append("\r\n")
-        end
+        buffer_request.append(line)
+        var parser = new HttpParser
+        answer(parser.parse_request(buffer_request.to_s))
     end
 
-    fun dispatch(request: HttpRequest) do
-        #let's find the virtual host
+    fun answer(request: HttpRequest) do
+        #todo find host
+        var h = config.get_hostsmanager.get_default_host
 
+        var headers = new HashMap[String, String]
+        var response = new HttpResponse(request.get_version, 200, "OK", headers, "Hello world")
+        write(response.to_s)
+        close
     end
-    
-
 end
 
 class HttpServerFactory
@@ -36,7 +34,7 @@ super Factory
         config = new Config("nitcorn")
         #Setting default hosts
         config.get_hostsmanager.set_default_host(
-            new VirtualHost("localhost", new Ip([127,0,0,1]), 80, "/var/www")
+            new Host("localhost", "/var/www/", new Mimes)
         )
     end
 

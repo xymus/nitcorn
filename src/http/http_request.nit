@@ -37,6 +37,8 @@ class HttpRequest
 	
 	fun get_body: String do return body
 
+    fun get_host: String do return get_header("Host")
+
     fun get_header(key: String) : String
     do
 		if header_fields.keys.has(key) then 

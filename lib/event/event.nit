@@ -44,16 +44,17 @@ static void
 c_read_cb(struct bufferevent *bev, void *ctx)
 {
     struct evbuffer *input = bufferevent_get_input(bev);
-    char* buf = NULL;
-    size_t sz;
-    buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_ANY);
-    //todo
+    size_t sz = evbuffer_get_length(input);
+    char* buf = malloc(sz);
+    //buf = evbuffer_readln(input, &sz, EVBUFFER_EOL_CRLF);
+    evbuffer_remove(input, buf, sz);
     String buf_str;
     if(sz > 0) {
         buf_str = new_String_from_cstring(buf);
     } else {
         buf_str = new_String_from_cstring("");
     }
+    printf("Got from C : '%s'\n", buf);
     if(ctx != NULL) {
         Connection_read_callback(
             ((struct connection_data*)ctx) ,

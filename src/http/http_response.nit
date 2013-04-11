@@ -53,4 +53,16 @@ class HttpResponse
 
 		return full_response	
 	end
+
+    redef fun to_s : String do
+        var buf = new Buffer
+        buf.append("{version} {status_code} {status_message}\r\n")
+        for key,value in response_header_fields do
+            buf.append("{key}: {value}\r\n")
+        end
+        buf.append("Content-Length: {response_body.length}\r\n")
+        buf.append("\r\n{response_body}")
+        return buf.to_s
+    end
+
 end
