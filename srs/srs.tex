@@ -266,7 +266,7 @@ permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant tr
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
-Le serveur devra supporter les méthodes HTTP suivantes:\\
+Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
 \begin{itemize}
  \item TODO: En enlever?
  \item TODO: Ajouter des méthodes qui ne sont pas dans le RFC2616?
@@ -282,67 +282,108 @@ Le serveur devra supporter les méthodes HTTP suivantes:\\
  
 \end{itemize}
 
-Le serveur devra être en mesure de supporter seulement les headers suivants: \\
-\begin{itemize}
-
- \item TODO: Enlever ceux que l'on ne veux pas et inclut-on des headers non-standard?
- \item TODO: Ajouter les headers de reponses?
- \item TODO: \#\#\# : Ne sont pas dans le RFC 2616
- \item Accept
- \item Accept-Charset
- \item Accept-Encoding
- \item Accept-Language
- \item \#\#\#Accept-Datetime
- \item Accept-Ranges
- \item Age
- \item Allow
- \item Authorization
- \item Cache-Control
- \item Connection
- \item \#\#\#Cookie
- \item Content-Encoding
- \item Content-Language
- \item Content-Length
- \item Content-Location
- \item Content-MD5
- \item Content-Range
- \item Content-Type
- \item Date
- \item ETag
- \item Expect
- \item Expires
- \item From
- \item Host
- \item If-Match
- \item If-Modified-Since
- \item If-None-Match
- \item If-Range
- \item If-Unmodified-Since
- \item Last-Modified
- \item Location
- \item Max-Forwards
- \item \#\#\#Origin
- \item Pragma
- \item Proxy-Authentification
- \item Proxy-Authorization
- \item Range
- \item Referer
- \item Retry-After
- \item Server
- \item TE
- \item Trailer
- \item Transfert-Encoding
- \item Upgrade
- \item User-Agent
- \item Vary
- \item Via
- \item Warning
- \item WWW-Authenticate
- \\
- 
-\end{itemize}
- 
- De plus, il sera en mesure de traiter les types d'erreurs suivants:\\
+Le serveur devra être en mesure de supporter les headers suivants: \\
+\\
+Http/1.0\\
+    General-Header\\
+        \begin{itemize}
+        \item Date
+        \item Pragma
+        \end{itemize}
+\\
+    Request-Header\\
+        \begin{itemize}
+        \item Authorization
+        \item From      
+        \item If-Modified-Since
+        \item Referer          
+        \item User-Agent       
+        \end{itemize}
+\\
+    Response-Header\\
+        \begin{itemize}
+        \item Location           
+        \item Server          
+        \item WWW-Authenticate
+        \end{itemize}
+\\
+    Entity-Header\\
+        \begin{itemize}
+        \item Allow               
+        \item Content-Encoding 
+        \item Content-Length    
+        \item Content-Type      
+        \item Expires           
+        \item Last-Modified     
+        \item Extension-header
+        \end{itemize}
+\\
+Http/1.1\\
+    General-Header\\
+        \begin{itemize}
+        \item Cache-Control      
+        \item Connection      
+        \item Date            
+        \item Pragma          
+        \item Trailer         
+        \item Transfer-Encoding
+        \item Upgrade          
+        \item Via              
+        \item Warning          
+        \end{itemize}
+\\
+    Request-Header\\
+        \begin{itemize}
+        \item Accept              
+        \item Accept-Charset   
+        \item Accept-Encoding  
+        \item Accept-Language  
+        \item Authorization    
+        \item Expect           
+        \item From             
+        \item Host             
+        \item If-Match         
+        \item If-Modified-Since
+        \item If-None-Match    
+        \item If-Range         
+        \item If-Unmodified-Since
+        \item Max-Forwards       
+        \item Proxy-Authorization
+        \item Range              
+        \item Referer            
+        \item TE                 
+        \item User-Agent  
+        \end{itemize}
+\\
+    Response-Header\\
+        \begin{itemize}
+        \item Accept-Ranges 
+        \item Age        
+        \item ETag       
+        \item Location   
+        \item Proxy-Authenticate  
+        \item Retry-After         
+        \item Server              
+        \item Vary                
+        \item WWW-Authenticate
+        \end{itemize}
+\\
+    Entity-Header\\
+        \begin{itemize}
+        \item Allow                   
+        \item Content-Encoding     
+        \item Content-Language     
+        \item Content-Length       
+        \item Content-Location     
+        \item Content-MD5          
+        \item Content-Range        
+        \item Content-Type         
+        \item Expires              
+        \item Last-Modified        
+        \item Extension-header
+        \end{itemize}
+\\
+De plus, il sera en mesure de traiter les types d'erreurs suivants:\\
  \begin{itemize}
  \item TODO Voir quels autres ont supporte ou si on en enlève de ceux-ci.
  \item 200 - Ok
