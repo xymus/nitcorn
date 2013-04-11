@@ -293,6 +293,7 @@ Http/1.0\\
         \item Date
         \item Pragma
         \end{itemize}
+\\
     Request-Header\\
         \begin{itemize}
         \item Authorization
@@ -301,12 +302,14 @@ Http/1.0\\
         \item Referer          
         \item User-Agent       
         \end{itemize}
+\\
     Response-Header\\
         \begin{itemize}
         \item Location           
         \item Server          
         \item WWW-Authenticate
         \end{itemize}
+\\
     Entity-Header\\
         \begin{itemize}
         \item Allow               
@@ -317,6 +320,7 @@ Http/1.0\\
         \item Last-Modified     
         \item Extension-header
         \end{itemize}
+\\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
@@ -330,6 +334,7 @@ Http/1.1\\
         \item Via              
         \item Warning          
         \end{itemize}
+\\
     Request-Header\\
         \begin{itemize}
         \item Accept              
@@ -352,6 +357,7 @@ Http/1.1\\
         \item TE                 
         \item User-Agent  
         \end{itemize}
+\\
     Response-Header\\
         \begin{itemize}
         \item Accept-Ranges 
@@ -364,6 +370,7 @@ Http/1.1\\
         \item Vary                
         \item WWW-Authenticate
         \end{itemize}
+\\
     Entity-Header\\
         \begin{itemize}
         \item Allow                   
@@ -378,32 +385,33 @@ Http/1.1\\
         \item Last-Modified        
         \item Extension-header
         \end{itemize}
+\\
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
- \item \textbf{200 - OK}
+ \item 200 - OK
  \subitem La requête à bien été traité sans erreurs.
- \item \textbf{201 - Created}
+ \item 201 - Created
  \subitem La ressource a bien été créée.
- \item \textbf{202 - Accepted}
+ \item 202 - Accepted
  \subitem La requête a été acceptée pour être traitée mais le traitement n'est pas terminé.
- \item \textbf{204 - No Content}
+ \item 204 - No Content
  \subitem Le serveur à bien traité la requête et il n'y a aucune information à retourner.
- \item \textbf{205 - Reset Content}
+ \item 205 - Reset Content
  \subitem Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
- \item \textbf{206 - Partial Content}
+ \item 206 - Partial Content
  \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource.
- \item \textbf{301 - Moved Permanently}
+ \item 301 - Moved Permanently
  \subitem La ressource demandé à été assigné à un nouvel URL de façon permanante.
- \item \textbf{400 - Bad Request}
+ \item 400 - Bad Request
  \subitem La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
- \item \textbf{401 - Unauthorized}
+ \item 401 - Unauthorized
  \subitem La requête nécéssite une authentification.
- \item \textbf{403 - Forbidden}
+ \item 403 - Forbidden
  \subitem La requête a bien été comprise, mais le serveur refuse de la traiter. Une authentification n'aidera pas.
- \item \textbf{404 - Not Found}
+ \item 404 - Not Found
  \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
- \item \textbf{405 - Method Not Allowed}
+ \item 405 - Method Not Allowed
  \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
  \item \textbf{406 - Not Acceptable}
  \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyé par la requête.
@@ -418,23 +426,25 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item \textbf{411 - Length Required}
  \subitem Le serveur refuse de traiter la requête sans un textit{header} Content-Length.
  \item \textbf{412 - Precondition Failed}
+ \subitem La précondition donnée dans un ou plusieurs champs \textit{header} a été évaluée à faux lorsque testé sur le serveur.
+ \item \textbf{413 - Request Entity Too Large}
+ \subitem Le serveur refuse de traiter une requête car l'entité de la requête est plus grande que ce que le serveur veut ou peut traiter.
+ \item \textbf{414 - Request-URI Too Long}
+ \subitem Le serveur refuse de servir la requête car l'URI de la requête est plus longue que ce que le serveur accepte d'interpréter.
+ \item \textbf{415 - Unsupported Media Type}
+ \subitem Le serveur refuse de traiter la requête car l'entité de la requête est dans un format non supporté par la ressource demandée pour la méthode demandée.
+ \item \textbf{416 - Requested Range Not Satisfiable}
+ \subitem Le champs du \textit{Range header} est invalide pour la ressource demandée.
+ \item \textbf{417 - Expectation Failed}
+ \subitem L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur
  \item 500 - Server Error
  \subitem 
 
  \item 501 - Not implemented
-<<<<<<< HEAD
  \item 502 - Bad Gateway
  \item 503 - Out of Resources
  \item 504 - Gateway Time-Out
  \item 505 - HTTP Version not supported
-=======
- \item \textbf{502 - Bad Gateway}
- \subitem Le serveur est incapable de contacter une autre ressource nécessaire à la completion de la requête.
- \item \textbf{503 Service Unavailable}
- \subitem Le serveur manque temporairement de ressources pour répondre à la requête.
- \item \textbf{504 - Gateway Time-Out}
- \item \textbf{505 - HTTP Version not supported}
->>>>>>> 3fb99c1e478ac282b51863f655622b26d6b21f09
 
  \end{itemize}
 
@@ -713,6 +723,9 @@ la valeur fournie.
 \section{Exigences fonctionnelles}
 \begin{itemize}
     \item Lors du démarrage, le système doit lire sa configuration.
+\end{itemize}
+\section{Exigences de performance} Le nombre 
+\section{Contraintes de conception}
     \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
         le serveur Nitcorn utilisera un hôte par défaut.
     \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
