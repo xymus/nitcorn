@@ -247,6 +247,7 @@ class Server
     
     fun read(line : String) is abstract
     fun send_file(path: String) : Int do
+        print "Sending file {path}"
         return self.connection.send_file(path)
     end
     fun write(line : String) do

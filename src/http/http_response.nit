@@ -57,11 +57,11 @@ class HttpResponse
     redef fun to_s : String do
         var buf = new Buffer
         buf.append("{version} {status_code} {status_message}\r\n")
+        #response_header_fields["Content-Length"] = response_body.length.to_s
         for key,value in response_header_fields do
             buf.append("{key}: {value}\r\n")
         end
-        buf.append("Content-Length: {response_body.length}\r\n")
-        buf.append("\r\n{response_body}")
+        buf.append("{response_body}")
         return buf.to_s
     end
 
