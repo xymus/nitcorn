@@ -344,7 +344,7 @@ Le serveur devra être en mesure de supporter seulement les headers suivants: \\
  
 \end{itemize}
  
-Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
  \item 200 - OK
  \subitem La requête à bien été traité sans erreurs.
@@ -359,11 +359,13 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
  \item 206 - Partial Content
  \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource. La réponse doit inclure les headers Content-Range, Date, Content-Location et Cache-Control.
  \item 400 - Bad Request
- 
+ \subitem La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
  \item 401 - Unauthorized
+ \subitem 
  \item 403 - Forbidden
  \item 404 - Not Found
  \item 500 - Server Error
+
  \item 501 - Not implemented
  \item 502 - Bad Gateway
  \item 503 - Out of Resources
