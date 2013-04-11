@@ -65,6 +65,8 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
      & Modification des acteurs &\\
      & Modifications aux définitions &\\
     \hline
+    Équipe & Rédaction de groupe & 2013/04/11 \\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
@@ -98,6 +100,7 @@ document.
 \begin{description}
     \item[Apache] Un serveur Web.
 	\item[API]
+    \item[Asynchrone]
 	\item[Authentification Basic]
     \item[Authentification Digest]
 	\item[Boucle d'événement asynchrone]
@@ -384,10 +387,23 @@ Http/1.1\\
         \end{itemize}
 \\
 De plus, il sera en mesure de traiter les types d'erreurs suivants:\\
+ 
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 dans les cas suivants:\\
  \begin{itemize}
- \item TODO Voir quels autres ont supporte ou si on en enlève de ceux-ci.
- \item 200 - Ok
+ \item 200 - OK
+ \subitem La requête à bien été traité sans erreurs.
+ \item 201 - Created
+ \subitem La ressource a bien été créée.
+ \item 202 - Accepted
+ \subitem La requête a été acceptée pour être traitée mais le traitement n'est pas terminé.
+ \item 204 - No Content
+ \subitem Le serveur à bien traité la requête et il n'y a aucune information à retourner.
+ \item 205 - Reset Content
+ \subitem Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
+ \item 206 - Partial Content
+ \subitem Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource. La réponse doit inclure les headers Content-Range, Date, Content-Location et Cache-Control.
  \item 400 - Bad Request
+ 
  \item 401 - Unauthorized
  \item 403 - Forbidden
  \item 404 - Not Found
@@ -646,8 +662,7 @@ n'existe pas.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
-du ou des paramètre(s) désirée à l'API qui se chargera de relayer
-l'information à la classe appropriée.
+du ou des paramètre(s) désirée à l'API qui se chargera de relayer l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
@@ -657,16 +672,32 @@ vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
 la valeur fournie.
 
 \section{Exigences des interfaces externes}
+\subsection{Requête HTTP}
+\subsubsection{But} Le but d'une requête HTTP est de demander au serveur une ressource quelconque.
+\subsubsection{Provenance} La requête HTTP est soumise par le client.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les requêtes de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Il y a une requête HTTP pour chaque réponse HTTP.
+\subsection{Réponse HTTP}
+\subsubsection{But} Le but d'une réponse HTTP est de fournir au client la ressource demandée.
+\subsubsection{Provenance} La réponse HTTP est émise par le serveur.
+\subsubsection{Synchronisation} Le serveur Nitcorn traite les réponses de manière asynchrone. Il n'y a donc aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} Pour chaque réponse HTTP, il y a une requête HTTP.
 \subsection{Configuration}
+\subsubsection{But} Les but de la configuration est d'informer le serveur web sur la façon de traiter les requêtes HTTP.
+\subsubsection{Provenance} Il y a une configuration par défaut qui sera fournie avec le serveur Nitcorn. 
+\subsubsection{Synchronisation} La configuration du server ne necessite aucune synchronisation.
+\subsubsection{Rapport avec les autres intrants/extrants} La configuration détermine la façon dont la requête sera traité par le serveur.
 Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
 \section{Exigences de performance}
 \section{Contraintes de conception}
 \section{Attributs}
 \subsection{Disponibilité}
+Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
+Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
-
+Le serveur devra pouvoir changer sa configuration sans se redémarrer.
 
 
 \begin{thebibliography}{9}
