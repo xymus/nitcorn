@@ -413,17 +413,25 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \subitem Le serveur n'a rien trouvé correspondant à l'URI de la requête.
  \item 405 - Method Not Allowed
  \subitem La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
- \item 406 - Not Acceptable
- \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \testit{headers} d'acceptation envoyé par la requête.
- \item 407 - Proxy Authentification Required
+ \item \textbf{406 - Not Acceptable}
+ \subitem La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyé par la requête.
+ \item \textbf{407 - Proxy Authentification Required}
  \subitem Semblable à 401 - Unauthorized, mais indique que le client doit s'authetifier avec le proxy auparavant.
+ \item \textbf{408 -Request Timeout}
+ \subitem Le client n'a pas produit de requête dans le temps pendant lequel le serveur est prêt à attendre.
+ \item \textbf{409 - Conflict}
+ \subitem La requête n'a pas pu être complété à cause d'un conflit avec l'état actuel de la ressource.
+ \item \textbf{410 - Gone}
+ \subitem La ressource demandée n'est plus disponible sur le serveur et aucune adresse de redirection n'est connue.
+ \item \textbf{411 - Length Required}
+ \subitem Le serveur refuse de traiter la requête sans un textit{header} Content-Length.
+ \item \textbf{412 - Precondition Failed}
  \item 500 - Server Error
  \subitem 
 
  \item 501 - Not implemented
  \item 502 - Bad Gateway
- \item 503 Service Unavailable
- \subitem Le serveur manque temporairement de ressources pour répondre à la requête.
+ \item 503 - Out of Resources
  \item 504 - Gateway Time-Out
  \item 505 - HTTP Version not supported
 
