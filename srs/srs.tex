@@ -111,11 +111,10 @@ document.
     \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web. 
     \item[Fil d'éxécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
     \item[File descriptor] Identifiant d'un fichier ouvert par le système d'exploitation. 
- 	\item[Header]
+ 	\item[Header] Les en-têtes retrouvées dans les rquêtes et les réponses HTTP/1.0 et HTTP/1.1
     \item[Host] Domaine.	
-	\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
-connexions keep-alive.
-	\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des****
+	\item[HTTP 1.0] Version 1.0 du protocole HTTP. Ne permet pas de connexions de type keep-alive.
+	\item[HTTP 1.1] Version 1.1 du protocole HTTP qui support d'avantage de méthodes et d'en-têtes que la version 1.0
     \item[Itanium] Processeurs 64 bits développés par Intel utilisant l'architecture IA_64 et non x86_64. Inclus ici les processeurs Itanium 2.
 	\item[Log]   
     \item[Méthode HTTP] Intention de la requête.
@@ -269,20 +268,17 @@ permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant tr
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
-Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
+Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
 \begin{itemize}
- \item TODO: En enlever?
- \item TODO: Ajouter des méthodes qui ne sont pas dans le RFC2616?
- \item OPTIONS
- \item GET
- \item HEAD
- \item POST
- \item PUT
- \item DELETE
- \item TRACE
- \item CONNECT
+ \item OPTIONS:
+ \item GET:
+ \item HEAD:
+ \item POST:
+ \item PUT:
+ \item DELETE:
+ \item TRACE:
+ \item CONNECT:
  \\
- 
 \end{itemize}
 
 Le serveur devra être en mesure de supporter les headers suivants: \\
@@ -298,7 +294,7 @@ Http/1.0\\
         \item Authorization: Identification du navigateur avec le serveur.
         \item From: L'adresse e-mail du client.      
         \item If-Modified-Since: la reqête doit avoir été modifiée depuis la date spécifiée.
-        \item Referer: URL du lien de la requête effectué.          
+        \item Referer: URL du lien de la requête effectuée.          
         \item User-Agent: liste d'information sur le client(nom et version)       
         \end{itemize}
     Response-Header\\
@@ -317,54 +313,53 @@ Http/1.0\\
         \item Last-Modified: La date et l'heure de la dernière modification, en format HTTP-date.     
         \item Extension-header: L'ajout de headers supplémentaires.
         \end{itemize}
-
 \\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
-        \item Cache-Control      
-        \item Connection      
-        \item Trailer         
-        \item Transfer-Encoding
-        \item Upgrade          
-        \item Via              
-        \item Warning          
+        \item Cache-Control: Directives imposées au systèmes de cache rencontrés dans la requête et la réponse.      
+        \item Connection: Options des spécifications de la connection courante.     
+        \item Trailer: Liste des headers présent dans le message encodé.          
+        \item Transfer-Encoding: Indique le type de transformation effectuée sur le corps du message afin de se rendre à déstination.
+        \item Upgrade: Spécifie les autres prtocoles de communication supportées au server.          
+        \item Via:              
+        \item Warning:          
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Accept              
-        \item Accept-Charset   
-        \item Accept-Encoding  
-        \item Accept-Language
-        \item Expect                    
-        \item Host             
-        \item If-Match
-        \item If-None-Match    
-        \item If-Range         
-        \item If-Unmodified-Since
-        \item Max-Forwards       
-        \item Proxy-Authorization
-        \item Range              
-        \item TE
+        \item Accept:              
+        \item Accept-Charset:   
+        \item Accept-Encoding:  
+        \item Accept-Language:
+        \item Expect:                    
+        \item Host:             
+        \item If-Match:
+        \item If-None-Match:    
+        \item If-Range:         
+        \item If-Unmodified-Since:
+        \item Max-Forwards:       
+        \item Proxy-Authorization:
+        \item Range:              
+        \item TE: Liste des extentions d'encodage de transfert. 
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges 
-        \item Age        
-        \item ETag        
-        \item Proxy-Authenticate  
-        \item Retry-After                       
-        \item Vary                
+        \item Accept-Ranges: 
+        \item Age:        
+        \item ETag:       
+        \item Proxy-Authenticate:  
+        \item Retry-After:                       
+        \item Vary:                
         \end{itemize}
     Entity-Header\\
         \begin{itemize}                 
-        \item Content-Language
-        \item Content-Location     
-        \item Content-MD5          
-        \item Content-Range        
+        \item Content-Language:
+        \item Content-Location:     
+        \item Content-MD5:          
+        \item Content-Range:        
         \end{itemize}
  
-Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leurs définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
  \item \textbf{200 - OK}
  \subitem La requête à bien été traité sans erreurs.
@@ -436,13 +431,9 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item \textbf{101 - Switching Protocols}
  \subitem Le serveur comprend et est d'accord pour se conformer avec la requête du client de changer le protocole actuellement utilisé sur cette connection.
  \end{itemize}
-
- 
     
 \section{Hypothèse et dépendances}
 Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
-
-
 
 \chapter{Exigences spécifiques}
 
@@ -451,9 +442,6 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
 \subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
 \subsection{Administrateur système:} L'administrateur système est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
 \subsection{Serveur:} C'est le logiciel décrit par le présent document, soit Nitcorn.
-
-
-
 
 \section{Spécification des cas d'utilisation pour le serveur} 
 À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
@@ -477,7 +465,6 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
 \end{itemize} 
 \subsubsection{Description du processus:}
 Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
-
 
 *** A Faire:DIAGRAMME
 Example de requêtes;
