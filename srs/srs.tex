@@ -290,32 +290,32 @@ Le serveur devra être en mesure de supporter les headers suivants: \\
 Http/1.0\\
     General-Header\\
         \begin{itemize}
-        \item Date
-        \item Pragma
+        \item Date: La date et l'heure de l'origine du message en format HTTP-date.
+        \item Pragma: Liste de directives supplémentaires d'implémentation.
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Authorization
-        \item From      
-        \item If-Modified-Since
-        \item Referer          
-        \item User-Agent       
+        \item Authorization: Identification du navigateur avec le serveur.
+        \item From: L'adresse e-mail du client.      
+        \item If-Modified-Since: la reqête doit avoir été modifiée depuis la date spécifiée.
+        \item Referer: URL du lien de la requête effectué.          
+        \item User-Agent: liste d'information sur le client(nom et version)       
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Location           
-        \item Server          
-        \item WWW-Authenticate
+        \item Location: Redirection vers une nouvelle URL associée au document.           
+        \item Server: Caractéristiques du serveur qui émet la réponse.          
+        \item WWW-Authenticate: Inclue avec une réponse à une erreur d'authentification 401.
         \end{itemize}
     Entity-Header\\
         \begin{itemize}
-        \item Allow               
-        \item Content-Encoding 
-        \item Content-Length    
-        \item Content-Type      
-        \item Expires           
-        \item Last-Modified     
-        \item Extension-header
+        \item Allow: Liste de méthodes supportées par la resource                
+        \item Content-Encoding: Type d'encodage du corps de la requête  
+        \item Content-Length: Longueur du corps de la requête    
+        \item Content-Type: Le type MIME du corps de la requête.      
+        \item Expires: Date d'expiration des données.           
+        \item Last-Modified: La date et l'heure de la dernière modification, en format HTTP-date.     
+        \item Extension-header: L'ajout de headers supplémentaires.
         \end{itemize}
 
 \\
@@ -324,8 +324,6 @@ Http/1.1\\
         \begin{itemize}
         \item Cache-Control      
         \item Connection      
-        \item Date            
-        \item Pragma          
         \item Trailer         
         \item Transfer-Encoding
         \item Upgrade          
@@ -337,52 +335,33 @@ Http/1.1\\
         \item Accept              
         \item Accept-Charset   
         \item Accept-Encoding  
-        \item Accept-Language  
-        \item Authorization    
-        \item Expect           
-        \item From             
+        \item Accept-Language
+        \item Expect                    
         \item Host             
-        \item If-Match         
-        \item If-Modified-Since
+        \item If-Match
         \item If-None-Match    
         \item If-Range         
         \item If-Unmodified-Since
         \item Max-Forwards       
         \item Proxy-Authorization
         \item Range              
-        \item Referer            
-        \item TE                 
-        \item User-Agent  
+        \item TE
         \end{itemize}
     Response-Header\\
         \begin{itemize}
         \item Accept-Ranges 
         \item Age        
-        \item ETag       
-        \item Location   
+        \item ETag        
         \item Proxy-Authenticate  
-        \item Retry-After         
-        \item Server              
+        \item Retry-After                       
         \item Vary                
-        \item WWW-Authenticate
         \end{itemize}
     Entity-Header\\
-        \begin{itemize}
-        \item Content-Language:            
-        \item Content-Location:     
-        \item Content-MD5:          
-        \item Content-Range:          
-        \item Allow                   
-        \item Content-Encoding     
-        \item Content-Language     
-        \item Content-Length       
+        \begin{itemize}                 
+        \item Content-Language
         \item Content-Location     
         \item Content-MD5          
         \item Content-Range        
-        \item Content-Type         
-        \item Expires              
-        \item Last-Modified        
-        \item Extension-header
         \end{itemize}
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\

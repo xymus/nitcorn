@@ -30,12 +30,12 @@ class ConfigManager
 
 	private fun get_req(edit_config_request: HttpRequest): HttpResponse
 	do 
-		return new HttpResponse("HTTP/1.1", 400, "Bad Request", new HashMap[String, String],"")
+		return new HttpResponse("HTTP/1.1", 200, "OK", new HashMap[String, String],"")
 	end
 
 	private fun post_req(edit_config_request: HttpRequest): HttpResponse
 	do
-		return new HttpResponse("HTTP/1.1", 400, "Bad Request", new HashMap[String, String],"")
+		return new HttpResponse("HTTP/1.1", 200, "Bad Request", new HashMap[String, String],"")
 	end
 
 	private fun bad_request(edit_config_request: HttpRequest): HttpResponse
