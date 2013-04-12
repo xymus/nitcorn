@@ -177,7 +177,7 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilité
+Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
 d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
 fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
@@ -368,6 +368,10 @@ Http/1.1\\
         \end{itemize}
     Entity-Header\\
         \begin{itemize}
+        \item Content-Language:            
+        \item Content-Location:     
+        \item Content-MD5:          
+        \item Content-Range:          
         \item Allow                   
         \item Content-Encoding     
         \item Content-Language     
@@ -745,7 +749,8 @@ Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
 Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-
+\subsection{Transférabilité} Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
+sur des machines de même famille. Si le module de persistance 
 
 \begin{thebibliography}{9}
 \bibitem{ieefr}
