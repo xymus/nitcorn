@@ -9,7 +9,7 @@ class VirtualHost
 	
 	private var port : Int
 	
-	# Domain name, i.e. www.domain.com
+	# Domain names, i.e. www.domain.com
 	private var aliases : Array[String]
 
 	# Root directory of content to be served
