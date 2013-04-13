@@ -1,3 +1,7 @@
+
+    private var config_db_path : String = "config.sqlite"
+    private var config_script_path : String = "../../sql/config.sql"
+
 fun save_config
     do
         if not config_db_path.file_exists then 
