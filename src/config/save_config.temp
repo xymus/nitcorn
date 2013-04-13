@@ -1,0 +1,97 @@
+fun save_config
+    do
+        if not config_db_path.file_exists then 
+            create_db
+        end
+        do_save_config
+    end
+
+    fun load_config : Bool 
+    do
+
+        if not config_db_path.file_exists then
+            return false
+        else
+            var db: Sqlite3 = new Sqlite3
+
+            # Load config
+            var config_req = "SELECT * FROM Config WHERE name = '{get_name}';"
+
+            db.open(config_db_path)
+            db.prepare(config_req)
+            db.step
+
+            var log_id = db.column_int(2)
+
+            # Load log path
+            var log_req = "SELECT * FROM LogPaths WHERE _id = {log_id};"
+            db.prepare(log_req)
+            db.step
+
+            logmanager.set_e_path(db.column_text(1))
+            logmanager.set_a_path(db.column_text(2))
+            logmanager.set_i_path(db.column_text(3))
+            logmanager.set_d_path(db.column_text(4))
+            logmanager.set_v_path(db.column_text(5))
+            logmanager.set_w_path(db.column_text(6))
+            logmanager.set_wtf_path(db.column_text(7))
+
+            # Load hosts
+            #TODO
+
+
+            db.close
+            return true
+        end
+    end
+
+    private fun create_db
+    do
+        # hack for prototype only... TODO eventually
+        var cmd : String = "sqlite3 {config_db_path} < {config_script_path}"
+        sys.system(cmd)
+    end
+
+    private fun do_save_config
+    do
+        var db: Sqlite3 = new Sqlite3
+
+        #Log path save
+        var log: LogManager = get_logmanager
+        var req : String = "INSERT INTO LogPaths VALUES(NULL, '{log.get_e_path}', '{log.get_a_path}', '{log.get_i_path}', '{log.get_d_path}', '{log.get_v_path}', '{log.get_w_path}', '{log.get_wtf_path}');"
+        db.open(config_db_path)
+        db.exec(req)
+
+        #Config save
+        var log_id: Int = db.last_insert_rowid
+        req = "INSERT INTO Config VALUES(NULL, '{get_name}', '{log_id}')"
+        db.exec(req)
+        var config_id: Int = db.last_insert_rowid
+
+        #Host save
+        var host_man : HostManager = get_hostsmanager
+        var host_iterator: HashMapIterator[String, Host] = host_man.get_hosts
+        var host_ids: HashMap[String, Int] = new HashMap[String, Int]
+        while host_iterator.is_ok do
+            var host: Host = host_iterator.item
+            req = "INSERT INTO Host VALUES(NULL, '{host.get_name}', '{host.get_root}')"
+            db.exec(req)
+            host_ids[host.get_name] = db.last_insert_rowid
+            host_iterator.next
+        end
+
+        #Virtual host save
+        var vh_iterator: HashMapIterator[String, VirtualHost] = host_man.get_virtualhosts
+        while vh_iterator.is_ok do
+            var vh: VirtualHost = vh_iterator.item
+            var ip: Ip = vh.get_ip
+            req = "INSERT INTO VirtualHost VALUES(NULL, '{config_id}', '{vh.get_name}', '{ip.get_part(0)}', '{ip.get_part(1)}', '{ip.get_part(2)}', '{ip.get_part(3)}', '{vh.get_port}', '{vh.get_alias}', '{host_ids[vh.get_host.get_name]}')"
+            db.exec(req)
+            print db.get_error_str
+            print "fuck"
+            vh_iterator.next
+        end
+
+
+        db.close
+    end

@@ -28,7 +28,7 @@ class HostManager
 
     private fun get_new_default_host : VirtualHost
     do
-    	return new VirtualHost("default",-1,"","./",default_mimes)
+    	return new VirtualHost("default",-1,[""],"./",default_mimes)
     end
 
     fun get_default_host : VirtualHost
@@ -40,9 +40,9 @@ class HostManager
 
     fun get_virtualhosts : ArrayIterator[VirtualHost] do return virtualhosts.iterator end
 
-	fun addnew_virtualhost(name : String, port : Int, alias : String, root : String) : VirtualHost
+	fun addnew_virtualhost(name : String, port : Int, aliases : Array[String], root : String) : VirtualHost
 	do
-		var vh = new VirtualHost(name, port, alias, root, default_mimes)
+		var vh = new VirtualHost(name, port, aliases, root, default_mimes)
 		virtualhosts.push(vh)
 		self.add_route_for(vh)
 		return vh
@@ -54,9 +54,10 @@ class HostManager
 		port_route = router[vh.get_port]
 		if port_route is null then
 			port_route = new HashMap[String, VirtualHost]
+		end
+		for alias in vh.get_aliases do
 			router[vh.get_port] = port_route
 		end
-		port_route[vh.get_alias] = vh
 	end
 
 	fun route(port : Int, alias : String) : VirtualHost
