@@ -58,6 +58,6 @@ config.get_hostsmanager.set_default_host(
 )
 
 var e : EventBase = new EventBase.create_base
-var listener = new ConnectionListener.bind_to(e, "localhost", 80, new HttpServerFactory(config))
+var listener = new ConnectionListener.bind_to(e, "localhost", 8080, new HttpServerFactory(config))
 
 e.dispatch
