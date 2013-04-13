@@ -8,12 +8,15 @@ class HostManager
 	
 	private var virtualhosts : Array[VirtualHost] = new Array[VirtualHost]
 
+	private var default_host : VirtualHost
+
 	type Router : HashMap[Int, HashMap[String, VirtualHost]]
 	private var router : Router = new Router
 
 	init
 	do
 	    self.default_mimes = get_new_default_mimes
+	    self.default_host = get_new_default_host
 	end
     
     private fun get_new_default_mimes : Mimes
@@ -21,6 +24,16 @@ class HostManager
         var mimes : Mimes = new Mimes
         mimes.load_basic_mimes
         return mimes
+    end
+
+    private fun get_new_default_host : VirtualHost
+    do
+    	return new VirtualHost("default",-1,"","./",default_mimes)
+    end
+
+    fun get_default_host : VirtualHost
+    do
+    	return default_host
     end
     
     fun get_default_mimes : Mimes do return default_mimes
@@ -46,13 +59,17 @@ class HostManager
 		port_route[vh.get_alias] = vh
 	end
 
-	fun route(port : Int, alias : String) : nullable VirtualHost
+	fun route(port : Int, alias : String) : VirtualHost
 	do
 		var port_route : nullable HashMap[String, VirtualHost]
 		port_route = router[port]
-		if port_route is null then 
-			return null
-		else return port_route[alias]
+		if port_route is null then return default_host
+		var routed_host : nullable VirtualHost = port_route[alias]
+		if routed_host is null then
+			return default_host
+		else
+			return routed_host.as(not null)
+		end
 	end
 
 end
