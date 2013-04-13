@@ -1,3 +1,5 @@
+module server
+
 import event
 import config
 import http_parser
