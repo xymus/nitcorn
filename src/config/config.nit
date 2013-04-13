@@ -6,13 +6,11 @@ import logmanager
 # Server instance configuration
 
 class Config
+    super HostManager, LogManager
 
 	private var name : String
 	private var init_time : Int
 	private var accepted_methods: Array[String] = ["GET"]
-
-	private var logmanager : LogManager = new LogManager
-	private var hostmanager : HostManager = new HostManager
 
     private var config_db_path : String = "config.sqlite"
     private var config_script_path : String = "../../sql/config.sql"
@@ -21,6 +19,7 @@ class Config
     do
     	self.name = name
     	self.init_time = get_time
+
     end
 
     fun get_accepted_methods : Array[String] do return accepted_methods
