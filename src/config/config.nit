@@ -6,7 +6,8 @@ import logmanager
 # Server instance configuration
 
 class Config
-    super HostManager, LogManager
+    super HostManager
+    super LogManager
 
 	private var name : String
 	private var init_time : Int
