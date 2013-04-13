@@ -26,6 +26,8 @@ class HostManager
         return mimes
     end
 
+    fun set_default_host(h: VirtualHost) do default_host = h
+
     private fun get_new_default_host : VirtualHost
     do
     	return new VirtualHost("default",-1,[""],"./",default_mimes)
