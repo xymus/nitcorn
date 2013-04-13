@@ -61,7 +61,7 @@ class HttpResponse
         for key,value in response_header_fields do
             buf.append("{key}: {value}\r\n")
         end
-        buf.append("{response_body}")
+        buf.append("\r\n{response_body}")
         return buf.to_s
     end
 
