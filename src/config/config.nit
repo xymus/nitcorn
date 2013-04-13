@@ -10,6 +10,7 @@ class Config
 
 	private var name : String
 	private var init_time : Int
+	private var accepted_methods: Array[String] = ["GET"]
 
 	private var logmanager : LogManager = new LogManager
 	private var hostmanager : HostManager = new HostManager
@@ -22,6 +23,8 @@ class Config
     	self.name = name
     	self.init_time = get_time
     end
+
+    fun get_accepted_methods : Array[String] do return accepted_methods
 
     fun get_name : String do return name
 
