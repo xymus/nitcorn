@@ -50,11 +50,10 @@ c_read_cb(struct bufferevent *bev, void *ctx)
     evbuffer_remove(input, buf, sz);
     String buf_str;
     if(sz > 0) {
-        buf_str = new_String_from_cstring(buf);
+        buf_str = new_String_with_native(buf,sz);
     } else {
         buf_str = new_String_from_cstring("");
     }
-    printf("Got from C : '%s'\n", buf);
     if(ctx != NULL) {
         Connection_read_callback(
             ((struct connection_data*)ctx) ,
@@ -166,7 +165,10 @@ extern EventBase
 
 end
 extern ConnectionListener
-    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import Connection::close, Connection::from_server, Factory::set_listener, Factory::make_server, String::to_cstring, Connection::read_callback, ConnectionListener::error_callback `{
+    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import
+			Connection::close, Connection::from_server, Factory::set_listener, Factory::make_server,
+			String::to_cstring, String::from_cstring, String::with_native, Connection::read_callback,
+			ConnectionListener::error_callback `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
         Factory_incr_ref(fact);
