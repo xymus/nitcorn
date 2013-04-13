@@ -22,9 +22,7 @@ class Application
             return router["/"].execute("")
         else
             for key,action in router do
-                print "{http_request.get_url} {key}"
                 if http_request.get_url == key then
-                    print "got key {key}"
                     return action.execute("")
                 end
             end
@@ -44,17 +42,20 @@ redef class HttpServer
         else
             var app = new Application(http_request)
             var response =  app.execute
+            response.set_version("HTTP/1.0")
+            if response.get_response_field("Content-Type") == "" then
+                response.set_response_field("Content-Type", "text/html")
+            end
             write(response.to_s)
             close
         end
     end
 end
 
-
 var config = new Config("nitcorn")
-#Setting default hosts for static files
+#Setting default hosts
 config.get_hostsmanager.set_default_host(
-    new Host("localhost", "/home/jp/Projects-ssd/nit-webserve", new Mimes)
+    new VirtualHost("localhost", 80, new Array[String], "src/example-app/public_html", new Mimes)
 )
 
 var e : EventBase = new EventBase.create_base

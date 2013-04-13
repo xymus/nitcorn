@@ -26,18 +26,16 @@ super Server
 
         var http_codes = new HttpStatusCodes
 
-        var response = new HttpResponse(request.get_version, 200, http_codes.get_status_message(200), headers, "")
+        var response = new HttpResponse("HTTP/1.0", 200, http_codes.get_status_message(200), headers, "")
 
         if config.get_accepted_methods.has(request.get_method) then
             if "{h.get_root}{request.get_url}".file_exists then
                 if request.get_url.last != '/' then
                     var file = new IFStream.open("{h.get_root}{request.get_url}")
-                    print "Getting file {h.get_root}{request.get_url}"
                     response.set_response_body(file.read_all)
                 else
                     var body = new Buffer
                     var files = "{h.get_root}{request.get_url}".files
-                    print "Getting files for {h.get_root}{request.get_url}"
                     body.append("{h.get_root}:\n")
                     for file in files do
                         body.append("{file}\n")
@@ -46,7 +44,6 @@ super Server
                 end
                 headers["Content-Length"] = response.get_response_body.length.to_s
             else
-                print "{h.get_root}{request.get_url} not found"
                 response.set_status_code(404)
                 response.set_status_message(http_codes.get_status_message(404))
             end
@@ -76,7 +73,7 @@ end
 var config = new Config("nitcorn")
 #Setting default hosts
 config.get_hostsmanager.set_default_host(
-    new Host("localhost", "/var/www", new Mimes)
+    new VirtualHost("localhost", 80, new Array[String], "/var/www", new Mimes)
 )
 
 var e : EventBase = new EventBase.create_base
