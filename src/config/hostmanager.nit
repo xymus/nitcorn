@@ -24,7 +24,6 @@ class HostManager
     end
     
     fun get_default_mimes : Mimes do return default_mimes
-    fun set_default_mimes(mimes : Mimes) do default_mimes = mimes end
 
     fun get_virtualhosts : ArrayIterator[VirtualHost] do return virtualhosts.iterator end
 
