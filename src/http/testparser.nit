@@ -36,7 +36,18 @@ assert t_set_field: 	test_parsed_request.get_field("Host") == t_field_value
 
 # Ensure parsed_request values of http_parser
 
-#var test_request_string_one = "GET /test-url.nit HTTP/1.0\r\nHost: 123.222.666.nit" 
+var test_request_string_one = "GET /test-url.nit?allyourbases=arebelongtous?no=yes HTTP/1.0\r\nHost: 123.222.666.nit" 
+var parser = new HttpParser
+var test2 = parser.parse_request(test_request_string_one)
+
+print test2.get_field("method")
+print test2.get_field("url")
+print test2.get_field("version")
+print test2.get_field("body")
+print test2.get_field("var1")
+print test2.get_field("var2")
+print test2.get_field("var3")
+
 #var test_request_string_two = "POST https://new-google.nit/world007.org HTTP/1.1\r\nConnection: Keep-Alive\r\n\r\nThis is the body"
 
 #var t_one_method = "GET" 
