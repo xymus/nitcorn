@@ -24,10 +24,10 @@ class Application
 
     fun execute: HttpResponse do
         for key,action in router do
-            if http_request.get_field("path") == "/" then
+            if http_request.get_field("url") == "/" then
                 return router["/"].execute("")
             end
-            if http_request.get_field("path").substring(0, key.length) == key and key != "/" then
+            if http_request.get_field("url").substring(0, key.length) == key and key != "/" then
                 var module_name = ""
                 if http_request.get_field("url").substring_from(key.length - 1) != "/" then
                     module_name =  http_request.get_field("url").substring_from(key.length)
