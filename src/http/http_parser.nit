@@ -25,7 +25,7 @@ class HttpParser
         http_request.url = first_line[1]
         if http_request.url.has('?') then 
             http_request.uri = first_line[1].substring(0, first_line[1].index_of('?'))
-            http_request.query_string = first_line[1].substring_from(first_line[1].index_of('?'))
+            http_request.query_string = first_line[1].substring_from(first_line[1].index_of('?')+1)
             http_request.params = parse_url
         else
             http_request.uri = first_line[1]
@@ -97,7 +97,7 @@ class HttpParser
         var query_strings = new ArrayMap[String, String]
 
 		if http_request.url.has('?') then 
-            var params = http_request.url.split_with("&")
+            var params = http_request.query_string.split_with("&")
             for param in params do
                 var key_value = param.split_with("=")
                 query_strings[key_value[0]] = key_value[1]

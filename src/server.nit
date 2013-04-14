@@ -10,7 +10,13 @@ class HttpServer
 super Server
 
     var buffer_request : Buffer = new Buffer
-    var config : nullable Config
+    var config : Config
+
+    init(factory: HttpServerFactory, connection: Connection, config: Config)
+    do
+        super(factory, connection)
+        self.config = config
+    end
 
     redef fun read(line : String) do
         buffer_request.append(line)
@@ -63,9 +69,7 @@ super Factory
     init (c: Config) do config = c
 
     redef fun make_server(c: Connection): HttpServer do
-        var s = new HttpServer(self, c)
-        s.config = config
-        return s
+        return new HttpServer(self, c, config)
     end
 end
 

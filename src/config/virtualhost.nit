@@ -32,4 +32,6 @@ class VirtualHost
 	fun get_root : String do return root
 	fun get_supported_mimes : Mimes do return supported_mimes
 
+    fun set_root(new_root: String) do root = new_root
+
 end
