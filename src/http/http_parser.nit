@@ -12,8 +12,8 @@ class HttpParser
 	private var method_types: Array[String]
 	private var version_types: Array[String]
 
-	private var header_fields: Array[String]
-	private var first_line: Array[String]
+	private var header_fields: Array[String] = new Array[String]
+	private var first_line: Array[String] = new Array[String]
     private var fields : HashMap[String, String] = new HashMap[String, String]
 	
 	init
@@ -29,7 +29,7 @@ class HttpParser
 		if request.has_prefix(" ") then return response_error("400")
 
 		if not segment_request(request) then return response_error("400")
-			
+			 
 		if not check_method then return response_error("400")
 
 		if not check_version then return response_error("400")
@@ -70,11 +70,14 @@ class HttpParser
 			first_line  = temp_req.split_with(' ')
 			header_fields.shift
 			header_fields.shift
-			if first_line.length > 3 then return false 
+
+			if first_line.length != 3 then return false 
+
 		else
 			first_line = header_fields[0].split_with(' ')
 			header_fields.shift
-			if first_line.length > 3 then return false
+
+			if first_line.length != 3 then return false
 		end
 
 		var pos = 0
@@ -86,18 +89,29 @@ class HttpParser
 			end
 			pos = pos+1
 		end
+
+		fields["method"] = first_line[0]
+		fields["url"] = first_line[1]
+		fields["version"] = first_line[2]
+
 		return true
 	end
 	
 	private fun check_method: Bool 
-	do
-		for i in method_types do if i == fields["method"] then return true
+	do 
+		for i in method_types 
+		do 
+			if fields["method"] == i then return true
+		end
 		return false
 	end
 	
 	private fun check_version: Bool	
 	do
-		for i in version_types do if i == fields["version"] then return true 
+		for i in version_types
+		do
+			if fields["version"] == i then return true 
+		end
 		return false
 	end
 

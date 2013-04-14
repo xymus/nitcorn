@@ -7,7 +7,7 @@ module http_response
 
 class HttpResponse
 
-	private var version: String
+		private var version: String
 	private var status_code: Int
 	
 	private var status_message: String

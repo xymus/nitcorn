@@ -13,7 +13,7 @@ class Action
     init(r: HttpRequest) do http_request = r
 
     fun return_404 : HttpResponse do
-        return new HttpResponse(http_request.get_version, 404, http_codes.get_status_message(404), new HashMap[String, String], "")
+        return new HttpResponse(http_request.get_field("version"), 404, http_codes.get_status_message(404), new HashMap[String, String], "")
     end
 
     fun execute(module_name: String): HttpResponse is abstract
