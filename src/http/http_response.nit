@@ -42,19 +42,6 @@ class HttpResponse
 		end
 	end 
 
-	fun get_full_response: String
-	do
-		var full_response = ""
-		
-		full_response = version + " " + status_code.to_s + " " + status_message + "\r\n"
-
-		for x, y in response_header_fields do full_response += x + ": " + y + "\r\n"
-		
-		if response_body != "" then full_response += "\r\n" + response_body + "\r\n"
-
-		return full_response	
-	end
-
     redef fun to_s : String do
         var buf = new Buffer
         buf.append("{version} {status_code} {status_message}\r\n")

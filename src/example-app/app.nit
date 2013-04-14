@@ -24,13 +24,13 @@ class Application
 
     fun execute: HttpResponse do
         for key,action in router do
-            if http_request.get_field("url") == "/" then
+            if http_request.url == "/" then
                 return router["/"].execute("")
             end
-            if http_request.get_field("url").substring(0, key.length) == key and key != "/" then
+            if http_request.url.substring(0, key.length) == key and key != "/" then
                 var module_name = ""
-                if http_request.get_field("url").substring_from(key.length - 1) != "/" then
-                    module_name =  http_request.get_field("url").substring_from(key.length)
+                if http_request.url.substring_from(key.length - 1) != "/" then
+                    module_name =  http_request.url.substring_from(key.length)
                 end
                 var response = action.execute(module_name)
                 if not action.render_file is null then
@@ -50,7 +50,7 @@ end
 redef class HttpServer
 
     redef fun answer(http_request: HttpRequest) do
-        if http_request.get_field("url").substring(0, 8) == "/static/" then
+        if http_request.url.substring(0, 8) == "/static/" then
             super(http_request)
             close
         else

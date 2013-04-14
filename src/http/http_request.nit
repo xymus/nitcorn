@@ -7,24 +7,22 @@ module http_request
 
 class HttpRequest
 
-	private var fields: HashMap[String, String]
+    var http_version : String = ""
+    var method : String = ""
+    var host : String = ""
+    var url : String = ""
+    var uri : String = ""
+    var query_string : String = ""
+    var params : ArrayMap[String, String] = new ArrayMap[String, String]
+    var headers : ArrayMap[String, String] = new ArrayMap[String, String]
+    var body : String = ""
 
-	init
-	do
-		self.fields = new HashMap[String,String]
-	end
-
-	init full(fields: HashMap[String,String])
-	do
-		self.fields = fields
-	end
-
-	fun set_field(field, value: String) do fields[field] = value
+	fun set_header(header, value: String) do headers[header] = value
 	
-    fun get_field(key: String) : String
+    fun get_header(key: String) : String
     do
-		if fields.keys.has(key) then 
-			return fields[key] 
+		if headers.keys.has(key) then 
+			return headers[key] 
 		else
 			return ""
 		end

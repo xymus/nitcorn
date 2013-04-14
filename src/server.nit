@@ -15,7 +15,7 @@ super Server
     redef fun read(line : String) do
         buffer_request.append(line)
         var parser = new HttpParser
-        answer(parser.parse_request(buffer_request.to_s))
+        answer(parser.parse_http_request(buffer_request.to_s))
     end
 
     fun answer(request: HttpRequest) do
@@ -28,14 +28,14 @@ super Server
 
         var response = new HttpResponse("HTTP/1.0", 200, http_codes.get_status_message(200), headers, "")
 
-        if config.get_accepted_methods.has(request.get_field("method")) then
-            if "{h.get_root}{request.get_field("url")}".file_exists then
-                if request.get_field("url").last != '/' then
-                    var file = new IFStream.open("{h.get_root}{request.get_field("url")}")
+        if config.get_accepted_methods.has(request.method) then
+            if "{h.get_root}{request.url}".file_exists then
+                if request.url.last != '/' then
+                    var file = new IFStream.open("{h.get_root}{request.url}")
                     response.set_response_body(file.read_all)
                 else
                     var body = new Buffer
-                    var files = "{h.get_root}{request.get_field("url")}".files
+                    var files = "{h.get_root}{request.url}".files
                     body.append("{h.get_root}:\n")
                     for file in files do
                         body.append("{file}\n")

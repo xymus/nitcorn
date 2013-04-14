@@ -5,63 +5,62 @@
 
 module http_parser
 
-import http_request
+intrude import http_request
 
 class HttpParser
 
-	private var method_types: Array[String]
-	private var version_types: Array[String]
+    var body: String = ""
+	var header_fields: Array[String] = new Array[String]
+	var first_line: Array[String] = new Array[String]
+    var fields : HashMap[String, String] = new HashMap[String, String]
+    var http_request = new HttpRequest
 
-	private var header_fields: Array[String] = new Array[String]
-	private var first_line: Array[String] = new Array[String]
-    private var fields : HashMap[String, String] = new HashMap[String, String]
-	
-	init
-	do
-		method_types = ["GET","POST","PUT","HEAD","OPTIONS","DELETE","TRACE","CONNECT"]
-		version_types = ["HTTP/1.0","HTTP/1.1"]
-	end
-
-	fun parse_request(request: String) : HttpRequest
+	fun parse_http_request(full_request: String) : HttpRequest
 	do	
 		clear_data
 
-		if request.has_prefix(" ") then return response_error("400")
+		segment_http_request(full_request)
+        
+        http_request.http_version = first_line[2]
+        http_request.url = first_line[1]
+        if http_request.url.has('?') then 
+            http_request.uri = first_line[1].substring(0, first_line[1].index_of('?'))
+            http_request.query_string = first_line[1].substring_from(first_line[1].index_of('?'))
+            http_request.params = parse_url
+        else
+            http_request.uri = first_line[1]
+        end
+        http_request.method = first_line[0]
 
-		if not segment_request(request) then return response_error("400")
-			 
-		if not check_method then return response_error("400")
+		for i in header_fields do
+			var temp_field = i.split_with(": ")
 
-		if not check_version then return response_error("400")
+			if temp_field.length == 2 then
+				http_request.headers[temp_field[0]] = temp_field[1]
+			end				
+		end
 
-		if not find_path_variables then return response_error("400")
-
-		if not insert_fields then return response_error("400")
-
-		fields["status_code"] = "200"
-
-        return new HttpRequest.full(fields)
+        return http_request
 	end
 
 	private fun clear_data
 	do
-		fields.clear
 		first_line.clear
 		header_fields.clear
 	end
 
-	private fun segment_request(request: String): Bool 
+	private fun segment_http_request(http_request: String): Bool 
 	do		
-		var temp_place = "\r\n\r\n".search_index_in(request, 0)
+		var temp_place = "\r\n\r\n".search_index_in(http_request, 0)
 
 		if temp_place < 0 then
-			header_fields = request.split_with("\r\n")
+			header_fields = http_request.split_with("\r\n")
 		else
-			header_fields = request.substring(0, temp_place).split_with("\r\n")
-			fields["body"] = request.substring(temp_place+4, request.length-1)
+			header_fields = http_request.substring(0, temp_place).split_with("\r\n")
+			body = http_request.substring(temp_place+4, http_request.length-1)
 		end
 		
-		## If a line of the request is long it may change line, it has " " at the end to indicate this.
+		## If a line of the http_request is long it may change line, it has " " at the end to indicate this.
 		## This section turns them into 1 line.
 
 		if header_fields.length > 1 and header_fields[0].has_suffix(" ") then
@@ -90,75 +89,21 @@ class HttpParser
 			pos = pos+1
 		end
 
-		fields["method"] = first_line[0]
-		fields["url"] = first_line[1]
-		fields["version"] = first_line[2]
-
 		return true
 	end
-	
-	private fun check_method: Bool 
-	do 
-		for i in method_types 
-		do 
-			if fields["method"] == i then return true
-		end
-		return false
-	end
-	
-	private fun check_version: Bool	
+
+    private fun parse_url : ArrayMap[String, String]
 	do
-		for i in version_types
-		do
-			if fields["version"] == i then return true 
-		end
-		return false
-	end
+        var query_strings = new ArrayMap[String, String]
 
-	private fun find_path_variables: Bool
-	do
-		var no_problem = true
-		var temp_path_variables = first_line[1].split_with("?")
-		var count = 1
-
-		if temp_path_variables.length <= 0 then 
-			no_problem = false
-		else if temp_path_variables.length == 1 then 
-			fields["path"] = temp_path_variables[0]
-		else
-			fields["path"] = temp_path_variables[0]
-			temp_path_variables.remove_at(0)
-
-			for i in temp_path_variables do
-				var temp_string = "var" + count.to_s
-				fields[temp_string] = i
-				count += 1
-			end
+		if http_request.url.has('?') then 
+            var params = http_request.url.split_with("&")
+            for param in params do
+                var key_value = param.split_with("=")
+                query_strings[key_value[0]] = key_value[1]
+            end
 		end
 
-		return no_problem
-	end
-
-	private fun insert_fields: Bool
-	do
-		var no_problem = true
-
-		for i in header_fields do
-			var temp_field = i.split_with(": ")
-
-			if temp_field.length != 2 then
-				no_problem = false	
-			else 
-				fields[temp_field[0]] = temp_field[1]
-			end				
-		end
-
-		return no_problem	
-	end	
-
-	private fun response_error(err_num: String): HttpRequest
-	do
-		fields["status_code"] = err_num
-		return new HttpRequest.full(fields)
+        return query_strings
 	end
 end
