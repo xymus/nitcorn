@@ -11,7 +11,7 @@ super Action
             return new HttpResponse("HTTP/1.0", 200, http_codes.get_status_message(200), new HashMap[String, String], "")
         else
             if ["bleu", "rouge", "vert"].has(module_name) then
-                var input = new IFStream.open("src/example-app/data.txt")
+                var input = new IFStream.open("data.txt")
                 var data = input.read_line.split_with("|")
                 input.close
                 if module_name == "bleu" then
@@ -21,7 +21,7 @@ super Action
                 else
                     data[2] = (data[2].to_i + 1).to_s 
                 end
-                var output = new OFStream.open("src/example-app/data.txt")
+                var output = new OFStream.open("data.txt")
                 output.write("{data[0]}|{data[1]}|{data[2]}")
                 output.close
 
@@ -35,7 +35,7 @@ super Action
 
                 return new HttpResponse("HTTP/1.0", 200, http_codes.get_status_message(200), headers, "\{\"bleu\": {data[0]}, \"rouge\": {data[1]}, \"vert\": {data[2]}\}")
             else if module_name == "get_data.csv" then
-                var input = new IFStream.open("src/example-app/data.txt")
+                var input = new IFStream.open("data.txt")
                 var data = input.read_line.split_with("|")
                 input.close
                 if module_name == "bleu" then
