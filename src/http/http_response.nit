@@ -9,6 +9,7 @@ class HttpResponse
 
 	private var version: String
 	private var status_code: Int
+	
 	private var status_message: String
 	private var response_header_fields: HashMap[String, String]
 	private var response_body: String
