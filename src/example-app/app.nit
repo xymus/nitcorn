@@ -4,13 +4,13 @@ import server
 import action
 import home_action
 import hello_world_action
+import config_action
 
 class Application
     var server_config : Config
     var http_request : HttpRequest
     var router : HashMap[String, Action]
     var template_dir = "src/example-app/templates"
-
 
     init(r: HttpRequest, c : Config) do
         http_request = r
@@ -19,17 +19,18 @@ class Application
 
         router["/hello_world/"] = new HelloWorldAction(http_request)
         router["/"] = new HomeAction(http_request)
+        router["/edit_config/"] = new ConfigAction(http_request)
     end
 
     fun execute: HttpResponse do
         for key,action in router do
-            if http_request.get_url == "/" then
+            if http_request.get_field("path") == "/" then
                 return router["/"].execute("")
             end
-            if http_request.get_url.substring(0, key.length) == key and key != "/" then
+            if http_request.get_field("path").substring(0, key.length) == key and key != "/" then
                 var module_name = ""
-                if http_request.get_url.substring_from(key.length - 1) != "/" then
-                    module_name =  http_request.get_url.substring_from(key.length)
+                if http_request.get_field("url").substring_from(key.length - 1) != "/" then
+                    module_name =  http_request.get_field("url").substring_from(key.length)
                 end
                 var response = action.execute(module_name)
                 if not action.render_file is null then
@@ -49,7 +50,7 @@ end
 redef class HttpServer
 
     redef fun answer(http_request: HttpRequest) do
-        if http_request.get_url.substring(0, 8) == "/static/" then
+        if http_request.get_field("url").substring(0, 8) == "/static/" then
             super(http_request)
             close
         else

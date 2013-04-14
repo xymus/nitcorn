@@ -29,10 +29,4 @@ class HttpRequest
 			return ""
 		end
 	end
-
-	fun get_method : String do return get_field("method") end
-
-	fun get_url : String do return get_field("url") end
-
-	fun get_version : String do return get_field("version") end
 end
