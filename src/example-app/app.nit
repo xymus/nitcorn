@@ -52,7 +52,7 @@ redef class HttpServer
             super(http_request)
             close
         else
-            var app = new Application(http_request,config)
+            var app = new Application(http_request,config.as(not null))
             var response =  app.execute
             response.set_version("HTTP/1.0")
             if response.get_response_field("Content-Type") == "" then
@@ -67,7 +67,7 @@ end
 var config = new Config("nitcorn")
 #Setting default hosts
 config.get_hostsmanager.set_default_host(
-    new VirtualHost("localhost", 80, new Array[String], "src/example-app/public_html", new Mimes)
+    new VirtualHost("localhost", 12345, new Array[String], "src/example-app/public_html", new Mimes)
 )
 
 var e : EventBase = new EventBase.create_base
