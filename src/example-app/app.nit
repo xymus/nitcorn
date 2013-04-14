@@ -33,6 +33,7 @@ class Application
                 end
                 var response = action.execute(module_name)
                 if not action.render_file is null then
+                    print("{template_dir}/{action.render_file.as(not null)}")
                     var file = new IFStream.open("{template_dir}/{action.render_file.as(not null)}")
                     response.set_response_body(file.read_all)
                 end
