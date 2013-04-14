@@ -30,9 +30,9 @@ class HttpRequest
 		end
 	end
 
-	fun get_method : String do return fields["method"] end
+	fun get_method : String do return get_field("method") end
 
-	fun get_url : String do return fields["url"] end
+	fun get_url : String do return get_field("url") end
 
-	fun get_version : String do return fields["version"] end
+	fun get_version : String do return get_field("version") end
 end
