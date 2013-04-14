@@ -13,7 +13,7 @@ server: bin-dir
 	nitc -o bin/server -I lib/ -I src/http/ -I src/config/ src/server.nit
 
 app: bin-dir
-	nitc -o bin/app -I lib/ -I src/http/ -I src/config/ -I src/ -I src/example-app -I src/example-app/actions src/example-app/app.nit
+	nitc -o bin/app -I lib/ -I lib/json -I src/http/ -I src/config/ -I src/ -I src/example-app -I src/example-app/actions src/example-app/app.nit
 
 clean:
 	rm -rf bin/*
