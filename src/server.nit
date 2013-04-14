@@ -10,7 +10,7 @@ class HttpServer
 super Server
 
     var buffer_request : Buffer = new Buffer
-    private var config : nullable Config
+    var config : nullable Config
 
     redef fun read(line : String) do
         buffer_request.append(line)
