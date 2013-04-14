@@ -25,7 +25,11 @@ class Application
                 return router["/"].execute("")
             end
             if http_request.get_url.substring(0, key.length) == key and key != "/" then
-                var response = action.execute(http_request.get_url.substring_from(key.length - 1))
+                var module_name = ""
+                if http_request.get_url.substring_from(key.length - 1) != "/" then
+                    module_name =  http_request.get_url.substring_from(key.length)
+                end
+                var response = action.execute(module_name)
                 if not action.render_file is null then
                     var file = new IFStream.open("{template_dir}/{action.render_file.as(not null)}")
                     response.set_response_body(file.read_all)
