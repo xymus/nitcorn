@@ -106,11 +106,22 @@ class HttpParser
 		var no_problem = true
 		var temp_path_variables = first_line[1].split_with("?")
 		var count = 1
-		for i in temp_path_variables do
-			var temp_string = "var" + count.to_s
-			fields[temp_string] = i
-			count += 1
+
+		if temp_path_variables.length <= 0 then 
+			no_problem = false
+		else if temp_path_variables.length == 1 then 
+			fields["path"] = temp_path_variables[0]
+		else
+			fields["path"] = temp_path_variables[0]
+			temp_path_variables.remove_at(0)
+
+			for i in temp_path_variables do
+				var temp_string = "var" + count.to_s
+				fields[temp_string] = i
+				count += 1
+			end
 		end
+
 		return no_problem
 	end
 
