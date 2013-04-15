@@ -38,13 +38,6 @@ super Action
                 var input = new IFStream.open("data.txt")
                 var data = input.read_line.split_with("|")
                 input.close
-                if module_name == "bleu" then
-                    data[0] = (data[0].to_i + 1).to_s 
-                else if module_name == "rouge" then
-                    data[1] = (data[1].to_i + 1).to_s 
-                else
-                    data[2] = (data[2].to_i + 1).to_s 
-                end
                 var headers = new HashMap[String, String]
                 headers["Content-Type"] = "text/csv"
 
