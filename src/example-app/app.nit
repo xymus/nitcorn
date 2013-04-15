@@ -91,8 +91,10 @@ redef class HttpServer
             if response.get_response_field("Content-Type") == "" then
                 response.set_response_field("Content-Type", "text/html; charset=utf-8")
             end
+            config.get_logmanager.log("HTTP", "{http_request.url} {response.get_status_code}")
             write(response.to_s)
             close
+
         end
     end
 end
@@ -106,5 +108,5 @@ config.get_hostsmanager.set_default_host(
 var e : EventBase = new EventBase.create_base
 var listener = new ConnectionListener.bind_to(e, "localhost", 8080, new HttpServerFactory(config))
 
-print "listening"
+config.get_logmanager.log("DEBUG", "Server started, listening on port 8080")
 e.dispatch

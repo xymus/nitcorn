@@ -11,7 +11,7 @@ class Config
 	private var init_time : Int
 	private var accepted_methods: Array[String] = ["GET"]
 
-	private var logmanager : LogManager = new LogManager
+	private var logmanager : LogManager = new LogManager("log/error.log", "log/access.log")
 	private var hostmanager : HostManager = new HostManager
 
     private var config_db_path : String = "config.sqlite"
