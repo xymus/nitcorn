@@ -102,7 +102,7 @@ end
 var config = new Config("nitcorn")
 #Setting default hosts
 config.get_hostsmanager.set_default_host(
-    new VirtualHost("localhost", 12345, new Array[String], "src/example-app/public_html", new Mimes)
+    new VirtualHost("localhost", 8080, new Array[String], "src/example-app/public_html", new Mimes)
 )
 
 var e : EventBase = new EventBase.create_base
