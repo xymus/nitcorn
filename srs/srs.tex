@@ -83,7 +83,7 @@ détaillée des exigences de l'application Nitcorn. Le concept des exigences ser
 Ce document s'adresse aux développeurs du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
 \section{Portée}
-L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développé par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
+L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développé principalement par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
 \begin{itemize}
     \item Écoute sur un socket;
     \item Réception de requêtes HTTP 1.0 et 1.1;
@@ -146,6 +146,7 @@ Connexion keep-alive\cite{http1.0}.
 \end{description}
 
 \section{Références}
+(@TODO AJOUTER LES DATES ET LES ORGANISATIONS QUI LES ONT PUBLIÉS)\\
 \begin{tabularx}{\textwidth}{|l|X|l|}
     \hline
     Ref. & Numéro du document & Titre \\
@@ -162,7 +163,7 @@ Le  reste du document va contenir toutes les exigences de notre application orga
 \\
 La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présentée. Cette section traitera les aspects suivants:
 \begin{description}
-\item[Description] Description global du projet et de ses interfaces.
+\item[Description] Description globale du projet et de ses interfaces.
 \item[Récit des fonctions] Récit décrivant une fonction du point de vue de son utilisateur. Organisé par utilisateurs.
 \item[Caractéristiques des utilisateurs] Caractéristiques requises par les utilisateurs
 \item[Contraintes] Éléments qui risquent de contraindre le développeur.
@@ -178,6 +179,10 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
+(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES INTERFACES?:)\\
+(@TODO A block diagram showing the major components of the larger system, interconnections, and external inter-
+faces)
+
 Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
 d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
@@ -226,6 +231,7 @@ Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilis
 Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
 
 \subsection{Serveur}
+(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES LIENS ENTRE CES TROIS PARTIES?)\\
 \begin{itemize}
  \item Réception d'une requête
  \item Traiter une requête
@@ -270,7 +276,10 @@ permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant tr
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
+(@TODO MISE EN PAGE DE CETTE SECTION)\\
+(@TODO MESSAGE SUR LE FAIT QUE LA DÉFINITION EXACTE DES METHODES, HEADERS ET CODE D'ERREURS SONT DANS LE RFC 2616)\\
 Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
+(@TODO BRÈVE DESCRIPTION DES MÉTHODES)\\
 \begin{itemize}
  \item OPTIONS:
  \item GET:
@@ -284,7 +293,9 @@ Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
 \end{itemize}
 
 Le serveur devra être en mesure de supporter les headers suivants: \\
+(@TODO COMPLÉTER LES DESCRIPTIONS MANQUANTES)\\
 \\
+
 Http/1.0\\
     General-Header\\
         \begin{itemize}
@@ -432,9 +443,12 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \end{itemize}
     
 \section{Hypothèse et dépendances}
+(@TODO MESSAGE SUR LA PORTABILITÉ SUR LES AUTRES OS QUI SERAIENT SUPPORTÉS PAR NIT?)\\
 Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
 
+
 \chapter{Exigences spécifiques}
+(@TODO COMPLÉTER LES CAS D'UTILISATION)\\
 
 \section{Description des acteurs}
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
@@ -706,15 +720,42 @@ la valeur fournie.
     \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
 \end{itemize}
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
+\section{Contraintes sur la base de données}
+(@TODO: 5.3.4 Logical database requirements
+This should specify the logical requirements for any information that is to be placed into a database. This
+may include the following:
+  a)   Types of information used by various functions;
+  b)   Frequency of use;
+  c)   Accessing capabilities;
+  d)   Data entities and their relationships;
+  e)   Integrity constraints;
+  f)   Data retention requirements.
+)
+\section{Contraintes de conception}(@TODO: LES ÉNUMÉRER?)\\ Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
+\section{Conformité avec les standards}
+(@TODO: This subsection should specify the requirements derived from existing standards or regulations. They may
+include the following:
+   a)    Report format;
+   b)    Data naming;
+   c)    Accounting procedures;
+   d)    Audit tracing.
+For example, this could specify the requirement for software to trace processing activity. Such traces are
+needed for some applications to meet minimum regulatory or Þnancial standards. An audit trace requirement
+may, for example, state that all changes to a payroll database must be recorded in a trace Þle with before and
+after values.
+)
 \section{Attributs}
 \subsection{Disponibilité}
-Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
+Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme. \\
+(@TODO: CHIFFRER EN PLUS! Exemple: 24/24, 7/7, 95\% du temps)
 \subsection{Sécurité}
+(@TODO: TROP VAGUE, IMPRÉCIE)
 Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
-Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-\subsection{Transférabilité} Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
+Le serveur devra pouvoir changer sa configuration sans être redémarrer.
+\subsection{Transférabilité} 
+(@TODO: NON TERMINÉ?)
+Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
 sur des machines de même famille. Si le module de persistance 
 
 \begin{thebibliography}{9}
