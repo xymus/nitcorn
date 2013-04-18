@@ -147,14 +147,16 @@ Connexion keep-alive\cite{http1.0}.
 \end{description}
 
 \section{Références}
-(@TODO AJOUTER LES DATES ET LES ORGANISATIONS QUI LES ONT PUBLIÉS)\\
-\begin{tabularx}{\textwidth}{|l|X|l|}
+
+\begin{tabularx}{\textwidth}{|l|X|l|l|l|}
     \hline
-    Ref. & Numéro du document & Titre \\
+    Ref. & Numéro du document & Titre & Organisation & Date\\
     \hline
-    \cite{ieefr} & IEEE 830-1993 & Norme IEEE 830-1993 \\
+    \cite{ieefr} & IEEE 830-& Norme IEEE 830-1993 & Institute of Electrical and & 1993\\
+    & 1993& &  Electronics Engineers &\\
     \hline
-    \cite{http} & RFC2616 & Hypertext Transfer Protocol -- HTTP/1.1 \\
+    \cite{http} & RFC2616 & Hypertext Transfer Protocol & The Internet Society&	1999\\
+    & & -- HTTP/1.1& &\\
     \hline
 \end{tabularx}
 
@@ -185,7 +187,7 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 faces)
 
 Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
-d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). (@TODO: TROP VAGUE: )Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
 fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
 et de fonctionnalités essentiels au serveur web.
