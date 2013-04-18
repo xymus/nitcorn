@@ -276,6 +276,9 @@ une boucle d’événements pour les communications bloquantes sur les sockets. 
 permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
+
+
+
 \subsection{Utilisation du serveur}
 (@TODO MISE EN PAGE DE CETTE SECTION)\\
 La spécification complète et exacte des méthodes, \textit{headers} et des codes d'erreurs suivants se retrouvent dans le RFC2616 listé dans les références.\\\\
@@ -291,9 +294,9 @@ Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
  \item CONNECT: Demande au serveur d'ouvrir un tunnel TCI/IP.
  \\
 \end{itemize}
-
+\\\\
 Le serveur devra être en mesure de supporter les headers suivants: \\
-(@TODO COMPLÉTER LES DESCRIPTIONS MANQUANTES)\\
+
 \\
 
 Http/1.0\\
@@ -333,42 +336,42 @@ Http/1.1\\
         \item Connection: Options des spécifications de la connection courante.     
         \item Trailer: Liste des headers présent dans le message encodé.          
         \item Transfer-Encoding: Indique le type de transformation effectuée sur le corps du message afin de se rendre à déstination.
-        \item Upgrade: Spécifie les autres prtocoles de communication supportées au server.          
-        \item Via:              
-        \item Warning:          
+        \item Upgrade: Spécifie les autres protocoles de communication supportées au server.          
+        \item Via: Doit être utilisé par les passerelles et proxys pour indiquer les protocoles intermédiaires entre le serveur et le client.
+        \item Warning: Contient des information additionnelles sur le status ou la transformation du message.
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Accept:              
-        \item Accept-Charset:   
-        \item Accept-Encoding:  
-        \item Accept-Language:
-        \item Expect:                    
-        \item Host:             
-        \item If-Match:
-        \item If-None-Match:    
-        \item If-Range:         
-        \item If-Unmodified-Since:
-        \item Max-Forwards:       
-        \item Proxy-Authorization:
-        \item Range:              
+        \item Accept: Spécifie les types de données acceptées dans la réponse.
+        \item Accept-Charset: Indique le codage des caractères accepté dans la réponse.
+        \item Accept-Encoding: Similaire au \textit{Accept}, mais restreint l'encodage du contenu acceptable dans la réponse.
+        \item Accept-Language: Spécifit le language naturel préféré en réponse.
+        \item Expect: Indique qu'un comportement spécifique est requis par le client.
+        \item Host: Spécifit l'hôte et le port de la ressource demandée.
+        \item If-Match: Rend conditionnelle la requête.
+        \item If-None-Match: Semblable au \textit{If-Match}, mais inverse la condition.
+        \item If-Range: Spécifit de n'envoyer que les parties à jour de la ressource demandé dont client ne dispose pas.
+        \item If-Unmodified-Since: Rend conditionnelle la méthode: n'effectue la requête que si la ressource n'a pas été modifié depuis la date indiqué.
+        \item Max-Forwards: Limite le nombre de proxys ou de passerelle qui peuvent envoyer une réponse lors d'une requête TRACE ou OPTIONS.
+        \item Proxy-Authorization: Permet au client de s'identifier à un proxy.
+        \item Range: Spécifit l'étendu de la ressource désiré par le client.
         \item TE: Liste des extentions d'encodage de transfert. 
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges: 
-        \item Age:        
-        \item ETag:       
-        \item Proxy-Authenticate:  
-        \item Retry-After:                       
-        \item Vary:                
+        \item Accept-Ranges: Permet au serveur d'inquiquer les \textit{Range} accepté au client.
+        \item Age: L'âge de la réponse depuis son écriture.
+        \item ETag: Identifiant unique donné par le serveur à une version d'une ressource.
+        \item Proxy-Authenticate: Indique au client la méthode d'authentification du proxy.
+        \item Retry-After: Indique au client combien de temps le service prévoit ne pas être disponible.
+        \item Vary: Indique comment déterminer si le contenu peut être utilisé à la place d'effectuer une nouvelle requête.
         \end{itemize}
     Entity-Header\\
         \begin{itemize}                 
-        \item Content-Language:
-        \item Content-Location:     
-        \item Content-MD5:          
-        \item Content-Range:        
+        \item Content-Language: Indique le language naturel du contenu.
+        \item Content-Location: Indique un emplacement alternatif du contenue.
+        \item Content-MD5: Indique le MD5 du corps de la requête.
+        \item Content-Range: Indique la position du corps partiel actuel dans le corps du message complet.
         \end{itemize}
  
 Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leurs définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
