@@ -278,18 +278,17 @@ Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitat
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 \subsection{Utilisation du serveur}
 (@TODO MISE EN PAGE DE CETTE SECTION)\\
-(@TODO MESSAGE SUR LE FAIT QUE LA DÉFINITION EXACTE DES METHODES, HEADERS ET CODE D'ERREURS SONT DANS LE RFC 2616)\\
+La spécification complète et exacte des méthodes, \textit{headers} et des codes d'erreurs suivants se retrouvent dans le RFC2616 listé dans les références.\\\\
 Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
-(@TODO BRÈVE DESCRIPTION DES MÉTHODES)\\
 \begin{itemize}
- \item OPTIONS:
- \item GET:
- \item HEAD:
- \item POST:
- \item PUT:
- \item DELETE:
- \item TRACE:
- \item CONNECT:
+ \item OPTIONS: Demande les informations sur les options de communication disponible.
+ \item GET: Demande la ressource identifié par l'URI.
+ \item HEAD: Identique à GET, mais la réponse ne doit pas contenir de \textit{message body}.
+ \item POST: Indique que des données sont envoyés dans le \textit{message body} et demande au serveur d'en prendre compte.
+ \item PUT: Demande de stocker les données envoyé par la requête.
+ \item DELETE: Demande d'effacer la ressource identifiée par l'URI.
+ \item TRACE: Invoque les serveurs intermédiaires pour leur demander de lui réenvoyer la requête.
+ \item CONNECT: Demande au serveur d'ouvrir un tunnel TCI/IP.
  \\
 \end{itemize}
 
