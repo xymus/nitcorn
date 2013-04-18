@@ -726,16 +726,26 @@ la valeur fournie.
 \end{itemize}
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
 \section{Contraintes sur la base de données}
-(@TODO: 5.3.4 Logical database requirements
-This should specify the logical requirements for any information that is to be placed into a database. This
-may include the following:
-  a)   Types of information used by various functions;
-  b)   Frequency of use;
-  c)   Accessing capabilities;
-  d)   Data entities and their relationships;
-  e)   Integrity constraints;
-  f)   Data retention requirements.
-)
+(@TODO VALIDER PAR L'ÉQUIPE #TEAMVAL)
+\subsection{Information contenue}
+La base de données de Nitcorn devra contenir les informations de la configuration:
+\begin{itemize}
+	\item Chemins des différents fichiers de log.
+	\item Les différentes données des hôtes virtuels.
+\end{itemize}
+\subsection{Fréquence d'utilisation}
+Elle ne sera lu que lors du démarage de Nitcorn ou lors d'une modification de la configuration.
+La charge qu'elle devra soutenir sera ainsi que très minime.
+\subsection{Accessibilité}
+Elle devra être accessible que par le serveur Nitcorn ou les administrateurs de celui-ci.
+\subsection{Données}
+\begin{itemize}
+	\item Un chemin par fichier de log.
+	\item Un nom, un port, un dossier racine et une liste d'alias par hôte virtuel.
+\end{itemize}
+\subsection{Rétention des données}
+Le serveur Nitcorn aura besoin des données de cette base de données pour fonctionner, donc en contrepartie d'une petite charge, l'intégrité des données est primoridale. Elle ne devra donc être victime d'aucune perte de données dans la mesure du possible et devra offrir la possibilité de copier son contenu pour une sauvegarde de sûreté et d'importer une telle sauvegarde.
+
 \section{Contraintes de conception}(@TODO: LES ÉNUMÉRER?)\\ Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
 \section{Conformité avec les standards}
 (@TODO: This subsection should specify the requirements derived from existing standards or regulations. They may
