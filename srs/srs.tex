@@ -71,6 +71,10 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Guillaume Auger & Souligner les parties à compléter/corriger & 2013/04/16 \\
     \hline
+    Guillaume Auger & Terminer headers & 2013/04/18 \\
+    & Description des méthodes & \\
+    & Contraintes sur la base de données & \\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
@@ -157,6 +161,8 @@ Connexion keep-alive\cite{http1.0}.
     \hline
     \cite{http} & RFC2616 & Hypertext Transfer Protocol & The Internet Society&	1999\\
     & & -- HTTP/1.1& &\\
+    \hline
+    \cite{NCSA} & N/A & NCSA Common Log Format & NCSA & N/A \\
     \hline
 \end{tabularx}
 
@@ -484,7 +490,7 @@ Nitc ne supporte actuellement que les système de la famille linux mais il devra
     \item  Le log à été enregistré.
 \end{itemize} 
 \subsubsection{Description du processus:}
-Je dois pouvoir recevoir une ou plusieurs requêtes simultanément(@TODO: COMBIEN PLUS PRÉCISÉMENT: MAXIMUM). Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
+Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
 
 (@TODO A Faire:DIAGRAMME
 Example de requêtes;
@@ -600,7 +606,7 @@ pour tenir compte des ajustements.
     \item  
 \end{itemize} 
 \subsubsection{Description du processus:}En tant que serveur, je désire garder un historique de mes transactions. Par
-défaut je respecte le \textbf{standard NCSA Common log format}. Par contre je m'adapte
+défaut je respecte le \textbf{standard NCSA Common log format}\cite{NCSA}. Par contre je m'adapte
 aux administrateurs, qui eux ont la possibilité de changer le format de
 l'enregistrement. Mes enregistrements sont cours et concis. Ils expliquent
 simplement qui a fait quoi et quand.
@@ -750,6 +756,7 @@ Le serveur Nitcorn aura besoin des données de cette base de données pour fonct
 
 \section{Contraintes de conception}(@TODO: LES ÉNUMÉRER?)\\ Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
 \section{Conformité avec les standards}
+(@TODO à valider par l'équipe TEAMVAL:)
 (@TODO: This subsection should specify the requirements derived from existing standards or regulations. They may
 include the following:
    a)    Report format;
@@ -761,6 +768,15 @@ needed for some applications to meet minimum regulatory or Þnancial standards. 
 may, for example, state that all changes to a payroll database must be recorded in a trace Þle with before and
 after values.
 )
+\subsection{Requête HTTP}
+Le format et le contenu d'une requête HTTP doit être conforme avec la section 5 du RFC2616\cite{http1.0} mit en référence.
+\subsection{Réponse HTTP}
+Le format et le contenu d'une réponse HTTP doit être conforme avec la section 6 du RFC2616\cite{http1.0} mit en référence.
+\subsection{Entrée de transaction dans le log}
+Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que fournit en référence.
+
+
+
 \section{Attributs}
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme. \\
@@ -791,6 +807,10 @@ spécifications d’exigences de logiciel}, 1993
     The Internet Society,
 \emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996,
 \url{https://tools.ietf.org/html/rfc1945}
+\bibitem{NCSA}
+	NCSA,
+\emph{Common Log Format},
+\url{http://httpd.apache.org/docs/2.2/logs.html#common}	
 \end{thebibliography}
 
 % add other chapters and sections to suit
