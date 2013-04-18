@@ -9,18 +9,18 @@
 \hypersetup{
     bookmarks=false, % show bookmarks bar?
     pdftitle={Document de spécification des exigences du logiciel}
-pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
-Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
-%pdfsubject={TeX and LaTeX}, % subject of the document %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+	pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
+		Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
+	pdfsubject={TeX and LaTeX}, % subject of the document %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
     colorlinks=true, % false: boxed links; true: colored links
     linkcolor=blue, % color of internal links
     citecolor=black, % color of links to bibliography
     filecolor=black, % color of file links
     urlcolor=purple, % color of external links
     linktoc=page % only page is linked
-}%
+}
 \def\myversion{1.0 }
-\title{%
+\title{
 \flushright
 \rule{16cm}{5pt}\vskip1cm
 \Huge{Document de spécification des exigences du logiciel}\\
@@ -69,6 +69,8 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Maxime Bélanger & Définition & 2013/04/13 \\
     \hline
+    Guillaume Auger & Souligner les parties à compléter/corriger & 2013/04/16 \\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
@@ -77,8 +79,7 @@ de notre application à l'aide de définitions, acronymes et
 abréviations. Les objectifs et les portées seront décrits pour
 avoir une meilleure compréhension du document.
 \section{Objet}
-L'objectif de ce document est de présenter une description complète et
-détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents types de diagrammes seront utilisé pour illustrer l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
+L'objectif de ce document est de présenter une description complète, détaillée et précise des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents types de diagrammes seront utilisé pour illustrer l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
 
 Ce document s'adresse aux développeurs du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
@@ -102,7 +103,7 @@ document.
 \begin{description}
     \item[Apache] Serveur Web connu pour jouer un rôle clé dans la croissance initiale du World Wide Web.
 	\item[API] Interface qui rend possible l'interaction entre un homme et une machine.
-    \item[Asynchrone]Technique permettant de mettre en oeuvre des opérations qui sont exécutées simultanément avec le reste du programme.
+    \item[Asynchrone]Technique permettant de mettre en oeuvre des opérations qui sont exécutées simultanément, mais non syncronisé entre elles, avec le reste du programme. 
 	\item[Authentification Basic]Technique de base pour renforcer les contrôles d'accès aux ressources Web.
     \item[Authentification Digest]Technique plus sécuritaire pour renforcer les contrôles d'accès aux ressources Web.
 	\item[Boucle d'événement asynchrone] Structure de programmation qui attend et distribue les événements ou les messages de façon asynchrone dans un programme.
@@ -184,7 +185,7 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 faces)
 
 Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
-d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). (@TODO: TROP VAGUE: )Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
 fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
 et de fonctionnalités essentiels au serveur web.
@@ -449,6 +450,7 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
 
 \chapter{Exigences spécifiques}
 (@TODO COMPLÉTER LES CAS D'UTILISATION)\\
+(@TODO PRIORISER LES FONCTIONS: AJOUTER UN ORDRE DE PRIORITÉ POUR SAVOIR QUELLES FONCTIONS DOIVENT ÊTRE IMPLÉMENTÉS AVANT LESQUELS?)
 
 \section{Description des acteurs}
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
@@ -477,13 +479,13 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
     \item  Le log à été enregistré.
 \end{itemize} 
 \subsubsection{Description du processus:}
-Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
+Je dois pouvoir recevoir une ou plusieurs requêtes simultanément(@TODO: COMBIEN PLUS PRÉCISÉMENT: MAXIMUM). Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
 
-*** A Faire:DIAGRAMME
+(@TODO A Faire:DIAGRAMME
 Example de requêtes;
 Démontrer le traitement;
 Example de retour ;
-***
+)
 
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
@@ -711,8 +713,8 @@ la valeur fournie.
 % Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
 \begin{itemize}
-    \item Lors du démarrage, le système doit lire sa configuration.
-    \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
+    \item Lors du démarrage, le système doit lire sa configuration enregistré dans la base de données.
+    \item Sur réception d'une requête, le système doit vérifier que le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
         le serveur Nitcorn utilisera un hôte par défaut.
     \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
     \item Si la ressource demandée est un dossier et que le client y a accès, le système doit retourner une liste des fichiers et/ou dossiers contenus dans ce même dossier.
