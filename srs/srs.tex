@@ -452,6 +452,7 @@ Nitc ne supporte actuellement que les système de la famille linux mais il devra
 \subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
 \subsection{Administrateur système:} L'administrateur système est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
 \subsection{Serveur:} C'est le logiciel décrit par le présent document, soit Nitcorn.
+\subsection{Application Nit:} C'est un logiciel quelconque écrit en Nit
 
 \section{Spécification des cas d'utilisation pour le serveur} 
 À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
@@ -636,6 +637,7 @@ Réception d'une requête HTTP par l'application Nit via l'interface de Nitcorn.
 \begin{itemize}
     \item Le serveur doit traiter la requête reçue.
 \end{itemize} 
+
 \subsubsection{Description du processus:}
 En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
 serveur/application me permettant de communiquer avec le serveur
@@ -651,7 +653,7 @@ Traitement d'une requête HTTP reçue par l'application Nit.
 
 \subsubsection{Acteurs:}
 \begin{itemize}
-    \item Client 
+    \item Application Nit
     \item Serveur
 \end{itemize}
 
