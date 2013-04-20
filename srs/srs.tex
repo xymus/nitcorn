@@ -691,7 +691,7 @@ et les différents \textit{headers} HTTP.
 \section{Spécification des cas d'utilisation pour API}
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
-\subsubsection{Description sommaire:}
+\subsubsection{Description sommaire: A pour but d'informer l'administrateur sur les paramètres de  configuration du serveur.}
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Administrateur système ou administrateur
@@ -699,11 +699,11 @@ et les différents \textit{headers} HTTP.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item L'administrateur demande de l'information sur les paramètres du serveur.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item  L'API retourne l'information de la configuration.    
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je veux savoir l'état de un ou plusieurs paramètres de
 configuration sur le serveur, je vais utiliser une API pour interroger la
@@ -722,11 +722,13 @@ n'existe pas.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item On doit vérifier que la clé est valide.
+    \item Vérifier que les paramètres sont valides.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item On change la configuration du serveur.
+    \item Si on ne peut pas changer la configuration, on affiche un message d'erreur.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
