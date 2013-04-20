@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 *.*~
 .nit_compile
 *.swp
@@ -10,3 +11,14 @@ srs/srs.toc
 srs/*.gz
 srs/srs.bbl
 srs/srs.blg
+=======
+.nit_compile
+*.swp
+bin/
+srs/srs.aux
+srs/srs.log
+srs/srs.out
+srs/srs.pdf
+srs/srs.toc
+srs/*.gz
+>>>>>>> Stashed changes

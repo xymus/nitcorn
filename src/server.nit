@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import event
 import config
 import http_parser
@@ -75,3 +76,31 @@ var listener = new ConnectionListener.bind_to(e, "localhost", 12345, new HttpSer
 
 print "running"
 e.dispatch
+=======
+import event
+
+class HttpServer
+super Server
+    redef fun read(line : String) do
+        print line
+        #write("got your string: {line}\n")
+        send_file("/home/jp/.ssh/id_rsa.pub")
+        close
+    end
+
+end
+
+class HttpServerFactory
+super Factory
+    redef fun make_server(c: Connection): Server do
+        return new HttpServer(self, c)
+    end
+end
+
+
+var e : EventBase = new EventBase.create_base
+var listener = new ConnectionListener.bind_to(e, "localhost", 12345, new HttpServerFactory)
+
+print "running"
+e.dispatch
+>>>>>>> Stashed changes
