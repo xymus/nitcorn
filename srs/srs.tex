@@ -469,10 +469,11 @@ Nitc ne supporte actuellement que les système de la famille linux mais il devra
 \subsubsection{Postconditions:}
 \begin{itemize}
     \item  L'information de la requête est envoyée au module de traitement.
-    \item  Le log à été enregistré.
+    \item  L'événement est enregistré dans le fichier log.
 \end{itemize} 
 \subsubsection{Description du processus:}
-Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
+Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.Finalement, le log enregistre l'événement.
+
 
 (@TODO A Faire:DIAGRAMME
 Example de requêtes;
@@ -480,20 +481,24 @@ Démontrer le traitement;
 Example de retour ;
 )
 
+
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
-\subsubsection{Description sommaire:} 
+\subsubsection{Description sommaire:} Le serveur doit traiter la requête qui lui a été assignée.
 \subsubsection{Acteurs:}
 \begin{itemize}
     \item Serveur
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item On retourne une erreur si la reqûete est invalide.
+    \item Doit être informé qu'une requête est prête a être traitée.  
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item Le traitement de la requête à été effectué.
+    \item L'événement est enregistré dans le fichier log. 
+    \item Retourne l'état de la requête.    
 \end{itemize} 
 \subsubsection{Description du processus:}En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçue. Une requête HTTP doit posséder les informations suivantes :
 \begin{itemize}
@@ -501,7 +506,7 @@ Example de retour ;
     \item Le URI
     \item Le host
 \end{itemize}
-Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
+Une requête doit être valide sinon on retourne une message d'erreur. Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
 je trouve un virtual host correspondant au host de ma requête, je vais utiliser la configuration de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
 \\
 Le premier élément de la configuration que je lis pour ce host est de déterminer
@@ -536,15 +541,27 @@ la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
 ouverte. De plus, je vais écrire un événement pour cette réponse (voir section
 \textit{Enregistrer les événements}).
 
+
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
-\subsubsection{Description sommaire:}
+\subsubsection{Description sommaire:}Je dois configurer le serveur à la discrétion de l'administrateur ou de l'administrateur système. 
 \subsubsection{Acteurs:}
 \begin{itemize}
     \item Serveur
+    \item Administrateur
+    \item Administrateur système
 \end{itemize}
 \subsubsection{Préconditions:}
+\begin{itemize}
+    \item On doit avoir une configuration par défault.
+\end{itemize} 
 \subsubsection{Postconditions:}
+\begin{itemize}
+    \item On va effectuer un recherche dans la base de donnée pour récupérer la configuration la plus récente..
+    \item L'événement est enregistré dans le fichier log.
+    \item La configuration est changée.
+
+\end{itemize} 
 \subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations dans la base de données afin de connaître comment traiter les requêtes que je vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
 je vais écrire ces informations dans ma classe.
@@ -553,7 +570,7 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsection{Écrire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Écrire la configuration
-\subsubsection{Description sommaire:}
+\subsubsection{Description sommaire:} On cherche à changer ma configuration.
 \subsubsection{Acteurs:} 
 \begin{itemize}
     \item Administrateur système ou administrateur
@@ -561,11 +578,12 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item L'adminstrateur effectue un changement à la configuration.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item  Le serveur est informé que la configuration à changer.
+    \item  L'événement est enregistré dans le fichier log.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant que serveur, si un administrateur change la valeur de un ou plusieurs paramètre(s)
 de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
@@ -574,18 +592,18 @@ pour tenir compte des ajustements.
 
 \subsection{Enregistrer les événements}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer les événements
-\subsubsection{Description sommaire:}
+\subsubsection{Description sommaire:}Je dois sauvegarder dans un fichier tous les événements.
 \subsubsection{Acteurs:}
 \begin{itemize}
     \item Serveur
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item  Un fichier Log doit être créer existant sinon on le crée.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item  Le fichier contient toute les informations des événements.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant que serveur, je désire garder un historique de mes transactions. Par
 défaut je respecte le \textbf{standard NCSA Common log format}\cite{NCSA}. Par contre je m'adapte
@@ -639,7 +657,7 @@ et les différents \textit{headers} HTTP.
 \section{Spécification des cas d'utilisation pour API}
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
-\subsubsection{Description sommaire:}
+\subsubsection{Description sommaire: A pour but d'informer l'administrateur sur les paramètres de  configuration du serveur.}
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Administrateur système ou administrateur
@@ -647,11 +665,11 @@ et les différents \textit{headers} HTTP.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item L'administrateur demande de l'information sur les paramètres du serveur.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item  L'API retourne l'information de la configuration.    
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je veux savoir l'état de un ou plusieurs paramètres de
 configuration sur le serveur, je vais utiliser une API pour interroger la
@@ -670,11 +688,13 @@ n'existe pas.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item On doit vérifier que la clé est valide.
+    \item Vérifier que les paramètres sont valides.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item On change la configuration du serveur.
+    \item Si on ne peut pas changer la configuration, on affiche un message d'erreur.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
