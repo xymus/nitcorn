@@ -5,7 +5,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{tabularx}
-\usepackage{graphicx}
 
 \hypersetup{
     bookmarks=false, % show bookmarks bar?
@@ -204,7 +203,17 @@ et de fonctionnalités essentiels au serveur web.
 Nitcorn sera utilisé sur deux systèmes : un serveur web et un environnement de développement.
 Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
 que l'environnement de développement sera le système utilisé par les développeurs
-pour développer des applications web en Nit.
+pour développer des applications web en Nit.\\
+
+Pour communiquer avec le serveur, l'application web devra redéfinir la classe HTTPServer pour modifier la méthode answer() qui définit la réponse à la requête. 
+La méthode answer() prend en argument une requête http (http_request) et écrit la réponse http avec write().\\\\
+La réponse http doit être composée de la version du protocole HTTP, du code de status, du texte de status, d'un HashMap contenant les \textit{headers} et leur valeur, ainsi que du corps du texte.\\\\
+Voici un exemple simple:\\
+On définit la réponse dans la méthode answer():\\
+var response = new HttpResponse("HTTP/1.0", 200, "OK", new HashMap[String, String], "Hello world")\\
+Puis on la retourne en l'écrivant avec write:\\
+write(response.to_s)\\
+
 
 \subsection{Interfaces avec les utilisateurs}
 Comme il est disponible avec les autres serveurs web, un système de log est
@@ -242,13 +251,7 @@ Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilis
 Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
 
 \subsection{Serveur}
-\\(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES LIENS ENTRE CES TROIS PARTIES?)
-\begin{figure}[ht!]
-    \caption{A simple caption}
-    \centering
-    \includegraphics[width=9cm]{diagram/diagram1}
-\end{figure}
-
+(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES LIENS ENTRE CES TROIS PARTIES?)\\
 \begin{itemize}
  \item Réception d'une requête
  \item Traiter une requête
@@ -297,7 +300,7 @@ pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 
 \subsection{Utilisation du serveur}
 (@TODO MISE EN PAGE DE CETTE SECTION)\\
-La spécification complète et exacte des méthodes, \textit{headers} et des codes d'erreurs suivants se retrouvent dans le RFC2616 listé dans les références.\\\\
+La spécification complète et exacte des méthodes, \textit{headers} et des codes de status suivants se retrouvent dans le RFC2616 listé dans les références.\\\\
 Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
 \begin{itemize}
  \item OPTIONS: Demande les informations sur les options de communication disponible.
@@ -390,7 +393,7 @@ Http/1.1\\
         \item Content-Range: Indique la position du corps partiel actuel dans le corps du message complet.
         \end{itemize}
  
-Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leurs définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
+Le serveur doit retourner ces codes de status HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leurs définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
  \item \textbf{200 - OK}
  \subitem La requête à bien été traité sans erreurs.
