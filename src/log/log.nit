@@ -27,13 +27,14 @@ class Log
     `}
 
     fun error(id: Int, message: String) do
-        var date = get_date
-        file.write("{date}\t{id}\tERROR\t{message}\n")
+        debug(id, message, "ERROR")
     end
 
     fun debug(id: Int, message: String, tag: String) do
         var date = self.get_date
-        file.write("{date}\t{id}\t{tag}\t{message}\n")
+        var output = "-- {date} [{id}] {tag}: {message}\n"
+        file.write(output)
+        printn output
     end
 
     fun close do

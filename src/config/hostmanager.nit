@@ -1,26 +1,22 @@
 module hostmanager
 
-import host
 import virtualhost
 
 class HostManager
 
     private var default_mimes : Mimes
-	private var default_host : Host
 	
-	type AliasRouter : HashMap[String, VirtualHost]
-	type PortAliasRouter : HashMap[Int, AliasRouter]
-	type IpPortAliasRouter : HashMap[Ip, PortAliasRouter]
-	
-	private var virtualhost_router : IpPortAliasRouter = new IpPortAliasRouter
-	
-	private var hosts : HashMap[String, Host] = new HashMap[String, Host]
-	private var virtualhosts : HashMap[String, VirtualHost] = new HashMap[String, VirtualHost]
+	private var virtualhosts : Array[VirtualHost] = new Array[VirtualHost]
+
+	private var default_host : VirtualHost
+
+	type Router : HashMap[Int, HashMap[String, VirtualHost]]
+	private var router : Router = new Router
 
 	init
 	do
 	    self.default_mimes = get_new_default_mimes
-    	self.default_host = get_new_default_host
+	    self.default_host = get_new_default_host
 	end
     
     private fun get_new_default_mimes : Mimes
@@ -30,75 +26,52 @@ class HostManager
         return mimes
     end
 
-    private fun get_new_default_host : Host
+    fun set_default_host(h: VirtualHost) do default_host = h
+
+    private fun get_new_default_host : VirtualHost
     do
-    	return new Host("default","./",default_mimes)
+    	return new VirtualHost("default",-1,[""],"./",default_mimes)
+    end
+
+    fun get_default_host : VirtualHost
+    do
+    	return default_host
     end
     
     fun get_default_mimes : Mimes do return default_mimes
-    fun set_default_mimes(mimes : Mimes) do default_mimes = mimes end
-    
-    fun get_default_host : Host do return default_host
-    fun set_default_host(host : Host) do default_host = host end
 
-    fun get_hosts : HashMapIterator[String, Host] do return hosts.iterator end
-    fun get_virtualhosts : HashMapIterator[String, VirtualHost] do return virtualhosts.iterator end
+    fun get_virtualhosts : ArrayIterator[VirtualHost] do return virtualhosts.iterator end
 
-	fun addnew_virtualhost(name : String, ip : Ip, port : Int, alias : String) : VirtualHost
+	fun addnew_virtualhost(name : String, port : Int, aliases : Array[String], root : String) : VirtualHost
 	do
-		return addnew_virtualhost_with_host(name, ip, port, alias, default_host)
-	end
-	
-	fun addnew_virtualhost_with_host(name : String, ip : Ip, port : Int, alias: String, host : Host) : VirtualHost
-	do
-		var vh = new VirtualHost(name, ip, port, alias, host)
-		virtualhosts[name] = vh
-		addnew_route_for_virtualhost(vh)
-		hosts[host.get_name] = host
+		var vh = new VirtualHost(name, port, aliases, root, default_mimes)
+		virtualhosts.push(vh)
+		self.add_route_for(vh)
 		return vh
 	end
 	
-	private fun addnew_route_for_virtualhost(virtualhost : VirtualHost)
+	fun add_route_for(vh : VirtualHost)
 	do
-		var port_alias_router
-		if virtualhost_router.keys.has(virtualhost.get_ip) then
-			port_alias_router = virtualhost_router[virtualhost.get_ip]
-		else
-			port_alias_router = new PortAliasRouter
-			virtualhost_router[virtualhost.get_ip] = port_alias_router
+		var port_route : nullable HashMap[String, VirtualHost]
+		port_route = router[vh.get_port]
+		if port_route is null then
+			port_route = new HashMap[String, VirtualHost]
 		end
-		
-		var alias_router
-		if port_alias_router.keys.has(virtualhost.get_port) then
-			alias_router = port_alias_router[virtualhost.get_port]
-		else
-			alias_router = new AliasRouter
-			port_alias_router[virtualhost.get_port] = alias_router
+		for alias in vh.get_aliases do
+			router[vh.get_port] = port_route
 		end
-		
-		alias_router[virtualhost.get_alias] = virtualhost
 	end
-	
-	fun get_host_for(ip : Ip, port : Int, alias : String) : nullable Host
+
+	fun route(port : Int, alias : String) : VirtualHost
 	do
-		var port_alias_router
-		if virtualhost_router.keys.has(ip) then
-			port_alias_router = virtualhost_router[ip]
+		var port_route : nullable HashMap[String, VirtualHost]
+		port_route = router[port]
+		if port_route is null then return default_host
+		var routed_host : nullable VirtualHost = port_route[alias]
+		if routed_host is null then
+			return default_host
 		else
-			return null
-		end
-		
-		var alias_router
-		if port_alias_router.keys.has(port) then
-			alias_router = port_alias_router[port]
-		else
-			return null
-		end
-		
-		if alias_router.keys.has(alias) then
-			return alias_router[alias].get_host
-		else
-			return null
+			return routed_host.as(not null)
 		end
 	end
 

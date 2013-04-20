@@ -84,7 +84,7 @@ extern Sqlite3
 	`}
 
 	fun last_insert_rowid: Int is extern `{
-		return sqlite3_last_insert_rowid(((struct Data*)recv)->stmt);
+		return sqlite3_last_insert_rowid(((struct Data*)recv)->ppDb);
 	`}
 
 

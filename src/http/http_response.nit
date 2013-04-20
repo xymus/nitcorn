@@ -7,8 +7,9 @@ module http_response
 
 class HttpResponse
 
-	private var version: String
+		private var version: String
 	private var status_code: Int
+	
 	private var status_message: String
 	private var response_header_fields: HashMap[String, String]
 	private var response_body: String
@@ -41,19 +42,6 @@ class HttpResponse
 		end
 	end 
 
-	fun get_full_response: String
-	do
-		var full_response = ""
-		
-		full_response = version + " " + status_code.to_s + " " + status_message + "\r\n"
-
-		for x, y in response_header_fields do full_response += x + ": " + y + "\r\n"
-		
-		if response_body != "" then full_response += "\r\n" + response_body + "\r\n"
-
-		return full_response	
-	end
-
     redef fun to_s : String do
         var buf = new Buffer
         buf.append("{version} {status_code} {status_message}\r\n")
@@ -61,7 +49,7 @@ class HttpResponse
         for key,value in response_header_fields do
             buf.append("{key}: {value}\r\n")
         end
-        buf.append("{response_body}")
+        buf.append("\r\n{response_body}")
         return buf.to_s
     end
 

@@ -6,22 +6,23 @@
 \usepackage[utf8]{inputenc}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{tabularx}
+\usepackage{graphicx}
 
 \hypersetup{
     bookmarks=false, % show bookmarks bar?
     pdftitle={Document de spécification des exigences du logiciel}
-pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
-Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
-%pdfsubject={TeX and LaTeX}, % subject of the document %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+	pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
+		Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
+	pdfsubject={TeX and LaTeX}, % subject of the document %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
     colorlinks=true, % false: boxed links; true: colored links
     linkcolor=blue, % color of internal links
     citecolor=black, % color of links to bibliography
     filecolor=black, % color of file links
     urlcolor=purple, % color of external links
     linktoc=page % only page is linked
-}%
+}
 \def\myversion{1.0 }
-\title{%
+\title{
 \flushright
 \rule{16cm}{5pt}\vskip1cm
 \Huge{Document de spécification des exigences du logiciel}\\
@@ -68,6 +69,14 @@ Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
     \hline
     Équipe & Rédaction de groupe & 2013/04/11 \\
     \hline
+    Maxime Bélanger & Définition & 2013/04/13 \\
+    \hline
+    Guillaume Auger & Souligner les parties à compléter/corriger & 2013/04/16 \\
+    \hline
+    Guillaume Auger & Terminer headers & 2013/04/18 \\
+    & Description des méthodes & \\
+    & Contraintes sur la base de données & \\
+    \hline
 \end{tabularx}
 
 \chapter{Introduction}
@@ -76,21 +85,20 @@ de notre application à l'aide de définitions, acronymes et
 abréviations. Les objectifs et les portées seront décrits pour
 avoir une meilleure compréhension du document.
 \section{Objet}
-L'objectif de ce document est de présenter une description complète et
-détaillée des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents types de diagrammes seront utilisé pour illustrer l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
+L'objectif de ce document est de présenter une description complète, détaillée et précise des exigences de l'application Nitcorn. Le concept des exigences sera décrit textuellement et différents types de diagrammes seront utilisé pour illustrer l'interaction avec l'utilisateur. De plus, une spécification d'interface externe sera décrite permettant aux applications Nit existantes d'utiliser un serveur web.\\
 
 Ce document s'adresse aux développeurs du projet Nitcorn ainsi qu'aux potentiels
 contributeurs externes.
 \section{Portée}
-L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développé par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
+L'application dont le présent document décrit se nomme Nitcorn. Elle sera responsable d'offrir un serveur web aux applications Nit. Étant un nouveau language de programmation développé principalement par un professeur de l'UQAM, Nit n'a pas encore de librairie capable d'établir une connexion entre une application et un serveur web. Le but de cette application est d'en offrir la possibilité. Le document sera composé d'une description des différentes composantes que le serveur va offrir à l'usager. Voici ces fonctionnalités:
 \begin{itemize}
     \item Écoute sur un socket;
     \item Réception de requêtes HTTP 1.0 et 1.1;
     \item Traitement et réponse à une requête HTTP;
     \item Exposer une API pour gérer la configuration;
     \item Gestion de log;
-    \item Transmettre les requêtes vers un serveur mandataire; et
-    \item Permettre la ré-écriture des requêtes HTTP.
+    \item Transmettre les requêtes vers un serveur mandataire;
+    \item Permettre la ré-écriture des requêtes HTTP;
     \item Chiffrement et déchiffrement (SSL/TLS);
     \item Persistance de la configuration;
 \end{itemize}
@@ -99,12 +107,12 @@ L'application dont le présent document décrit se nomme Nitcorn. Elle sera resp
 Voici les définitions des différents termes techniques utilisés dans ce
 document.
 \begin{description}
-    \item[Apache] Un serveur Web.
-	\item[API]
-    \item[Asynchrone]
-	\item[Authentification Basic]
-    \item[Authentification Digest]
-	\item[Boucle d'événement asynchrone]
+    \item[Apache] Serveur Web connu pour jouer un rôle clé dans la croissance initiale du World Wide Web.
+	\item[API] Interface qui rend possible l'interaction entre un homme et une machine.
+    \item[Asynchrone]Technique permettant de mettre en oeuvre des opérations qui sont exécutées simultanément, mais non syncronisé entre elles, avec le reste du programme. 
+	\item[Authentification Basic]Technique de base pour renforcer les contrôles d'accès aux ressources Web.
+    \item[Authentification Digest]Technique plus sécuritaire pour renforcer les contrôles d'accès aux ressources Web.
+	\item[Boucle d'événement asynchrone] Structure de programmation qui attend et distribue les événements ou les messages de façon asynchrone dans un programme.
     \item[Contenu] Information binaire.
     \item[Cookie HTTP] Petit contenu envoyé par un site web et stocké par le client. Le contenu peut par la suite être récupéré par le serveur lors d'une prochaine visite.
     \item[Domaine] Fully qualified domain name. Nom qualifiant un et un seul emplacement dans les trois hiérarchies du DNS.
@@ -112,13 +120,12 @@ document.
     \item[Fastcgi] Protocole d'interface de programmes interactifs avec un serveur Web. 
     \item[Fil d'éxécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
     \item[File descriptor] Identifiant d'un fichier ouvert par le système d'exploitation. 
- 	\item[Header]
-    \item[Host] Domaine.	
-	\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
-connexions keep-alive.
-	\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des****
+ 	\item[Header] Les en-têtes retrouvées dans les rquêtes et les réponses HTTP/1.0 et HTTP/1.1
+    \item[Host] Identifiant de domaine internet.	
+	\item[HTTP 1.0] Version 1.0 du protocole HTTP. Ne permet pas de connexions de type keep-alive.
+	\item[HTTP 1.1] Version 1.1 du protocole HTTP qui support d'avantage de méthodes et d'en-têtes que la version 1.0
     \item[Itanium] Processeurs 64 bits développés par Intel utilisant l'architecture IA_64 et non x86_64. Inclus ici les processeurs Itanium 2.
-	\item[Log]   
+	\item[Log] Désigne un historique d'événements (Journal des événements).   
     \item[Méthode HTTP] Intention de la requête.
 	\item[MIME] Multipurpose Internet Mail Extensions. Est un identifiant de format de données composé de deux parties, utilisé par les serveurs pour distinguer le type de format.
 	\item[Nit] Langage de programmation open source orienté objet développé par le
@@ -134,7 +141,7 @@ Connexion keep-alive\cite{http1.0}.
     \item[Site web] Ensemble de pages web sur un même domaine.
 	\item[Socket] Interface logiciel de connexion réseau.   
     \item[SSL] Secure Sockets Layer. Un protocole de sécurisation des échanges sur Internet.
-	\item[Standard NCSA Common log format]  
+	\item[Standard NCSA Common log format]  Format de journal ne contenant que des informations concernant l'accès HTTP.
     \item[TLS] Transport Layer Security. Un protocole de sécurisation des échanges sur Internet. 
     \item[UQAM] Université du Québec à Montréal.    
     \item[URI] Uniform resource identifier. Chaîne de caractères identifiant une ressource.
@@ -146,13 +153,18 @@ Connexion keep-alive\cite{http1.0}.
 \end{description}
 
 \section{Références}
-\begin{tabularx}{\textwidth}{|l|X|l|}
+
+\begin{tabularx}{\textwidth}{|l|X|l|l|l|}
     \hline
-    Ref. & Numéro du document & Titre \\
+    Ref. & Numéro du document & Titre & Organisation & Date\\
     \hline
-    \cite{ieefr} & IEEE 830-1993 & Norme IEEE 830-1993 \\
+    \cite{ieefr} & IEEE 830-& Norme IEEE 830-1993 & Institute of Electrical and & 1993\\
+    & 1993& &  Electronics Engineers &\\
     \hline
-    \cite{http} & RFC2616 & Hypertext Transfer Protocol -- HTTP/1.1 \\
+    \cite{http} & RFC2616 & Hypertext Transfer Protocol & The Internet Society&	1999\\
+    & & -- HTTP/1.1& &\\
+    \hline
+    \cite{NCSA} & N/A & NCSA Common Log Format & NCSA & N/A \\
     \hline
 \end{tabularx}
 
@@ -162,7 +174,7 @@ Le  reste du document va contenir toutes les exigences de notre application orga
 \\
 La section 2 va contenir les facteurs généraux qui vont influencer le produit et ses exigences. Une description des différents modules du système sera présentée. Cette section traitera les aspects suivants:
 \begin{description}
-\item[Description] Description global du projet et de ses interfaces.
+\item[Description] Description globale du projet et de ses interfaces.
 \item[Récit des fonctions] Récit décrivant une fonction du point de vue de son utilisateur. Organisé par utilisateurs.
 \item[Caractéristiques des utilisateurs] Caractéristiques requises par les utilisateurs
 \item[Contraintes] Éléments qui risquent de contraindre le développeur.
@@ -178,8 +190,12 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 \end{description}
 \chapter{Description générale}
 \section{Environnement}
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilité
-d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES INTERFACES?:)\\
+(@TODO A block diagram showing the major components of the larger system, interconnections, and external inter-
+faces)
+
+Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
+d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
 fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
 et de fonctionnalités essentiels au serveur web.
@@ -226,6 +242,13 @@ Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilis
 Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
 
 \subsection{Serveur}
+\\(@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES LIENS ENTRE CES TROIS PARTIES?)
+\begin{figure}[ht!]
+    \caption{A simple caption}
+    \centering
+    \includegraphics[width=9cm]{diagram/diagram1}
+\end{figure}
+
 \begin{itemize}
  \item Réception d'une requête
  \item Traiter une requête
@@ -269,120 +292,105 @@ une boucle d’événements pour les communications bloquantes sur les sockets. 
 permettre de n'utiliser qu'un seul processus pour le serveur, tout en restant très performant.
 Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
 pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
-\subsection{Utilisation du serveur}
-Le serveur devra supporter les méthodes HTTP1.0 suivantes:\\
-\begin{itemize}
- \item TODO: En enlever?
- \item TODO: Ajouter des méthodes qui ne sont pas dans le RFC2616?
- \item OPTIONS
- \item GET
- \item HEAD
- \item POST
- \item PUT
- \item DELETE
- \item TRACE
- \item CONNECT
- \\
- 
-\end{itemize}
 
+
+
+\subsection{Utilisation du serveur}
+(@TODO MISE EN PAGE DE CETTE SECTION)\\
+La spécification complète et exacte des méthodes, \textit{headers} et des codes d'erreurs suivants se retrouvent dans le RFC2616 listé dans les références.\\\\
+Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes:\\
+\begin{itemize}
+ \item OPTIONS: Demande les informations sur les options de communication disponible.
+ \item GET: Demande la ressource identifié par l'URI.
+ \item HEAD: Identique à GET, mais la réponse ne doit pas contenir de \textit{message body}.
+ \item POST: Indique que des données sont envoyés dans le \textit{message body} et demande au serveur d'en prendre compte.
+ \item PUT: Demande de stocker les données envoyé par la requête.
+ \item DELETE: Demande d'effacer la ressource identifiée par l'URI.
+ \item TRACE: Invoque les serveurs intermédiaires pour leur demander de lui réenvoyer la requête.
+ \item CONNECT: Demande au serveur d'ouvrir un tunnel TCI/IP.
+ \\
+\end{itemize}
+\\\\
 Le serveur devra être en mesure de supporter les headers suivants: \\
+
 \\
+
 Http/1.0\\
     General-Header\\
         \begin{itemize}
-        \item Date
-        \item Pragma
+        \item Date: La date et l'heure de l'origine du message en format HTTP-date.
+        \item Pragma: Liste de directives supplémentaires d'implémentation.
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Authorization
-        \item From      
-        \item If-Modified-Since
-        \item Referer          
-        \item User-Agent       
+        \item Authorization: Identification du navigateur avec le serveur.
+        \item From: L'adresse e-mail du client.      
+        \item If-Modified-Since: la reqête doit avoir été modifiée depuis la date spécifiée.
+        \item Referer: URL du lien de la requête effectuée.          
+        \item User-Agent: liste d'information sur le client(nom et version)       
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Location           
-        \item Server          
-        \item WWW-Authenticate
+        \item Location: Redirection vers une nouvelle URL associée au document.           
+        \item Server: Caractéristiques du serveur qui émet la réponse.          
+        \item WWW-Authenticate: Inclue avec une réponse à une erreur d'authentification 401.
         \end{itemize}
     Entity-Header\\
         \begin{itemize}
-        \item Allow               
-        \item Content-Encoding 
-        \item Content-Length    
-        \item Content-Type      
-        \item Expires           
-        \item Last-Modified     
-        \item Extension-header
+        \item Allow: Liste de méthodes supportées par la resource                
+        \item Content-Encoding: Type d'encodage du corps de la requête  
+        \item Content-Length: Longueur du corps de la requête    
+        \item Content-Type: Le type MIME du corps de la requête.      
+        \item Expires: Date d'expiration des données.           
+        \item Last-Modified: La date et l'heure de la dernière modification, en format HTTP-date.     
+        \item Extension-header: L'ajout de headers supplémentaires.
         \end{itemize}
-
-\\
 Http/1.1\\
     General-Header\\
         \begin{itemize}
-        \item Cache-Control      
-        \item Connection      
-        \item Date            
-        \item Pragma          
-        \item Trailer         
-        \item Transfer-Encoding
-        \item Upgrade          
-        \item Via              
-        \item Warning          
+        \item Cache-Control: Directives imposées au systèmes de cache rencontrés dans la requête et la réponse.      
+        \item Connection: Options des spécifications de la connection courante.     
+        \item Trailer: Liste des headers présent dans le message encodé.          
+        \item Transfer-Encoding: Indique le type de transformation effectuée sur le corps du message afin de se rendre à déstination.
+        \item Upgrade: Spécifie les autres protocoles de communication supportées au server.          
+        \item Via: Doit être utilisé par les passerelles et proxys pour indiquer les protocoles intermédiaires entre le serveur et le client.
+        \item Warning: Contient des information additionnelles sur le status ou la transformation du message.
         \end{itemize}
     Request-Header\\
         \begin{itemize}
-        \item Accept              
-        \item Accept-Charset   
-        \item Accept-Encoding  
-        \item Accept-Language  
-        \item Authorization    
-        \item Expect           
-        \item From             
-        \item Host             
-        \item If-Match         
-        \item If-Modified-Since
-        \item If-None-Match    
-        \item If-Range         
-        \item If-Unmodified-Since
-        \item Max-Forwards       
-        \item Proxy-Authorization
-        \item Range              
-        \item Referer            
-        \item TE                 
-        \item User-Agent  
+        \item Accept: Spécifie les types de données acceptées dans la réponse.
+        \item Accept-Charset: Indique le codage des caractères accepté dans la réponse.
+        \item Accept-Encoding: Similaire au \textit{Accept}, mais restreint l'encodage du contenu acceptable dans la réponse.
+        \item Accept-Language: Spécifit le language naturel préféré en réponse.
+        \item Expect: Indique qu'un comportement spécifique est requis par le client.
+        \item Host: Spécifit l'hôte et le port de la ressource demandée.
+        \item If-Match: Rend conditionnelle la requête.
+        \item If-None-Match: Semblable au \textit{If-Match}, mais inverse la condition.
+        \item If-Range: Spécifit de n'envoyer que les parties à jour de la ressource demandé dont client ne dispose pas.
+        \item If-Unmodified-Since: Rend conditionnelle la méthode: n'effectue la requête que si la ressource n'a pas été modifié depuis la date indiqué.
+        \item Max-Forwards: Limite le nombre de proxys ou de passerelle qui peuvent envoyer une réponse lors d'une requête TRACE ou OPTIONS.
+        \item Proxy-Authorization: Permet au client de s'identifier à un proxy.
+        \item Range: Spécifit l'étendu de la ressource désiré par le client.
+        \item TE: Liste des extentions d'encodage de transfert. 
         \end{itemize}
     Response-Header\\
         \begin{itemize}
-        \item Accept-Ranges 
-        \item Age        
-        \item ETag       
-        \item Location   
-        \item Proxy-Authenticate  
-        \item Retry-After         
-        \item Server              
-        \item Vary                
-        \item WWW-Authenticate
+        \item Accept-Ranges: Permet au serveur d'inquiquer les \textit{Range} accepté au client.
+        \item Age: L'âge de la réponse depuis son écriture.
+        \item ETag: Identifiant unique donné par le serveur à une version d'une ressource.
+        \item Proxy-Authenticate: Indique au client la méthode d'authentification du proxy.
+        \item Retry-After: Indique au client combien de temps le service prévoit ne pas être disponible.
+        \item Vary: Indique comment déterminer si le contenu peut être utilisé à la place d'effectuer une nouvelle requête.
         \end{itemize}
     Entity-Header\\
-        \begin{itemize}
-        \item Allow                   
-        \item Content-Encoding     
-        \item Content-Language     
-        \item Content-Length       
-        \item Content-Location     
-        \item Content-MD5          
-        \item Content-Range        
-        \item Content-Type         
-        \item Expires              
-        \item Last-Modified        
-        \item Extension-header
+        \begin{itemize}                 
+        \item Content-Language: Indique le language naturel du contenu.
+        \item Content-Location: Indique un emplacement alternatif du contenue.
+        \item Content-MD5: Indique le MD5 du corps de la requête.
+        \item Content-Range: Indique la position du corps partiel actuel dans le corps du message complet.
         \end{itemize}
  
-Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leur définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
+Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé brièvement ici. Leurs définition complète et précise se retrouve dans le RFC-2616 mit en référence. \\
  \begin{itemize}
  \item \textbf{200 - OK}
  \subitem La requête à bien été traité sans erreurs.
@@ -445,9 +453,6 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item \textbf{505 - HTTP Version Not Supported}
  \subitem Le serveur ne supporte pas, ou refuse de supporter, la version du protocole HTTP spécifié dans par la requête.
  \end{itemize}
- \\
- \\
- 
  Pour le HTTP/1.1, le serveur devra, en plus, supporter les erreurs suivantes.
  \begin{itemize}
  \item \textbf{100 - Continue}
@@ -455,24 +460,22 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
  \item \textbf{101 - Switching Protocols}
  \subitem Le serveur comprend et est d'accord pour se conformer avec la requête du client de changer le protocole actuellement utilisé sur cette connection.
  \end{itemize}
-
- 
     
 \section{Hypothèse et dépendances}
+(@TODO À VALIDER PAR PIJI)\\
+Nitc ne supporte actuellement que les système de la famille linux mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
 Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
 
 
-
 \chapter{Exigences spécifiques}
+(@TODO COMPLÉTER LES CAS D'UTILISATION)\\
+(@TODO PRIORISER LES FONCTIONS: AJOUTER UN ORDRE DE PRIORITÉ POUR SAVOIR QUELLES FONCTIONS DOIVENT ÊTRE IMPLÉMENTÉS AVANT LESQUELS?)
 
 \section{Description des acteurs}
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
 \subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
 \subsection{Administrateur système:} L'administrateur système est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
 \subsection{Serveur:} C'est le logiciel décrit par le présent document, soit Nitcorn.
-
-
-
 
 \section{Spécification des cas d'utilisation pour le serveur} 
 À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
@@ -497,12 +500,11 @@ Le serveur doit retourner ces codes d'erreurs HTTP/1.0 et HTTP/1.1 résumé bri�
 \subsubsection{Description du processus:}
 Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.
 
-
-*** A Faire:DIAGRAMME
+(@TODO A Faire:DIAGRAMME
 Example de requêtes;
 Démontrer le traitement;
 Example de retour ;
-***
+)
 
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
@@ -612,7 +614,7 @@ pour tenir compte des ajustements.
     \item  
 \end{itemize} 
 \subsubsection{Description du processus:}En tant que serveur, je désire garder un historique de mes transactions. Par
-défaut je respecte le \textbf{standard NCSA Common log format}. Par contre je m'adapte
+défaut je respecte le \textbf{standard NCSA Common log format}\cite{NCSA}. Par contre je m'adapte
 aux administrateurs, qui eux ont la possibilité de changer le format de
 l'enregistrement. Mes enregistrements sont cours et concis. Ils expliquent
 simplement qui a fait quoi et quand.
@@ -730,8 +732,8 @@ la valeur fournie.
 % Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
 \section{Exigences fonctionnelles}
 \begin{itemize}
-    \item Lors du démarrage, le système doit lire sa configuration.
-    \item Sur réception d'une requête, le système doit vérifier le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
+    \item Lors du démarrage, le système doit lire sa configuration enregistré dans la base de données.
+    \item Sur réception d'une requête, le système doit vérifier que le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
         le serveur Nitcorn utilisera un hôte par défaut.
     \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
     \item Si la ressource demandée est un dossier et que le client y a accès, le système doit retourner une liste des fichiers et/ou dossiers contenus dans ce même dossier.
@@ -739,15 +741,63 @@ la valeur fournie.
     \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
 \end{itemize}
 \section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
-\section{Contraintes de conception} Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
+\section{Contraintes sur la base de données}
+(@TODO VALIDER PAR L'ÉQUIPE #TEAMVAL)
+\subsection{Information contenue}
+La base de données de Nitcorn devra contenir les informations de la configuration:
+\begin{itemize}
+	\item Chemins des différents fichiers de log.
+	\item Les différentes données des hôtes virtuels.
+\end{itemize}
+\subsection{Fréquence d'utilisation}
+Elle ne sera lu que lors du démarage de Nitcorn ou lors d'une modification de la configuration.
+La charge qu'elle devra soutenir sera ainsi que très minime.
+\subsection{Accessibilité}
+Elle devra être accessible que par le serveur Nitcorn ou les administrateurs de celui-ci.
+\subsection{Données}
+\begin{itemize}
+	\item Un chemin par fichier de log.
+	\item Un nom, un port, un dossier racine et une liste d'alias par hôte virtuel.
+\end{itemize}
+\subsection{Rétention des données}
+Le serveur Nitcorn aura besoin des données de cette base de données pour fonctionner, donc en contrepartie d'une petite charge, l'intégrité des données est primoridale. Elle ne devra donc être victime d'aucune perte de données dans la mesure du possible et devra offrir la possibilité de copier son contenu pour une sauvegarde de sûreté et d'importer une telle sauvegarde.
+
+\section{Contraintes de conception}(@TODO: LES ÉNUMÉRER?)\\ Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
+\section{Conformité avec les standards}
+(@TODO à valider par l'équipe TEAMVAL:)
+(@TODO: This subsection should specify the requirements derived from existing standards or regulations. They may
+include the following:
+   a)    Report format;
+   b)    Data naming;
+   c)    Accounting procedures;
+   d)    Audit tracing.
+For example, this could specify the requirement for software to trace processing activity. Such traces are
+needed for some applications to meet minimum regulatory or Þnancial standards. An audit trace requirement
+may, for example, state that all changes to a payroll database must be recorded in a trace Þle with before and
+after values.
+)
+\subsection{Requête HTTP}
+Le format et le contenu d'une requête HTTP doit être conforme avec la section 5 du RFC2616\cite{http1.0} mit en référence.
+\subsection{Réponse HTTP}
+Le format et le contenu d'une réponse HTTP doit être conforme avec la section 6 du RFC2616\cite{http1.0} mit en référence.
+\subsection{Entrée de transaction dans le log}
+Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que fournit en référence.
+
+
+
 \section{Attributs}
 \subsection{Disponibilité}
-Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme.
+Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme. \\
+(@TODO: CHIFFRER EN PLUS! Exemple: 24/24, 7/7, 95\% du temps)
 \subsection{Sécurité}
+(@TODO: TROP VAGUE, IMPRÉCIE)
 Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
 \subsection{Maintenabilité}
-Le serveur devra pouvoir changer sa configuration sans se redémarrer.
-
+Le serveur devra pouvoir changer sa configuration sans être redémarrer.
+\subsection{Transférabilité} 
+(@TODO: NON TERMINÉ?)
+Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
+sur des machines de même famille. Si le module de persistance 
 
 \begin{thebibliography}{9}
 \bibitem{ieefr}
@@ -765,6 +815,10 @@ spécifications d’exigences de logiciel}, 1993
     The Internet Society,
 \emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996,
 \url{https://tools.ietf.org/html/rfc1945}
+\bibitem{NCSA}
+	NCSA,
+\emph{Common Log Format},
+\url{http://httpd.apache.org/docs/2.2/logs.html#common}	
 \end{thebibliography}
 
 % add other chapters and sections to suit

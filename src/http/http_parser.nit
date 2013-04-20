@@ -5,135 +5,105 @@
 
 module http_parser
 
-import http_request
+intrude import http_request
 
 class HttpParser
-	
-	private var method_types: Array[String]
-	private var version_types: Array[String]	
 
-	private var req_line:  Array[String]
-	private var req_fields: Array[String]
-	private var status_code: Int
-	private var body: String
-    private var fields : HashMap[String, String] = new HashMap[String, String]
+    var body: String = ""
+	var header_fields: Array[String] = new Array[String]
+	var first_line: Array[String] = new Array[String]
+    var fields : HashMap[String, String] = new HashMap[String, String]
+    var http_request = new HttpRequest
 
-	init
-	do
-		method_types = ["GET","POST","PUT","HEAD","OPTIONS","DELETE","TRACE","CONNECT"]
-		version_types = ["HTTP/1.0","HTTP/1.1"]	
-
-		req_fields = new Array[String]
-		req_line = new Array[String]
-		status_code = 200
-		body = ""
-	end
-
-	fun parse_request(request: String) : HttpRequest
+	fun parse_http_request(full_request: String) : HttpRequest
 	do	
-		clean_variables
+		clear_data
 
-		if not request.has_prefix(" ") then
-	
-			segment_request(request)	
-		
-			if not check_req_line then
-				status_code = 400
-			end	
-		else
-			status_code = 400
+		segment_http_request(full_request)
+        
+        http_request.http_version = first_line[2]
+        http_request.url = first_line[1]
+        if http_request.url.has('?') then 
+            http_request.uri = first_line[1].substring(0, first_line[1].index_of('?'))
+            http_request.query_string = first_line[1].substring_from(first_line[1].index_of('?')+1)
+            http_request.params = parse_url
+        else
+            http_request.uri = first_line[1]
+        end
+        http_request.method = first_line[0]
+
+		for i in header_fields do
+			var temp_field = i.split_with(": ")
+
+			if temp_field.length == 2 then
+				http_request.headers[temp_field[0]] = temp_field[1]
+			end				
 		end
 
-		if not insert_fields then status_code = 400
-
-        return new HttpRequest(req_line[0], req_line[1], req_line[2], body,
-            status_code, fields)
+        return http_request
 	end
 
-	private fun clean_variables
+	private fun clear_data
 	do
-		req_fields.clear
-		req_line.clear
-		body = ""
-		status_code = 200
+		first_line.clear
+		header_fields.clear
 	end
 
-	private fun segment_request(req: String) 
+	private fun segment_http_request(http_request: String): Bool 
 	do		
-		var temp_place = "\r\n\r\n".search_index_in(req, 0)
+		var temp_place = "\r\n\r\n".search_index_in(http_request, 0)
 
 		if temp_place < 0 then
-			req_fields = req.split_with("\r\n")
+			header_fields = http_request.split_with("\r\n")
 		else
-			req_fields = req.substring(0, temp_place).split_with("\r\n")
-			body = req.substring(temp_place+4, req.length-1)
+			header_fields = http_request.substring(0, temp_place).split_with("\r\n")
+			body = http_request.substring(temp_place+4, http_request.length-1)
 		end
 		
-		if req_fields.length > 1 and req_fields[0].has_suffix(" ") then
-			var temp_req = req_fields[0].substring(0, req_fields[0].length-1) + req_fields[1]
+		## If a line of the http_request is long it may change line, it has " " at the end to indicate this.
+		## This section turns them into 1 line.
+
+		if header_fields.length > 1 and header_fields[0].has_suffix(" ") then
+			var temp_req = header_fields[0].substring(0, header_fields[0].length-1) + header_fields[1]
 			
-			req_line = temp_req.split_with(' ')
-			req_fields.shift
-			req_fields.shift
+			first_line  = temp_req.split_with(' ')
+			header_fields.shift
+			header_fields.shift
+
+			if first_line.length != 3 then return false 
+
 		else
-			req_line = req_fields[0].split_with(' ')
-			req_fields.shift
+			first_line = header_fields[0].split_with(' ')
+			header_fields.shift
+
+			if first_line.length != 3 then return false
 		end
 
 		var pos = 0
-		while pos < req_fields.length do
-			if pos < req_fields.length-1 and req_fields[pos].has_suffix(" ") then
-				req_fields[pos] = req_fields[pos].substring(0, req_fields[pos].length-1) + req_fields[pos+1]
-				req_fields.remove_at(pos+1)
+		while pos < header_fields.length do
+			if pos < header_fields.length-1 and header_fields[pos].has_suffix(" ") then
+				header_fields[pos] = header_fields[pos].substring(0, header_fields[pos].length-1) + header_fields[pos+1]
+				header_fields.remove_at(pos+1)
 				pos = pos-1
 			end
 			pos = pos+1
 		end
-	end
-	
-	private fun check_req_line: Bool
-	do
-		if req_line.length != 3 then return false
-		if not check_method then return false
-		if not check_version then return false
 
-		return true		
+		return true
 	end
-	
-	private fun check_method: Bool 
+
+    private fun parse_url : ArrayMap[String, String]
 	do
-		for i in method_types 
-		do 
-			if i == req_line[0] then return true
+        var query_strings = new ArrayMap[String, String]
+
+		if http_request.url.has('?') then 
+            var params = http_request.query_string.split_with("&")
+            for param in params do
+                var key_value = param.split_with("=")
+                query_strings[key_value[0]] = key_value[1]
+            end
 		end
 
-		return false
+        return query_strings
 	end
-	
-	private fun check_version: Bool	
-	do
-		for i in version_types
-		do
-			if i == req_line[2] then return true 
-		end
-
-		return false
-	end
-
-	private fun insert_fields: Bool
-	do
-		var no_problem = true
-
-		for i in req_fields do
-			var temp_field = i.split_with(": ")
-
-			if temp_field.length != 2 then
-				no_problem = false	
-			else 
-				fields[temp_field[0]] = temp_field[1]
-			end				
-		end
-
-		return no_problem
-	end	
 end
