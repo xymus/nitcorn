@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 \documentclass{scrreprt}
 \usepackage{listings}
 \usepackage{underscore}
@@ -620,43 +620,61 @@ l'enregistrement. Mes enregistrements sont cours et concis. Ils expliquent
 simplement qui a fait quoi et quand.
 
 \section{Spécification des cas d'utilisation pour l'application Nit}
+
 \subsection{Recevoir une requête HTTP}
+
 \subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
+
 \subsubsection{Description sommaire:}
+Réception d'une requête HTTP par l'application Nit.
+
 \subsubsection{Acteurs:}
 \begin{itemize}
-	\item Client
-    \item Serveur
+	\item Client : L'application Nit qui envoit la requête sera considéré comme le client.
+    	\item Serveur : L'application Nit qui reçoit la requête sera considéré comme le serveur.
 \end{itemize}
+
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item  Le client doit envoyer une requête HTTP.
 \end{itemize} 
+
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item Le serveur doit traiter la requête reçue.
 \end{itemize} 
-\subsubsection{Description du processus:}En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
+
+\subsubsection{Description du processus:}
+En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
 (@TODO définir et nommer le protocole) me permettant de communiquer avec le serveur
 Nitcorn. La réception d'une requête se fait en passant en paramètre les informations
 reçu par Nitcorn (host, uri, headers).
+
 \subsection{Traiter une requête HTTP}
+
 \subsubsection{Titre du cas d'utilisation: Traiter une requête HTTP}
+
 \subsubsection{Description sommaire:}
+Traitement d'une requête HTTP reçue par l'application Nit.
+
 \subsubsection{Acteurs:}
 \begin{itemize}
-    \item Client
-    \item Serveur
+    \item Client : L'application Nit qui envoit la requête sera considéré comme le client.
+    \item Serveur : L'application Nit qui reçoit la requête sera considéré comme le serveur.
 \end{itemize}
+
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item Le serveur doit recevoir une requête HTTP. 
 \end{itemize} 
+
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
-\end{itemize} 
-\subsubsection{Description du processus:}Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
+    \item Le serveur doit envoyer une réponse HTTP au client. 
+\end{itemize}
+ 
+\subsubsection{Description du processus:}
+Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
 Une fois ce traitement fait, je dois retourner (@TODO à voir avec spec de l'interface)
 une réponse selon le protocole de l'interface avec Nitcorn. Cette réponse doit
 contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
@@ -823,343 +841,3 @@ spécifications d’exigences de logiciel}, 1993
 
 % add other chapters and sections to suit
 \end{document}
-=======
-\documentclass{scrreprt}
-\usepackage{listings}
-\usepackage{underscore}
-\usepackage[francais]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[bookmarks=true]{hyperref}
-\usepackage{tabularx}
-
-\hypersetup{
-    bookmarks=false,    % show bookmarks bar?
-    pdftitle={Document de spécification des exigences du logiciel}
-pdfauthor={Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
-Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano}
-%pdfsubject={TeX and LaTeX},                        % subject of the document    %pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=blue,       % color of internal links
-    citecolor=black,       % color of links to bibliography
-    filecolor=black,        % color of file links
-    urlcolor=purple,        % color of external links
-    linktoc=page            % only page is linked
-}%
-\def\myversion{1.0 }
-\title{%
-\flushright
-\rule{16cm}{5pt}\vskip1cm
-\Huge{Document de spécification des exigences du logiciel}\\
-\vspace{2cm}
-pour\\
-\vspace{2cm}
-Nitcorn\\
-\vspace{2cm}
-%\LARGE{Release 1.0\\}
-%\vspace{2cm}
-%\LARGE{Version \myversion approved\\}
-%\vspace{2cm}
-Préparé par Jean-Philippe Caissy\\Stéphan Michaud\\Guillaume Auger\\Maxime
-Bélanger\\Justin Michaud-Ouelette\\Frédéric Sevillano\\
-\vfill
-\rule{16cm}{5pt}
-}
-\date{}
-\usepackage{hyperref}
-\begin{document}
-\maketitle
-\tableofcontents
-\chapter*{Historique de révision}
-\begin{tabularx}{\textwidth}{|r|X|r|}
-    \hline
-    Nom & Description & Date \\
-    \hline
-    Stéphan Michaud & Création & 2013/02/04 \\
-    \hline
-    Équipe & Ébauche & 2013/02/26 \\
-    \hline
-    Jean-Philippe Caissy & Convertion en \LaTeX & 2013/03/04 \\
-    \hline
-    Jean-Philippe Caissy,\\Stéphan Michaud,\\Justin Michaud-Ouelette & Fonctionalités & 2013/03/24 \\
-    \hline
-\end{tabularx}
-
-\chapter{Introduction}
-Ce chapitre permet d'introduire la documentation du serveur Internet Nitcorn. Ilpermettra d'éliminer toute ambiguïté concernant la documentation
-de notre application à l'aide de définitions, acronymes et
-abréviations. Les objectifs et les portées seront décrites pour
-avoir une meilleure compréhension du document.
-\section{Objet}
-L'objectif de ce document est de présenter une description
-détaillée des différents modules de l'application Nitcorn. De plus,
-une spécification d'interface externe sera décrite permettant aux applications
-Nit existantes
-d'utiliser un serveur web.\\
-Ce document s'adresse aux développeur du projet Nitcorn ainsi qu'aux potentiels
-contributeurs externes.
-\section{Portée}
-L'application dont le présent document décrit est Nitcorn. Les différentes
-composantes seront :
-\begin{itemize}
-    \item Écoute sur un socket;
-    \item Réception de requête HTTP 1.0 et 1.1;
-    \item Traitement et réponse à une requête HTTP;
-    \item Exposer une API pour gérer la configuration;
-    \item Gestion de log;
-    \item Transmettre les requêtes vers un serveur mandataire; et
-    \item Permettre la ré-écriture des requêtes HTTP.
-\end{itemize}
-Les éléments suivants ne sont pas traités par Nitcorn. Ainsi une couche
-d'abstraction
-sera développé pour utiliser les librairies externes avec l'interface native de
-Nit.
-
-\begin{itemize}
-    \item Chiffrement et déchiffrement (SSL/TLS);
-    \item Boucle évènementiel gèrant les entrées et sorties bloquantes; et
-    \item Persistance de la configuration;
-\end{itemize}
-
-Les 3 éléments ci-hauts ne seront pas développés en Nit puisqu'il existe des
-librairies déjà existante matures et testés en production permettant de répondreà ses demandes.
-\\
-De plus, nous avons décidé d'utiliser un patron de conception basée sur
-une boucle d'évènements pour les communications bloquantes sur les sockets. Celapermet d'utiliser qu'un seul processus pour le serveur, tout en restant très
-performant.
-Ce mécanisme permet d'utiliser des mécanismes existant du système d'exploitation
-pour
-gérer de manière asynchrone les entrées et sorties\cite{c10k}.
-
-\section{Définitions, acroynmes et abréviations}
-Voici les définitions des différents termes techniques utilisés dans ce
-document.
-\begin{description}
-\item[Protocole HTTP] Protocole de communication applicative d'architecture
-client-serveur\cite{http}.
-\item[HTTP 1.0] Version 1.0 du protocole HTTP ne permettant pas d'avoir des
-connexion keep-alive.
-\item[HTTP 1.1] Version 1.1 du protocole HTTP permettant entre autre d'avoir des
-connexion keep-alive\cite{http1.0}.
-\item[Nit] Langage de programmation open source orienté objet développé par le
-groupe de recherche sur l'étude, la spécification et l'implémentation des
-langages informatique du département d'informatique à l'Université du Québec à
-Montréal.
-    \item[Boucle d'évènement asynchrone] 
-    \item[Fil d'exécution] Traitement d'une suite d'instructions par la machine sur un programme donné.
-    \item[MIME]
-    \item[Méthode HTTP]
-    \item[Cookie]
-    \item[URL et URI]
-    \item[Virtual Host]
-    \item[Reverse Proxy]
-    \item[Apache]
-    \item[Nginx]
-    \item[Authentification Basic]
-    \item[Authentification Digest]
-    \item[Fastcgi]
-    \item[Socket] Interface logiciel de connexion réseau.
-    \item[File descriptor] identifiant d'un fichié ouvert par le système d'exploitation
-    \item[x86] Architecture de processeur 32 bits développée par Intel.
-    \item[x86_64] Architecture de processeur 64 bit développée par AMD, mais comptabile avec la famille de processeur 64 bit d'Intel (à l'exception de Itanimum).
-\end{description}
-
-\section{Références}
-\begin{tabularx}{\textwidth}{|l|X|l|}
-    \hline
-    Ref. & Numéro du document & Titre \\
-    \hline
-    \cite{ieefr} & IEEE 830-1993 & Norme IEEE 830-1993 \\
-    \hline
-    \cite{http} & RFC2616 & Hypertext Transfer Protocol -- HTTP/1.1 \\
-    \hline
-\end{tabularx}
-
-\section{Vue d'ensemble}
-@TODO
-\chapter{Description générale}
-\section{Environnement}
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit
-d'utiliser
-un serveur web. Ainsi, il est important d'offrir des fonctionnalités de serveur
-au langage afin qu'il puisse être placée derrière un serveur web (Nginx, Apache,
-\ldots).
-Sous cette configuration, il est quand même essentiel de pouvoir répondre à des
-requêtes web, mais des fonctionnalités tel que la gestion des logs ou la
-persistance
-des configuration n'est plus inutile car ces fonctionnalités seraient gérés par
-le serveur web.\\
-Par contre, cela n'empêcherait pas Nitcorn d'être directement exposé à Internet
-et agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
-serveur webs (Nginx, Apache, \ldots). Sous cette configuration, les
-fonctionnalités
-mentionnés ci-haut doivent être utilisés pour assurer les requis de traçabilité
-et de fonctionnalités essentiels d'un serveur web.
-
-\subsection{Interfaces avec le sysyème}
-Nitcorn sera utilisé sur deux système : un serveur web et un environnement de développement.
-Le serveur web sera le système ayant comme fonctionnalité d'agir en tant que serveur web, alors
-que l'environnement de développement sera le système utilisé par les développeurs
-pour développer des applications web en Nit.
-
-\subsection{Interfaces avec les utilisateurs}
-Comme il est disponible avec les autres serveurs web, un système de log est
-disponible permettant à un utilisateur de déterminer la cause du problème. Sur
-un autre point, le logiciel aura une API permettant aux applications Nit de 
-communiquer sur le web sans avoir de se soucier des configurations. Cette
-API sera grandement inspirée par l'interface universelle WGSI développé pour
-le langage Python. Le logiciel Nitcorn offira aussi une interface pour les
-applications Nit.
-
-\subsection{Interfaces avec le matériel}
-Nitcorn dépent du compilateur de Nit. Celui-ci est compatible pour le moment avec
-les architectures x86 et x86_64.
-
-\subsection{Interfaces avec les logiciels}
-Nitcorn ne supporte que les systèmes d'exploitation de style UNIX (GNU/Linux, *BSD, Mac OS X, etc).
-De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
-\\
-\begin{tabular}{|l|l|l|l|l|}
-    \hline
-    Nom & Mnémonique & Spécification & Version & Source \\
-    \hline
-    Nitc & N/A & FFI & N/A & \url{https://github.com/xymus/nit/tree/ffi} \\
-    \hline
-    Libevent & N/A & N/A & 2.0.X & \url{http://libevent.org/} \\
-    \hline
-    SQLite & N/A & N/A & 3.X & \url{https://www.sqlite.org/} \\
-    \hline
-
-\end{tabular}
-
-\section{Fonctions}
-Les différentes fonctions sont séparaés en deux groupes : serveur et application Nit.
-Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
-Nitcorn pour répondre à des requêtes web dynamiquement. \\
-Chacune des fonctionalités sont décrites sous forme de récit d'utilisateur.
-
-\subsection{Serveur}
-\subsubsection{Réception d'une requête}
-Afin de recevoir des requêtes, je dois écouter un port à l'aide d'un socket. Je veux pouvoir recevoir plusieurs requête et écouter plusieurs ports en même temps. Je transfère la requête au module de traitement sous forme de texte.
-
-\subsubsection{Traiter une requête}
-En tant que Nitcorn, je dois traiter une requête HTTP qui a été reçu. Une requête
-HTTP doit posséder les informations suivantes :
-\begin{itemize}
-    \item La version du protocole HTTP : 1.0 ou 1.1
-    \item Le URI (i.e.: /foobar/123)
-    \item Le host de la requête (i.e.: www.example.com)
-\end{itemize}
-
-Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
-je trouve un virtual host égal au host de ma requête, je vais utiliser la configuration
-de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
-\\
-Le premier élément de la configuration que je lit pour ce host est de déterminer
-si pour ce host et URI je dois soit : lire un fichier statique, passer la requête
-à une application Nit, ou passer la requête à un serveur mandataire (reverse-proxy).\\
-\\
-Lorsque je traite une requête pour une page statique, je dois récupérer la page par
-défaut et le dossier racine pour ce host. Avec ces informations-là, je peux renvoyer
-le contenu de la page statique au requérant. Si je ne suis pas en mesure de lire
-la page ou le dossier demandé, je dois retourner un message d'erreur au requérant
-(page inexistant, accès refusé, etc).\\
-\\
-Si la requête doit être passée à un serveur mandataire, je vais créer
-une requête web avec les mêmes informations de la requête, mais je vais modifier
-l'argument \textit{host} pour pointer vers le host du serveur mandataire. Lorsque
-la requête est envoyée, je vais attendre la réception de la réponse et transmettre
-cette réponse au client.
-\\
-Finalement, si la requete doit être transmise à une application Nit, je vais utiliser
-le protocole (@TODO PROTOCOLE À DÉFINIR) pour communiquer avec l'application
-qui m'a instanciée. Par la suite, je vais attendre de recevoir la réponse de l'application
-et lorsque je l'ai reçu, je vais décoder cette réponse et créer la réponse HTTP
-à transmettre avec les éléments suivants :
-\begin{itemize}
-    \item Le code de statut HTTP
-    \item La taille de la réponse
-    \item D'autres \textit{headers} transmis par l'application NIT
-    \item Le contenu de la réponse
-\end{itemize}
-Après que la réponse est transmise au client, si le protocole HTTP est 1.0, je ferme
-la connexion. Si le protocole HTTP est 1.1, je dois garder la connexion
-ouverte. De plus, je vais écrire un évènement pour cette réponse (voir section
-\textit{Enregistrer les évènements}).
-
-\subsubsection{Lire la configuration}
-En tant que serveur, je vais faire une première lecture des mes configurations
-dans la base de données afin de connaître comment traiter les requêtes que je 
-vais recevoir.
-Pour éviter de faire une relecture dans la base de données pour chaque requête,
-je vais écrire ses informations dans ma classe.
-Si une application change ma configuration, je vais en tenir compte dans ma
-classe pour éviter d'utiliser une configuration qui n'est plus à jour.
-
-\subsubsection{Écrire la configuration}
-En tant que serveur, si un client change la valeur de un ou plusieurs paramètres
- de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
- je dois ajuster mes attributs de classe et valeurs dans la base de donnée 
-pour tenir compte des ajustements.
-\subsubsection{Enregistrer les évènements}
-
-\subsection{Application Nit}
-\subsubsection{Recevoir une requête HTTP}
-
-
-\subsubsection{Traiter une requête HTTP}
-
-\subsection{API}
-\subsubsection{Lire la configuration}
-En tant que client, si je veux savoir l'état de un ou plusieurs paramètres de
-configuration sur le serveur, je vais utiliser une API pour interroger la 
-classe en question qui elle me retournera la ou les valeur(s) désirée(s).
-Si j'utilise la API pour interroger une classe à propos d'un paramètre 
-inexistant, je vais recevoir une erreur m'indiquant la clé en question
-n'existe pas. 
-\subsubsection{Enregistrer la configuration}
-En tant que client, si je désire apporter une modification à un ou plusieurs
-paramètres de la configuration sur le serveur, je vais fournir la nouvelle valeur
-de la ou les paramètre(s) désirée à l'API qui se chargera de relayer.
-l'information à la classe appropriée.
-Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
-serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
-question n'existe pas.
-Si j'essaie de faire une modification sur un paramètre à l'aide la l'API et que  
-je lui fournit une valeur qui est invalide dans le contexte du paramètre, je 
-vais recevoir une erreur m'indiquant que le paramètre ne peut pas contenir
-la valeur fourni. 
-\section{Caractéristiques des utilisateurs}
-
-\section{Contraintes}
-
-\subsection{Mémoire}
-Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de \textbf{file descriptor} ouvert en même temps sera limité par le noyau du système d'exploitation. La limite est à la discrétion de l'utilisateur. Le serveur devra gerer l'atteinte de cette limite.
-\subsection{Exécution}
-Le traitement des requêtes dois s'effectuer de façon asynchrone sur un seul fil d'exécution. Plusieurs requêtes doivent être traitables simultané sans bloquer les nouvelles requêtes.
-
-
-\section{Hypothèse et dépendances}
-\chapter{Exigences spécifiques}
-
-\begin{thebibliography}{9}
-\bibitem{ieefr}
-  Société d'informatique IEEE,
-\emph{Norme IEEE 830-1993, Pratique recommandée par IEEE pour la préparation de
-spécifications d’exigences de logiciel}, 1993
-\url{http://www.cours.polymtl.ca/log3410/bibliographie/IEEE/Pratique_Recommandee_Par_IEEE_pour_la%20_Specification.pdf}.
-\bibitem{c10k}
-  Dan Kegel
-\emph{The C10K Problem}, 1999, \url{http://www.kegel.com/c10k.html#strategies}\bibitem{http}
-    The Internet Society,
-\emph{Hypertext Transfer Protocol -- HTTP/1.1}, 1999,
-\url{https://tools.ietf.org/html/rfc2616}
-\bibitem{http1.0}
-    The Internet Society,
-\emph{Hypertext Transfer Protocol -- HTTP/1.0}, 1996,
-\url{https://tools.ietf.org/html/rfc1945}
-\end{thebibliography}
-
-
-% add other chapters and sections to suit
-\end{document}
->>>>>>> Stashed changes
