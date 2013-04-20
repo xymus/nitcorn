@@ -819,7 +819,7 @@ Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme. \\
 (@TODO: CHIFFRER EN PLUS Exemple: 24/24, 7/7, 95\% du temps)
 \subsection{Sécurité}
 (@TODO: TROP VAGUE, IMPRÉCIE)
-Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
+Le serveur ne doit pas faire de compromis pour assurer sa qualité. Cependant, il n'y aura aucun suppor pour HTTPS.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 \subsection{Transférabilité} 
@@ -827,6 +827,8 @@ Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
 sur des machines de même famille. Si le module de persistance 
 
+\subsection{Test}
+Test de performance et de stabilité du serveur avec des utilitaires de benchmark tel que Apache Benchmark (ab) ou Siege. Puisqu'il n'existe aucune librairie de tests unitaires en Nit, chacun des modules développées auront des tests de base embarqués. ces tests ne seront aucunement aussi complet que des test unitaires.
 \begin{thebibliography}{9}
 \bibitem{ieefr}
   Société d'informatique IEEE,
