@@ -206,8 +206,8 @@ que l'environnement de développement sera le système utilisé par les dévelop
 pour développer des applications web en Nit.\\
 
 Pour communiquer avec le serveur, l'application web devra redéfinir la classe HTTPServer pour modifier la méthode answer() qui définit la réponse à la requête. 
-La méthode answer() prend en argument une requête http (http_request) et écrit la réponse http avec write().\\\\
-La réponse http doit être composée de la version du protocole HTTP, du code de status, du texte de status, d'un HashMap contenant les \textit{headers} et leur valeur, ainsi que du corps du texte.\\\\
+La méthode answer() prend en argument une requête http qui est une classe HttpRequest du module http_request, et écrit la réponse http, une sous-classe HttpResponse avec write().\\\\
+La réponse http doit être composée de la version du protocole HTTP, du code de status, du texte de status, d'un HashMap contenant les \textit{headers} et leur valeur, ainsi que du corps de la réponse.\\\\
 Voici un exemple simple:\\
 On définit la réponse dans la méthode answer():\\
 var response = new HttpResponse("HTTP/1.0", 200, "OK", new HashMap[String, String], "Hello world")\\
@@ -814,7 +814,7 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 \section{Attributs}
 \subsection{Disponibilité}
 Le serveur web doit être disponible jusqu'à ce que l'utilisateur le ferme. \\
-(@TODO: CHIFFRER EN PLUS! Exemple: 24/24, 7/7, 95\% du temps)
+(@TODO: CHIFFRER EN PLUS Exemple: 24/24, 7/7, 95\% du temps)
 \subsection{Sécurité}
 (@TODO: TROP VAGUE, IMPRÉCIE)
 Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
