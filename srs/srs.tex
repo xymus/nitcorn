@@ -1,3 +1,4 @@
+
 \documentclass{scrreprt}
 \usepackage{listings}
 \usepackage{underscore}
@@ -612,45 +613,87 @@ l'enregistrement. Mes enregistrements sont cours et concis. Ils expliquent
 simplement qui a fait quoi et quand.
 
 \section{Spécification des cas d'utilisation pour l'application Nit}
+
 \subsection{Recevoir une requête HTTP}
+
 \subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
+
 \subsubsection{Description sommaire:}
+Réception d'une requête HTTP par l'application Nit via l'interface de Nitcorn.
+
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Client
-    \item Serveur
+    	\item Serveur
 \end{itemize}
+
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item   
 \end{itemize} 
+
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
+    \item Le serveur doit traiter la requête reçue.
 \end{itemize} 
-\subsubsection{Description du processus:}En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
+\subsubsection{Description du processus:}
+En tant qu'application Nit, je peux recevoir une requête HTTP grâce à l'interface
 serveur/application me permettant de communiquer avec le serveur
 Nitcorn. La réception d'une requête se fait en passant en paramètre les informations
 reçu par Nitcorn (host, uri, headers).
+
 \subsection{Traiter une requête HTTP}
+
 \subsubsection{Titre du cas d'utilisation: Traiter une requête HTTP}
+
 \subsubsection{Description sommaire:}
+Traitement d'une requête HTTP reçue par l'application Nit.
+
 \subsubsection{Acteurs:}
 \begin{itemize}
-    \item Client
+    \item Client 
     \item Serveur
 \end{itemize}
+
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  
+    \item Le serveur doit recevoir une requête HTTP. 
 \end{itemize} 
+
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  
-\end{itemize} 
-\subsubsection{Description du processus:}Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
-Une fois ce traitement fait, je dois retourner (@TODO à voir avec spec de l'interface DONE BUT WAIT FOR PUSH)
-une réponse HttpResponse en l'écrivant avec write(). Cette réponse doit
+    \item Le serveur doit envoyer une réponse HTTP au client. 
+\end{itemize}
+ 
+\subsubsection{Description du processus:}
+Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
+
+\subsection{Envoyer une réponse HTTP}
+
+\subsubsection{Titre du cas d'utilisation: Envoyer une réponse HTTP}
+
+\subsubsection{Description sommaire:}
+Envoi d'une réponse HTTP.
+
+\subsubsection{Acteurs:}
+\begin{itemize}
+	\item Client
+	\item Serveur
+\end{itemize}
+
+\subsubsection{Préconditions:}
+\begin{itemize}
+	\item Le traitement de la requête HTTP doit être complété.
+\end{itemize}
+
+\subsubsection{Postconditions:}
+\begin{itemize}
+	\item Aucun.
+\end{itemize}
+
+\subsubsection{Description du processus:}
+Une fois que le traitement de la requête HTTP est complété, je dois retourner une 
+réponse selon de protocole de l'interface avec Nitcorn. Cette réponse doit
 contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
 et les différents \textit{headers} HTTP.
 
@@ -771,7 +814,7 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
 (@TODO: TROP VAGUE, IMPRÉCIE)
-Le serveur ne doit pas faire de compromis pour assurrer sa qualité.
+Le serveur ne doit pas faire de compromis pour assurer sa qualité. Cependant, il n'y aura aucun suppor pour HTTPS.
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 \subsection{Transférabilité} 
@@ -779,6 +822,8 @@ Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
 sur des machines de même famille. Si le module de persistance 
 
+\subsection{Test}
+Test de performance et de stabilité du serveur avec des utilitaires de benchmark tel que Apache Benchmark (ab) ou Siege. Puisqu'il n'existe aucune librairie de tests unitaires en Nit, chacun des modules développées auront des tests de base embarqués. ces tests ne seront aucunement aussi complet que des test unitaires.
 \begin{thebibliography}{9}
 \bibitem{ieefr}
   Société d'informatique IEEE,

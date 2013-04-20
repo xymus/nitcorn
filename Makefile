@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 default: server
 
 bin-dir:
@@ -20,3 +21,18 @@ hello_world: bin-dir
 
 clean:
 	rm -rf bin/*
+=======
+default: server
+
+bin-dir:
+	mkdir -p bin
+
+event: bin-dir
+	nitc -o bin/event lib/event/event.nit
+
+server: bin-dir
+	nitc -o bin/server -I lib/ src/server.nit
+
+clean:
+	rm -rf bin/*
+>>>>>>> Stashed changes
