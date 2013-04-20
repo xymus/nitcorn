@@ -653,17 +653,17 @@ simplement qui a fait quoi et quand.
 \subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
 
 \subsubsection{Description sommaire:}
-Réception d'une requête HTTP par l'application Nit.
+Réception d'une requête HTTP par l'application Nit via l'interface de Nitcorn.
 
 \subsubsection{Acteurs:}
 \begin{itemize}
-	\item Client : L'application Nit qui envoit la requête sera considéré comme le client.
-    	\item Serveur : L'application Nit qui reçoit la requête sera considéré comme le serveur.
+	\item Client
+    	\item Serveur
 \end{itemize}
 
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  Le client doit envoyer une requête HTTP.
+    \item   
 \end{itemize} 
 
 \subsubsection{Postconditions:}
@@ -686,8 +686,8 @@ Traitement d'une requête HTTP reçue par l'application Nit.
 
 \subsubsection{Acteurs:}
 \begin{itemize}
-    \item Client : L'application Nit qui envoit la requête sera considéré comme le client.
-    \item Serveur : L'application Nit qui reçoit la requête sera considéré comme le serveur.
+    \item Client 
+    \item Serveur
 \end{itemize}
 
 \subsubsection{Préconditions:}
@@ -702,8 +702,33 @@ Traitement d'une requête HTTP reçue par l'application Nit.
  
 \subsubsection{Description du processus:}
 Après qu'une requête HTTP ai été reçue, je fait le traitement nécessaire.
-Une fois ce traitement fait, je dois retourner (@TODO à voir avec spec de l'interface)
-une réponse selon le protocole de l'interface avec Nitcorn. Cette réponse doit
+
+\subsection{Envoyer une réponse HTTP}
+
+\subsubsection{Titre du cas d'utilisation: Envoyer une réponse HTTP}
+
+\subsubsection{Description sommaire:}
+Envoi d'une réponse HTTP.
+
+\subsubsection{Acteurs:}
+\begin{itemize}
+	\item Client
+	\item Serveur
+\end{itemize}
+
+\subsubsection{Préconditions:}
+\begin{itemize}
+	\item Le traitement de la requête HTTP doit être complété.
+\end{itemize}
+
+\subsubsection{Postconditions:}
+\begin{itemize}
+	\item Aucun.
+\end{itemize}
+
+\subsubsection{Description du processus:}
+Une fois que le traitement de la requête HTTP est complété, je dois retourner une 
+réponse selon de protocole de l'interface avec Nitcorn. Cette réponse doit
 contenir le contenu de la réponse HTTP, mais également le code de statut HTTP
 et les différents \textit{headers} HTTP.
 
