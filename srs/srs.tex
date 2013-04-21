@@ -214,7 +214,7 @@ Voici un exemple simple:\\
 On définit la réponse dans la méthode answer():\\
 var response = new HttpResponse("HTTP/1.0", 200, "OK", new HashMap[String, String], "Hello world")\\
 Puis on la retourne en l'écrivant avec write:\\
-write(response.to_s)\\
+write(response.to_s)
 
 
 \subsection{Interfaces avec les utilisateurs}
@@ -307,7 +307,7 @@ pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 
 \subsection{Utilisation du serveur}
 La spécification complète et exacte des méthodes, \textit{headers} et des codes de status suivants se retrouvent dans le RFC2616 listé dans les références.
-\subsubsection{Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes}\\
+\subsubsection{Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes}
 \begin{description}
  \item [OPTIONS] Demande les informations sur les options de communication disponible.
  \item [GET] Demande la ressource identifié par l'URI.
@@ -317,9 +317,8 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
  \item [DELETE] Demande d'effacer la ressource identifiée par l'URI.
  \item [TRACE] Invoque les serveurs intermédiaires pour leur demander de lui réenvoyer la requête.
  \item [CONNECT] Demande au serveur d'ouvrir un tunnel TCI/IP.
- 
 \end{description}
-\\\\
+
 \subsubsection{Le serveur devra être en mesure de supporter les headers suivants}
 
 \subsubsection{Http/1.0}
@@ -429,8 +428,8 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
  \item [503 - Service Unavailable] Le serveur est actuellement incapable de prendre en charge la requête à cause d'une surcharge ou de maintenance en cours sur celui-ci.
  \item [504 - Gateway Timeout] Le serveur, en agissant comme passerelle ou un proxy, n'a pas reçu à temps une réponse du serveur en amont.
  \item [505 - HTTP Version Not Supported] Le serveur ne supporte pas, ou refuse de supporter, la version du protocole HTTP spécifié dans par la requête.
- \end{description}\\
- \\\\
+ \end{description}
+ 
  Pour le HTTP/1.1, le serveur devra, en plus, supporter les erreurs suivantes.\\
  \begin{description}
  \item [100 - Continue] Le client devrait continuer avec la requête.
@@ -444,9 +443,6 @@ Nitc ne supporte actuellement que les système de la famille linux mais il devra
 
 
 \chapter{Exigences spécifiques}
-(@TODO COMPLÉTER LES CAS D'UTILISATION)\\
-(@TODO PRIORISER LES FONCTIONS: AJOUTER UN ORDRE DE PRIORITÉ POUR SAVOIR QUELLES FONCTIONS DOIVENT ÊTRE IMPLÉMENTÉS AVANT LESQUELS?)
-
 \section{Description des acteurs}
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
 \subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
@@ -455,9 +451,11 @@ Nitc ne supporte actuellement que les système de la famille linux mais il devra
 \subsection{Application Nit:} C'est un logiciel quelconque écrit en Nit
 
 \section{Spécification des cas d'utilisation pour le serveur} 
-À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.
+À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.\\
+Les cas d'utilisation ont une priorité qui leur est assignée. 1 étant les plus prioritaire et plus le nombre associé est croissant, moins le cas est prioritaire.
 \subsection{Réception d'une requête}
 \subsubsection{Titre du cas d'utilisation:} Réception d'une requête
+\subsubsection{Priorité:} 1
 \subsubsection{Description sommaire:} Je reçois une requête et je l'envoie au module de traitement.
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -487,6 +485,7 @@ Example de retour ;
 
 \subsection{Traiter une requête HTTP}
 \subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
+\subsubsection{Priorité:} 2
 \subsubsection{Description sommaire:} Le serveur doit traiter la requête qui lui a été assignée.
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -546,6 +545,7 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
 
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
+\subsubsection{Priorité:} 4
 \subsubsection{Description sommaire:}Je dois configurer le serveur à la discrétion de l'administrateur ou de l'administrateur système. 
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -555,7 +555,7 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item On doit avoir une configuration par défault.
+    \item On doit avoir une configuration par défaut.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
@@ -572,6 +572,7 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 
 \subsection{Écrire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Écrire la configuration
+\subsubsection{Priorité:} 5
 \subsubsection{Description sommaire:} On cherche à changer ma configuration.
 \subsubsection{Acteurs:} 
 \begin{itemize}
@@ -594,6 +595,7 @@ pour tenir compte des ajustements.
 
 \subsection{Enregistrer les événements}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer les événements
+\subsubsection{Priorité:} 3
 \subsubsection{Description sommaire:}Je dois sauvegarder dans un fichier tous les événements.
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -617,7 +619,8 @@ simplement qui a fait quoi et quand.
 
 \subsection{Recevoir une requête HTTP}
 
-\subsubsection{Titre du cas d'utilisation: Recevoir une requête HTTP}
+\subsubsection{Titre du cas d'utilisation:} Recevoir une requête HTTP
+\subsubsection{Priorité:} 2
 
 \subsubsection{Description sommaire:}
 Réception d'une requête HTTP par l'application Nit via l'interface de Nitcorn.
@@ -646,8 +649,8 @@ reçu par Nitcorn (host, uri, headers).
 
 \subsection{Traiter une requête HTTP}
 
-\subsubsection{Titre du cas d'utilisation: Traiter une requête HTTP}
-
+\subsubsection{Titre du cas d'utilisation:} Traiter une requête HTTP
+\subsubsection{Priorité:} 2
 \subsubsection{Description sommaire:}
 Traitement d'une requête HTTP reçue par l'application Nit.
 
@@ -673,8 +676,8 @@ l'application destinataire qui elle fait le traitement nécessaire.
 
 \subsection{Envoyer une réponse HTTP}
 
-\subsubsection{Titre du cas d'utilisation: Envoyer une réponse HTTP}
-
+\subsubsection{Titre du cas d'utilisation:} Envoyer une réponse HTTP
+\subsubsection{Priorité:} 3
 \subsubsection{Description sommaire:}
 Envoi d'une réponse HTTP.
 
@@ -703,6 +706,7 @@ et les différents \textit{headers} HTTP.
 \section{Spécification des cas d'utilisation pour API}
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
+\subsubsection{Priorité:} 6
 \subsubsection{Description sommaire: A pour but d'informer l'administrateur sur les paramètres de  configuration du serveur.}
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -726,6 +730,7 @@ n'existe pas.
 
 \subsection{Enregistrer la configuration}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer la configuration
+\subsubsection{Priorité:} 6
 \subsubsection{Description sommaire: Va permettre au administrateur d'effectuer le changement des configurations.}
 \subsubsection{Acteurs:}
 \begin{itemize}
@@ -801,7 +806,7 @@ Elle devra être accessible que par le serveur Nitcorn ou les administrateurs de
 \subsection{Rétention des données}
 Le serveur Nitcorn aura besoin des données de cette base de données pour fonctionner, donc en contrepartie d'une petite charge, l'intégrité des données est primoridale. Elle ne devra donc être victime d'aucune perte de données dans la mesure du possible et devra offrir la possibilité de copier son contenu pour une sauvegarde de sûreté et d'importer une telle sauvegarde.
 
-\section{Contraintes de conception}(@TODO: LES ÉNUMÉRER?)\\ Le logiciel doit respecter plusieurs contraintes de conception. RFC2616.
+\section{Contraintes de conception} Le logiciel doit respecter les contraintes de conception de la norme RFC2616.
 \section{Conformité avec les standards}
 \subsection{Requête HTTP}
 Le format et le contenu d'une requête HTTP doit être conforme avec la section 5 du RFC2616\cite{http1.0} mit en référence.
@@ -817,13 +822,13 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
 (@TODO: TROP VAGUE, IMPRÉCIE)
-Le serveur ne doit pas faire de compromis pour assurer sa qualité. Cependant, il n'y aura aucun suppor pour HTTPS.
+Le serveur ne doit pas faire de compromis pour assurer sa qualité
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 \subsection{Transférabilité} 
-(@TODO: NON TERMINÉ?)
 Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
-sur des machines de même famille. Si le module de persistance 
+sur des machines de même famille. 
+Le module de persistance permettra facilement d'importer et d'exporter la configuration d'un serveur Nitcorn à un autre.
 
 \subsection{Test}
 Test de performance et de stabilité du serveur avec des utilitaires de benchmark tel que Apache Benchmark (ab) ou Siege. Puisqu'il n'existe aucune librairie de tests unitaires en Nit, chacun des modules développées auront des tests de base embarqués. ces tests ne seront aucunement aussi complet que des test unitaires.
