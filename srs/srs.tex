@@ -192,7 +192,7 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 \section{Environnement}
 (@TODO INCLURE UN DIAGRAMME ILLUSTRANT LES INTERFACES?:)\\
 (@TODO A block diagram showing the major components of the larger system, interconnections, and external inter-
-faces)
+faces PIJI)
 
 Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
 d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
@@ -485,7 +485,7 @@ Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'env
 Example de requêtes;
 Démontrer le traitement;
 Example de retour ;
-)
+PIJI)
 
 
 \subsection{Traiter une requête HTTP}
@@ -832,7 +832,7 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 \subsection{Disponibilité}
 Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
-(@TODO: TROP VAGUE, IMPRÉCIE)
+(@TODO:PIJI TROP VAGUE, IMPRÉCIE)
 Le serveur ne doit pas faire de compromis pour assurer sa qualité
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
