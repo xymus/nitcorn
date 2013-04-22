@@ -438,22 +438,21 @@ La spécification complète et exacte des méthodes, des \textit{headers} et des
  \end{description}
     
 \section{Hypothèse et dépendances}
-(@TODO À VALIDER PAR PIJI)\\
-Nitc ne supporte actuellement que les système de la famille GNU/Linux mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
+Nitc ne supporte actuellement que les systèmes de la famille GNU/Linux mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
 Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
 
 
 \chapter{Exigences spécifiques}
 \section{Description des acteurs}
 \subsection{Client:} Le client est le logiciel distant qui envoit les requêtes au serveur et qui en reçoit les réponses. 
-\subsection{Administrateur:} L'adminisrateur est la personne qui s'occupe de la configuration et de la maintenant d'une des applications installées sur le serveur, par exemple un site web.
+\subsection{Administrateur:} L'administrateur est la personne qui s'occupe de la configuration et de la maintenance d'une des applications installées sur le serveur, par exemple un site web.
 \subsection{Administrateur système:} L'administrateur système est la personne qui s'occupe de la configuration et de la maintenance du serveur et du système sur lequel est installé le serveur. C'est la personne possédant le plus de droits sur le serveur.
 \subsection{Serveur:} C'est le logiciel décrit par le présent document, soit Nitcorn.
 \subsection{Application Nit:} C'est un logiciel quelconque écrit en Nit
 
 \section{Spécification des cas d'utilisation pour le serveur} 
 À noter que nous utilisons la première personne du singulier pour représenter le serveur. De plus, chacune des fonctionnalités sont décrites sous forme de récit d'utilisateur.\\
-Les cas d'utilisation ont une priorité qui leur est assignée. 1 étant les plus prioritaire et plus le nombre associé est croissant, moins le cas est prioritaire.
+Les cas d'utilisation ont une priorité qui leur est assignée. 1 étant les plus prioritaires et plus le nombre associé est croissant, moins le cas est prioritaire.
 
 \begin{figure}[h]
 \caption{Cas d'utilisation pour le serveur}	
@@ -479,7 +478,7 @@ Les cas d'utilisation ont une priorité qui leur est assignée. 1 étant les plu
     \item  L'événement est enregistré dans le fichier log.
 \end{itemize} 
 \subsubsection{Description du processus:}
-Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte.Finalement, le log enregistre l'événement.
+Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'envoie d'une requête effectuée par le client, je vais écouter un ou plusieurs port(s) à l'aide d'un socket. Ensuite, je vais identifier le type de requête qui m'a été transmis et l'assigner au module de traitement sous forme de texte. Finalement, le log enregistre l'événement.
 
 
 \subsection{Traiter une requête HTTP}
@@ -509,10 +508,10 @@ Je dois pouvoir recevoir une ou plusieurs requêtes simultanément. Après l'env
     \item Le URI
     \item Le host
 \end{itemize}
-Une requête doit être valide sinon on retourne une message d'erreur. Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
+Une requête doit être valide sinon on retourne un message d'erreur. Avec les informations que j'ai, je vais pouvoir lire ma configuration actuelle. Si
 je trouve un virtual host correspondant au host de ma requête, je vais utiliser la configuration de ce host. Sinon je vais utiliser la configuration du host par défaut. \\
 \\
-Le premier élément de la configuration que je lis pour ce host est de déterminer
+Le premier élément de la configuration que je lis pour ce host est pour déterminer
 si, pour ce host et URI, je dois soit : lire un fichier statique, passer la requête
 à une application Nit, ou passer la requête à un serveur mandataire (reverse-proxy).\\
 \\
@@ -520,7 +519,7 @@ Lorsque je traite une requête pour une page statique, je dois récupérer la pa
 défaut et le dossier racine pour ce host. Avec ces informations-là, je peux renvoyer
 le contenu de la page statique au requérant. Si je ne suis pas en mesure de lire
 la page ou le dossier demandé, je dois retourner un message d'erreur au requérant
-(404-Not Found, 401-Unauthorized, etc).\\
+(404-Not Found, 401-Unauthorized, etc.).\\
 \\
 Si la requête doit être passée à un serveur mandataire, je vais créer
 une requête web avec les mêmes informations que la requête, mais je vais modifier
@@ -560,11 +559,11 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item On va effectuer un recherche dans la base de donnée pour récupérer la configuration la plus récente..
+    \item On va effectuer une recherche dans la base de donnée pour récupérer la configuration la plus récente.
     \item L'événement est enregistré dans le fichier log.
     \item La configuration est changée.
-
 \end{itemize} 
+
 \subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations dans la base de données afin de connaître comment traiter les requêtes que je vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
 je vais écrire ces informations dans ma classe.
