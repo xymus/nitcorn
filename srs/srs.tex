@@ -251,7 +251,7 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 \section{Fonctions}
 Les différentes fonctions sont séparées en deux groupes : serveur et application Nit.
 Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
-Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
+Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion de la configuration selon les préférences de l'utilisateur.\\
 \begin{figure}[ht!]
     \caption{Liens entre les composants}
     \centering
@@ -290,7 +290,7 @@ au serveur.
 
 \subsection{Mémoire}
 Nous n'imposons aucune contrainte mémoire. Par contre, la quantité de
-\textbf{file descriptors} ouvert en même temps sera limitée par le noyau du
+\textbf{file descriptors} ouverts en même temps sera limitée par le noyau du
 système d'exploitation. La limite est à la discrétion de l'utilisateur. Le
 serveur devra gérer l'atteinte de cette limite.
 \subsection{Exécution}
@@ -307,14 +307,14 @@ pour gérer de manière asynchrone les entrées et sorties\cite{c10k}.
 
 
 \subsection{Utilisation du serveur}
-La spécification complète et exacte des méthodes, \textit{headers} et des codes de status suivants se retrouvent dans le RFC2616 listé dans les références.
+La spécification complète et exacte des méthodes, des \textit{headers} et des codes de status suivants se retrouvent dans le RFC2616 listé dans les références.
 \subsubsection{Le serveur devra supporter les méthodes HTTP/1.0 et HTTP/1.1 suivantes}
 \begin{description}
  \item [OPTIONS] Demande les informations sur les options de communication disponible.
- \item [GET] Demande la ressource identifié par l'URI.
+ \item [GET] Demande la ressource identifiée par l'URI.
  \item [HEAD] Identique à GET, mais la réponse ne doit pas contenir de \textit{message body}.
- \item [POST] Indique que des données sont envoyés dans le \textit{message body} et demande au serveur d'en prendre compte.
- \item [PUT] Demande de stocker les données envoyé par la requête.
+ \item [POST] Indique que des données sont envoyées dans le \textit{message body} et demande au serveur d'en prendre compte.
+ \item [PUT] Demande de stocker les données envoyées par la requête.
  \item [DELETE] Demande d'effacer la ressource identifiée par l'URI.
  \item [TRACE] Invoque les serveurs intermédiaires pour leur demander de lui réenvoyer la requête.
  \item [CONNECT] Demande au serveur d'ouvrir un tunnel TCI/IP.
@@ -322,7 +322,7 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
 
 \subsubsection{Le serveur devra être en mesure de supporter les headers suivants}
 
-\subsubsection{Http/1.0}
+\subsubsection{HTTP/1.0}
 \subsubsection{General-Headers:}
         \begin{description}
         \item [Date] La date et l'heure de l'origine du message en format HTTP-date.
@@ -332,9 +332,9 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
         \begin{description}
         \item [Authorization] Identification du navigateur avec le serveur.
         \item [From] L'adresse e-mail du client.      
-        \item [If-Modified-Since] la reqête doit avoir été modifiée depuis la date spécifiée.
+        \item [If-Modified-Since] La requête doit avoir été modifiée depuis la date spécifiée.
         \item [Referer] URL du lien de la requête effectuée.          
-        \item [User-Agent] liste d'information sur le client(nom et version)       
+        \item [User-Agent] Liste d'informations sur le client(nom et version)       
         \end{description}
 \subsubsection{Response-Headers:}
         \begin{description}
@@ -344,7 +344,7 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
         \end{description}
 \subsubsection{Entity-Headers:}
         \begin{description}
-        \item [Allow] Liste de méthodes supportées par la resource                
+        \item [Allow] Liste de méthodes supportées par la ressource                
         \item [Content-Encoding] Type d'encodage du corps de la requête  
         \item [Content-Length] Longueur du corps de la requête    
         \item [Content-Type] Le type MIME du corps de la requête.      
@@ -355,13 +355,13 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
 \subsubsection{Http/1.1}
 \subsubsection{General-Headers:}
         \begin{description}
-        \item [Cache-Control] Directives imposées au systèmes de cache rencontrés dans la requête et la réponse.      
+        \item [Cache-Control] Directives imposées aux systèmes de cache rencontrés dans la requête et la réponse.      
         \item [Connection] Options des spécifications de la connection courante.     
-        \item [Trailer] Liste des headers présent dans le message encodé.          
-        \item [Transfer-Encoding] Indique le type de transformation effectuée sur le corps du message afin de se rendre à déstination.
-        \item [Upgrade] Spécifie les autres protocoles de communication supportées au server.          
+        \item [Trailer] Liste des headers présents dans le message encodé.          
+        \item [Transfer-Encoding] Indique le type de transformation effectuée sur le corps du message afin de se rendre à destination.
+        \item [Upgrade] Spécifie les autres protocoles de communication supportés au serveur.          
         \item [Via] Doit être utilisé par les passerelles et proxys pour indiquer les protocoles intermédiaires entre le serveur et le client.
-        \item [Warning] Contient des information additionnelles sur le status ou la transformation du message.
+        \item [Warning] Contient des informations additionnelles sur le status ou la transformation du message.
         \end{description}
 \subsubsection{Request-Headers:}
         \begin{description}
@@ -370,19 +370,19 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
         \item [Accept-Encoding] Similaire au \textit{Accept}, mais restreint l'encodage du contenu acceptable dans la réponse.
         \item [Accept-Language] Spécifit le language naturel préféré en réponse.
         \item [Expect] Indique qu'un comportement spécifique est requis par le client.
-        \item [Host] Spécifit l'hôte et le port de la ressource demandée.
+        \item [Host] Spécifie l'hôte et le port de la ressource demandée.
         \item [If-Match] Rend conditionnelle la requête.
         \item [If-None-Match] Semblable au \textit{If-Match}, mais inverse la condition.
-        \item [If-Range] Spécifit de n'envoyer que les parties à jour de la ressource demandé dont client ne dispose pas.
-        \item [If-Unmodified-Since] Rend conditionnelle la méthode: n'effectue la requête que si la ressource n'a pas été modifié depuis la date indiqué.
-        \item [Max-Forwards] Limite le nombre de proxys ou de passerelle qui peuvent envoyer une réponse lors d'une requête TRACE ou OPTIONS.
+        \item [If-Range] Spécifie de n'envoyer que les parties à jour de la ressource demandée dont le client ne dispose pas.
+        \item [If-Unmodified-Since] Rend conditionnelle la méthode: n'effectue la requête que si la ressource n'a pas été modifiée depuis la date indiquée.
+        \item [Max-Forwards] Limite le nombre de proxys ou de passerellee qui peuvent envoyer une réponse lors d'une requête TRACE ou OPTIONS.
         \item [Proxy-Authorization] Permet au client de s'identifier à un proxy.
-        \item [Range] Spécifit l'étendu de la ressource désiré par le client.
+        \item [Range] Spécifie l'étendu de la ressource désirée par le client.
         \item [TE] Liste des extentions d'encodage de transfert. 
         \end{description}
 \subsubsection{Response-Headers:}
         \begin{description}
-        \item [Accept-Ranges] Permet au serveur d'inquiquer les \textit{Range} accepté au client.
+        \item [Accept-Ranges] Permet au serveur d'inquiquer les \textit{Range} acceptés au client.
         \item [Age] L'âge de la réponse depuis son écriture.
         \item [ETag] Identifiant unique donné par le serveur à une version d'une ressource.
         \item [Proxy-Authenticate] Indique au client la méthode d'authentification du proxy.
@@ -392,43 +392,43 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
 \subsubsection{Entity-Headers:}
         \begin{description}              
         \item [Content-Language] Indique le language naturel du contenu.
-        \item [Content-Location] Indique un emplacement alternatif du contenue.
+        \item [Content-Location] Indique un emplacement alternatif du contenu.
         \item [Content-MD5] Indique le MD5 du corps de la requête.
         \item [Content-Range] Indique la position du corps partiel actuel dans le corps du message complet.
         \end{description}
  
 \subsubsection{Le serveur doit retourner ces codes de status HTTP/1.0 et HTTP/1.1 résumés brièvement ici.}
  \begin{description}
- \item [200 - OK] La requête à bien été traité sans erreurs.
+ \item [200 - OK] La requête à bien été traitée sans erreurs.
  \item [201 - Created] La ressource a bien été créée.
  \item [202 - Accepted] La requête a été acceptée pour être traitée mais le traitement n'est pas terminé.
- \item [204 - No Content] Le serveur à bien traité la requête et il n'y a aucune information à retourner.
- \item [205 - Reset Content] Le serveur à complété la requête et le client devrait rafraîchire le document qui a causé l'envoie de la requête.
- \item [206 - Partial Content] Le serveur à complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource.
- \item [301 - Moved Permanently] La ressource demandé à été assigné à un nouvel URL de façon permanante.
+ \item [204 - No Content] Le serveur a bien traité la requête et il n'y a aucune information à retourner.
+ \item [205 - Reset Content] Le serveur a complété la requête et le client devrait rafraîchir le document qui a causé l'envoie de la requête.
+ \item [206 - Partial Content] Le serveur a complété une requête GET partielle et retourne le \textit{Range} demandé de la ressource.
+ \item [301 - Moved Permanently] La ressource demandée à été assignée à un nouvel URL de façon permanante.
  \item [400 - Bad Request] La requête n'a pas été comprise par le serveur dû à une malformation syntaxique. 
  \item [401 - Unauthorized] La requête nécéssite une authentification.
  \item [403 - Forbidden] La requête a bien été comprise, mais le serveur refuse de la traiter. Une authentification n'aidera pas.
  \item [404 - Not Found] Le serveur n'a rien trouvé correspondant à l'URI de la requête.
  \item [405 - Method Not Allowed] La méthode spécifiée par la requête n'est pas permise pour la ressource identifiée.
- \item [406 - Not Acceptable] La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyé par la requête.
+ \item [406 - Not Acceptable] La ressource identifiée par la requête est seulement capable de générer des entitées de réponses qui ont des caractéristiques de contenu non acceptable selon les \textit{headers} d'acceptation envoyés par la requête.
  \item [407 - Proxy Authentification Required] Semblable à 401 - Unauthorized, mais indique que le client doit s'authetifier avec le proxy auparavant.
  \item [408 -Request Timeout] Le client n'a pas produit de requête dans le temps pendant lequel le serveur est prêt à attendre.
- \item [409 - Conflict] La requête n'a pas pu être complété à cause d'un conflit avec l'état actuel de la ressource.
+ \item [409 - Conflict] La requête n'a pas pu être complétée à cause d'un conflit avec l'état actuel de la ressource.
  \item [410 - Gone] La ressource demandée n'est plus disponible sur le serveur et aucune adresse de redirection n'est connue.
  \item [411 - Length Required] Le serveur refuse de traiter la requête sans un textit{header} Content-Length.
- \item [412 - Precondition Failed] La précondition donnée dans un ou plusieurs champs \textit{header} a été évaluée à faux lorsque testé sur le serveur.
+ \item [412 - Precondition Failed] La précondition donnée dans un ou plusieurs champs \textit{header} a été évaluée à faux lorsque testée sur le serveur.
  \item [413 - Request Entity Too Large] Le serveur refuse de traiter une requête car l'entité de la requête est plus grande que ce que le serveur veut ou peut traiter.
- \item [414 - Request-URI Too Long] Le serveur refuse de servir la requête car l'URI de la requête est plus longue que ce que le serveur accepte d'interpréter.
+ \item [414 - Request-URI Too Long] Le serveur refuse de servir la requête car l'URI de la requête est plus long que ce que le serveur accepte d'interpréter.
  \item [415 - Unsupported Media Type] Le serveur refuse de traiter la requête car l'entité de la requête est dans un format non supporté par la ressource demandée pour la méthode demandée.
  \item [416 - Requested Range Not Satisfiable] Le champs du \textit{Range header} est invalide pour la ressource demandée.
- \item [417 - Expectation Failed] L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur
+ \item [417 - Expectation Failed] L'attente donnée par le champs du \textit{Expect request header} ne peut pas être satisfait par le serveur.
  \item [500 - Internal Server Error] Le serveur a rencontré une condition innattendue qui l'empêche de satifaire la requête.
  \item [501 - Not Implemented] Le serveur ne supporte pas la fonctionnalité nécéssaire pour satisfaire la requête.
  \item [502 - Bad Gateway] Le serveur, en agissant comme une passerelle ou un proxy, a reçu une réponse invalide du serveur en amont.
  \item [503 - Service Unavailable] Le serveur est actuellement incapable de prendre en charge la requête à cause d'une surcharge ou de maintenance en cours sur celui-ci.
  \item [504 - Gateway Timeout] Le serveur, en agissant comme passerelle ou un proxy, n'a pas reçu à temps une réponse du serveur en amont.
- \item [505 - HTTP Version Not Supported] Le serveur ne supporte pas, ou refuse de supporter, la version du protocole HTTP spécifié dans par la requête.
+ \item [505 - HTTP Version Not Supported] Le serveur ne supporte pas, ou refuse de supporter, la version du protocole HTTP spécifiée par la requête.
  \end{description}
  
  Pour le HTTP/1.1, le serveur devra, en plus, supporter les erreurs suivantes.\\
