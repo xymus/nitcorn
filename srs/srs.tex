@@ -438,9 +438,8 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
     
 \section{Hypothèse et dépendances}
 (@TODO À VALIDER PAR PIJI)\\
-Nitc ne supporte actuellement que les système de la famille linux mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
-Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
-
+Le compilateur nitc ne supporte actuellement que les système de la famille GNU/Linux, mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
+Étant donné le sujet de l'application, il est essentiel d'avoir une connexion réseau (Internet ou LAN) pour avoir accès au serveur web.\\
 
 \chapter{Exigences spécifiques}
 \section{Description des acteurs}
@@ -837,7 +836,7 @@ Le serveur ne doit pas faire de compromis pour assurer sa qualité
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 \subsection{Transférabilité} 
-Compte tenu que nitc ne supporte que les système d'exploitation de famille linux, le serveur Nitcorn pourra seulement être déployé
+Compte tenu que nitc ne supporte que les système d'exploitation de famille GNU/Linux, le serveur Nitcorn pourra seulement être déployé
 sur des machines de même famille. 
 Le module de persistance permettra facilement d'importer et d'exporter la configuration d'un serveur Nitcorn à un autre.
 
