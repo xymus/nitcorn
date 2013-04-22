@@ -194,8 +194,8 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 (@TODO A block diagram showing the major components of the larger system, interconnections, and external inter-
 faces PIJI)
 
-Le but premier de Nitcorn est d'offrir aux applications développés en Nit la possibilitée
-d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance des configuration devront être gérés automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourrait avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retourné à l'utilisateur. Nitcorn sera directement exposé à Internet et devra agir en tant qu'un serveur web exactement comme c'est le cas pour les autres
+Le but premier de Nitcorn est d'offrir aux applications développées en Nit la possibilité
+d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance de la configuration devront être gérées automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourra avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retournée à l'utilisateur. Nitcorn sera directement exposée à Internet et devra agir en tant que serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
 fonctionnalités mentionnées ci-haut doivent être utilisées pour assurer les requis de traçabilité
 et de fonctionnalités essentiels au serveur web.
@@ -221,7 +221,7 @@ write(response.to_s)
 Comme il est disponible avec les autres serveurs web, un système de log est
 disponible permettant à un utilisateur de déterminer la cause du problème. Sur
 un autre point, le logiciel aura une API permettant aux applications Nit de
-communiquer sur le web sans avoir à se soucier des configurations. Cette
+communiquer avec le web sans avoir à se soucier des configurations. Cette
 API sera grandement inspirée par l'interface universelle WGSI développée pour
 le langage Python. Le logiciel Nitcorn offrira aussi une interface pour les
 applications Nit.
@@ -437,8 +437,10 @@ La spécification complète et exacte des méthodes, \textit{headers} et des cod
  \end{description}
     
 \section{Hypothèse et dépendances}
-Le compilateur nitc ne supporte actuellement que les système de la famille GNU/Linux, mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
-Étant donné le sujet de l'application, il est essentiel d'avoir une connexion réseau (Internet ou LAN) pour avoir accès au serveur web.\\
+(@TODO À VALIDER PAR PIJI)\\
+Nitc ne supporte actuellement que les système de la famille GNU/Linux mais il devrait éventuellement en supporter d'autres. Le serveur Nitcorn pourrait alors être déployé sur ces systèmes, suivant le développement de Nit.
+Étant donné le sujet de l'application, il est essentiel d'avoir une connexion internet pour avoir accès au serveur web.\\
+
 
 \chapter{Exigences spécifiques}
 \section{Description des acteurs}
@@ -830,7 +832,8 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 \subsection{Disponibilité}
 Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'utilisateur le ferme.
 \subsection{Sécurité}
-Le serveur ne doit pas permettre d'exécution de code à distance non autorisé. Seul les usagers autorisés vont pouvoir modifier la configuration du serveur.
+(@TODO:PIJI TROP VAGUE, IMPRÉCIE)
+Le serveur ne doit pas faire de compromis pour assurer sa qualité
 \subsection{Maintenabilité}
 Le serveur devra pouvoir changer sa configuration sans être redémarrer.
 \subsection{Transférabilité} 
