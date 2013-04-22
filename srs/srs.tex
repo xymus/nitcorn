@@ -194,6 +194,7 @@ La section 3 va couvrir en détail toutes les exigences du système afin que les
 (@TODO A block diagram showing the major components of the larger system, interconnections, and external inter-
 faces PIJI)
 
+\includegraphics[width=\textwidth]{diagram/environnements.png}
 Le but premier de Nitcorn est d'offrir aux applications développées en Nit la possibilité
 d'utiliser un serveur web. On va donc devoir créer un module pour le langage Nit afin que d'autres applications Nit puissent être en mesure d'utiliser un serveur web. Il offrira des fonctionnalités de serveur au langage afin qu'il puisse être placé derrière un serveur web(Nginx, Apache,\ldots). Sous cette configuration, il va pouvoir répondre à des dizaines de milliers de requêtes web par seconde. Un service web sera utilisé afin de configurer le serveur. La gestion des logs ou la persistance de la configuration devront être gérées automatiquement par le serveur web.\\ De cette façon, l'utilisateur pourra avoir accès au log pour déterminer l'état du serveur. De plus, lorsqu'une erreur est détectée, un message d'erreur sera retournée à l'utilisateur. Nitcorn sera directement exposée à Internet et devra agir en tant que serveur web exactement comme c'est le cas pour les autres
 serveurs web (Nginx, Apache, \ldots). Sous cette configuration, les
@@ -251,14 +252,14 @@ De plus, Nitcorn a besoin des logiciels suivants lors de la compilation : \\
 Les différentes fonctions sont séparées en deux groupes : serveur et application Nit.
 Le serveur est Nitcorn, alors que l'application Nit est l'application qui utilise
 Nitcorn pour répondre à des requêtes web dynamiquement. De plus, une API est existante pour la gestion des configurations selon les préférences de l'utilisateur.\\
-
-\subsection{Serveur}
 \begin{figure}[ht!]
     \caption{Liens entre les composants}
     \centering
     \includegraphics[width=9cm]{diagram/diagram1}
 \end{figure}
 
+
+\subsection{Serveur}
 \begin{itemize}
  \item Réception d'une requête
  \item Traiter une requête
