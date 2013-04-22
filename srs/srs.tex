@@ -541,7 +541,7 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
 \subsubsection{Priorité:} 4
-\subsubsection{Description sommaire:}Je dois configurer le serveur à la discrétion de l'administrateur ou de l'administrateur système. 
+\subsubsection{Description sommaire:} Je dois configurer le serveur à la discrétion de l'administrateur ou de l'administrateur système. 
 \subsubsection{Acteurs:}
 \begin{itemize}
     \item Serveur
@@ -559,7 +559,7 @@ ouverte. De plus, je vais écrire un événement pour cette réponse (voir secti
     \item La configuration est changée.
 \end{itemize} 
 
-\subsubsection{Description du processus:}En tant que serveur, je vais faire une première lecture des mes configurations dans la base de données afin de connaître comment traiter les requêtes que je vais recevoir.
+\subsubsection{Description du processus:} En tant que serveur, je vais faire une première lecture de mes configurations dans la base de données afin de connaître comment traiter les requêtes que je vais recevoir.
 Pour éviter de faire une relecture dans la base de données pour chaque requête,
 je vais écrire ces informations dans ma classe.
 Si une application change ma configuration, je vais en tenir compte dans ma
@@ -580,12 +580,12 @@ classe pour éviter d'utiliser une configuration qui n'est plus à jour.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
-    \item  Le serveur est informé que la configuration à changer.
+    \item  Le serveur est informé que la configuration a changée.
     \item  L'événement est enregistré dans le fichier log.
 \end{itemize} 
-\subsubsection{Description du processus:}En tant que serveur, si un administrateur change la valeur de un ou plusieurs paramètre(s)
+\subsubsection{Description du processus:} En tant que serveur, si un administrateur change la valeur de un ou plusieurs paramètre(s)
 de configuration à l'aide de l'API en fournissant des nouvelles valeurs valides,
-je dois ajuster mes attributs de classe et valeurs dans la base de donnée
+je dois ajuster mes attributs de classe et valeurs dans la base de données
 pour tenir compte des ajustements.
 
 \subsection{Enregistrer les événements}
@@ -598,7 +598,7 @@ pour tenir compte des ajustements.
 \end{itemize}
 \subsubsection{Préconditions:}
 \begin{itemize}
-    \item  Un fichier Log doit être créer existant sinon on le crée.
+    \item  Un fichier Log doit être existant sinon on le créer.
 \end{itemize} 
 \subsubsection{Postconditions:}
 \begin{itemize}
@@ -629,7 +629,7 @@ Réception d'une requête HTTP par l'application Nit via l'interface de Nitcorn.
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Client
-    	\item Serveur
+    \item Serveur
 \end{itemize}
 
 \subsubsection{Préconditions:}
@@ -673,7 +673,7 @@ Traitement d'une requête HTTP reçue par l'application Nit.
  
 \subsubsection{Description du processus:}
 Après qu'une requête HTTP a été reçue, j'achemine l'information à 
-l'application destinataire qui elle fait le traitement nécessaire.
+l'application destinataire, qui elle fait le traitement nécessaire.
 
 \subsection{Envoyer une réponse HTTP}
 
@@ -708,7 +708,7 @@ et les différents \textit{headers} HTTP.
 \subsection{Lire la configuration}
 \subsubsection{Titre du cas d'utilisation:} Lire la configuration
 \subsubsection{Priorité:} 6
-\subsubsection{Description sommaire: A pour but d'informer l'administrateur sur les paramètres de configuration du serveur.}
+\subsubsection{Description sommaire:} A pour but d'informer l'administrateur sur les paramètres de configuration du serveur.
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Administrateur système ou administrateur
@@ -722,7 +722,7 @@ et les différents \textit{headers} HTTP.
 \begin{itemize}
     \item  L'API retourne l'information de la configuration.    
 \end{itemize} 
-\subsubsection{Description du processus:}En tant qu'administrateur, si je veux savoir l'état de un ou plusieurs paramètres de
+\subsubsection{Description du processus:}En tant qu'administrateur, si je veux savoir l'état d'un ou plusieurs paramètre(s) de
 configuration sur le serveur, je vais utiliser une API pour interroger la
 classe en question qui, elle, me retournera la ou les valeur(s) désirée(s).
 Si j'utilise l'API pour interroger une classe à propos d'un paramètre
@@ -732,7 +732,7 @@ n'existe pas.
 \subsection{Enregistrer la configuration}
 \subsubsection{Titre du cas d'utilisation:} Enregistrer la configuration
 \subsubsection{Priorité:} 6
-\subsubsection{Description sommaire: Va permettre au administrateur d'effectuer le changement des configurations.}
+\subsubsection{Description sommaire:} Va permettre au administrateur d'effectuer le changement des configurations.
 \subsubsection{Acteurs:}
 \begin{itemize}
 	\item Administrateur système ou administrateur
@@ -750,7 +750,7 @@ n'existe pas.
 \end{itemize} 
 \subsubsection{Description du processus:}En tant qu'administrateur, si je désire apporter une modification à un ou plusieurs
 paramètres de la configuration sur le serveur, je vais fournir la ou les nouvelle(s) valeur(s)
-du ou des paramètre(s) désirée à l'API qui se chargera de relayer l'information à la classe appropriée.
+du ou des paramètre(s) désirée(s) à l'API qui se chargera de relayer l'information à la classe appropriée.
 Si j'essaie de faire une modification sur un paramètre qui n'existe pas sur le
 serveur à l'aide de l'API, je vais recevoir une erreur m'indiquant que la clé en
 question n'existe pas.
@@ -774,11 +774,11 @@ la valeur fournie.
 \subsubsection{But} Les but de la configuration est d'informer le serveur web sur la façon de traiter les requêtes HTTP.
 \subsubsection{Provenance} Il y a une configuration par défaut qui sera fournie avec le serveur Nitcorn. 
 \subsubsection{Synchronisation} La configuration du server ne necessite aucune synchronisation.
-\subsubsection{Rapport avec les autres intrants/extrants} La configuration détermine la façon dont la requête sera traité par le serveur.
-% Pour la configuration du serveur, un service web sera disponible pour configurer le serveur selon les préférences du client. (ACOMPLETE)
+\subsubsection{Rapport avec les autres intrants/extrants} La configuration détermine la façon dont la requête sera traitée par le serveur.
+
 \section{Exigences fonctionnelles}
 \begin{itemize}
-    \item Lors du démarrage, le système doit lire sa configuration enregistré dans la base de données.
+    \item Lors du démarrage, le système doit lire sa configuration enregistrée dans la base de données.
     \item Sur réception d'une requête, le système doit vérifier que le «Host» spécifié par le header du même nom existe dans la configuration du serveur, s'il n'existe pas
         le serveur Nitcorn utilisera un hôte par défaut.
     \item Une fois que l'hôte est trouvé, le système doit aller chercher la racine de l'hôte.
@@ -786,7 +786,7 @@ la valeur fournie.
     \item Si la ressource demandée est un fichier et que le client y a accès, le système doit retourner le contenu du fichier dans la réponse HTTP.
     \item Si la ressource demandée est un dossier ou un fichier et que le client n'y a pas accès, le système doit retourner un code d'erreur approprié.
 \end{itemize}
-\section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitée en moins de 100 millisecondes chacune. 
+\section{Exigences de performance} Le serveur sera en mesure de gérer plus de 10 000 requêtes simultanées qui devront être traitées en moins de 100 millisecondes chacune. 
 \section{Contraintes sur la base de données}
 \subsection{Information contenue}
 La base de données de Nitcorn devra contenir les informations de la configuration:
@@ -805,7 +805,7 @@ Elle devra être accessible que par le serveur Nitcorn ou les administrateurs de
 	\item Un nom, un port, un dossier racine et une liste d'alias par hôte virtuel.
 \end{itemize}
 \subsection{Rétention des données}
-Le serveur Nitcorn aura besoin des données de cette base de données pour fonctionner, donc en contrepartie d'une petite charge, l'intégrité des données est primoridale. Elle ne devra donc être victime d'aucune perte de données dans la mesure du possible et devra offrir la possibilité de copier son contenu pour une sauvegarde de sûreté et d'importer une telle sauvegarde.
+Le serveur Nitcorn aura besoin des données de cette base de données pour fonctionner, donc en contrepartie d'une petite charge, l'intégrité des données est primordiale. Elle ne devra donc être victime d'aucune perte de données dans la mesure du possible et devra offrir la possibilité de copier son contenu pour une sauvegarde de sûreté et d'importer une telle sauvegarde.
 
 \section{Contraintes de conception} Le logiciel doit respecter les contraintes de conception de la norme RFC2616.
 \section{Conformité avec les standards}
@@ -820,19 +820,19 @@ Ces entrées doivent respecter le NCSA Common Log Format\cite{NCSA} tel que four
 
 \section{Attributs}
 \subsection{Disponibilité}
-Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'utilisateur le ferme.
+Le serveur web doit être disponible 99\% du temps entre le démarrage du serveur et jusqu'à ce que l'administrateur système le ferme.
 \subsection{Sécurité}
 Seul un utilisateur autorisé (i.e.: administrateur système) peut modifier la configuration du serveur. De plus, le serveur
 ne doit pas poser de problème de sécurité pour le système d'exploitation.
 \subsection{Maintenabilité}
-Le serveur devra pouvoir changer sa configuration sans être redémarrer.
+Le serveur devra pouvoir changer sa configuration sans être redémarré.
 \subsection{Transférabilité} 
 Compte tenu que nitc ne supporte que les système d'exploitation de famille GNU/Linux, le serveur Nitcorn pourra seulement être déployé
 sur des machines de même famille. 
 Le module de persistance permettra facilement d'importer et d'exporter la configuration d'un serveur Nitcorn à un autre.
 
 \subsection{Test}
-Test de performance et de stabilité du serveur avec des utilitaires de benchmark tel que Apache Benchmark (ab) ou Siege. Puisqu'il n'existe aucune librairie de tests unitaires en Nit, chacun des modules développées auront des tests de base embarqués. ces tests ne seront aucunement aussi complet que des test unitaires.
+Test de performance et de stabilité du serveur avec des utilitaires de benchmark tel que Apache Benchmark (ab) ou Siege. Puisqu'il n'existe aucune librairie de tests unitaires en Nit, chacun des modules développées auront des tests de base embarqués. Ces tests ne seront aucunement aussi complet que des test unitaires.
 \begin{thebibliography}{9}
 \bibitem{ieefr}
   Société d'informatique IEEE,
