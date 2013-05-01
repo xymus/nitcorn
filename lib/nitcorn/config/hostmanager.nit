@@ -11,7 +11,7 @@ class HostManager
 	private var default_host : VirtualHost
 
 	type Router : HashMap[Int, HashMap[String, VirtualHost]]
-	private var router : Router = new Router
+	private var router : Router = new HashMap[Int, HashMap[String, VirtualHost]]
 
 	init
 	do
