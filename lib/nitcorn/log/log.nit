@@ -16,6 +16,8 @@ class Log
 
     var file : OFStream
     init(filename: String) do
+        var dir = filename.dirname
+        if not dir.file_exists then dir.mkdir
         file = new OFStream.open(filename)
     end
 
