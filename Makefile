@@ -9,14 +9,14 @@ event: bin-dir
 request: bin-dir
 	nitc -o bin/request src/http/request.nit
 
-server: bin-dir
-	nitc -o bin/server -I lib/ -I src/http/ -I src/config/ src/server.nit
+file_server: bin-dir
+	nitc -o bin/file_server -I lib/ examples/nitcorn_file_server.nit
 
 app: bin-dir
-	nitc -o bin/app -I lib/ -I lib/json -I src/http/ -I src/config/ -I src/ -I src/example-app -I src/example-app/actions src/example-app/app.nit
+	nitc -o bin/app -I lib/ examples/nitcorn_app
 
 hello_world: bin-dir
-	nitc -o bin/hello_world -I lib/ -I lib/json -I src/http/ -I src/config/ -I src/ -I src/example-app -I src/example-app/actions src/example-app/simple_hello_world.nit
+	nitc -o bin/hello_world -I lib/ examples/nitcorn_hello_world.nit
 
 clean:
 	rm -rf bin/*
