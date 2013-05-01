@@ -1,8 +1,6 @@
 module action
 
-import http_response
-import http_request
-import http_status_codes
+import http
 
 class Action
 

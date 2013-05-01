@@ -1,10 +1,10 @@
-module server
+module nitcorn
 
 import event
 import config
-import http_parser
-import http_response
-import http_status_codes
+import http
+
+import action
 
 class HttpServer
 super Server
@@ -72,17 +72,3 @@ super Factory
         return new HttpServer(self, c, config)
     end
 end
-
-
-var config = new Config("nitcorn")
-#Setting default hosts
-config.get_hostsmanager.set_default_host(
-    new VirtualHost("localhost", 80, new Array[String], "/var/www", new Mimes)
-)
-
-var e : EventBase = new EventBase.create_base
-var listener = new ConnectionListener.bind_to(e, "localhost", 80, new HttpServerFactory(config))
-
-
-print "running"
-e.dispatch
