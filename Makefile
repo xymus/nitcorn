@@ -18,5 +18,11 @@ app: bin-dir
 hello_world: bin-dir
 	nitc -o bin/hello_world -I lib/ examples/nitcorn_hello_world.nit
 
+doc:
+	mkdir -p doc
+	nitdoc -I lib examples/nitcorn_file_server.nit examples/nitcorn_hello_world.nit examples/nitcorn_app
+
 clean:
 	rm -rf bin/*
+
+.PHONY: doc
