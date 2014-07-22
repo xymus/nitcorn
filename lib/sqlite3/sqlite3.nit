@@ -1,4 +1,4 @@
-module sqlite3
+module sqlite3 is pkgconfig
 
 in "C header" `{
 	#include "sqlite3.h"

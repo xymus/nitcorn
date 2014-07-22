@@ -9,7 +9,7 @@ import action
 class HttpServer
 super Server
 
-    var buffer_request : Buffer = new Buffer
+    var buffer_request = new FlatBuffer
     var config : Config
 
     init(factory: HttpServerFactory, connection: Connection, config: Config)
@@ -40,7 +40,7 @@ super Server
                     var file = new IFStream.open("{h.get_root}{request.url}")
                     response.set_response_body(file.read_all)
                 else
-                    var body = new Buffer
+                    var body = new FlatBuffer
                     var files = "{h.get_root}{request.url}".files
                     body.append("{h.get_root}:\n")
                     for file in files do

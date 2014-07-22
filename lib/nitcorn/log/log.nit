@@ -21,11 +21,10 @@ class Log
         file = new OFStream.open(filename)
     end
 
-    fun get_date : String is extern import String::from_cstring `{
+    fun get_date : String is extern import NativeString.to_s_with_length `{
         time_t date = time(NULL);
         char* s = ctime(&date);
-        s[strlen(s)-1] = '\0';
-        return new_String_from_cstring(s);
+        return NativeString_to_s_with_length(s, strlen(s)-1);
     `}
 
     fun error(id: Int, message: String) do

@@ -10,8 +10,7 @@ class HostManager
 
 	private var default_host : VirtualHost
 
-	type Router : HashMap[Int, HashMap[String, VirtualHost]]
-	private var router : Router = new HashMap[Int, HashMap[String, VirtualHost]]
+	private var router = new HashMap[Int, HashMap[String, VirtualHost]]
 
 	init
 	do
@@ -40,7 +39,7 @@ class HostManager
     
     fun get_default_mimes : Mimes do return default_mimes
 
-    fun get_virtualhosts : ArrayIterator[VirtualHost] do return virtualhosts.iterator end
+    fun get_virtualhosts : Iterator[VirtualHost] do return virtualhosts.iterator end
 
 	fun addnew_virtualhost(name : String, port : Int, aliases : Array[String], root : String) : VirtualHost
 	do
@@ -54,7 +53,7 @@ class HostManager
 	do
 		var port_route : nullable HashMap[String, VirtualHost]
 		port_route = router[vh.get_port]
-		if port_route is null then
+		if port_route == null then
 			port_route = new HashMap[String, VirtualHost]
 		end
 		for alias in vh.get_aliases do
@@ -66,12 +65,12 @@ class HostManager
 	do
 		var port_route : nullable HashMap[String, VirtualHost]
 		port_route = router[port]
-		if port_route is null then return default_host
+		if port_route == null then return default_host
 		var routed_host : nullable VirtualHost = port_route[alias]
-		if routed_host is null then
+		if routed_host == null then
 			return default_host
 		else
-			return routed_host.as(not null)
+			return routed_host
 		end
 	end
 

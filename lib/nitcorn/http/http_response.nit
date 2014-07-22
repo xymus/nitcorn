@@ -43,7 +43,7 @@ class HttpResponse
 	end 
 
     redef fun to_s : String do
-        var buf = new Buffer
+        var buf = new FlatBuffer
         buf.append("{version} {status_code} {status_message}\r\n")
         #response_header_fields["Content-Length"] = response_body.length.to_s
         for key,value in response_header_fields do

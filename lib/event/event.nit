@@ -1,4 +1,4 @@
-module event
+module event is pkgconfig("libevent")
 
 in "C header" `{
 #include <sys/stat.h>
@@ -50,9 +50,9 @@ c_read_cb(struct bufferevent *bev, void *ctx)
     evbuffer_remove(input, buf, sz);
     String buf_str;
     if(sz > 0) {
-        buf_str = new_String_with_native(buf, sz);
+        buf_str = NativeString_to_s_with_length(buf, sz);
     } else {
-        buf_str = new_String_from_cstring("");
+        buf_str = NativeString_to_s_with_length(NULL, 0);
     }
     if(ctx != NULL) {
         Connection_read_callback(
@@ -104,14 +104,14 @@ accept_conn_cb(struct evconnlistener *listener,
 }
 `}
 
-extern Connection
-    new from_server is extern `{
+extern class Connection
+    new from_server `{
         struct connection_data* con = malloc(sizeof(*con));
         con->close = 0;
         return con;
     `}
 
-    fun write_line(line : String) : Int is extern import String::to_cstring `{
+    fun write_line(line : String) : Int import String.to_cstring `{
         if(((struct connection_data*)recv)->close != 1) {
             char* c_line = String_to_cstring(line);
             return bufferevent_write(((struct connection_data*)recv)->buffer_event, c_line, strlen(c_line));
@@ -119,9 +119,9 @@ extern Connection
         return 0;
     `}
 
-    fun send_file(path: String) : Int is extern import String::to_cstring `{
+    fun send_file(path: String) : Int import String.to_cstring `{
         char* path_c = String_to_cstring(path);
-        int file = open(path_c, 'r');
+	int file = open(path_c, O_RDONLY);
         if(file) {
             struct stat st;
             fstat(file, &st);
@@ -133,7 +133,7 @@ extern Connection
     `}
 
 
-    fun close is extern `{
+    fun close `{
         /*
          * Check if we have anything left in our buffers. If so, we set our connection to be closed
          * on a callback. Otherwise we close it and free it right away.
@@ -154,18 +154,18 @@ extern Connection
 
 end
 
-extern EventBase
-        new create_base is extern `{
+extern class EventBase
+        new create_base `{
             return event_base_new();
         `}
 
-        fun dispatch is extern `{
+        fun dispatch `{
             event_base_dispatch(recv);
         `}
 
 end
-extern ConnectionListener
-    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) is extern import Connection::close, Connection::from_server, Factory::set_listener, Factory::make_server, String::to_cstring, Connection::read_callback, ConnectionListener::error_callback, String::with_native `{
+extern class ConnectionListener
+    new bind_to(base: EventBase, address : String, port : Int, fact: Factory) import Connection.close, Connection.from_server, Factory.set_listener, Factory.make_server, String.to_cstring, Connection.read_callback, ConnectionListener.error_callback, NativeString.to_s_with_length `{
         struct sockaddr_in sin;
         struct evconnlistener *listener;
         Factory_incr_ref(fact);
@@ -199,7 +199,7 @@ extern ConnectionListener
         return listener;
     `}
 
-    #fun set_factory(f : Factory) is extern import Server::set_listener, Factory::make_server `{
+    #fun set_factory(f : Factory) import Server::set_listener, Factory::make_server `{
     #    Factory_incr_ref(f);
     #    struct callback* cb = malloc(sizeof(*cb));
     #    cb->factory = f;
@@ -207,7 +207,7 @@ extern ConnectionListener
     #    evconnlistener_set_cb(((struct listener*)recv)->listener, (evconnlistener_cb)accept_conn_cb, cb);
     #    ((struct listener*)recv)->cb = cb;
     #`}
-    fun base : EventBase is extern `{
+    fun base : EventBase `{
         return evconnlistener_get_base(((struct connection_listener*)recv)->listener);
     `}
     fun error_callback do
@@ -216,13 +216,13 @@ extern ConnectionListener
         exit_loop
     end
 
-    fun get_socket_error is extern `{
+    fun get_socket_error `{
         int err = EVUTIL_SOCKET_ERROR();
         fprintf(stderr, "Got an error %d (%s) on the listener. ",
             err, evutil_socket_error_to_string(err));
     `}
 
-    fun exit_loop is extern import ConnectionListener::base `{
+    fun exit_loop import ConnectionListener.base `{
         event_base_loopexit(ConnectionListener_base(recv), NULL);
     `}
 

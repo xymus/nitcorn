@@ -5,6 +5,8 @@
 
 module http_parser
 
+intrude import standard::string_search # for search_index_in
+
 intrude import http_request
 
 class HttpParser

@@ -32,7 +32,7 @@ class Application
                     module_name =  http_request.uri.substring_from(key.length)
                 end
                 var response = action.execute(module_name)
-                if not action.render_file is null then
+                if not action.render_file == null then
                     var file = new IFStream.open("{template_dir}/{action.render_file.as(not null)}")
                     response.set_response_body(file.read_all)
                 end
