@@ -9,7 +9,7 @@ class Application
     var server_config : Config
     var http_request : HttpRequest
     var router : HashMap[String, Action]
-    var template_dir = "src/example-app/templates"
+    var template_dir = "nitcorn_app/templates"
 
     init(r: HttpRequest, c : Config) do
         http_request = r
